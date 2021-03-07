@@ -1,0 +1,35 @@
+site_name: APL Course
+site_description: A self-study introduction to Dyalog APL
+docs_dir: docs/
+repo_name: 'rikedyp/APLCourse'
+repo_url: 'https://github.com/rikedyp/APLCourse'
+plugins:
+  - search
+  - awesome-pages
+  - section-index
+theme:
+  name: material
+  favicon: 'img/favicon-32.png'
+  logo: 'img/dyalog-white.svg'
+  features:
+    - navigation.instant
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.details
+  - abbr
+extra_css:
+  - style/main.css
+  - style/quickstart.css
+extra_javascript:
+  - javascripts/config.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+pages:
+  - First steps.md
+nav:
+  - About: index.md
+  - First Steps: First steps.md
+  - Problem set 1: Problem set 1.md
+  - Dfns and assignment: Dfns.md
+  - Problem set 2: Problem set 2.md
