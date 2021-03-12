@@ -1,8 +1,7 @@
 site_name: APL Course
 site_description: A self-study introduction to Dyalog APL
 docs_dir: docs/
-repo_name: 'rikedyp/APLCourse'
-repo_url: 'https://github.com/rikedyp/APLCourse'
+site_url: https://dyalog.com
 plugins:
   - search
   - awesome-pages
