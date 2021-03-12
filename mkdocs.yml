@@ -2,10 +2,6 @@ site_name: APL Course
 site_description: A self-study introduction to Dyalog APL
 docs_dir: docs/
 site_url: https://dyalog.com
-plugins:
-  - search
-  - awesome-pages
-  - section-index
 theme:
   name: material
   favicon: 'img/favicon-32.png'
@@ -19,13 +15,10 @@ markdown_extensions:
   - abbr
 extra_css:
   - style/main.css
-  - style/quickstart.css
 extra_javascript:
   - javascripts/config.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-pages:
-  - First steps.md
 nav:
   - About: index.md
   - First Steps: First steps.md
