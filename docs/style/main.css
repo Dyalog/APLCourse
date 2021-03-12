@@ -25,3 +25,19 @@ code {
 	--md-primary-fg-color--dark: #563336;
 	--md-default-bg-color: #F8F8F8;
 }
+/* Code copy only input (see CONTRIBUTING.md) */
+pre + pre > button, pre + hr {
+    display: none;
+}
+pre > code {
+    padding-bottom: 1em!important;
+}
+hr + pre > button {
+    top: -0.2em!important;
+}
+pre + pre , hr + pre {
+    margin-top: -1.8em!important;
+}
+pre + pre > code, hr + pre > code {
+    padding-top: 0.2em!important;
+}

@@ -16,7 +16,7 @@
 		          84 - 12 - 1 - 13 - 28 - 9 - 6 - 15  
 		    70
 
-	??? Answers
+	??? Example "Answers"
 		<ol type="a">
 		<li>$\prod_{n=1}^{12} n$
 		<pre><code>      ×/⍳12
@@ -61,7 +61,7 @@
 
 		The stack in **Figure 3** has `3` **"layers"** and `36` cubes in total. How many cubes are there in a similar stack with `68` **"layers"**?
 
-	??? Answers
+	??? Example "Answers"
 		<ol type="a">
 			<li>  
 			<pre><code>      +/(⍳467)*2
@@ -84,7 +84,7 @@
 
 	4.  Find the mean average of `⎕AVU`.
 
-	??? Answers
+	??? Example "Answers"
 		<ol type="a">
 			<li>  
 			<pre><code>      +/⎕AVU

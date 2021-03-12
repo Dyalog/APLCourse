@@ -9,13 +9,13 @@ A dfn (pronounced "*dee-fun*" with a very short "u" sound) is a way of writing f
 
 ```APL
       3{⍺}5      ⍝ ⍺ is the (optional) left argument
-3     
+3
       {⍵}'apl'   ⍝ ⍵ is the right argument
-apl      
+apl
       {⍺}5       ⍝ Calling a dyadic function monadically results in an error
 VALUE ERROR
       {⍺}5
-      ∧            
+      ∧
       3{⍵}       ⍝ Calling a function without a right argument results in an error
 SYNTAX ERROR: Missing right argument
       3{⍵}
@@ -26,19 +26,23 @@ SYNTAX ERROR: Missing right argument
 Names are assigned with the left arrow `←`. We say "name gets [function or array]".
 
 ```APL
-      one←1      
-      three←3      
-      equals←=      
-      plus←+      
-      four←4      
+      one←1
+      three←3
+      equals←=
+      plus←+
+      four←4
       four equals one plus three   ⍝ 1 means true, 0 means false
+```
+```
 1
 ```
 
 We can use a name in the same line in which it is defined. In production code it is best to avoid this unless an expression is very short.
+
+Read the following as "squared numbers divided by the sum of squares":
 ```APL
-      ⍝ Squared numbers divided by the sum of squares 
-      
-      squared÷+/squared←¯1 0 1 2*2 
+      squared÷+/squared←¯1 0 1 2*2
+```
+```
 0.1666666667 0 0.1666666667 0.6666666667`
 ```
