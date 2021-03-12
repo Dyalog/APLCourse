@@ -2,7 +2,7 @@
 1. Utility Functions
 	1. Without using the *tally* `≢` or *shape* `⍴` functions, create a function named `Tally` which returns the number of elements in a vector.
 
-		            Tally 1 2 4 523 1 2 454  
+		          Tally 1 2 4 523 1 2 454  
 		    7
 
 	2. Create a function named `Mean` which returns the mean average of a numeric vector.
@@ -19,7 +19,7 @@
 		          12 IsDivisibleBy ⍳12
 		    1 1 1 1 0 1 0 0 0 0 0 1
 
-	??? Answers
+	??? Example "Answers"
 		There are many ways to write functions which have the same effect, but here are some examples:
 		<ol type="a">
 			<li><pre><code>Tally←{+/⍵=⍵}</code></pre></li>
@@ -54,7 +54,7 @@
 		          Split 7.62
 		    7 0.62
 
-	??? Answers
+	??? Example "Answers"
 		Using only what has been introduced so far, here are some example solutions:
 		<ol type="a">
 			<li><pre><code>Mod←{⍵-⍺×⌊⍵÷⍺}</code></pre></li>
@@ -71,7 +71,7 @@
 	4. What percentage of numbers in `⎕AVU` are strictly positive?
 	5. What do you notice about the percentage of strictly positive and negative numbers?
 
-	??? Answers
+	??? Example "Answers"
 		<ol type="a">
 			<li>$132$</li>
 			<li>$48.4375$</li>
@@ -91,6 +91,6 @@
 		          IsPrime 17
 	    1
 
-	???+ Answer
-		Once again, there are many ways to write this function. Here is one example using things which you have already seen:  
+	??? Example "Answer"
+		Once again, there are many ways to write this function. Here is one example using only constructs which have already been introduced:  
 		<pre><code>IsPrime←{2=+/div=⌊div←⍵÷⍳⍵}</code></pre>
