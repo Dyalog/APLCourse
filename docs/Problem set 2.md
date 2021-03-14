@@ -1,6 +1,6 @@
 # Problem Set 2: Dfns and Assignment
 1. Utility Functions
-	1. Without using the *tally* `≢` or *shape* `⍴` functions, create a function named `Tally` which returns the number of elements in a vector.
+	1. Without using the *tally* `≢⍵` or *shape* `⍴⍵` functions, create a function named `Tally` which returns the number of elements in a vector.
 
 		          Tally 1 2 4 523 1 2 454  
 		    7
@@ -10,7 +10,7 @@
 		          Mean 1 2 4 523 1 2 454
 		    141
 
-	3. Using `⌊` ("floor" i.e. round down), create a function `IsDivisibleBy` which returns `1` if `⍺` is divisible by `⍵` and `0` otherwise.
+	3. Using `⌊⍵` ("floor" i.e. round down), create a function `IsDivisibleBy` which returns `1` if `⍺` is divisible by `⍵` and `0` otherwise.
 
 		          15 IsDivisibleBy 5
 		    1
@@ -28,7 +28,7 @@
 		</ol>
 
 2. What Remains
-	1. `Mod` is a **dyadic** function which returns the remainder after its right argument **`⍵`** number is divided by the left argument **`⍺`**.
+	1. `⍺ Mod ⍵` is a **dyadic** function which returns the remainder after its right argument **`⍵`** number is divided by the left argument **`⍺`**.
 
 		          16÷5
 		    3.2
@@ -45,7 +45,7 @@
 
 		Write the `Mod` function as a dfn without using the *residue* (`|`) glyph.
 
-	2. Write a function named `Split` which takes a fractional number and returns two numbers: its integer and fractional parts.
+	2. Write a function named `Split ⍵` which takes a fractional number and returns two numbers: its integer and fractional parts.
 
 		          Split 0
 		    0 0
