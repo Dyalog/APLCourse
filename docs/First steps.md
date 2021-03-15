@@ -53,7 +53,7 @@ The reduce operator `/` inserts the function to its left between parts of the ri
 ```
 
 ## The index generator
-The index generator `⍳` generates integers up to the integer right argument `⍵`
+The index generator `⍳⍵` generates integers up to the integer right argument `⍵`
 ```APL
       ⍳10
 ```
