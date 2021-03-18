@@ -3,8 +3,8 @@
 	src: local("APL385 Unicode"), url("../assets/apl385.ttf");
 }
 .language-APL {
-	font-family: APL;
-	line-height: 1.2em;
+	font-family: APL!important;
+	line-height: 1.2em!important;
 }
 code {
 	font-family: APL;
