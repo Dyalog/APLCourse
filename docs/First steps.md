@@ -44,7 +44,7 @@ Adding a list of numbers *could* become very tedious...
 120
 ```
 
-The reduce operator `/` inserts the function to its left between parts of the right argument array.
+The reduce operator `F/` inserts the function `F` to its left between parts of the right argument array.
 ```APL
       +/1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
 ```
