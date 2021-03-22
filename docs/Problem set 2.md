@@ -43,9 +43,9 @@
 		          5 Mod 30   ⍝ 5 goes into 25 exactly 6 times      
 		    0
 
-		Write the `Mod` function as a dfn without using the *residue* (`|`) glyph.
+		Write the `Mod` function as a dfn without using the *magnitude*/*residue* (`|`) glyph.
 
-	2. Write a function named `Split ⍵` which takes a fractional number and returns two numbers: its integer and fractional parts.
+	2. Write a function `Split ⍵` which takes a fractional number and returns two numbers: its integer and fractional parts.
 
 		          Split 0
 		    0 0
