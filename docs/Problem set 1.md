@@ -1,4 +1,4 @@
-# Problem Set 1
+# Problem Set 1: First Steps
 1. A Mathematical Notation
 
 	Use APL to evaluate the following
