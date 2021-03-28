@@ -7,30 +7,32 @@
 
 ```APL
       3 4⍴⍳12   ⍝ A 3 row, 4 column matrix of the integers from 1 to 12 inclusive      
-      ⍴cards←'A23456789TJQK'∘.,'♠♥♦♣'
+      ⍴cards←'A23456789TJQK'∘.,'SCHD'
       ⍉cards
-      (,cards)[?52]
+      (,cards)[?×/⍴cards]
       alph←2 3 4⍴⎕A
       ,alph      
 ```
 
 ## The shape of a scalar
 
-Use the match function `≡` to determine which expressions below produce the empty character vector `''` ("*quote-quote*") and which produce the empty numeric vector `⍬` ("*zilde*").
+Use the match function `⍺≡⍵` to determine which expressions below produce the empty character vector `''` ("*quote-quote*") and which produce the empty numeric vector `⍬` ("*zilde*").
 
-<pre><code class="language-APL">      0⍴0</code></pre>
-<pre><code class="language-APL">      0↑⎕A</code></pre>
-<pre><code class="language-APL">      ⍳0</code></pre>
-<pre><code class="language-APL">      0⍴''</code></pre>
-<pre><code class="language-APL">      0⍴'def'</code></pre>
-<pre><code class="language-APL">      0 0⍴'abc'</code></pre>
-<pre><code class="language-APL">      2 0 3⍴⍳6</code></pre>
-<pre><code class="language-APL">      rain[⍸rain>250]</code></pre>
-<pre><code class="language-APL">      alph[⍸alph='Z']</code></pre>
-<pre><code class="language-APL">      ⌈⌿⍬⍬</code></pre>
-<pre><code class="language-APL">      ⎕JSON'{}'</code></pre>
-<pre><code class="language-APL">      ⎕JSON'[]'</code></pre>
-<pre><code class="language-APL">      ⎕JSON'""'</code></pre>
+          0⍴0
+          0↑⎕A
+          ⍳0
+          0⍴''
+          0⍴'def'
+          0 0⍴'abc'
+          2 0 3⍴⍳6
+          alph[⍸alph='Z']
+          ⌈⌿⍬⍬
+          ⎕JSON'{}'
+          ⎕JSON'[]'
+          ⎕JSON'""'
+
+!!! Warning "Version Warning"
+	`⎕JSON` ("*quad jason*") is a function for converting APL arrays to and from JavaScript Object Notation. It is not available in version 12.1.
 
 A *simple array* contains only single numbers and/or characters as elements. Single numbers or characters are called *scalars*. Arrays generally can contain any other array. These are called *nested arrays*. For example `cards` is a nested matrix of character vectors.
 

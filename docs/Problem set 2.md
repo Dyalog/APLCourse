@@ -63,7 +63,7 @@
 
 3. What Was In That Vector Again?
 
-	You should have a variable named `⎕AVU` in your workspace, from [Part 1](#1).
+	You should have a variable named `⎕AVU` in your workspace, from [problem set 1](../Problem set 1).
 
 	1. How many even numbers are there in `⎕AVU`?
 	2. What percentage of numbers in `⎕AVU` are odd numbers?

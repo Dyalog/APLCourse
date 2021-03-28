@@ -51,9 +51,12 @@ joined uptext vectors
 	│3 1│3 2│3 3│
 	└───┴───┴───┘</pre>
 
+!!! Warning "Version Warning"
+	The `]box` user command is not available in version 12.1.
+
 ### Reduce down     
 
-Reduce-first `F⌿` on a matrix will reduce along columns instead of rows. 
+Reduce-first `F⌿` on a matrix will reduce down columns instead of along rows. 
 
 ```APL
 			∘.÷⍨⍳3
@@ -82,7 +85,7 @@ Reduce-first `F⌿` on a matrix will reduce along columns instead of rows.
 
 Up to now the only comparison function we have seen is `⍺=⍵`. You should be aware that APL includes logical comparison functions `< ≤ = ≠ ≥ >`.
 
-Furthermore, all necessary [primitives](https://aplwiki.com/wiki/Glyph) have been explicitly introduced before each problem set. Many APL interpreters include a *language bar* to aid with typing symbols. Necessary constructs will continue to be introduced in each section. However, you are encouraged to explore the language bar and experiment with the primitive functions, as these constitute your core vocabulary for solving problems.
+Furthermore, most necessary [primitives](https://aplwiki.com/wiki/Glyph) have been explicitly introduced before each problem set. Many APL interpreters include a *language bar* to aid with typing symbols. Necessary constructs will continue to be introduced in each section. However, you are encouraged to explore the language bar and experiment with the primitive functions, as these constitute your core vocabulary for solving problems.
 
 <div align="center">
 <img src="../img/lb.png" alt="APL symbols" width="50%">

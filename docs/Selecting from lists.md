@@ -34,8 +34,12 @@ APL
 0 123 8364 246
 ```
 
+!!! Warning "Version Warning"
+	- The function *where* `⍸⍵` is not available in version 12.1 as it was introduced in version 16.0. 
+	- In Dyalog Classic the glyph `⍸` is unavailable, and is instead represented by `⎕U2378`. It is a good idea to name this e.g. `Where←⎕U2378`.
+
 ## Replicate/Compress
-Finding the indices of a boolean array using the "where" function `⍸⍵` is an unnecessary extra step since we know that indices will never be repeated in this case.
+Finding the indices of a boolean array using the **where** function `⍸⍵` is an unnecessary extra step since we know that indices will never be repeated in this case.
 
 The **replicate** function `⍺/⍵` (yes, some symbols have <a target="_blank" href="https://aplwiki.com/wiki/Function-operator_overloading">multiple meanings</a>) repeats elements of an array along rows.
 
@@ -80,3 +84,7 @@ Take a moment to experiment with the shape `⍴`, tally `≢` and reshape `⍴` 
 
 !!! note
 	You might find that some arguments to reshape produce intolerably long output. Use the command `]rows -fold=3` to truncate the output.
+
+!!! Warning "Version Warning"
+	- Tally `≢⍵` is not available in version 12.1. The glyph is still in use as the function *Not Match* `⍺≢⍵`.
+	- The `]rows` user command is not available in version 12.1.

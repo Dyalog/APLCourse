@@ -25,14 +25,19 @@
 ??? Example "Answers"
 	Here are just some example solutions.
 	<ol type="a">
-		<li><pre><code>Even←{⍵/⍨0=2|⍵}
-	Even←{⍵[⍸0=2|⍵]}</code></pre></li>
+		<li>
+			<pre><code class="language-APL">Even←{⍵[⍸0=2|⍵]}</code></pre>  
+			We can **compress** directly with the boolean vector:  
+			<pre><code>Even←{(0=2|⍵)/⍵}</code></pre>  
+			Or use the *commute* operator `⍨` to swap the arguments to compress, removing parentheses: 
+			<pre><code class="language-APL">Even←{⍵/⍨0=2|⍵}</code></pre>
+		</li>
 		<li><pre><code>Div5←{⍵/⍨0=5|⍵}</code></pre></li>
 		<li><pre><code>Div←{⍵/⍨0=⍺|⍵}</code></pre></li>
 	</ol>
 
 1. Without without  
-	Write a dfn which doesn't use `⍺~⍵` to remove spaces from a text vector. 
+	Write a dfn which doesn't use `~` to remove spaces from a text vector. 
 
 	          NoSpace'here is some text'
 	    hereissometext
