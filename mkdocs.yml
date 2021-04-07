@@ -11,6 +11,9 @@ theme:
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.highlight:
+      use_pygments: false
+  - pymdownx.superfences
   - admonition
   - pymdownx.details
   - abbr
@@ -23,14 +26,24 @@ extra_javascript:
 nav:
   - About: index.md
   - First Steps: First steps.md
-  - Problem set 1: Problem set 1.md
   - Dfns and assignment: Dfns.md
-  - Problem set 2: Problem set 2.md
   - Selecting from lists: Selecting from lists.md
-  - Problem set 3: Problem set 3.md
   - The Outer Product: Outer product.md
-  - Problem set 4: Problem set 4.md
   - Shape Reshape: Shape Reshape.md
-  - Problem set 5: Problem set 5.md
   - Fundamentals of high rank arrays: Fundamentals of high rank arrays.md
-  - Problem set 6: Problem set 6.md
+  - Workspace basics: Workspaces.md
+  - Nested arrays: Nested.md
+  - Namespaces and other objects: Namespace.md
+  - Getting help: Help.md
+  - Loops and recursion: Loops.md
+  - Operators: Operators.md
+  - User-defined functions: Ufns.md
+  - Error handling basics: Errors.md
+  - Data IO: Data.md
+  - Code IO: Code.md
+  - External interfaces: Interfaces.md
+  - Historical quirks: Quirks.md
+  - The call stack: Stack.md
+  - Error trapping and signalling: Error trapping and signalling.md
+  - Interpreter internals: Implementation.md
+  - Further reading: Reading.md

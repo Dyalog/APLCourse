@@ -128,7 +128,7 @@
 		<pre><code>1 A
 	2 B
 	3 C
-	
+	&nbsp;
 	4 A
 	5 B
 	6 C</code></pre>
