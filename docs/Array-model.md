@@ -40,9 +40,6 @@ To see what the markings mean, see the help for the `]Display` user command:
       ]Display -??
 ```
 
-!!! Warning "Version Warning"
-	The `]box` user command is not available in version 12.1. Use `]disp` or `]display` instead.
-
 ## Fundamentals of high rank arrays
 
 ### Cells and axes
@@ -50,7 +47,7 @@ From the APL Wiki:
 <blockquote>
       A <a target="_blank" href="https://aplwiki.com/wiki/Cell">cell</a> is a subarray which is formed by selecting a single index along some number of leading axes and the whole of each trailing axis. Cells are classified by their rank, which may be between 0 (scalars) and the array's rank (in which case the cell must be the entire array). Cells with rank k are called k-cells of an array. A major cell is a cell whose rank is one less than the entire array, or a 0-cell of a scalar. 
 </blockquote>
-If the text above feels confusing, don't worry. Possibly after this chapter, and almost certainly after [the next section on selecting from arrays](../Selecting from arrays), you will be able to read it again and say to yourself "oh yeah, that makes sense". What you need to know for now is that arrays are arranged like rectangles in many dimensions. The three simplest cases should feel somewhat familiar to you.
+If the text above feels confusing, don't worry. Possibly after this chapter, and almost certainly after reading a future section on selecting from arrays, you will be able to read it again and say to yourself "oh yeah, that makes sense". What you need to know for now is that arrays are arranged like rectangles in many dimensions. The three simplest cases should feel somewhat familiar to you.
 
 ```APL
       0            ⍝ A scalar
@@ -110,12 +107,6 @@ Now that you know how to describe the structure of an array in terms of its sub-
       {(+⌿⍵)÷≢⍵}mass(×⍤0 2)pos
       ×⍤0 2⍨⍳10      
 ```
-
-!!! Warning "Version Warning"
-	The rank operator `⍤` is not available in version 12.1.  
-	The glyph `⍤` is not available in Dyalog Classic. Rank is instead represented by `⎕U2364`.
-	
-	`_Rank_←{⍺←⊢ ⋄ ⍺(⍺⍺ ⎕U2364 ⍵⍵)⍵}`
 
 ??? Hint
 	When applying dyadic functions using the rank operator, use the helper function <code class="language-APL">,⍥⊂</code> <em>ravel over enclose</em> (or <code class="language-APL">{⍺⍵}</code> for versions before Dyalog version 18.0) to see how arguments are paired up. For example:
@@ -237,7 +228,7 @@ Arrays in Dyalog APL are always collections of scalars, regardless of rank. Howe
 0
 ```
 
-Boxing a simple scalar returns the same scalar. This becomes very relevant when we learn [more about indexing](../Selecting from arrays). In technical terms, a simple scalar is a rank-0 array which contains itself as its value.
+Boxing a simple scalar returns the same scalar. This becomes very relevant when we learn more about indexing. In technical terms, a simple scalar is a rank-0 array which contains itself as its value.
 
 ```APL
       'a'≡⊃'a'       ⍝ The disclose of a simple scalar is itself
@@ -305,7 +296,7 @@ The depth of an array can be found using the **depth** `≡⍵` function. It ret
 ### Pick and Mix
 There are two more useful constructs for modifying array structures: **first** `⊃⍵` and **mix** `↑⍵`.
 
-First is a special case of **pick** `⍺⊃⍵`, which is a way of [selecting items from nested arrays](../Selecting from arrays/#reach-indexing). 
+First is a special case of **pick** `⍺⊃⍵`, which is a way of selecting items from nested arrays. 
 
 Mix will increment the rank while decrementing the depth:
 ```APL
@@ -436,7 +427,7 @@ Experiment with the following expressions to determine what the each `¨` and bi
 
 1. Some Points in Space Revisited
 
-	These problems are identical to those about Some Points in Space in [problem set 5](../Shape Reshape/#problem-set-5). This time, create a function which works on vectors and use the rank operator to solve these problems.
+	These problems are identical to those about Some Points in Space in [problem set 5](../Shape-Reshape/#problem-set-5). This time, create a function which works on vectors and use the rank operator to solve these problems.
 
 	The positions of 7 points in 2D space are given by the matrix `pos2`:
 

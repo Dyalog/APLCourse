@@ -91,7 +91,7 @@ Of course, we can change the order of execution using different parentheses.
 15 25
 ```
 
-## Problem Set 1: First Steps
+## Problem Set 1
 1. A Mathematical Notation
 
 	Use APL to evaluate the following
