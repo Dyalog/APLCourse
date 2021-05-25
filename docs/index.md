@@ -11,7 +11,7 @@ This site is a work in progress. Currently we are transferring content from [APL
 	If you see some text which looks like  
 	`\(\sum_{n=1}^N n\)`  
 	then try refreshing the page. It should look like:  
-	<img alt="mathjax example rendering" src="/img/mathjax.png" width="60px">
+	<img alt="mathjax example rendering" src="../img/mathjax.png" width="60px">
 
 ## Getting Started
 If you're just starting out, you can use the [TryAPL](https://tryapl.org) online interpreter. Put TryAPL on one half of your screen, and this site on the other half. 
