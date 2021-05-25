@@ -95,7 +95,7 @@ As you continue through these sessions fewer outright explanations will be given
 
 It is also worth mentioning at this point that pressing `F1` in Dyalog with the text cursor on a primitive will open the help for that primitive.
 
-## Problem Set 4
+## Problem Set 4: Array-Oriented Solutions with Matrices
 
 1. Back to School
 	1. Write a function to produce the multiplication table from `1` to `⍵`. 
@@ -161,7 +161,3 @@ It is also worth mentioning at this point that pressing `F1` in Dyalog with the 
 		An alternative coding uses the multiplication table:
 		
 		<pre><code class="language-APL">Primes ← {i~∘.×⍨i←1↓⍳⍵}</code></pre>
-		
-		Of course, the outer product `∘.F` indicates that the number of calculations to compute both of these solutions increases with the square of the input size. We say they have a computational complexity "*of order n squared*" or $O(n)$ in [big-O notation](https://en.wikipedia.org/wiki/Big_O_notation). This is a very inefficient way to do find prime numbers.
-		
-		To see discussions around more efficient ways to compute prime numbers in APL, see [the dfns page on prime numbers](https://dfns.dyalog.com/n_pco.htm).
