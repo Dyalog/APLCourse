@@ -11,6 +11,8 @@ theme:
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.highlight:
+      use_pygments: false
   - admonition
   - pymdownx.details
   - abbr
@@ -22,11 +24,9 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 nav:
   - About: index.md
-  - First Steps: First steps.md
-  - Problem set 1: Problem set 1.md
-  - Dfns and assignment: Dfns.md
-  - Problem set 2: Problem set 2.md
-  - Selecting from lists: Selecting from lists.md
-  - Problem set 3: Problem set 3.md
-  - The Outer Product: Outer product.md
-  - Problem set 4: Problem set 4.md
+  - First Steps: First-steps.md
+  - Dfns and Assignment: Dfns.md
+  - Selecting from Lists: Selecting-from-lists.md
+  - The Outer Product: Outer-product.md
+  - Shape Reshape: Shape-Reshape.md
+  - The Array Model: Array-model.md

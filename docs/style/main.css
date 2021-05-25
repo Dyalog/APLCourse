@@ -27,7 +27,7 @@ code {
 }
 /* Code copy only input (see CONTRIBUTING.md) */
 pre + pre > button, pre + hr {
-    display: none;
+    display: none!important;
 }
 pre > code {
     padding-bottom: 1em!important;
