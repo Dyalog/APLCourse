@@ -1,1 +1,0 @@
-# Namespaces and other objects
