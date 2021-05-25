@@ -52,7 +52,7 @@ Read the following as "squared numbers divided by the sum of squares":
 0.1666666667 0 0.1666666667 0.6666666667`
 ```
 
-## Problem Set 2: Dfns and Assignment
+## Problem Set 2
 1. Utility Functions
 	1. Without using the *tally* `≢⍵` or *shape* `⍴⍵` functions, create a function named `Tally` which returns the number of elements in a vector.
 
