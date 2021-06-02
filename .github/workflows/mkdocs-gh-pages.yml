@@ -4,11 +4,7 @@ on:
     types: [closed]
   workflow_dispatch:
   
-permissions:
-  actions: read
-  packages: read
-  pull-requests: read
-  contents: write
+permissions: write-all
 
 jobs:
   build:
