@@ -3,13 +3,17 @@ on:
   pull_request:
     types: [closed]
   workflow_dispatch:
+  
+permissions:
+  actions: read
+  packages: read
+  pull-requests: read
+  contents: write
 
 jobs:
   build:
     name: Deploy docs
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Checkout main
         uses: actions/checkout@v2
