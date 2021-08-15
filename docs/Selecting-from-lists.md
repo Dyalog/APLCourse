@@ -34,6 +34,10 @@ APL
 0 123 8364 246
 ```
 
+!!! Warning "Version Warning"
+	- The function *where* `⍸⍵` is not available in version 12.1 as it was introduced in version 16.0. 
+	- In Dyalog Classic the glyph `⍸` is unavailable, and is instead represented by `⎕U2378`. It is a good idea to name this e.g. `Where←⎕U2378`.
+
 ## Replicate/Compress
 Finding the indices of a boolean array using the **where** function `⍸⍵` is an unnecessary extra step since we know that indices will never be repeated in this case.
 
@@ -81,6 +85,10 @@ Take a moment to experiment with the shape `⍴`, tally `≢` and reshape `⍴` 
 !!! note
 	You might find that some arguments to reshape produce intolerably long output. Use the command `]rows -fold=3` to truncate the output.
 
+!!! Warning "Version Warning"
+	- Tally `≢⍵` is not available in version 12.1. The glyph is still in use as the function *Not Match* `⍺≢⍵`. However, it can be defined as `Tally←{⍬⍴1,⍨⍴⍵}`
+	- The `]rows` user command is not available in version 12.1.
+
 ## Problem Set 3
 
 1. Simple Simon Says Select These Elements
@@ -105,19 +113,19 @@ Take a moment to experiment with the shape `⍴`, tally `≢` and reshape `⍴` 
 		          7 Div 11 17 21 42 18 7 0 70
 		    21 42 7 0 70          
 
-??? Example "Answers"
-	Here are just some example solutions.
-	<ol type="a">
-		<li>
-			<pre><code class="language-APL">Even←{⍵[⍸0=2|⍵]}</code></pre>  
-			We can **compress** directly with the boolean vector:  
-			<pre><code>Even←{(0=2|⍵)/⍵}</code></pre>  
-			Or use the *commute* operator `⍨` to swap the arguments to compress, removing parentheses: 
-			<pre><code class="language-APL">Even←{⍵/⍨0=2|⍵}</code></pre>
-		</li>
-		<li><pre><code>Div5←{⍵/⍨0=5|⍵}</code></pre></li>
-		<li><pre><code>Div←{⍵/⍨0=⍺|⍵}</code></pre></li>
-	</ol>
+	??? Example "Answers"
+		Here are just some example solutions.
+		<ol type="a">
+			<li>
+				<pre><code class="language-APL">Even←{⍵[⍸0=2|⍵]}</code></pre>  
+				We can **compress** directly with the boolean vector:  
+				<pre><code>Even←{(0=2|⍵)/⍵}</code></pre>  
+				Or use the *commute* operator `⍨` to swap the arguments to compress, removing parentheses: 
+				<pre><code class="language-APL">Even←{⍵/⍨0=2|⍵}</code></pre>
+			</li>
+			<li><pre><code>Div5←{⍵/⍨0=5|⍵}</code></pre></li>
+			<li><pre><code>Div←{⍵/⍨0=⍺|⍵}</code></pre></li>
+		</ol>
 
 1. Without without  
 	Write a dfn which doesn't use `~` to remove spaces from a text vector. 
@@ -127,8 +135,8 @@ Take a moment to experiment with the shape `⍴`, tally `≢` and reshape `⍴` 
 	          NoSpace'there   are   more   spaces   here'
 	    therearemorespaceshere
 
-??? Example "Answer"
-	<pre><code>NoSpace←{⍵/⍨⍵≠' '}</code></pre>
+	??? Example "Answer"
+		<pre><code>NoSpace←{⍵/⍨⍵≠' '}</code></pre>
 
 1. Where without Where  
     Write a dfn which doesn't use `⍸` to find the indices of `1`s in a boolean vector.
@@ -136,8 +144,9 @@ Take a moment to experiment with the shape `⍴`, tally `≢` and reshape `⍴` 
 	          Where 0 1 0 1 0 0 1 
 	    2 4 7
 
-??? Example "Answer"
-	<pre><code>Where←{⍵/⍳≢⍵}</code></pre>
+	??? Example "Answer"
+		<pre><code>Where←{⍵/⍳≢⍵}
+		Where←{(,⍵)/⍳⍴⍵}</code></pre>
 
 1. sdrawkcab s'taht woN
 
@@ -148,5 +157,5 @@ Take a moment to experiment with the shape `⍴`, tally `≢` and reshape `⍴` 
 	          Reverse ⍳10
 	    10 9 8 7 6 5 4 3 2 1
 
-??? Example "Answer"
-	<pre><code>Reverse←{⍵[1+(≢⍵)-⍳≢⍵]}</code></pre>
+	??? Example "Answer"
+		<pre><code>Reverse←{⍵[1+(≢⍵)-⍳≢⍵]}</code></pre>

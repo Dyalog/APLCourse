@@ -9,4 +9,4 @@ window.MathJax = {
     ignoreHtmlClass: ".*|",
     processHtmlClass: "arithmatex"
   }
-};
+}

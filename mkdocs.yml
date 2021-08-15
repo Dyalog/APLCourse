@@ -2,9 +2,14 @@ site_name: APL Course
 site_description: A self-study introduction to Dyalog APL
 docs_dir: docs/
 site_url: https://dyalog.com
+extra_javascript:
+  - javascripts/config.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 theme:
   name: material
   favicon: 'img/favicon-32.png'
+  language: en
   logo: 'img/dyalog-white.svg'
   features:
     - navigation.instant
@@ -18,10 +23,6 @@ markdown_extensions:
   - abbr
 extra_css:
   - style/main.css
-extra_javascript:
-  - javascripts/config.js
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 nav:
   - About: index.md
   - First Steps: First-steps.md
@@ -30,3 +31,19 @@ nav:
   - The Outer Product: Outer-product.md
   - Shape Reshape: Shape-Reshape.md
   - The Array Model: Array-model.md
+  - Search, Sort and Select: Selecting-from-arrays.md
+  - Loops and Recursion: Loops.md
+  - Extra Assignment: Assignment.md
+  - Workspace Basics: Workspaces.md
+  - Namespaces and Other Objects: Namespaces.md
+  - Getting Help: Help.md
+  - User-defined Functions: Ufns.md
+  - Operators: Operators.md
+  - Quad Names: Quad names.md
+  - Error Handling and Debugging: Errors.md
+  - Data IO: Data.md
+  - Code IO: Code.md
+  - External Interfaces: Interfaces.md
+  - Historical Quirks: Quirks.md
+  - Interpreter Internals: Interpreter-internals.md
+  - Further Reading: Reading.md
