@@ -31,6 +31,7 @@ pre + pre > button, pre + hr {
 }
 pre > code {
     padding-bottom: 1em!important;
+    line-height: 1.2em;
 }
 hr + pre > button {
     top: -0.2em!important;

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block config %}
+  {{ super() }}
+  <script>
+    var __search = {
+      transform: function(query) {
+        return ("site:course.dyalog.com " + query).trim()
+      },
+      worker: "https://duckduckgo.com?q="
+    }
+  </script>
+{% endblock %}
+
+{% block htmltitle %}
+  <title>Lorem ipsum dolor sit amet</title>
+{% endblock %}
