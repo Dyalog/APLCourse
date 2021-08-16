@@ -705,13 +705,6 @@ SYNTAX ERROR: Missing right argument
 </code></pre>
 </li>
 </ol>
-<details class="example"><summary>Answers</summary><p>There are many ways to write functions which have the same effect, but here are some examples:
-<ol type="a">
-    <li><pre><code>Tally←{+/⍵=⍵}</code></pre></li>
-    <li><pre><code>Mean←{(+/⍵)÷Tally ⍵}</code></pre></li>
-    <li><pre><code>IsDivisibleBy←{d=⌊d←⍺÷⍵}</code></pre></li>
-</ol></p>
-</details>
 </li>
 <li>
 <p>What Remains</p>
@@ -737,19 +730,13 @@ SYNTAX ERROR: Missing right argument
 <p>Write a function <code>Split ⍵</code> which takes a fractional number and returns two numbers: its integer and fractional parts.</p>
 <pre class="highlight"><code>      Split 0
 0 0
-      Split ¯10
-¯10 0
-      Split 7.62
-7 0.62
+      Split ¯7
+¯7 0
+      Split 4.32
+4 0.32
 </code></pre>
 </li>
 </ol>
-<details class="example"><summary>Answers</summary><p>Using only what has been introduced so far, here are some example solutions:
-<ol type="a">
-    <li><pre><code>Mod←{⍵-⍺×⌊⍵÷⍺}</code></pre></li>
-    <li><pre><code>Split←{floor,⍵-floor←⌊⍵}</code></pre></li>
-</ol></p>
-</details>
 </li>
 <li>
 <p>What Was In That Vector Again?</p>
@@ -761,14 +748,6 @@ SYNTAX ERROR: Missing right argument
 <li>What percentage of numbers in <code>⎕AVU</code> are strictly positive?</li>
 <li>What do you notice about the percentage of strictly positive and negative numbers?</li>
 </ol>
-<details class="example"><summary>Answers</summary><p><ol type="a">
-    <li><span class="arithmatex">\(132\)</span></li>
-    <li><span class="arithmatex">\(48.4375\)</span></li>
-    <li><span class="arithmatex">\(0\)</span></li>
-    <li><span class="arithmatex">\(99.609375\)</span></li>
-    <li>I know vague questions like this are kind of rubbish, but did you notice that the percentages of strictly positive and negative numbers don't add up to 100%? This means that there must be zeroes in <code>⎕AVU</code> - but you already knew that from <code>×/⎕AVU</code>, didn't you?</li>
-</ol></p>
-</details>
 </li>
 <li>
 <p>Prime Time</p>
@@ -779,9 +758,6 @@ SYNTAX ERROR: Missing right argument
           IsPrime 17
 1
 </code></pre>
-<details class="example"><summary>Answer</summary><p>Once again, there are many ways to write this function. Here is one example using only constructs which have already been introduced:<br />
-<pre><code>IsPrime←{2=+/div=⌊div←⍵÷⍳⍵}</code></pre></p>
-</details>
 </li>
 </ol>
                 

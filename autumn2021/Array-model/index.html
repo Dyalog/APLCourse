@@ -1172,13 +1172,6 @@ Although these are simply suggested answers, and the use of terms like "over" an
     <pre><code>7 5</code></pre></p>
 </li>
 </ol>
-<details class="example"><summary>Answers</summary><p><ol type="a">
-    <li><code>(+⌿rain)÷≢rain     ⍝ Rainfall for each month averaged over 7 years in each of 5 countries</code></li>
-    <li><code>(+/rain)÷⊃⌽⍴rain   ⍝ Average monthly rainfall in each year for each of 5 countries</code></li>
-    <li><code>(+⌿⍵)÷≢⍵}+/rain    ⍝ Average of total annual rainfalls</code></li>
-    <li><code>(months countries years)←1 2 3</code></li>
-</ol></p>
-</details>
 </li>
 </ol>
 <h3 id="rank-practice">Rank Practice</h3>
@@ -1314,58 +1307,6 @@ C 6</code></pre></p>
 └─────┴─────┴─────┘</code></pre></p>
 </li>
 </ol>
-<details class="example"><summary>Rank Practice: Answers</summary><p><ol>
-    <li>
-        <ol type="a">
-            <li><table>
-                <tr>
-                    <td><code>⍺</code></td><td>Rank</td><td><code>⍵</code></td>
-                </tr>
-                <tr>
-                    <td><code>vectors of ⍺</code></td><td><code>⍤1 3</code></td><td><code>3D arrays of ⍵</code></td>
-                </tr>
-                <tr>
-                    <td><code>matrices of ⍺</code></td><td><code>⍤2 1</code></td><td><code>vectors of ⍵</code></td>
-                </tr>
-                <tr>
-                    <td><code>major cells of ⍺</code></td><td><code>⍤¯1</code></td><td><code>major cells of ⍵</code></td>
-                </tr>
-                <tr>
-                    <td><code>scalars of ⍺</code></td><td><code>⍤0 99</code></td><td><code>⍵</code></td>
-                </tr>
-                <tr>
-                    <td><code>⍺</code></td><td><code>⍤99 ¯1</code></td><td><code>major cells of ⍵</code></td>
-                </tr>
-            </table></li>
-            <li><table>
-                <tr><td>Scalar</td><td>rank-0 array</td></tr>
-                <tr><td>Vector</td><td>rank-1 array</td></tr>
-                <tr><td>Matrix</td><td>rank-2 array</td></tr>
-                <tr><td>Table</td><td>rank-2 array</td></tr>
-                <tr><td>List</td><td>rank-1 array</td></tr>
-                <tr><td>Cube</td><td>rank-3 array</td></tr>
-                <tr><td>4D array</td><td>rank-4 array</td></tr>
-                <tr><td>2D array</td><td>rank-2 array</td></tr>
-            </table></li>
-        </ol>
-    </li>
-    <li>
-        <ol type="a">
-            <li><code>AddVec ← +</code></li>
-            <li><code>NormVec ← {⍵÷(+/⍵)*0.5}</code></li>
-        </ol>
-    </li>
-    <li>
-        <ol type="a">
-            <li><code>(j k) ← 1 1</code></li>
-            <li><code>(j k) ← 0 1</code></li>
-        </ol>
-    </li>
-    <li><code>R1 ← ,⍤0⍤1</code></li>
-    <li><code>Split ← ⊂⍤¯1</code>
-    </li>
-</ol></p>
-</details>
 <h2 id="an-apl-model-of-the-rank-operator">An APL model of the rank operator</h2>
 <p>The primitive rank operator <code>F⍤k</code> was introduced in Dyalog version 14.0. An APL model compatible with earlier versions is as follows:  </p>
 <pre><code class="language-APL"> _Rank_←{

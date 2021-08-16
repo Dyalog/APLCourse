@@ -754,26 +754,6 @@
 </code></pre>
 </li>
 </ol>
-<details class="example"><summary>Answers</summary><p><ol type="a">
-<li><span class="arithmatex">\(\prod_{n=1}^{12} n\)</span>
-<pre><code>      ×/⍳12
-479001600</code></pre></li>
-<li><span class="arithmatex">\(\sum_{n=1}^{17}n^2\)</span>
-<pre><code>      +/(⍳17)*2
-1785</code></pre></li>
-<li><span class="arithmatex">\(\sum_{n=1}^{100}2n\)</span>
-<pre><code>      +/2×⍳100
-10100</code></pre></li>
-<li><span class="arithmatex">\(\sum_{n=1}^{100}2n-1\)</span>
-<pre><code>      +/¯1+2×⍳100
-10000</code></pre></li>
-<li>Expressions are grouped with long right scope and short left scope, rather than using <a href="https://en.wikipedia.org/wiki/Order_of_operations#Mnemonics">BODMAS</a>. With parentheses, the APL and <abbr title="Traditional Mathematical Notation">TMN</abbr> can be made equivalent:
-<pre><code>      84 - (12 - (1 - (13 - (28 - (9 - (6 - 15))))))
-70
-      (((((((84 - 12) - 1) - 13) - 28) - 9) - 6) - 15)
-0</code></pre>
-</ol></p>
-</details>
 </li>
 <li>
 <p>Pyramid Schemes</p>
@@ -797,18 +777,6 @@
 <p>The stack in <strong>Figure 3</strong> has <code>3</code> <strong>"layers"</strong> and <code>36</code> cubes in total. How many cubes are there in a similar stack with <code>68</code> <strong>"layers"</strong>?</p>
 </li>
 </ol>
-<details class="example"><summary>Answers</summary><p><ol type="a">
-    <li><br />
-    <pre><code>      +/(⍳467)*2
-34058310</code></pre></li>
-    <li><br />
-    <pre><code>      +/(¯1+2×⍳812)*2
-713849500</pre></code></li>
-    <li><br />
-    <pre><code>      +/(⍳68)*3
-5503716</pre></code></li>
-</ol></p>
-</details>
 </li>
 <li>
 <p>What's in a Vector?<br />
@@ -827,25 +795,6 @@
 <p>Find the mean average of <code>⎕AVU</code>.</p>
 </li>
 </ol>
-<details class="example"><summary>Answers</summary><p><ol type="a">
-    <li><br />
-    <pre><code>      +/⎕AVU
-646112</code></pre></li>
-    <li><br />
-    <pre><code>      ×/⎕AVU
-0</code></pre></li>
-    <li>There are many ways to compute the number of numbers in a numeric vector. Here are a couple:
-    <pre><code>      +/⎕AVU=⎕AVU
-256
-      +/⎕AVU*0
-256
-      +/1+⎕AVU×0
-256</code></pre></li>
-    <li> The mean average is the sum divided by the length:
-    <pre><code>      (+/⎕AVU)÷+/⎕AVU=⎕AVU
-2523.875</code></pre></li>
-</ol></p>
-</details>
 </li>
 </ol>
                 

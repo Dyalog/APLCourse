@@ -733,13 +733,6 @@ Was OFF
 6 7 8 9 10 11 12</code></pre></p>
 </li>
 </ol>
-<details class="example"><summary>Answers</summary><p><ol type="a">
-    <li><pre><code class="language-APL">MulTable ← {(⍳⍵)∘.×⍳⍵}</code></pre>
-    which can be simplified using the <em>selfie</em> operator <code>⍨</code>
-    <pre><code class="language-APL">MulTable ← {∘.×⍨⍳⍵}</code></pre></li>
-    <li><pre><code class="language-APL">AddTable ← {∘.+⍨¯1+⍳⍵}</code></pre></li>
-</ol></p>
-</details>
 </li>
 <li>
 <p>Making the Grade</p>
@@ -776,8 +769,6 @@ Was OFF
 <p>Write a function that, given an array of integer test scores in the inclusive range 0 to 100, returns a list of letter grades according to the table above.</p>
 <p><pre><code class="language-APL">      Grade 0 10 75 78 85</code></pre>
 <pre><code class="language-APL">FFCCB</code></pre></p>
-<details class="example"><summary>Answer</summary><p><pre><code class="language-APL">Grade ← {'FDCBA'[+⌿0 65 70 80 90∘.≤⍵]}</code></pre></p>
-</details>
 </li>
 <li>
 <p>Optimus Prime</p>
@@ -788,12 +779,6 @@ Was OFF
 <hr>
 <pre><code class="language-APL">      Primes 30</code></pre>
 <pre><code class="language-APL">2 3 5 7 11 13 17 19 23 29</code></pre></p>
-<details class="example"><summary>Answer</summary><p><pre><code class="language-APL">Primes ← {⍸2=+⌿0=∘.|⍨⍳⍵}</code></pre></p>
-<p>An alternative coding uses the multiplication table:</p>
-<p><pre><code class="language-APL">Primes ← {i~∘.×⍨i←1↓⍳⍵}</code></pre></p>
-<p>Of course, the outer product <code>∘.F</code> indicates that the number of calculations to compute both of these solutions increases with the square of the input size. We say they have a computational complexity "<em>of order n squared</em>" or <span class="arithmatex">\(O(n^2)\)</span> in <a href="https://en.wikipedia.org/wiki/Big_O_notation">big-O notation</a>. This is a very inefficient way to find prime numbers.</p>
-<p>To see discussions around more efficient ways to compute prime numbers in APL, see <a href="https://dfns.dyalog.com/n_pco.htm">the dfns page on prime numbers</a>.</p>
-</details>
 </li>
 </ol>
                 

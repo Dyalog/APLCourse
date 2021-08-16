@@ -739,19 +739,6 @@ O
 </code></pre>
 </li>
 </ol>
-<details class="example"><summary>Answers</summary><p>Here are just some example solutions.
-<ol type="a">
-    <li>
-        <pre><code class="language-APL">Even←{⍵[⍸0=2|⍵]}</code></pre><br />
-        We can <strong>compress</strong> directly with the boolean vector:<br />
-        <pre><code>Even←{(0=2|⍵)/⍵}</code></pre><br />
-        Or use the <em>commute</em> operator <code>⍨</code> to swap the arguments to compress, removing parentheses: 
-        <pre><code class="language-APL">Even←{⍵/⍨0=2|⍵}</code></pre>
-    </li>
-    <li><pre><code>Div5←{⍵/⍨0=5|⍵}</code></pre></li>
-    <li><pre><code>Div←{⍵/⍨0=⍺|⍵}</code></pre></li>
-</ol></p>
-</details>
 </li>
 <li>
 <p>Without without<br />
@@ -761,8 +748,6 @@ hereissometext
       NoSpace'there   are   more   spaces   here'
 therearemorespaceshere
 </code></pre>
-<details class="example"><summary>Answer</summary><p><pre><code>NoSpace←{⍵/⍨⍵≠' '}</code></pre></p>
-</details>
 </li>
 <li>
 <p>Where without Where<br />
@@ -770,9 +755,6 @@ therearemorespaceshere
 <pre class="highlight"><code>      Where 0 1 0 1 0 0 1 
 2 4 7
 </code></pre>
-<details class="example"><summary>Answer</summary><p><pre><code>Where←{⍵/⍳≢⍵}
-Where←{(,⍵)/⍳⍴⍵}</code></pre></p>
-</details>
 </li>
 <li>
 <p>sdrawkcab s'taht woN</p>
@@ -782,8 +764,6 @@ sretcarahc emoS
       Reverse ⍳10
 10 9 8 7 6 5 4 3 2 1
 </code></pre>
-<details class="example"><summary>Answer</summary><p><pre><code>Reverse←{⍵[1+(≢⍵)-⍳≢⍵]}</code></pre></p>
-</details>
 </li>
 </ol>
                 

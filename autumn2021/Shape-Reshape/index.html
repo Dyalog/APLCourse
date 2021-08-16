@@ -687,12 +687,6 @@
 <p>The <em>rank</em> of an array is the number of <em>axes</em> or <em>dimensions</em> an array has. If the shape of an array <code>⍵</code> is given by the vector result of the shape function <code>⍴⍵</code>, give an expression for the rank of an array.</p>
 </li>
 </ol>
-<details class="example"><summary>Answers</summary><p><ol type="a">
-    <li><pre><code class="language-APL">IsEmpty←{0∊⍴⍵}</code></pre></li>
-    <li>The functions <strong>shape</strong> <code>⍴⍵</code> and <strong>ravel</strong> <code>,⍵</code> return these two vectors, which are called the <em>shape</em> and the <em>ravel of elements</em>.</li>
-    <li>Traditionally, the rank is defined as the <em>shape of the shape</em> <code>⍴⍴⍵</code>. However, in modern APL it is preferable to use the tally of the shape <code>≢⍴⍵</code>.</li>
-</ol></p>
-</details>
 </li>
 <li>
 <p>Some Points in Space </p>
@@ -729,21 +723,6 @@
 <p class="admonition-title">Bonus</p>
 <p>Write commutative versions of <code>AddRows</code> which will still work when the vector and matrix arguments are swapped.</p>
 </div>
-<details class="example"><summary>Answers</summary><p><ol type="a">
-    <li>This solutions assumes a vector left argument:<br />
-        <pre><code class="language-APL">AddRows ← {⍵+(⍴⍵)⍴⍺}</code></pre>
-    </li>
-    <li>Using only things which have been introduced so far:
-        <pre><code class="language-APL">NormRows ← {⍵÷(⍴⍵)⍴(⍴⍵)[2]/0.5*⍨+/⍵*2}</code></pre>
-    </li>
-</ol></p>
-</details>
-<details class="example"><summary>Bonus Answers</summary><p>A commutative version of <code>AddRows</code> can be made by sorting using the ranks, and is expressed most clearly as two expressions separated by the <strong>statement separator</strong> <code>⋄</code>
-<pre><code class="language-APL">AddRows ← {(v m)←⍺ ⍵[(≢⍴)¨⍺ ⍵] ⋄ m+(⍴m)⍴v}   ⍝ v is the vector, m is the matrix</code></pre>
-It can be coded in a single expression as a <em>reduction</em>, but then the result must be <strong>disclosed</strong> using <strong>pick</strong> <code>⊃</code>, which we will cover later in the course. If you want to know why, look at the shape of the result with and without the pick <code>⊃</code>
-<pre><code class="language-APL">AddRows ← {⊃{⍵+(⍴⍵)⍴⍺}/⍺ ⍵[(≢⍴)¨⍺ ⍵]}</code></pre>
-In the next section, we will see a better way to write functions that work on arrays of differing rank.</p>
-</details>
 </li>
 <li>
 <p>Without executing them, determine the shape of the results of the following expressions:</p>
@@ -754,13 +733,6 @@ In the next section, we will see a better way to write functions that work on ar
       ?⌿2 3⍴3/4 52
       ⌈/(2 3⍴⍳6)∘.×¯1+?5 4⍴0</code></pre></p>
 <details class="hint"><summary>Hint</summary><p>Of course, you can always check your answers using the shape function <code class='language-APL'>⍴</code></p>
-</details>
-<details class="example"><summary>Answers</summary><p><pre><code>  3 4 ≡ ⍴1 3 5∘.!2 4 6 8
-    3 = ⍴1 2 3 + 4 5 6
-    ⍬ ≡ ⍴{(+⌿⍵)÷≢⍵}3 1 4 1 5   ⍝ The empty numeric vector
-    3 = ⍴+⌿2 3⍴⍳6
-    3 = ⍴?⌿2 3⍴3/4 52
-2 3 5 ≡ ⍴⌈/(2 3⍴⍳6)∘.×¯1+?5 4⍴0</code></pre></p>
 </details>
 </li>
 </ol>
