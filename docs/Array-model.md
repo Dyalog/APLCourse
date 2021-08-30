@@ -384,6 +384,14 @@ Experiment with the following expressions to determine what the each `¨` and bi
 		<pre><code class="language-APL">      ⍴(+⌿⍤months)rain      ⍝ Sum over months</code></pre>
 		<pre><code>7 5</code></pre>
 
+	??? Example "Answers"
+		<ol type="a">
+			<li>`(+⌿rain)÷≢rain     ⍝ Rainfall for each month averaged over 7 years in each of 5 countries`</li>
+			<li>`(+/rain)÷⊃⌽⍴rain   ⍝ Average monthly rainfall in each year for each of 5 countries`</li>
+			<li>`(+⌿⍵)÷≢⍵}+/rain    ⍝ Average of total annual rainfalls`</li>
+			<li>`(months countries years)←1 2 3`</li>
+		</ol>
+
 ### Rank Practice
 
 1. Common Names for Arrays of Rank-n
@@ -510,6 +518,59 @@ Experiment with the following expressions to determine what the each `¨` and bi
 	│7 8 9│1 2 3│4 5 6│
 	│1 2 3│4 5 6│7 8 9│
 	└─────┴─────┴─────┘</code></pre>
+
+??? Example "Rank Practice: Answers"
+	<ol>
+		<li>
+			<ol type="a">
+				<li><table>
+					<tr>
+						<td>`⍺`</td><td>Rank</td><td>`⍵`</td>
+					</tr>
+					<tr>
+						<td>`vectors of ⍺`</td><td>`⍤1 3`</td><td>`3D arrays of ⍵`</td>
+					</tr>
+					<tr>
+						<td>`matrices of ⍺`</td><td>`⍤2 1`</td><td>`vectors of ⍵`</td>
+					</tr>
+					<tr>
+						<td>`major cells of ⍺`</td><td>`⍤¯1`</td><td>`major cells of ⍵`</td>
+					</tr>
+					<tr>
+						<td>`scalars of ⍺`</td><td>`⍤0 99`</td><td>`⍵`</td>
+					</tr>
+					<tr>
+						<td>`⍺`</td><td>`⍤99 ¯1`</td><td>`major cells of ⍵`</td>
+					</tr>
+				</table></li>
+				<li><table>
+					<tr><td>Scalar</td><td>rank-0 array</td></tr>
+					<tr><td>Vector</td><td>rank-1 array</td></tr>
+					<tr><td>Matrix</td><td>rank-2 array</td></tr>
+					<tr><td>Table</td><td>rank-2 array</td></tr>
+					<tr><td>List</td><td>rank-1 array</td></tr>
+					<tr><td>Cube</td><td>rank-3 array</td></tr>
+					<tr><td>4D array</td><td>rank-4 array</td></tr>
+					<tr><td>2D array</td><td>rank-2 array</td></tr>
+				</table></li>
+			</ol>
+		</li>
+		<li>
+			<ol type="a">
+				<li>`AddVec ← +`</li>
+				<li>`NormVec ← {⍵÷(+/⍵)*0.5}`</li>
+			</ol>
+		</li>
+		<li>
+			<ol type="a">
+				<li>`(j k) ← 1 1`</li>
+				<li>`(j k) ← 0 1`</li>
+			</ol>
+		</li>
+		<li>`R1 ← ,⍤0⍤1`</li>
+		<li>`Split ← ⊂⍤¯1`
+		</li>
+	</ol>
 
 ## An APL model of the rank operator
 The primitive rank operator `F⍤k` was introduced in Dyalog version 14.0. An APL model compatible with earlier versions is as follows:  

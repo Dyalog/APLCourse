@@ -62,6 +62,13 @@ A *simple array* contains only single numbers and/or characters as elements. Sin
 
 	1. The *rank* of an array is the number of *axes* or *dimensions* an array has. If the shape of an array `⍵` is given by the vector result of the shape function `⍴⍵`, give an expression for the rank of an array.
 
+	??? Example "Answers"
+		<ol type="a">
+			<li><pre><code class="language-APL">IsEmpty←{0∊⍴⍵}</code></pre></li>
+			<li>The functions **shape** `⍴⍵` and **ravel** `,⍵` return these two vectors, which are called the *shape* and the *ravel of elements*.</li>
+			<li>Traditionally, the rank is defined as the *shape of the shape* `⍴⍴⍵`. However, in modern APL it is preferable to use the tally of the shape `≢⍴⍵`.</li>
+		</ol>
+
 1. Some Points in Space 
 
 	The positions of 5 points in 3D space are given by the matrix `pos`:
@@ -97,6 +104,23 @@ A *simple array* contains only single numbers and/or characters as elements. Sin
 	!!! Hint "Bonus"
 		Write commutative versions of `AddRows` which will still work when the vector and matrix arguments are swapped.
 
+	??? Example "Answers"
+		<ol type="a">
+			<li>This solutions assumes a vector left argument:  
+				<pre><code class="language-APL">AddRows ← {⍵+(⍴⍵)⍴⍺}</code></pre>
+			</li>
+			<li>Using only things which have been introduced so far:
+				<pre><code class="language-APL">NormRows ← {⍵÷(⍴⍵)⍴(⍴⍵)[2]/0.5\*⍨+/⍵*2}</code></pre>
+			</li>
+		</ol>
+	
+	??? Example "Bonus Answers"
+		A commutative version of `AddRows` can be made by sorting using the ranks, and is expressed most clearly as two expressions separated by the **statement separator** `⋄`
+		<pre><code class="language-APL">AddRows ← {(v m)←⍺ ⍵[(≢⍴)¨⍺ ⍵] ⋄ m+(⍴m)⍴v}   ⍝ v is the vector, m is the matrix</code></pre>
+		It can be coded in a single expression as a *reduction*, but then the result must be **disclosed** using **pick** `⊃`, which we will cover later in the course. If you want to know why, look at the shape of the result with and without the pick `⊃`
+		<pre><code class="language-APL">AddRows ← {⊃{⍵+(⍴⍵)⍴⍺}/⍺ ⍵[(≢⍴)¨⍺ ⍵]}</code></pre>
+		In the next section, we will see a better way to write functions that work on arrays of differing rank.
+
 1. Without executing them, determine the shape of the results of the following expressions:
 
 	<pre><code class="language-APL">      1 3 5∘.!2 4 6 8
@@ -108,3 +132,10 @@ A *simple array* contains only single numbers and/or characters as elements. Sin
 
 	??? Hint
 		Of course, you can always check your answers using the shape function <code class='language-APL'>⍴</code>
+	??? Example "Answers"
+		<pre><code>  3 4 ≡ ⍴1 3 5∘.!2 4 6 8
+		    3 = ⍴1 2 3 + 4 5 6
+		    ⍬ ≡ ⍴{(+⌿⍵)÷≢⍵}3 1 4 1 5   ⍝ The empty numeric vector
+		    3 = ⍴+⌿2 3⍴⍳6
+		    3 = ⍴?⌿2 3⍴3/4 52
+		2 3 5 ≡ ⍴⌈/(2 3⍴⍳6)∘.×¯1+?5 4⍴0</code></pre>

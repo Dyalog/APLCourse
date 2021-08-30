@@ -109,6 +109,27 @@ Of course, we can change the order of execution using different parentheses.
 		          84 - 12 - 1 - 13 - 28 - 9 - 6 - 15  
 		    70
 
+	??? Example "Answers"
+		<ol type="a">
+		<li>$\prod_{n=1}^{12} n$
+		<pre><code>      ×/⍳12
+		479001600</code></pre></li>
+		<li>$\sum_{n=1}^{17}n^2$
+		<pre><code>      +/(⍳17)*2
+		1785</code></pre></li>
+		<li>$\sum_{n=1}^{100}2n$
+		<pre><code>      +/2×⍳100
+		10100</code></pre></li>
+		<li>$\sum_{n=1}^{100}2n-1$
+		<pre><code>      +/¯1+2×⍳100
+		10000</code></pre></li>
+		<li>Expressions are grouped with long right scope and short left scope, rather than using [BODMAS](https://en.wikipedia.org/wiki/Order_of_operations#Mnemonics). With parentheses, the APL and TMN can be made equivalent:
+		<pre><code>      84 - (12 - (1 - (13 - (28 - (9 - (6 - 15))))))
+		70
+		      (((((((84 - 12) - 1) - 13) - 28) - 9) - 6) - 15)
+		0</code></pre>
+		</ol>
+
 *[TMN]: Traditional Mathematical Notation
 
 2. Pyramid Schemes
@@ -133,6 +154,19 @@ Of course, we can change the order of execution using different parentheses.
 
 		The stack in **Figure 3** has `3` **"layers"** and `36` cubes in total. How many cubes are there in a similar stack with `68` **"layers"**?
 
+	??? Example "Answers"
+		<ol type="a">
+			<li>  
+			<pre><code>      +/(⍳467)*2
+		34058310</code></pre></li>
+			<li>  
+			<pre><code>      +/(¯1+2×⍳812)\*2
+		713849500</pre></code></li>
+			<li>  
+			<pre><code>      +/(⍳68)\*3
+		5503716</pre></code></li>
+		</ol>
+
 3. What's in a Vector?  
 	`⎕AVU` is a list (vector) of numbers (don't worry about what it represents). Find the following properties of `⎕AVU`:  
 	1. Find the sum of all the values in `⎕AVU`.
@@ -142,3 +176,23 @@ Of course, we can change the order of execution using different parentheses.
 	3. What is the length of `⎕AVU`?
 
 	4.  Find the mean average of `⎕AVU`.
+
+	??? Example "Answers"
+		<ol type="a">
+			<li>  
+			<pre><code>      +/⎕AVU
+		646112</code></pre></li>
+			<li>  
+			<pre><code>      ×/⎕AVU
+		0</code></pre></li>
+			<li>There are many ways to compute the number of numbers in a numeric vector. Here are a couple:
+			<pre><code>      +/⎕AVU=⎕AVU
+		256
+		      +/⎕AVU*0
+		256
+		      +/1+⎕AVU×0
+		256</code></pre></li>
+			<li> The mean average is the sum divided by the length:
+			<pre><code>      (+/⎕AVU)÷+/⎕AVU=⎕AVU
+		2523.875</code></pre></li>
+		</ol>

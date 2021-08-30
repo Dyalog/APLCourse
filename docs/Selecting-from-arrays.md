@@ -281,6 +281,16 @@ Now answer the following questions about `words`.
 
 1. How many words are in alphabetical order?
 
+??? Example "Answers"
+	<ol type="a">
+		<li>$3585$</li>
+		<li>$2149$</li>
+		<li>baa</li>
+		<li>bookkeeper  bookkeeper's  bookkeepers  bookkeeping  bookkeeping's</li>
+		<li>$109$</li>
+		<li>deified</li>
+	</ol>
+
 ### Rain facts
 The 3D array `rain` gives the monthly rainfall in millimeters over 7 years in 5 countries.
 
