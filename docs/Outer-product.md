@@ -120,14 +120,6 @@ It is also worth mentioning at this point that pressing `F1` in Dyalog with the 
 		5 6 7 8  9 10 11
 		6 7 8 9 10 11 12</code></pre>
 
-	??? Example "Answers"
-		<ol type="a">
-			<li><pre><code class="language-APL">MulTable ← {(⍳⍵)∘.×⍳⍵}</code></pre>
-			which can be simplified using the *selfie* operator `⍨`
-			<pre><code class="language-APL">MulTable ← {∘.×⍨⍳⍵}</code></pre></li>
-			<li><pre><code class="language-APL">AddTable ← {∘.+⍨¯1+⍳⍵}</code></pre></li>
-		</ol>
-
 1. Making the Grade
 
     |   |   |   |   |   |   |
@@ -140,9 +132,6 @@ It is also worth mentioning at this point that pressing `F1` in Dyalog with the 
 	<pre><code class="language-APL">      Grade 0 10 75 78 85</code></pre>
 	<pre><code class="language-APL">FFCCB</code></pre>
 
-	??? Example "Answer"
-		<pre><code class="language-APL">Grade ← {'FDCBA'[+⌿0 65 70 80 90∘.≤⍵]}</code></pre>
-
 1. Optimus Prime
 
 	A prime number is divisible by only itself and `1`.
@@ -154,14 +143,3 @@ It is also worth mentioning at this point that pressing `F1` in Dyalog with the 
 	<hr>
 	<pre><code class="language-APL">      Primes 30</code></pre>
 	<pre><code class="language-APL">2 3 5 7 11 13 17 19 23 29</code></pre>
-
-	??? Example "Answer"
-		<pre><code class="language-APL">Primes ← {⍸2=+⌿0=∘.|⍨⍳⍵}</code></pre>
-		
-		An alternative coding uses the multiplication table:
-		
-		<pre><code class="language-APL">Primes ← {i~∘.×⍨i←1↓⍳⍵}</code></pre>
-		
-		Of course, the outer product `∘.F` indicates that the number of calculations to compute both of these solutions increases with the square of the input size. We say they have a computational complexity "*of order n squared*" or $O(n^2)$ in [big-O notation](https://en.wikipedia.org/wiki/Big_O_notation). This is a very inefficient way to find prime numbers.
-		
-		To see discussions around more efficient ways to compute prime numbers in APL, see [the dfns page on prime numbers](https://dfns.dyalog.com/n_pco.htm).
