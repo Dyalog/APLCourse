@@ -213,19 +213,19 @@ Here are some useful code snippets for finding information about the currently r
 What version of Dyalog am I running?
 
 ```APL
-'.'⎕WG'APLVersion'
+'#'⎕WG'APLVersion'   ⍝ '#' is '.' in older versions of Dyalog
 ```
 
 For error reports, get the BuildID:
 
 ```APL
-⎕←2⎕NQ'.' 'GetBuildID'
+⎕←2⎕NQ'#' 'GetBuildID'
 ```
 
 Am I a Unicode interpreter?
 
 ```APL
-80=⎕DR' '
+80=⎕DR''
 ```
 
 Am I big endian?
@@ -237,7 +237,7 @@ Am I big endian?
 What is my word width?
 
 ```APL
-{z←⍵ ⋄ 2×⍬⍴⎕SIZE'z'} ⍬
+32×1+'4'∊⊃#⎕WG'APLVersion'   ⍝ 64-bit has 64 in the platform name. Otherwise the interpreter is 32-bit.
 ```
 
 ## Performance
