@@ -1,13 +1,7 @@
 site_name: APL Course
-site_description: A self-study introduction to Dyalog APL
+site_description: A guided introduction to Dyalog APL
 docs_dir: docs/
 site_url: https://dyalog.com
-theme:
-  name: material
-  favicon: 'img/favicon-32.png'
-  logo: 'img/dyalog-white.svg'
-  features:
-    - navigation.instant
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
@@ -16,6 +10,12 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - abbr
+theme:
+  name: material
+  favicon: 'img/favicon-32.png'
+  logo: 'img/dyalog-white.svg'
+  features:
+    - navigation.instant
 extra_css:
   - style/main.css
 extra_javascript:
