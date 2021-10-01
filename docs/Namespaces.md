@@ -274,12 +274,6 @@ It is possible to have a script depend on other scripts. To do so, use the [**:r
 	- Depth (≡) is 0 (simple scalar)
 	- Allows dot syntax (ns.name)
 
-	??? Example "Answers"
-		<pre><code class="language-APL">ScalarRef←(0=≡)∧(326=⎕DR)
-		ScalarRef←{9=⊃⎕NC'⍵'}
-		ScalarRef←{9=⊃⎕NC'⍵'}</code></pre>
-
-
 1. Write a function RefMask that returns an array of the same structure as its argument, but with bits indicating the namespace references.
 
 	<pre><code class="language-APL">      ]disp RefMask (⊂⊂⊂⊂1 2 ns) 3 ns (2 2⍴'abc',⎕NS⍬)
@@ -294,10 +288,6 @@ It is possible to have a script depend on other scripts. To do so, use the [**:r
 ││└─────────┘││ │ │   │
 │└───────────┘│ │ │   │
 └─────────────┴─┴─┴───┘</code></pre>
-
-	??? Example "Answers"
-		<pre><code class="language-APL">RefMask←{0=≡⍵:ScalarRef ⍵ ⋄ ∇¨⍵} 
-		RefMask←{b⊣(∊b)←ScalarRef¨∊b←⍵}</code></pre>
 
 1. Write a function `Fetch` which takes namespace reference as left argument and a nested vector of character vector keys as right argument and returns the corresponding values from the namespace.
 
@@ -318,9 +308,6 @@ It is possible to have a script depend on other scripts. To do so, use the [**:r
 \#
       FindRoot ⎕NS⍬
 \#</code></pre>
-
-	??? Example "Answer"
-		`FindRoot←{⍵.##}⍣=`
 
 1. What are our roots?
 	Write a function FindRoots that takes an arbitrary array of namespaces and finds the root for each namespace.
@@ -343,11 +330,6 @@ It is possible to have a script depend on other scripts. To do so, use the [**:r
       Line ⎕SE.cbbot.bandsb2.sb.io
  ⎕SE  ⎕SE.cbbot  ⎕SE.cbbot.bandsb2  ⎕SE.cbbot.bandsb2.sb  ⎕SE.cbbot.bandsb2.sb.io</code></pre>
 
-	??? Example "Answers"
-		`Line ← {⍺←⍬ ⋄ ⍵≡p←⍵.##:⍵,⍺ ⋄ p∇⍨⍵,⍺} `  
-		`Line ← {1↓r⊣{r,⍨←⍵.##}⍣≡r←⍵} `
-
-
 1. Where are my children?
 	Write a function that lists all the children of a given namespace.
 
@@ -355,21 +337,3 @@ It is possible to have a script depend on other scripts. To do so, use the [**:r
 		Note: `⎕NL` is Name List, not Children List  
 		Plan: You'll have to crawl through the entire workspace  
 		Think: How could namespaces still be out of reach?
-
-	??? Example "Answer"
-		
-		This answer demonstrates how complex attempting to do these types of tasks can become. Even the long function below does not cover every single edge case. You should take care to design your application so that you do not rely on these properties for behvaiour. If you find yourself needing to do these types of things to make your application work, then you might want to reconsider your approach.
-		
-		<pre><code class="language-APL">∇ children←{arg}ListChildren target;args;next;parents;visited
-			:If 0=⎕NC'arg' ⋄ arg←(# ⎕SE target)(0⍴#)(0⍴#) ⋄ :EndIf
-			(parents children visited)←arg
-			next←∪∊parents.(⍎¨'##' '⎕THIS',⎕NL ¯9)⍝ visit all reachable ns
-			next~←visited                         ⍝ excepted visited ones
-			:If 0∊⍴next ⋄ :Return ⋄ :EndIf        ⍝ (0⍴#).## is NONCE ERROR
-			children∪←(target=next.##)/next       ⍝ append children of target
-			visited,←next                         ⍝ no next has been visited
-			:If 0∊⍴next ⋄ :Return ⋄ :EndIf        ⍝ F¨0⍴# is NONCE ERROR
-			args←next children visited
-			children∪←args ListChildren target    ⍝ recur on unvisited ns
-		⍝ TO-DO: refs in arrays, derived functions, locals in threads, fields in OO, …
-		∇</code></pre>

@@ -357,16 +357,6 @@ Experiment with the following expressions to determine what the each `¨` and bi
 
 	??? Hint
 		Look at the shapes of the arguments and the results, <code class='language-apl'>⍴rain</code> and <code class='language-apl'>⍴+⌿rain</code> etc.
-	
-	??? Example "Answers"
-		<pre><code class="language-APL">      (+⌿⍤1)rain        ⍝ Total rainfall for each of 7 years in each of 5 countries
-		      +⌿rain            ⍝ Total monthly rainfall over 7 years for each of 5 countries
-		      (+⌿⍤2)rain        ⍝ Total monthly rainfall across 5 countries for each of 7 years
-		      (+⌿⍤3)rain        ⍝ Total annual rainfall for each of 7 years in each of 5 countries
-		      ⌈⌿rain            ⍝ Highest rainfall for that month of any year across 7 years for each of 5 countries
-		      (⌈⌿⍤2)rain        ⍝ Highest rainfall across all countries for that month
-		      rain[⍸rain>250]   ⍝ Months in which rainfall was more than 250mm (empty list)</code></pre>
-		Although these are simply suggested answers, and the use of terms like "over" and "for each of" in these sentences can be slightly ambiguous, the point we are trying to demonstrate is that by choosing an appropriate arrangement of data, you can use very simple expressions to perform a wide variety of summaries and transformations on that data.
 
 	1. Write an expression to find the average monthly rainfall for each individual month over the 7 years in each of the 5 countries.
 
