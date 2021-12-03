@@ -6,13 +6,6 @@ This course consists of a series of short instructional notes interleaved with p
 ## Status
 This site is a work in progress. Currently we are transferring content from [APL Workshop](https://rikedyp.uk/APLWorkshop) while reviewing and updating it.
 
-!!! Note "Rendering of mathematical notation"
-	There is a known issue with the MathJax renderer.  
-	If you see some text which looks like  
-	`\(\sum_{n=1}^N n\)`  
-	then try refreshing the page. It should look like:  
-	<img alt="mathjax example rendering" src="./img/mathjax.png" width="60px">
-
 ## Getting Started
 If you're just starting out, you can use the [TryAPL](https://tryapl.org) online interpreter. Put TryAPL on one half of your screen, and this site on the other half. 
 
