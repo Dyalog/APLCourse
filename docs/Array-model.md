@@ -357,16 +357,6 @@ Experiment with the following expressions to determine what the each `¨` and bi
 
 	??? Hint
 		Look at the shapes of the arguments and the results, <code class='language-apl'>⍴rain</code> and <code class='language-apl'>⍴+⌿rain</code> etc.
-	
-	??? Example "Answers"
-		<pre><code class="language-APL">      (+⌿⍤1)rain        ⍝ Total rainfall for each of 7 years in each of 5 countries
-		      +⌿rain            ⍝ Total monthly rainfall over 7 years for each of 5 countries
-		      (+⌿⍤2)rain        ⍝ Total monthly rainfall across 5 countries for each of 7 years
-		      (+⌿⍤3)rain        ⍝ Total annual rainfall for each of 7 years in each of 5 countries
-		      ⌈⌿rain            ⍝ Highest rainfall for that month of any year across 7 years for each of 5 countries
-		      (⌈⌿⍤2)rain        ⍝ Highest rainfall across all countries for that month
-		      rain[⍸rain>250]   ⍝ Months in which rainfall was more than 250mm (empty list)</code></pre>
-		Although these are simply suggested answers, and the use of terms like "over" and "for each of" in these sentences can be slightly ambiguous, the point we are trying to demonstrate is that by choosing an appropriate arrangement of data, you can use very simple expressions to perform a wide variety of summaries and transformations on that data.
 
 	1. Write an expression to find the average monthly rainfall for each individual month over the 7 years in each of the 5 countries.
 
@@ -383,14 +373,6 @@ Experiment with the following expressions to determine what the each `¨` and bi
 		<hr>
 		<pre><code class="language-APL">      ⍴(+⌿⍤months)rain      ⍝ Sum over months</code></pre>
 		<pre><code>7 5</code></pre>
-
-	??? Example "Answers"
-		<ol type="a">
-			<li>`(+⌿rain)÷≢rain     ⍝ Rainfall for each month averaged over 7 years in each of 5 countries`</li>
-			<li>`(+/rain)÷⊃⌽⍴rain   ⍝ Average monthly rainfall in each year for each of 5 countries`</li>
-			<li>`(+⌿⍵)÷≢⍵}+/rain    ⍝ Average of total annual rainfalls`</li>
-			<li>`(months countries years)←1 2 3`</li>
-		</ol>
 
 ### Rank Practice
 
@@ -519,58 +501,25 @@ Experiment with the following expressions to determine what the each `¨` and bi
 	│1 2 3│4 5 6│7 8 9│
 	└─────┴─────┴─────┘</code></pre>
 
-??? Example "Rank Practice: Answers"
-	<ol>
-		<li>
-			<ol type="a">
-				<li><table>
-					<tr>
-						<td>`⍺`</td><td>Rank</td><td>`⍵`</td>
-					</tr>
-					<tr>
-						<td>`vectors of ⍺`</td><td>`⍤1 3`</td><td>`3D arrays of ⍵`</td>
-					</tr>
-					<tr>
-						<td>`matrices of ⍺`</td><td>`⍤2 1`</td><td>`vectors of ⍵`</td>
-					</tr>
-					<tr>
-						<td>`major cells of ⍺`</td><td>`⍤¯1`</td><td>`major cells of ⍵`</td>
-					</tr>
-					<tr>
-						<td>`scalars of ⍺`</td><td>`⍤0 99`</td><td>`⍵`</td>
-					</tr>
-					<tr>
-						<td>`⍺`</td><td>`⍤99 ¯1`</td><td>`major cells of ⍵`</td>
-					</tr>
-				</table></li>
-				<li><table>
-					<tr><td>Scalar</td><td>rank-0 array</td></tr>
-					<tr><td>Vector</td><td>rank-1 array</td></tr>
-					<tr><td>Matrix</td><td>rank-2 array</td></tr>
-					<tr><td>Table</td><td>rank-2 array</td></tr>
-					<tr><td>List</td><td>rank-1 array</td></tr>
-					<tr><td>Cube</td><td>rank-3 array</td></tr>
-					<tr><td>4D array</td><td>rank-4 array</td></tr>
-					<tr><td>2D array</td><td>rank-2 array</td></tr>
-				</table></li>
-			</ol>
-		</li>
-		<li>
-			<ol type="a">
-				<li>`AddVec ← +`</li>
-				<li>`NormVec ← {⍵÷(+/⍵)*0.5}`</li>
-			</ol>
-		</li>
-		<li>
-			<ol type="a">
-				<li>`(j k) ← 1 1`</li>
-				<li>`(j k) ← 0 1`</li>
-			</ol>
-		</li>
-		<li>`R1 ← ,⍤0⍤1`</li>
-		<li>`Split ← ⊂⍤¯1`
-		</li>
-	</ol>
+## An APL model of the rank operator
+The primitive rank operator `F⍤k` was introduced in Dyalog version 14.0. An APL model compatible with earlier versions is as follows:  
+```APL
+ _Rank_←{
+     ⍺←{⍵}
+     ⍺ ⍺⍺{⍺←{⍵} ⋄ ⍺ ⍺⍺ ⍵}{
+         0 1000::⎕SIGNAL ⎕EN
+         effrank←{0≤⍺:⍺⌊⍴⍴⍵ ⋄ 0⌈⍺+⍴⍴⍵}   ⍝ effective rank
+         cells←{⊂[(-⍺ effrank ⍵)↑⍳⍴⍴⍵]⍵}
+         (m l r)←⌽3⍴⌽⍵⍵
+         ⎕ML←0                           ⍝ needed by ↑⍵
+         0=⎕NC'⍺':↑⍺⍺¨(m cells ⍵)        ⍝ monadic case
+         x←l cells ⍺
+         y←r cells ⍵
+         ((⍴x)≡⍴y)⍱0=(⍴⍴x)⌊⍴⍴y:⎕SIGNAL 4+(⍴⍴x)≡⍴⍴y
+         ↑x ⍺⍺¨y                         ⍝ dyadic  case
+     }⍵⍵{⍵}⍵
+ }
+```
 
 ## An APL model of the rank operator
 The primitive rank operator `F⍤k` was introduced in Dyalog version 14.0. An APL model compatible with earlier versions is as follows:  

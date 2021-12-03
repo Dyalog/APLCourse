@@ -1,7 +1,15 @@
 site_name: APL Course
-site_description: A self-study introduction to Dyalog APL
+site_description: A guided introduction to Dyalog APL
 docs_dir: docs/
 site_url: https://dyalog.com
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight:
+      use_pygments: false
+  - admonition
+  - pymdownx.details
+  - abbr
 extra_javascript:
   - javascripts/config.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
@@ -13,14 +21,6 @@ theme:
   logo: 'img/dyalog-white.svg'
   features:
     - navigation.instant
-markdown_extensions:
-  - pymdownx.arithmatex:
-      generic: true
-  - pymdownx.highlight:
-      use_pygments: false
-  - admonition
-  - pymdownx.details
-  - abbr
 extra_css:
   - style/main.css
 nav:

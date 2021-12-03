@@ -424,12 +424,6 @@ LEADING AXIS MISMATCH
 	
 	<pre><code class="language-APL">{⍺ ⍺⍺⍤(-⍺⌊⍥(≢⍴)⍵)⊢⍵}</code></pre>
 
-??? Example "Answer"
-	<pre><code class="language-APL"> \_L←{
-	    ⊃≠⌿↑⍴¨⍺ ⍵:'LEADING AXIS MISMATCH'⎕SIGNAL 5
-	    ⍺(⍺⍺ \_Rank\_(-⍺⌊\_O\_(≢⍴)⍵))⊢⍵
-	 }</code></pre>
-
 ### Testing for types
 Use the documentation and your own knowledge to find expressions to test for the following properties of arrays:
 

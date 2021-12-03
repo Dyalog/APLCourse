@@ -1,5 +1,5 @@
 
-# APL Course - Custom Spring 2021
+# APL Course - Custom Autumn 2021
 Instructional notes and activities to learn Dyalog APL.
 
 !!! Note "Rendering of mathematical notation"

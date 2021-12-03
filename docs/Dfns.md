@@ -73,14 +73,6 @@ Read the following as "squared numbers divided by the sum of squares":
 		          12 IsDivisibleBy ⍳12
 		    1 1 1 1 0 1 0 0 0 0 0 1
 
-	??? Example "Answers"
-		There are many ways to write functions which have the same effect, but here are some examples:
-		<ol type="a">
-			<li><pre><code>Tally←{+/⍵=⍵}</code></pre></li>
-			<li><pre><code>Mean←{(+/⍵)÷Tally ⍵}</code></pre></li>
-			<li><pre><code>IsDivisibleBy←{d=⌊d←⍺÷⍵}</code></pre></li>
-		</ol>
-
 2. What Remains
 	1. `⍺ Mod ⍵` is a **dyadic** function which returns the remainder after its right argument **`⍵`** number is divided by the left argument **`⍺`**.
 
@@ -103,17 +95,10 @@ Read the following as "squared numbers divided by the sum of squares":
 
 		          Split 0
 		    0 0
-		          Split ¯10
-		    ¯10 0
-		          Split 7.62
-		    7 0.62
-
-	??? Example "Answers"
-		Using only what has been introduced so far, here are some example solutions:
-		<ol type="a">
-			<li><pre><code>Mod←{⍵-⍺×⌊⍵÷⍺}</code></pre></li>
-			<li><pre><code>Split←{floor,⍵-floor←⌊⍵}</code></pre></li>
-		</ol>
+		          Split ¯7
+		    ¯7 0
+		          Split 4.32
+		    4 0.32
 
 3. What Was In That Vector Again?
 
@@ -125,15 +110,6 @@ Read the following as "squared numbers divided by the sum of squares":
 	4. What percentage of numbers in `⎕AVU` are strictly positive?
 	5. What do you notice about the percentage of strictly positive and negative numbers?
 
-	??? Example "Answers"
-		<ol type="a">
-			<li>$132$</li>
-			<li>$48.4375$</li>
-			<li>$0$</li>
-			<li>$99.609375$</li>
-			<li>I know vague questions like this are kind of rubbish, but did you notice that the percentages of strictly positive and negative numbers don't add up to 100%? This means that there must be zeroes in `⎕AVU` - but you already knew that from `×/⎕AVU`, didn't you?</li>
-		</ol>
-
 4. Prime Time
 
 	A prime number is divisible only by itself and `1`.
@@ -144,7 +120,3 @@ Read the following as "squared numbers divided by the sum of squares":
 	    0
 		          IsPrime 17
 	    1
-
-	??? Example "Answer"
-		Once again, there are many ways to write this function. Here is one example using only constructs which have already been introduced:  
-		<pre><code>IsPrime←{2=+/div=⌊div←⍵÷⍳⍵}</code></pre>
