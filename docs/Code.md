@@ -25,10 +25,6 @@ dfns.⎕cy'dfns'</code></pre>
 - Copy the selected functions into a specific namespace:
 	<pre><code class="language-APL">'dfns'⎕ns⍬
 'cal' 'date' 'days'dfns.⎕cy'dfns'</code></pre>
-	
-	!!! Warning "Version Warning"
-		In Dyalog version 12.1, you must use a matrix left argument to copy multiple names with `⎕CY`:  
-		<pre><code class="language-APL">(↑'cal' 'date' 'days')dfns.⎕cy'dfns'</code></pre>
 
 Alongside [APLcart](https://aplcart.info), the [dfns library](https://dfns.dyalog.com) (not to be confused with the dfns construct) contains a large number of useful functions for use cases ranging from number theory, graphs and tree data structures to games and graphics.
 
@@ -38,11 +34,6 @@ Some of these, such as the `]box` one, have been mentioned already. Commands whi
 Dyalog webinar: <a target="_blank" href="https://dyalog.tv/Webinar/?v=LWJzRGrOC3k">Creating and Managing your own User Commands</a>
 
 Custom user commands are scripted classes or namespaces containing specific member functions `List`, `Run` and `Help`. They should be saved as plain text **.dyalog**, **.apln** or **.aplc** files and placed in the folder **[HOME]/MyUCMDs** where \[HOME\] is either */home/user* on Unix-like systems or *C:\Users\user\Documents* on Microsoft Windows.
-
-!!! Warning "Version Warning"
-	The custom user command system has changed since, and many recent user commands are not available in version 12.1. To see the available user commands use `]?`.
-	
-	Dyalog 12.1 on UNIX does not have a session and user commands are unavailable.
 
 Some particularly useful in-built user commands for getting information about your workspace are mentioned in the section on [workspaces](../Workspaces).
 
@@ -100,17 +91,11 @@ If the full file path is not specified, SALT will look in a configurable collect
 Read [Chapter R of Mastering Dyalog APL](https://www.dyalog.com/uploads/documents/MasteringDyalogAPL.pdf#%5B%7B%22num%22%3A1305%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C175%2C640%2C0%5D) and the
 [SALT User Guide](https://docs.dyalog.com/latest/SALT%20User%20Guide.pdf).
 
-!!! Warning "Version Warning"
-	SALT is not available in Dyalog version 12.1 for UNIX
-
 ### ⎕FX
 The `⎕FX` system function can be used to define functions or operators from various forms of source code.
 
 ### ⎕FIX
 The `⎕FIX` system function can be used to define various APL items (functions, operators, namespaces etc.) from scripts.
-
-!!! Warning "Version Warning"
-	In Dyalog version 12.1, `⎕FIX` is only able to fix class and namespace scripts, and does not associate names in the workspace with files on the file system.
 
 If `2⎕FIX` is used and changes are made to the APL name using the Dyalog editor, the system will give you the option to save those changes to the text source file at the same time. 
 

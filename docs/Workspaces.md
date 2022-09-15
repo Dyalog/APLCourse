@@ -36,9 +36,6 @@ These commands have the special `)COMMAND` syntax, and are only used when intera
       ]peek -?
 ```
 
-!!! Warning "Version Warning"
-	]WS.Peek is not available in Dyalog version 12.1
-
 ## How big is a workspace?
 The data and code in the active workspace is limited to the maximum workspace size, or **MAXWS** (*maks-wuss*). The size of a **.dws workspace file** is usually much smaller than this.
 

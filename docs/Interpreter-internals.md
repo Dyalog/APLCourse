@@ -13,9 +13,6 @@ For a reference, the object requires an 8-byte pointer, plus space for the conte
 ## Data types
 Internally, Dyalog represents data with the following types. As a program runs, occasionally the interpreter will squeeze arrays into the smallest data type that can represent a particular figure, which helps keep memory usage low and may allow the interpreter to use vectorised instructions for certain operations on certain data types.
 
-!!! Warning "Version Warning"
-	Some data types are only available in Dyalog Unicode Edition.
-
 ### Character
 ```
       ⎕DR'APL'           ⍝ 1-byte

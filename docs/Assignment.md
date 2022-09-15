@@ -32,9 +32,6 @@ Experiment with the following expressions, paying particular attention to the `n
 
 ## At
 
-!!! Warning "Version Warning"
-	At `@` is not available in Dyalog version 12.1. Modified, indexed assignment is usually used instead. A compatible APL model is provided at the end of this chapter.
-
 Monadic functions take a single right argument array as input. Dyadic functions take two argument arrays.
 
 Monadic operators take a single left operand which can be a function or an array (as in `+/` where plus `+` is the function operand and reduce `/` is the operator). 

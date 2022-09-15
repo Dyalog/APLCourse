@@ -40,9 +40,6 @@ To see what the markings mean, see the help for the `]Display` user command:
       ]Display -??
 ```
 
-!!! Warning "Version Warning"
-	The `]box` user command is not available in version 12.1. Use `]disp` or `]display` instead.
-
 ## Fundamentals of high rank arrays
 
 ### Cells and axes
@@ -112,12 +109,6 @@ Now that you know how to describe the structure of an array in terms of its sub-
       {(+⌿⍵)÷≢⍵}mass(×⍤0 2)pos
       ×⍤0 2⍨⍳10      
 ```
-
-!!! Warning "Version Warning"
-	The rank operator `⍤` is not available in version 12.1. A compatible APL model of the operator which can be used (but might not provide the best performance) is provided at the end of this chapter.  
-	The glyph `⍤` is not available in Dyalog Classic. Rank is instead represented by `⎕U2364`.
-	
-	`_Rank_←{⍺←⊢ ⋄ ⍺(⍺⍺ ⎕U2364 ⍵⍵)⍵}`
 
 ??? Hint
 	When applying dyadic functions using the rank operator, use the helper function <code class="language-APL">,⍥⊂</code> <em>ravel over enclose</em> (or <code class="language-APL">{⍺⍵}</code> for versions before Dyalog version 18.0) to see how arguments are paired up. For example:

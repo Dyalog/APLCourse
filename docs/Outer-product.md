@@ -51,9 +51,6 @@ joined uptext vectors
 	│3 1│3 2│3 3│
 	└───┴───┴───┘</pre>
 
-!!! Warning "Version Warning"
-	The `]box` user command is not available in Dyalog version 12.1, but putting `]disp` before an expression achieves a similar effect.
-
 ### Reduce down     
 
 Reduce-first `F⌿` on a matrix will reduce down columns instead of along rows. 

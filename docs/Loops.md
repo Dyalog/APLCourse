@@ -34,9 +34,6 @@ If a function gets stuck in an infinite loop, use `Action → Interrupt` in the 
 ## A sort of detour
 Dyalog's *grade-up* `⍋` and *grade-down* `⍒` functions are able to [sort any array](https://aplwiki.com/wiki/Total_array_ordering). However, it is interesting and useful to look at other approaches to sorting.
 
-!!! Warning "Version Warning"
-	Total array ordering was introduced to Dyalog in version 17.0.
-
 Here is a function 'NSort' for sorting numeric lists.
 
 ```APL
@@ -155,12 +152,6 @@ You can think of this as a special case of [stencil code](https://en.wikipedia.o
 ```
 6 9 12 15 18 21 24 27
 ```
-
-!!! Warning "Version Warning"
-	In Dyalog Classic, the glyph for stencil `⌺` is not available and is instead represented by `⎕U233A`. You might want to wrap it in a named [dop](../Operators#dop).
-	<pre><code class="language-APL">      \_S\_←{⍺←⊢ ⋄ ⍺ (⍺⍺⎕U233A⍵⍵) ⍵}
-	      1↓¯1↓{+/⍵}\_S\_ 3⊢⍳10
-	6 9 12 15 18 21 24 27</code></pre>
 
 ## Don't forget scan!
 **Scan** `F\⍵` is another construct which is simple in a way that misleads you into thinking it is only used for very specific things. It is exactly a reduction `F/` on successive prefixes of `⍵`. The final value is `F/⍵`.

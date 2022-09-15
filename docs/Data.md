@@ -198,12 +198,6 @@ In the chapter on selecting from arrays there was [an example of reading a text 
       ⎕NUNTIE⎕NNUMS
 ```
 
-!!! Warning "Version Warning"
-	Unicode data types 80, 160 and 320 are not available in Dyalog Classic Edition. See the [online documentation for `⎕NREAD`](https://help.dyalog.com/latest/index.htm#Language/System%20Functions/nread.htm) for more information.
-	
-	The symbol `⊆` (Left Shoe Underbar) is not available in Classic Edition, and Partition is instead represented by `⎕U2286`.  
-	Trains are not available in Dyalog version 12.1. To use the partition function in version 12.1 (represented by `⍺⊆⍵` in Unicode Edition since version 16.0), you can set the [migration level](https://help.dyalog.com/latest/index.htm#Language/System%20Functions/ml.htm) locally inside a dfn: `Partition←{⎕ML←3 ⋄ ⍺⊂⍵}`
-
 ### ⎕MAP
 The memory mapping function `⎕MAP` associates a file on disk with an APL array in the workspace. This is useful if you are working with data that cannot fit inside the available workspace memory. One approach might be to read the data in chunks and process one chunk at a time (for example, see the "Records" variant option for `⎕CSV`). Another approach is to use `⎕MAP`.
 
@@ -311,9 +305,6 @@ The **HttpCommand** class is built on top of the [**Conga**](https://docs.dyalog
 Using `HttpCommand` with [`⎕FIX`](../Code/#fix) is a way to download APL code from the internet.
 
 For more information, see [the HttpCommand document](https://github.com/Dyalog/library-conga/blob/master/Documentation/HttpCommand.md). Alternatively, there is documentation within the comments of the code for the HttpCommand class; simply use `)ed HttpCommand` or press <kbd>Shift+Enter</kbd> with the text cursor on the name in the session.
-
-!!! Warning "Version Warning"
-	HttpCommand is not available in Dyalog version 12.1. Instead, network interfacing is via the [Conga TCP/IP framework](https://docs.dyalog.com/latest/Conga%20User%20Guide.pdf).
 
 ## Problem set 13
 
