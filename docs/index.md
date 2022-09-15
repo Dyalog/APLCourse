@@ -1,17 +1,17 @@
+# APL Course
+A self-study introduction to Dyalog APL with exercises.
 
-# APL Course - Custom Autumn 2021
-Instructional notes and activities to learn Dyalog APL.
+This course consists of a series of short instructional notes interleaved with problem sets.
 
-!!! Note "Rendering of mathematical notation"
-	There is a known issue with the MathJax renderer.  
-	If you see some text which looks like:  
-	`\(\sum_{n=1}^N n\)`  
-	then try refreshing the page. It should look like:  
-	<img alt="mathjax example rendering" src="./img/mathjax.png" width="60px">
+## Status
+This site is a work in progress. Currently we are transferring content from [APL Workshop](https://rikedyp.uk/APLWorkshop) while reviewing and updating it.
 
-## Version information
-This course targets Dyalog version 17.1 Classic, but it is understood that learners will be accessing Dyalog version 12.1 Classic as well. Occasionally there will be version warnings like this:
+## Getting Started
+If you're just starting out, you can use the [TryAPL](https://tryapl.org) online interpreter. Put TryAPL on one half of your screen, and [view the course](https://course.dyalog.com) on the other half.
 
-!!! Warning "Version Warning"
-	- The function **where** `⍸⍵` is not available in version 12.1.
-	- The glyph/symbol `⍸` is not available in Dyalog Classic, instead it is represented by `⎕U2378`.
+You can type APL using a prefix key followed by another key. For example, <kbd>\`a\`p\`l</kbd> gives `⍺*⎕`. The prefix key is backtick (<code>`</code>), at the top-left of most US and UK keyboard layouts.
+
+If you need help typing APL glyphs (e.g. `×⌿⍳`) then see [the APL Wiki](https://aplwiki.com/wiki/Typing_glyphs).
+
+## Feedback
+If you have any suggestions, critcisms or praise, please [create an issue](https://github.com/Dyalog/APLCourse/issues/new).

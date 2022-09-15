@@ -52,9 +52,6 @@ Any further functions simply alternate between *atop* (even number of functions)
 
 They allow some rather neat and memorable ways to write short functions.
 
-!!! Warning "Version Warning"
-	Trains were introduced in Dyalog version 14.0
-
 ```APL
       Mean ← +⌿ ÷ ≢         ⍝ The sum divided by the count
       Mean 3 1 4 1
@@ -64,10 +61,6 @@ They allow some rather neat and memorable ways to write short functions.
 
 !!! Note
 	Small unnamed dfns and tacit functions expand your vocabulary. One of my favourites is the "split by delimiter" train <code class="language-APL">(≠⊆⊢)</code>. It looks like a beat-up face <a href="https://en.wikipedia.org/wiki/Emoticon#Japanese_style_(kaomoji)">kaomoji</a>. A similar phrase which can take multiple delimiters can be found on <a href="https://aplcart.info/?q=split%20text#">aplcart.info</a>.
-
-!!! Warning "Version Warning"
-	The symbol `⊆` (Left Shoe Underbar) is not available in Classic Edition, and Partition is instead represented by `⎕U2286`.  
-	To use the partition function in version 12.1 (represented by `⍺⊆⍵` in Unicode Edition since version 16.0), you can set the [migration level](https://help.dyalog.com/latest/index.htm#Language/System%20Functions/ml.htm) locally inside a dfn: `Partition←{⎕ML←3 ⋄ ⍺⊂⍵}`
 
 ## Traditional functions
 Dyalog is a modern APL implementation. Since early APL implementations there has been a way of defining functions with a header line and named arguments and results. Since the introduction of dfns, functions of the original style are called *traditional functions* or [*tradfns*](https://aplwiki.com/wiki/Defined_function).
@@ -245,9 +238,6 @@ It is possible to define functions inside some other functions.
 - Tacit functions can only include other user-defined functions by name
 	<pre><code class="language-APL">      Sort ← {(⊂⍋⍵)⌷⍵}
 	  CSI ← Sort⍥⎕C   ⍝ Case-insensitive sort</code></pre>
-		
-	!!! Warning "Version Warning"
-		`⎕C` (*quad C*) and `⍥` (*over*) are only available from Dyalog version 18.0 onwards. Upper- and lower-casing can be easily implemented in raw APL, or achieved using `819⌶` (*eight nineteen I-beam*). Over can be defined as a dop: `_O_←{0=⎕NC'⍺':⍺⍺ ⍵⍵ ⍵ ⋄ (⍵⍵ ⍺) ⍺⍺ ⍵⍵ ⍵}`.
 
 - Dfns can contain tacit definitions and dfn definitions, as well as any named user-defined functions
 	<pre><code class="language-APL"> SortedMeans ← {
@@ -404,8 +394,3 @@ Control Structures in Dyalog are keywords beginning with a `:` colon.
 
 1. Use the `]runtime` user command to compare the computation time for each of the three grading functions.
 	<pre><code class="language-APL">]runtime -c "Grade 10×⍳10" "Grade2 10×⍳10" "Grade3 10×⍳10"</code></pre>
-	
-	!!! Warning "Version Warning"
-		The `]runtime` user command is not available in Dyalog version 12.1. However, it is just a cover for the `cmpx` function from `dfns`:
-		<pre><code class="language-APL">'cmpx'⎕CY'dfns'
-		cmpx 'Grade 10×⍳10' 'Grade2 10×⍳10' 'Grade3 10×⍳10'</code></pre>

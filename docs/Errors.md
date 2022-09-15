@@ -18,11 +18,6 @@ Study the following expression. It contains an error guard `::` and the primitiv
 Names.va←({2 6 11::0 ⋄ ⍎(⎕UCS ⍵),'←',⍕⍵}¨⍳1E4)~0   ⍝ Valid Assignment Character Codes      
 ```
 
-!!! Warning "Version Warning"
-	In Dyalog Classic, many Unicode symbols are not available and the above expressions will cause a `TRANSLATION ERROR`. Instead of the first ten thousand integers, try using the values in `⎕AVU`.
-	
-	In older code bases you are unlikely to want to use error guards very much, if at all. To see some of the "gotchas" of dfns error guards, read [the chapter on error handling in Stefan Kruger's Learn APL book](https://xpqz.github.io/learnapl/errors.html).
-
 1. Which three errors are trapped by the error guard? 
 
 1. [`⎕AV`](https://aplwiki.com/wiki/Atomic_vector) is the list of characters which was used before [Unicode](https://home.unicode.org/) was introduced.
@@ -103,9 +98,6 @@ The state of your program is frozen in time. You can now:
 		- Press <kbd>Enter</kbd> to proceed one line at a time
 		- Click the [trace action](https://mastering.dyalog.com/First-Aid-Kit.html#trace-actions) button to continue execution normally
 		- Type `→⎕LC` (*go-to quad LC*) to continue execution normally
-
-!!! Version Warning
-	`⎕DMX` is not available in Dyalog version 12.1.
 
 Sometimes it is better to execute a function line-by-line rather than wait for an error to occur. To do this, with the text cursor on the function-calling expression, either press <kbd>Ctrl+Enter</kbd> or click **Action → Trace** from the IDE menu.
 
@@ -252,10 +244,6 @@ You should test inputs explicitly using APL primitives. It can be tempting to us
 ```APL
       (⎕JSON⍠'Compact' 0)⎕DMX   
 ```
-
-!!! Warning "Version Warning"
-	The symbol `⍠` is not available in Classic Edition, and the Variant operator is instead represented by ⎕U2360. Note too that ⍠ and ⎕OPT are synonymous though only the latter is available in the Classic Edition.  
-	Neither Variant nor `⎕OPT` are available in Dyalog version 12.1.
 
 !!! Note
 	Your code should not assume that the properties in `⎕DMX` will stay the same across versions of Dyalog. See [the online documentation](https://help.dyalog.com/latest/index.htm#Language/System%20Functions/dmx.htm) for more information about `⎕DMX`.

@@ -155,16 +155,9 @@ The **key** operator was introduced in Dyalog version 14.0. Begin to familiarise
 
 **Interval index** is a function for classifying data by boundaries.
 
-!!! Warning "Version Warning"
-	The symbol `⌸` is not available in Classic Edition, and the Key operator is instead represented by `⎕U2338`.  
-	The symbol `⍸` is not available in Classic Edition, and the Interval Index function is instead represented by `⎕U2378`.
-
 At this point it is worth familiarising yourself with older APL constructs which perform similar functionality to key, and are likely to exist in code bases written before Dyalog version 14.0. 
 
 1. You already wrote Interval Index [in problem set 4](/Outer product/#problem-set-4) using the outer product `∘.F`. See if you can rewrite that `Grade` function using **interval index** `⍺⍸⍵`.
-
-	!!! Warning "Version Warning"
-		The function *interval index* `⍺⍸⍵` was introduced in Dyalog version 16.0
 
 1. Try to write the interval index function `⍺⍸⍵` without using the `⍸` glyph
 
@@ -180,11 +173,6 @@ Iverson's [dictionary of APL](https://www.jsoftware.com/papers/APLDictionary1.ht
 1 0 1
 0 1 0
 ```
-
-!!! Warning "Version Warning"
-	The function *unique* `∪⍵` fails on arrays where `1<≢⍴⍵` prior to version 17.0. Try to define `NubIn` so that it works on high rank arrays and without using the rank operator.
-	??? Hint
-		Use *split* `↓⍵` and *outer product* `∘.F`.
 
 ## Problem set 7
 
@@ -258,9 +246,6 @@ If you have the file on your computer (maybe you were given it on a USB drive, f
       (content encoding newline) ← ⎕NGET'/path/to/words.txt'
       words ← (⎕UCS newline) (≠⊆⊢) content
 ```
-
-!!! Warning "Version Warning"
-	`HttpCommand` and `⎕NGET` are not available in Dyalog version 12.1. Instead, read the file using `⎕NREAD` as described in [the chapter on data input and output](../Data/#n).
 
 Now answer the following questions about `words`.
 
