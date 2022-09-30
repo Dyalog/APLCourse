@@ -26,7 +26,7 @@ extra_css:
   - style/main.css
 nav:
   - About: index.md
-  - First Steps: First-steps.md
+  - Basic syntax and arithmetic: basic-syntax-and-arithmetic.md
   - Dfns and Assignment: Dfns.md
   - Selecting from Lists: Selecting-from-lists.md
   - The Outer Product: Outer-product.md
