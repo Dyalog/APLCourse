@@ -1,0 +1,1222 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A guided introduction to Dyalog APL">
+      
+      
+      
+        <link rel="canonical" href="https://dyalog.com/Ufns/">
+      
+      <link rel="icon" href="../img/favicon-32.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.1">
+    
+    
+      
+        <title>User-defined Functions - APL Course</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.69437709.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../style/main.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#user-defined-functions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="APL Course" class="md-header__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APL Course
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              User-defined Functions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="APL Course" class="md-nav__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    APL Course
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../First-steps/" class="md-nav__link">
+        First Steps
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Dfns/" class="md-nav__link">
+        Dfns and Assignment
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Selecting-from-lists/" class="md-nav__link">
+        Selecting from Lists
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Outer-product/" class="md-nav__link">
+        The Outer Product
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Shape-Reshape/" class="md-nav__link">
+        Shape Reshape
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Array-model/" class="md-nav__link">
+        The Array Model
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Selecting-from-arrays/" class="md-nav__link">
+        Search, Sort and Select
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Loops/" class="md-nav__link">
+        Loops and Recursion
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Assignment/" class="md-nav__link">
+        Extra Assignment
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Workspaces/" class="md-nav__link">
+        Workspace Basics
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Namespaces/" class="md-nav__link">
+        Namespaces and Other Objects
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Help/" class="md-nav__link">
+        Getting Help
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          User-defined Functions
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        User-defined Functions
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-three-function-styles" class="md-nav__link">
+    The Three Function Styles
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traditional-functions" class="md-nav__link">
+    Traditional functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#name-scope-locals-and-globals" class="md-nav__link">
+    Name scope, locals and globals
+  </a>
+  
+    <nav class="md-nav" aria-label="Name scope, locals and globals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#avoid-globals" class="md-nav__link">
+    Avoid globals
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nested-functions" class="md-nav__link">
+    Nested functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#which-style-to-use" class="md-nav__link">
+    Which style to use?
+  </a>
+  
+    <nav class="md-nav" aria-label="Which style to use?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dfns" class="md-nav__link">
+    Dfns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tacit-functions" class="md-nav__link">
+    Tacit functions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tradfns" class="md-nav__link">
+    Tradfns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-set-10" class="md-nav__link">
+    Problem set 10
+  </a>
+  
+    <nav class="md-nav" aria-label="Problem set 10">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#which-style-again" class="md-nav__link">
+    Which style again?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#choo-choo" class="md-nav__link">
+    Choo choo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marking-tests" class="md-nav__link">
+    Marking Tests
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Operators/" class="md-nav__link">
+        Operators
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quad%20names/" class="md-nav__link">
+        Quad Names
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Errors/" class="md-nav__link">
+        Error Handling and Debugging
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Data/" class="md-nav__link">
+        Data IO
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Code/" class="md-nav__link">
+        Code IO
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interfaces/" class="md-nav__link">
+        External Interfaces
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quirks/" class="md-nav__link">
+        Historical Quirks
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interpreter-internals/" class="md-nav__link">
+        Interpreter Internals
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Reading/" class="md-nav__link">
+        Further Reading
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-three-function-styles" class="md-nav__link">
+    The Three Function Styles
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traditional-functions" class="md-nav__link">
+    Traditional functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#name-scope-locals-and-globals" class="md-nav__link">
+    Name scope, locals and globals
+  </a>
+  
+    <nav class="md-nav" aria-label="Name scope, locals and globals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#avoid-globals" class="md-nav__link">
+    Avoid globals
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nested-functions" class="md-nav__link">
+    Nested functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#which-style-to-use" class="md-nav__link">
+    Which style to use?
+  </a>
+  
+    <nav class="md-nav" aria-label="Which style to use?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dfns" class="md-nav__link">
+    Dfns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tacit-functions" class="md-nav__link">
+    Tacit functions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tradfns" class="md-nav__link">
+    Tradfns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-set-10" class="md-nav__link">
+    Problem set 10
+  </a>
+  
+    <nav class="md-nav" aria-label="Problem set 10">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#which-style-again" class="md-nav__link">
+    Which style again?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#choo-choo" class="md-nav__link">
+    Choo choo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marking-tests" class="md-nav__link">
+    Marking Tests
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="user-defined-functions">User defined functions</h1>
+<p>This is a fairly brief introduction, and there are exercises at the end of this section to help solidify your understanding, but there is also <a href="https://mastering.dyalog.com/User-Defined-Functions.html">a more extensive treatment of user-defined functions in the book Mastering Dyalog APL</a>.</p>
+<h2 id="the-three-function-styles">The Three Function Styles</h2>
+<p>So far, we have been reading and writing <a href="https://aplwiki.com/wiki/Dfn">dfns</a>. </p>
+<pre><code class="language-APL">    3 {⍺+⍵} 5              ⍝ Left argument ⍺, right argument ⍵
+      {⍵&gt;0:⍵,∇ ⍵-1 ⋄ ⍵}5   ⍝ Guard is : (colon). The function itself is ∇ (del)
+ Fn ← {⍺⍵}                 ⍝ We can give functions names
+</code></pre>
+<p>It is also possible to name functions which do not explicitly refer to their arguments. This is called <a href="https://aplwiki.com/wiki/Tacit_programming">tacit</a> or <em>point-free</em> programming.</p>
+<pre><code class="language-APL">      Plus ← +
+      IndicesTo ← ⍳
+      _Reduce ← /      
+      Sum ← Plus _Reduce
+      Sum IndicesTo 10
+</code></pre>
+<p>There is a syntax for composing functions called <a href="https://aplwiki.com/wiki/Tacit_programming#Trains"><em>trains</em></a>. </p>
+<p>A two-train is an <strong>atop</strong>:</p>
+<pre><code class="language-APL">      3(|-)5
+2
+      |3-5
+2
+</code></pre>
+<p>A three-train is a <strong>fork</strong>:</p>
+<pre><code class="language-APL">      3(-×+)5
+¯16
+      (3-5)×(3+5)
+¯16
+</code></pre>
+<p>Any further functions simply alternate between <em>atop</em> (even number of functions) and <em>fork</em> (odd number of functions).</p>
+<pre><code class="language-APL">      3(|-×+)5    ⍝ Absolute value of the product of sum and difference
+16
+      3(⌈|-×+)5   ⍝ Max residue with the product of sum and difference
+4
+</code></pre>
+<p>They allow some rather neat and memorable ways to write short functions.</p>
+<pre><code class="language-APL">      Mean ← +⌿ ÷ ≢         ⍝ The sum divided by the count
+      Mean 3 1 4 1
+      3 (+,-) 5             ⍝ Plus and minus
+      ','(≠⊆⊢)'some,text'   ⍝ Split on commas
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Small unnamed dfns and tacit functions expand your vocabulary. One of my favourites is the "split by delimiter" train <code class="language-APL">(≠⊆⊢)</code>. It looks like a beat-up face <a href="https://en.wikipedia.org/wiki/Emoticon#Japanese_style_(kaomoji)">kaomoji</a>. A similar phrase which can take multiple delimiters can be found on <a href="https://aplcart.info/?q=split%20text#">aplcart.info</a>.</p>
+</div>
+<h2 id="traditional-functions">Traditional functions</h2>
+<p>Dyalog is a modern APL implementation. Since early APL implementations there has been a way of defining functions with a header line and named arguments and results. Since the introduction of dfns, functions of the original style are called <em>traditional functions</em> or <a href="https://aplwiki.com/wiki/Defined_function"><em>tradfns</em></a>.</p>
+<pre><code class="language-APL">      Mean ← +⌿÷≢         ⍝ A 3-train (fork) for the arithmetic mean
+</code></pre>
+<hr />
+<pre><code class="language-APL">      Mean ← {(+⌿⍵)÷≢⍵}   ⍝ A dfn for the arithmetic mean
+</code></pre>
+<hr />
+<pre><code class="language-APL">      ∇ m ← Mean a        ⍝ A tradfn for the arithmetic mean
+        m ← (+⌿a) ÷ ≢a
+      ∇
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Copy and paste everything between (and including) the two <code class='language-APL'>∇</code> <em>del</em> symbols into the session, and press <code class='language-APL'>Enter</code>, to define a tradfn in your workspace. <br><br>Using <code class='language-APL'>Shift+Enter</code> with the cursor on a name will bring up an editor window for that named thing.</p>
+</div>
+<p>A tradfn header reflects the calling syntax of the function. </p>
+<pre><code class="language-APL">     ∇ {result}←{optional}Tradfn argument;local1                             
+[1]    ;local2   ⍝ Locals can be declared across multiple lines in the header
+[2]    :If 0=⎕NC'optional'                                                   
+[3]        optional←'no left argument'                                       
+[4]    :EndIf                                                                
+[5]    local1←'⍺: ',optional                                                 
+[6]    local2←'⍵: ',argument                                                 
+[7]    global←⍪'TradFn last called with'local1 local2                        
+[8]    result←⍪local1 local2                                                 
+     ∇     
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class='language-APL'>∇</code> del representation of the <code class='language-APL'>TradFn</code> function above is the <b>vector representation</b> result of <code class='language-APL'>⎕VR'TradFn'</code> which can be directly input into the session.</p>
+</div>
+<ol>
+<li>Try calling <code>TradFn</code> with one and two arguments. How can the result be made to display to the session? </li>
+<li>Inspect the variable <code>global</code> after calling <code>TradFn</code> with different arguments.</li>
+<li>Step through the function using <code>Ctrl+Enter</code>. Inspect <code>⎕NC'optional'</code> when <code>TradFn</code> is called with one argument and when it is called with two arguments.</li>
+</ol>
+<p>Here is the smallest tradfn:</p>
+<pre><code class="language-APL">      ∇ T
+      ∇
+</code></pre>
+<p><code>T</code> is a function which takes no arguments, returns no results and has no effects.</p>
+<p>Results in <code>{}</code> curly braces are called <strong>shy results</strong> and do not print to the session by default, but can be passed to arguments. To ease debugging and write functions with predictable behaviour, it is generally best not to use shy results.</p>
+<p>Optional left arguments are a little awkward in tradfns. The dfn equivalent is a little nicer looking: <code>{⍺←'default' ⋄ ⍺,⍵}</code>.</p>
+<h2 id="name-scope-locals-and-globals">Name scope, locals and globals</h2>
+<p>The scope of a name describes the circumstances under which it is visible to code. </p>
+<p>For most intents and purposes, you just need to know about the difference between how <strong>local</strong> and <strong>global</strong> names are defined in the syntax, and how <strong>name shadowing</strong> works.</p>
+<p>By default, names assigned in tradfns are global. This is mostly for historical reasons. Names declared in the header - the arguments, results, and names preceded by semicolons - are localised.</p>
+<p>By default, names in a dfn are local to that dfn. This is the preferred default in most modern programming languages.</p>
+<p>If we define a name in the current namespace, that name is visible only within that namespace unless referred to by its full namespace path (e.g. <code>#.nsref.var</code>).</p>
+<pre><code class="language-APL">      'ns1'⎕ns⍬ ⋄ ns1.var←1 2 3
+      'ns2'⎕ns⍬ ⋄ ⎕cs ns2
+      ⎕←var
+      ⎕←#.ns1.var
+</code></pre>
+<p>Let us now define a dfn and a tradfn:</p>
+<pre><code class="language-APL">     ∇ Dfn←{             
+[1]        var←'lexical'⍵
+[2]    }                 
+     ∇                   
+
+     ∇ Tradfn arg      
+[1]    var←'dynamic'arg
+     ∇  
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While the <code>∇</code> <em>del</em> representation of dfns can be used to define dfns in the session, dfns in scripted namespaces must be defined without <code>∇</code> dels.</p>
+</div>
+<p>If we call each of these functions, <code>Tradfn</code> will modify <code>var</code> in the workspace, but <code>Dfn</code> will not:</p>
+<pre><code class="language-APL">      Dfn var
+      var
+</code></pre>
+<pre><code>1 2 3
+</code></pre>
+<hr />
+<pre><code class="language-APL">      Tradfn var
+      var
+</code></pre>
+<pre><code>┌───────┬─────┐
+│dynamic│1 2 3│
+└───────┴─────┘
+</code></pre>
+<p>Experiment with these altered definitions:</p>
+<pre><code class="language-APL">     ∇ Dfn←{              
+[1]        var∘←'lexical'⍵
+[2]    }                  
+     ∇                    
+</code></pre>
+<hr />
+<pre><code>     ∇ Tradfn arg;var  
+[1]    var←'dynamic'arg
+     ∇   
+</code></pre>
+<p>In Tradfns, references to local names within a function are said to "<em>shadow</em>" the same names from outer scopes. Notice how the following definition of <code>Tradfn</code> fails.</p>
+<pre><code class="language-APL">     ∇ Tradfn arg;var  
+[1]    var,←'dynamic'arg
+     ∇   
+</code></pre>
+<hr />
+<p>A similar dfn succeeds because, in dfns, modification will search namespaces in the local scope and then any parent scopes.</p>
+<pre><code class="language-APL">     ∇ Dfn←{              
+[1]        var,←'lexical'⍵
+[2]    }                  
+     ∇                    
+</code></pre>
+<p>For completeness, here we will also mention <code>⎕SHADOW</code>. It is used when names are dynamically created using <code>⍎</code>, <code>⎕FX</code> or <code>⎕FIX</code> but need to be localised. However, it is best to use the function syntax to establish name scope in general. Further information can be found <a href="https://www.dyalog.com/uploads/documents/MasteringDyalogAPL.pdf#page=252">in the specialists section on shadowed names</a> in Mastering Dyalog APL.</p>
+<p>The technical distinction between dfns and tradfns is that tradfns have <strong>dynamic scope</strong> whereas dfns have <strong>lexical scope</strong>.</p>
+<p>For further explanation of how this affects the use of dfns, see <a href="https://mastering.dyalog.com/User-Defined-Functions.html#lexical-scoping">section 5.5.3 of Mastering Dyalog APL</a>.</p>
+<p>For another excellent introduction to lexical scoping, I can recommend the <a href="https://mlochbaum.github.io/BQN/doc/lexical.html#closures">page on lexical scoping in the BQN documentation</a> (BQN is another language inspired by APL). </p>
+<h3 id="avoid-globals">Avoid globals</h3>
+<p>When possible, avoid using global variables.
+Pass parameters to functions as arguments unless this becomes very awkward.
+The use of global variables should be limited to state settings that affect the entire application, or tables containing databases that are shared globally.
+If you need global constants, it is a good idea to create them in a function in order to be able to use source code management / change tracking software.</p>
+<p>A function which uses globals is difficult, if not impossible, to run in parallel. If two copies of the function run in parallel and they update the global data, some kind of locking is required. Locking often defeats the potential benefits of parallel execution.</p>
+<p>Names should be localized unless they really really, really, really need to be global.</p>
+<p>An example of when to use globals is a switch which affects the entire application:</p>
+<pre><code class="language-APL">    ∇  err←Log msg                                  
+[1]    :If verbose                                  
+[2]        ⎕←msg   ⍝ Display information to the user
+[3]    :EndIf                                       
+[4]    PrintFile msg                                
+    ∇   
+</code></pre>
+<h2 id="nested-functions">Nested functions</h2>
+<p>It is possible to define functions inside some other functions.</p>
+<ul>
+<li>
+<p>Tacit functions can only include other user-defined functions by name
+    <pre><code class="language-APL">      Sort ← {(⊂⍋⍵)⌷⍵}
+      CSI ← Sort⍥⎕C   ⍝ Case-insensitive sort</code></pre></p>
+</li>
+<li>
+<p>Dfns can contain tacit definitions and dfn definitions, as well as any named user-defined functions
+    <pre><code class="language-APL"> SortedMeans ← {
+    Sort ← {(⊂⍋⍵)⌷⍵}
+    Mean ← +⌿÷1⌈≢
+    Sort Mean¨⍵
+}</code></pre></p>
+</li>
+<li>Tradfns can contain tacit definitions, dfn definitions and any named user-defined functions
+    <pre><code class="language-APL">     ∇ result←SortedMeans vectors;Mean;Sort
+[1]    Sort←{(⊂⍋⍵)⌷⍵}
+[2]    Mean←+⌿÷1⌈≢
+[3]    result←Sort Mean¨vectors
+     ∇  </code></pre></li>
+</ul>
+<h2 id="which-style-to-use">Which style to use?</h2>
+<p>While usage of different function styles varies throughout many applications, you might take inspiration from <a href="https://abrudz.github.io/style/">Adám's APL Style Guide</a>, when writing brand new production code. When maintaining others' code, it is best to try to continue in the already established style.</p>
+<h4 id="dfns">Dfns</h4>
+<p>For medium sized functions and utilities. Nested dfns are fine, but never use multi-line dfns inline.</p>
+<pre><code class="language-APL"> MultiDfn←{        ⍝ A Dfn with nested in-line multi-line dfns
+     (3{           ⍝ These are confusing to read and trace through
+         ⍺+2×⍵
+     }⍺){
+         x←⍺-4+⍵
+         x-2×⍺
+     }3+⍵
+ }
+</code></pre>
+<p>Instead, give them names and then apply them. Named dfns should be multi-line so that they can be traced through, unless truly trivial.</p>
+<pre><code class="language-APL"> MultiDfn2←{    ⍝ The previous function rewritten more clearly
+     y←3+2×⍺
+     x←y-1+⍵
+     x-2×y  
+ }       
+</code></pre>
+<p>Do not use a dfn instead of naming a variable. For example, instead of </p>
+<pre><code class="language-APL">      r←{⍵/⍨10≤⍵}a,b
+</code></pre>
+<p>write</p>
+<pre><code class="language-APL">      candidates←a,b
+      r←candidates/⍨10≤candidates
+</code></pre>
+<h4 id="tacit-functions">Tacit functions</h4>
+<p>Best as short, <a href="https://en.wikipedia.org/wiki/Pure_function">pure functions</a>, performing some specific task such as data transformation. Trains and functions derived from functions and operators (e.g. <code>+/</code>) can be used inline if they are not too complex.</p>
+<h4 id="tradfns">Tradfns</h4>
+<p>Best used as program control and for dealing with system interactions. The use of control structures can make procedural tasks easier to debug. For example, if an error occurs during a loop or iteration.</p>
+<pre><code class="language-APL">      ¯5{i←⍺+⍳⍵ ⋄ i÷i-2}10   ⍝ A single line function cannot be traced through
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use <code class='language-APL'>Ctrl+Enter</code> to step through a multiline function. You can then use <code class='language-APL'>Shift+Enter</code> to edit the function during execution and <code class='language-APL'>Esc</code> to save your changes to the function and continue execution.</p>
+</div>
+<pre><code class="language-APL">    ∇  r←a MultiLineError o;i
+[1]    :For i :In a+⍳o       
+[2]        r←i+3             
+[3]        r÷r-2             
+[4]    :EndFor               
+    ∇    
+</code></pre>
+<h2 id="problem-set-10">Problem set 10</h2>
+<h3 id="which-style-again">Which style again?</h3>
+<ol>
+<li>Which of the following function styles can have multiple lines?<ol>
+<li>TradFns</li>
+<li>Dfns</li>
+<li>Tacit functions</li>
+</ol>
+</li>
+<li>Which of the following function styles can be anonymous (unnamed)?<ol>
+<li>Tradfns</li>
+<li>Dfns</li>
+<li>Tacit</li>
+</ol>
+</li>
+<li>Think about which function style would be most appropriate in the following situations.    <ol>
+<li>Launching an application</li>
+<li>Applying a mathematical formula to an array of values</li>
+<li>A utility function to sort an array </li>
+<li>Reading and writing files</li>
+<li>Expressing the sum of two functions (f+g)(x)</li>
+<li>Downloading data from the internet</li>
+<li>GUI programming</li>
+<li>Checking if a function is a <a href="https://en.wikipedia.org/wiki/NOP_(code)">no-op</a> for a particular array</li>
+<li>Defining a <a href="https://www.mathsisfun.com/sets/functions-piecewise.html">piecewise</a> mathematical function</li>
+</ol>
+</li>
+</ol>
+<h3 id="choo-choo">Choo choo</h3>
+<ol>
+<li>Translating functions<ol>
+<li>Convert the following dfns into trains<ol>
+<li><code>{⌈/≢¨⍵}</code></li>
+<li><code>{1+⍺-⍵}</code></li>
+<li><code>{∨/⍺∊⍵}</code></li>
+<li><code>{(⌽⍵)≡⍵}</code></li>
+</ol>
+</li>
+<li>Convert the following trains into dfns<ol>
+<li><code>(⌈/-⌊/)</code></li>
+<li><code>(+⌿÷1⌈≢)</code></li>
+<li><code>(⊢-|)</code></li>
+<li><code>(1∧⊢,÷)</code></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="marking-tests">Marking Tests</h3>
+<p>Way back in <a href="/Outer-product/#problem-set-4">problem set 4</a> you wrote a dfn to convert test scores into letter values.</p>
+<p>You were led to produce some function or expression similar to the following:</p>
+<pre><code class="language-APL">      Grade←{'FDCBA'[+/⍵∘.&gt;80 70 60 50 0]}
+      Grade 95 65 92 77
+</code></pre>
+<p>This is an array-oriented solution to this problem. However, if a human was manually grading test scores, they might take one scored paper at a time and decide on which letter grade to write by reading each score.</p>
+<p>Procedural <a href="https://en.wikipedia.org/wiki/Pseudocode">pseudocode</a>:</p>
+<pre><code class="language-pseudocode">scores = 93,85,45,10,70,16,93,63,41,7,95,45,76
+For each score in scores:
+  If score is greater than 80:
+    Write &quot;A&quot;
+  Else If score is greater than 70:
+    Write &quot;B&quot;
+  Else If score is greater than 60:
+    Write &quot;C&quot;
+  Else If score is greater than 50:
+    Write &quot;D&quot;
+  Else
+    Write &quot;F&quot;
+</code></pre>
+<p>Control Structures in Dyalog are keywords beginning with a <code>:</code> colon.</p>
+<pre><code class="language-APL">      :If :OrIf :AndIf :ElseIf :Else :EndIf
+      :For :In :EndFor
+      :While :EndWhile
+      :Repeat :Until :Return
+</code></pre>
+<ol>
+<li>
+<p>Translate the pseudocode above into a <strong>tradfn</strong> called <code>Grade2</code> using control stuctures.</p>
+</li>
+<li>
+<p>Rewrite the <code>Grade</code> function again as either a dfn or a tradfn called <code>Grade3</code> which uses <code>⍺⍸⍵</code> interval index.</p>
+</li>
+<li>
+<p>Use the <code>]runtime</code> user command to compare the computation time for each of the three grading functions.
+    <pre><code class="language-APL">]runtime -c "Grade 10×⍳10" "Grade2 10×⍳10" "Grade3 10×⍳10"</code></pre></p>
+</li>
+</ol>
+
+
+
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../Help/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Getting Help" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Getting Help
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../Operators/" class="md-footer__link md-footer__link--next" aria-label="Next: Operators" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Operators
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant"], "search": "../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.9c69f0bc.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

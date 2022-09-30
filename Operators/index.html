@@ -1,0 +1,1322 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A guided introduction to Dyalog APL">
+      
+      
+      
+        <link rel="canonical" href="https://dyalog.com/Operators/">
+      
+      <link rel="icon" href="../img/favicon-32.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.1">
+    
+    
+      
+        <title>Operators - APL Course</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.69437709.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../style/main.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#operators" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="APL Course" class="md-header__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APL Course
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Operators
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="APL Course" class="md-nav__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    APL Course
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../First-steps/" class="md-nav__link">
+        First Steps
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Dfns/" class="md-nav__link">
+        Dfns and Assignment
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Selecting-from-lists/" class="md-nav__link">
+        Selecting from Lists
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Outer-product/" class="md-nav__link">
+        The Outer Product
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Shape-Reshape/" class="md-nav__link">
+        Shape Reshape
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Array-model/" class="md-nav__link">
+        The Array Model
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Selecting-from-arrays/" class="md-nav__link">
+        Search, Sort and Select
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Loops/" class="md-nav__link">
+        Loops and Recursion
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Assignment/" class="md-nav__link">
+        Extra Assignment
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Workspaces/" class="md-nav__link">
+        Workspace Basics
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Namespaces/" class="md-nav__link">
+        Namespaces and Other Objects
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Help/" class="md-nav__link">
+        Getting Help
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Ufns/" class="md-nav__link">
+        User-defined Functions
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Operators
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Operators
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#about" class="md-nav__link">
+    About
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#primitive" class="md-nav__link">
+    Primitive
+  </a>
+  
+    <nav class="md-nav" aria-label="Primitive">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quick-guide" class="md-nav__link">
+    Quick guide
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-inner-product" class="md-nav__link">
+    The Inner Product
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traditional" class="md-nav__link">
+    Traditional
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dop" class="md-nav__link">
+    Dop
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quirks-of-primitive-operators" class="md-nav__link">
+    Quirks of primitive operators
+  </a>
+  
+    <nav class="md-nav" aria-label="Quirks of primitive operators">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reduce-and-replicate" class="md-nav__link">
+    Reduce and replicate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#primitive-dyadic-operators" class="md-nav__link">
+    Primitive dyadic operators
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-set-11" class="md-nav__link">
+    Problem set 11
+  </a>
+  
+    <nav class="md-nav" aria-label="Problem set 11">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filter" class="md-nav__link">
+    Filter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply" class="md-nav__link">
+    Apply
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#numerical-integration" class="md-nav__link">
+    Numerical integration
+  </a>
+  
+    <nav class="md-nav" aria-label="Numerical integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trapezoid-rule" class="md-nav__link">
+    Trapezoid Rule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simpsons-rule" class="md-nav__link">
+    Simpson's Rule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rombergs-method" class="md-nav__link">
+    Romberg's Method
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-in-rome" class="md-nav__link">
+    When in Rome...
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#under-over" class="md-nav__link">
+    Under Over
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-without" class="md-nav__link">
+    Key without ⌸
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quad%20names/" class="md-nav__link">
+        Quad Names
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Errors/" class="md-nav__link">
+        Error Handling and Debugging
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Data/" class="md-nav__link">
+        Data IO
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Code/" class="md-nav__link">
+        Code IO
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interfaces/" class="md-nav__link">
+        External Interfaces
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quirks/" class="md-nav__link">
+        Historical Quirks
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interpreter-internals/" class="md-nav__link">
+        Interpreter Internals
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Reading/" class="md-nav__link">
+        Further Reading
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#about" class="md-nav__link">
+    About
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#primitive" class="md-nav__link">
+    Primitive
+  </a>
+  
+    <nav class="md-nav" aria-label="Primitive">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quick-guide" class="md-nav__link">
+    Quick guide
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-inner-product" class="md-nav__link">
+    The Inner Product
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traditional" class="md-nav__link">
+    Traditional
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dop" class="md-nav__link">
+    Dop
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quirks-of-primitive-operators" class="md-nav__link">
+    Quirks of primitive operators
+  </a>
+  
+    <nav class="md-nav" aria-label="Quirks of primitive operators">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reduce-and-replicate" class="md-nav__link">
+    Reduce and replicate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#primitive-dyadic-operators" class="md-nav__link">
+    Primitive dyadic operators
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-set-11" class="md-nav__link">
+    Problem set 11
+  </a>
+  
+    <nav class="md-nav" aria-label="Problem set 11">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filter" class="md-nav__link">
+    Filter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply" class="md-nav__link">
+    Apply
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#numerical-integration" class="md-nav__link">
+    Numerical integration
+  </a>
+  
+    <nav class="md-nav" aria-label="Numerical integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trapezoid-rule" class="md-nav__link">
+    Trapezoid Rule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simpsons-rule" class="md-nav__link">
+    Simpson's Rule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rombergs-method" class="md-nav__link">
+    Romberg's Method
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-in-rome" class="md-nav__link">
+    When in Rome...
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#under-over" class="md-nav__link">
+    Under Over
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-without" class="md-nav__link">
+    Key without ⌸
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="operators">Operators</h1>
+<h2 id="about">About</h2>
+<p>Dyalog APL is not a functional programming language, but those familiar with functional languages will recognise APL's operators as <a href="https://en.wikipedia.org/wiki/Higher-order_function">higher-order functions</a>. Operators in Dyalog can be:</p>
+<ul>
+<li>monadic (take a single left operand as in <code>F/</code>)</li>
+<li>dyadic (take a left and a right operand as in <code>F⍤k</code>)</li>
+</ul>
+<p>but they cannot be ambivalent. However, the functions derived from operators can be monadic, dyadic or ambivalent in terms of arguments. </p>
+<p>Abmivalent dfns usually have a default left argument (<code>⍺←default</code>) and ambivalent tradfns test if their left argument exists (<code>0=⎕NC'left_arg'</code>).</p>
+<h2 id="primitive">Primitive</h2>
+<p>We have already used a few primitive operators, but there is <a href="http://help.dyalog.com/latest/#Language/Primitive%20Operators/Operators%20Summarised.htm">a complete summary of primitive operators</a> in the online documentation.</p>
+<h3 id="quick-guide">Quick guide</h3>
+<p>For some commonly used operators</p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Calling syntax</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reduce</td>
+<td><code>F/</code> <code>F⌿</code></td>
+<td>Accumulation</td>
+</tr>
+<tr>
+<td>N-wise reduce</td>
+<td><code>nF/</code> <code>nF⌿</code></td>
+<td>Windowed-reduction</td>
+</tr>
+<tr>
+<td>Scan</td>
+<td><code>F⍀</code></td>
+<td>Accumulation with intermediate results</td>
+</tr>
+<tr>
+<td>Each</td>
+<td><code>F¨</code></td>
+<td>Looping / element-wise application over non-simple scalars</td>
+</tr>
+<tr>
+<td>Rank</td>
+<td><code>F⍤k</code></td>
+<td>Looping / pair-wise application over cells</td>
+</tr>
+<tr>
+<td>Power</td>
+<td><code>F⍣n</code> <code>F⍣G</code></td>
+<td>Iteration</td>
+</tr>
+<tr>
+<td>Key</td>
+<td><code>F⌸</code></td>
+<td>Grouping</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-inner-product">The Inner Product</h3>
+<p>Many people who have studied mathematics are familiar with one kind of inner product: matrix multiplication.</p>
+<pre><code class="language-APL">      (3 3⍴3 6 5 2)+.×3 3⍴1 0 ¯1
+</code></pre>
+<p>For two vectors:</p>
+<pre><code class="language-APL">      1 3 6((+/×)≡+.×)1 0 ¯1
+</code></pre>
+<p>The generalisation to any two functions leads to some neat encodings:</p>
+<pre><code class="language-APL">      'abbcde'+.='cbccfe'     ⍝ How many equal?
+      1 3 4 5 2+.&gt;0 3 3 6 3   ⍝ How many greater than?
+</code></pre>
+<p>As a particularly interesting example, the <strong>transitive closure</strong> of a <a href="https://transportgeography.org/contents/methods/graph-theory-definition-properties/connectivity-matrix/"><strong>connectivity matrix</strong></a> shows which nodes can reach which other nodes in a graph.</p>
+<pre><code class="language-APL">      cm←5 5⍴1 0 0 1 0 0 0 0 0
+      (∨.∧⍨∨⊢)⍣≡cm
+</code></pre>
+<h2 id="traditional">Traditional</h2>
+<p>Just like <a href="Ufns/#traditional-functions">their function counterparts</a>, traditional operators or <a href="https://aplwiki.com/wiki/Defined_function_(traditional)#Operators"><strong>tradops</strong></a> have a definition syntax which reflects their calling syntax:</p>
+<pre><code class="language-APL">      ⎕VR'TradOp'
+     ∇ {result}←{left}(LF TradOp RF)right                   
+[1]   ⍝ Dyadic operator which returns an ambivalent function
+[2]    :If 0=⎕NC'left'                                      
+[3]        result←LF RF right                               
+[4]    :Else                                                
+[5]        result←LF left RF right                          
+[6]    :EndIf                                               
+     ∇  
+</code></pre>
+<hr />
+<pre><code class="language-APL">      3 (÷ TradOp +) 5     ⍝ Shy results 
+      ⎕←3 (÷ TradOp +) 5   ⍝ The result
+</code></pre>
+<h2 id="dop">Dop</h2>
+<p><strong>Dops</strong> can be named or anonymous. They are just like dfns, except <code>⍺⍺</code> refers to its left operand and, if dyadic, <code>⍵⍵</code> refers to its right operand. For recursion, double-del <code>∇∇</code> is used to refer to the operator itself (and therefore must be used with operands to become a function when called), whereas a single del <code>∇</code> is used to refer to the derived function.</p>
+<h2 id="quirks-of-primitive-operators">Quirks of primitive operators</h2>
+<h3 id="reduce-and-replicate">Reduce and replicate</h3>
+<p>Reduce and replicate are both represented by <em>forward-slash</em> <code>/</code> (and <em>forward-slash-bar</em> <code>⌿</code> for their first-axis equivalents). Operators bind tightly (see <a href="https://help.dyalog.com/latest/index.htm#Language/Introduction/Binding%20Strength.htm">the binding table in the online documentation</a>) to function operands, so a forward-slash in a <a href="https://aplwiki.com/wiki/Tacit_programming#Trains">function train</a> will be interpreted as reduce. To force it to be the function replicate, use <strong>atop</strong> and <strong>right-tack</strong>.</p>
+<pre><code class="language-APL">(2∘|⊢⍤/⊢)⍳10
+</code></pre>
+<p>Of course this is subjective, but sometimes even simple functions look nicer as dfns:</p>
+<pre><code>{⍵⌿⍨2|⍵}⍳10
+</code></pre>
+<h3 id="primitive-dyadic-operators">Primitive dyadic operators</h3>
+<p>For no particular reason other than a technical limitation, dyadic primitive operators cannot be assigned to names. This is not a very useful thing to do in any case, but if you try this and find it does not work, just know that it is not supposed to work. </p>
+<p>If you must do this, the workaround is to wrap the operator in a simple dop. For example, <code>_Rank_←{⍺←⊢ ⋄ ⍺ (⍺⍺⍤⍵⍵) ⍵}</code>.</p>
+<h2 id="problem-set-11">Problem set 11</h2>
+<h3 id="filter">Filter</h3>
+<p>The <code>_Filter</code> operator returns only scalars of <code>⍵</code> which satisfy a predicate <code>⍺⍺</code>. That is, <code>⍵</code> is part of the result where <code>1=⍺⍺ ⍵</code>. Write the <code>_Filter</code> operator as a <em>dop</em>.</p>
+<pre><code class="language-APL">      2∘|_Filter ⍳20              ⍝ Odd numbers
+1 3 5 7 9 11 13 15 17 19
+      {(⊢=⌊)0.5*⍨⍵}_Filter ⍳100   ⍝ Square numbers
+1 4 9 16 25 36 49 64 81 100
+</code></pre>
+<h3 id="apply">Apply</h3>
+<p>The <code>_Apply_</code> operator will return its argument array <code>⍵</code>, but with its right operand function <code>⍵⍵</code> applied to elements for which <code>1=⍺⍺ ⍵</code>. </p>
+<pre><code class="language-APL">      3+_Apply_ 2∘|⊢⍳10
+1 5 3 4 5 6 7 8 9 10
+</code></pre>
+<ol>
+<li>
+<ol>
+<li>Which primitive operator behaves like this?</li>
+<li>What can that primitive operator do which is missing from the description of <code>_Apply_</code>?</li>
+</ol>
+</li>
+<li>Implement a simple version of <code>_Apply_</code> without using that primitive operator.</li>
+</ol>
+<h3 id="numerical-integration">Numerical integration</h3>
+<p>This problem is from Phase 2 of the 2019 <a href="https://www.dyalog.com/student-competition.htm">APL Problem Solving Competition</a>.</p>
+<p>The definite integral of a real valued function can be interpreted as the area under its graph over some interval (unless the function is negative or the endpoints are flipped but let's not get into that).</p>
+<p><center>
+    <figure>
+        <img src="../img/numerical-integration.svg" alt="The same integral (left) approximated using the trapezoid rule (middle) and Simpson's rule (right). Red is overestimate and purple is underestimate."/>
+        <figcaption>
+            The same integral (left) approximated using the trapezoid rule (middle) and Simpson's rule (right). Red is overestimate and purple is underestimate.
+        </figcaption>
+    </figure>
+</center></p>
+<p>Contrary to what introductory courses in calculus might lead you to believe, symbolic integration is not in general feasible. The function you want to integrate might not have an antiderivative in closed form (expressed in terms of “standard” mathematical functions; and even if it does, it might be too hard to find), or the function itself might not be given in closed form, but rather as the result of some measurement, simulation, or something similar. In such cases, numerical methods must be employed. There are several such methods, three of which we will implement in this problem set as APL user-defined operators.</p>
+<h4 id="trapezoid-rule">Trapezoid Rule</h4>
+<p>In the trapezoid rule, the integral of a function <span class="arithmatex">\(f\)</span> over an interval <span class="arithmatex">\([a,b]\)</span> is estimated by dividing <span class="arithmatex">\([a,b]\)</span> into <span class="arithmatex">\(n\)</span> sub-intervals of size <span class="arithmatex">\(\Delta x=(b-a)/n\)</span>, and approximating <span class="arithmatex">\(f\)</span> by a straight line within each (see the figure above). This means that <span class="arithmatex">\(f\)</span> only needs to be evaluated in the <span class="arithmatex">\(n+1\)</span> points <span class="arithmatex">\({x_i}=a+i\Delta x\)</span>. Putting it all together we get:</p>
+<p><span class="arithmatex">\({T_n}={{\Delta x}\over{2}}(f(x_0)+2f(x_1)+2f(x_2)+\cdots+2f(x_{n-1})+f(x_n))\)</span></p>
+<p>Write an APL operator, <code>_Trapezoid</code>, that:</p>
+<ul>
+<li>takes a left operand which is a scalar function.</li>
+<li>takes a positive integer left argument which is the number of subintervals.</li>
+<li>takes a 2-element numeric vector right argument which represents an interval <span class="arithmatex">\([a,b]\)</span> where <span class="arithmatex">\(a&lt;b\)</span>.</li>
+<li>returns <span class="arithmatex">\(T_n\)</span> for the given function and interval.</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="language-APL">      1 ⍟_Trapezoid 1,*1
+0.8591409142
+
+      (⍳4) ⍟_Trapezoid ¨ ⊂1,*1
+0.8591409142 0.9623362015 0.9829803154 0.9903650088
+</code></pre>
+<h4 id="simpsons-rule">Simpson's Rule</h4>
+<p>Using Simpson's rule the interval is similarly divided but, instead of approximating <span class="arithmatex">\(f\)</span> by a straight line, the sub-intervals are paired up and <span class="arithmatex">\(f\)</span> is approximated by a parabola (see the figure above). In general, this reduces the error but leads to the slightly more involved formula:</p>
+<p><span class="arithmatex">\(S_n = {{\Delta x}\over{3}} (f(x_0)+4f(x_1)+2f(x_2)+4f(x_3)+2f(x_4)+\cdots+4f(x_{n-1})+f(x_n))\)</span></p>
+<p>Write an operator, <code>_Simpson</code>, that:</p>
+<ul>
+<li>takes a left operand which is a scalar function</li>
+<li>takes an even, positive, integer left argument which is the number of sub-intervals.</li>
+<li>takes a 2-element vector right argument which represents an interval <span class="arithmatex">\([a,b]\)</span> where <span class="arithmatex">\(a&lt;b\)</span>.</li>
+<li>returns <span class="arithmatex">\(S_n\)</span> for the given function and interval.</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="language-APL">      2 ⍟_Simpson 1,*1
+0.9967346307
+
+      (2×⍳4) ⍟_Simpson¨ ⊂1,*1
+0.9967346307 0.9997079446 0.999936071 0.9999788955
+</code></pre>
+<h4 id="rombergs-method">Romberg's Method</h4>
+<p>This problem is significantly more difficult than the previous two. If you are not confident to try it straight away, feel free to skip it and come back later.</p>
+<p>Romberg's method generalizes the Trapezoid and Simpson's rules. As it turns out, given that <span class="arithmatex">\(f\)</span> has enough continuous derivatives, by using Taylor's formula, the error of the Trapezoid rule can be expressed in terms of these. Then, using a technique known as Richardson extrapolation one can combine approximations using different numbers of subintervals to cancel out term after term of the error. Glossing over a ton of (really cool!) detail we can define the Romberg method using the following recurrence:</p>
+<p><span class="arithmatex">\({R^0_n}=T_{2^n}\)</span></p>
+<p><span class="arithmatex">\({R^m_n}={1\over{4^m-1}}(4^m R^{m-1}_n - R^{m-1}_{n-1})\)</span></p>
+<p>Write an operator, <code>_Romberg</code>, that:</p>
+<ul>
+<li>takes a left operand which is a scalar function</li>
+<li>takes an integer left argument greater than or equal to <span class="arithmatex">\(0\)</span> representing <span class="arithmatex">\(n\)</span>.</li>
+<li>takes a 2-element vector right argument which represents an interval <span class="arithmatex">\([a,b]\)</span> where <span class="arithmatex">\(a&lt;b\)</span>.</li>
+<li>returns <span class="arithmatex">\(R^n_n\)</span> for the given function and interval.</li>
+</ul>
+<p>Try to find a solution that performs no unnecessary computation. That is, <span class="arithmatex">\(f\)</span> should be computed at most once in each point, and <span class="arithmatex">\(R^m_n\)</span> should be computed at most once for each <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span>.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-APL">      ( ̄1+⍳4)⍟Romberg ̈⊂1,*1 ⍝ Recognize the first two values?
+0.8591409142 0.9967346307 0.9999061655 0.9999984001
+</code></pre>
+<h3 id="when-in-rome">When in Rome...</h3>
+<p>This problem is from the 2012 <a href="https://www.dyalog.com/student-competition.htm">APL Problem Solving Competition</a>.</p>
+<p>Roman numerals, as used today, are based on seven symbols:</p>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><span style="font-family:Times;">I</span></strong></td>
+<td><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td><strong><span style="font-family:Times;">V</span></strong></td>
+<td><span class="arithmatex">\(5\)</span></td>
+</tr>
+<tr>
+<td><strong><span style="font-family:Times;">X</span></strong></td>
+<td><span class="arithmatex">\(10\)</span></td>
+</tr>
+<tr>
+<td><strong><span style="font-family:Times;">L</span></strong></td>
+<td><span class="arithmatex">\(50\)</span></td>
+</tr>
+<tr>
+<td><strong><span style="font-family:Times;">C</span></strong></td>
+<td><span class="arithmatex">\(100\)</span></td>
+</tr>
+<tr>
+<td><strong><span style="font-family:Times;">D</span></strong></td>
+<td><span class="arithmatex">\(500\)</span></td>
+</tr>
+<tr>
+<td><strong><span style="font-family:Times;">M</span></strong></td>
+<td><span class="arithmatex">\(1000\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Numbers are formed by combining symbols together and adding the values. For example, <strong><span style="font-family:Times;">MMVI</span></strong> is <span class="arithmatex">\(1000 + 1000 + 5 + 1 = 2006\)</span>. Generally, symbols are placed in order of value, starting with the largest values. When smaller values precede larger values, the smaller values are subtracted from the larger values, and the result is added to the total. For example <strong><span style="font-family:Times;">MCMXLIV</span></strong> is <span class="arithmatex">\(1000 + (1000 − 100) + (50 − 10) + (5 − 1) = 1944\)</span>. There has never been a universally accepted set of rules for Roman numerals. Because of this lack of standardization, there may be multiple ways of representing the same number in Roman numerals. Despite the lack of standardization, an additional set of rules has been frequently applied for the last few hundred years.</p>
+<ul>
+<li>The symbols <strong><span style="font-family:Times;">I</span></strong>, <strong><span style="font-family:Times;">X</span></strong>, <strong><span style="font-family:Times;">C</span></strong> and <strong><span style="font-family:Times;">M</span></strong> can be repeated three times in succession, but no more, unless the third and fourth are separated by a smaller value, as in <strong>XXXIX</strong>. <strong><span style="font-family:Times;">D</span></strong>, <strong><span style="font-family:Times;">L</span></strong> and <strong><span style="font-family:Times;">V</span></strong> can never be repeated.</li>
+<li><strong><span style="font-family:Times;">I</span></strong> can be subtracted from <strong><span style="font-family:Times;">V</span></strong> and <strong><span style="font-family:Times;">X</span></strong> only. <strong><span style="font-family:Times;">X</span></strong> can be subtracted from <strong><span style="font-family:Times;">L</span></strong> and <strong><span style="font-family:Times;">C</span></strong> only. <strong><span style="font-family:Times;">C</span></strong> can be subtracted from <strong><span style="font-family:Times;">D</span></strong> and <strong><span style="font-family:Times;">M</span></strong> only. <strong><span style="font-family:Times;">V</span></strong>, <strong><span style="font-family:Times;">L</span></strong> and <strong><span style="font-family:Times;">D</span></strong> can never be subtracted.</li>
+<li>Only one small-value symbol may be subtracted from any large-value symbol.</li>
+<li>A number written in Arabic numerals can be broken into digits. For example, 1903 is composed of <span class="arithmatex">\(1\)</span>, <span class="arithmatex">\(9\)</span>, <span class="arithmatex">\(0\)</span>, and <span class="arithmatex">\(3\)</span>. To write the Roman numeral, each of the non-zero digits should be treated separately. In the above example, 1000=<strong><span style="font-family:Times;">CM</span></strong> and <span class="arithmatex">\(3\)</span> is <strong><span style="font-family:Times;">III</span></strong>. Therefore, <span class="arithmatex">\(1903\)</span> is <strong><span style="font-family:Times;">MCMIII</span></strong>.</li>
+</ul>
+<p>Using this additional set of rules, there is only one possible Roman numeral for any given number. In addition, for this problem, we will add the following rules:</p>
+<ul>
+<li><span class="arithmatex">\(0\)</span> (zero) should be represented by an empty character vector</li>
+<li>Negative numbers should be preceded by an APL high minus (<code>¯</code>)</li>
+<li>Non-integers should be rounded up (0.5 and above rounds up)</li>
+<li>Larger numbers simply have a number of leading M's. For example, <span class="arithmatex">\(5005\)</span> is represented as <strong><span style="font-family:Times;">MMMMMV</span></strong></li>
+</ul>
+<p><strong>The <code>_Roman</code> Operator</strong></p>
+<p>Write a monadic operator <code>_Roman</code> that takes a function left operand and derived a function which is able to do computation on Roman numerals.</p>
+<pre><code class="language-APL">      'III'+_Roman'II'
+V
+
+      ⍳_Roman'X'
+┌─┬──┬───┬──┬─┬──┬───┬────┬──┬─┐
+│I│II│III│IV│V│VI│VII│VIII│IX│X│
+└─┴──┴───┴──┴─┴──┴───┴────┴──┴─┘
+
+      +/_Roman⍳_Roman'X'
+LV
+</code></pre>
+<p>Don't worry about "mixed" types. We don't expect this to work:</p>
+<pre><code class="language-APL">      'II' 'III'⍴_Roman⍳6
+</code></pre>
+<p>But the following should:</p>
+<pre><code class="language-APL">      'II' 'III'⍴_Roman⍳_Roman'VI'
+┌──┬──┬───┐
+│I │II│III│
+├──┼──┼───┤
+│IV│V │VI │
+└──┴──┴───┘
+</code></pre>
+<p>Use <code>]Display</code> to get the full description of the structure. Single Roman symbols are simple character scalars, whereas compound numbers are enclosed character vectors.</p>
+<pre><code class="language-APL">      ]Display 2 3⍴_Roman⍳_Roman'VI'
+┌→────────────────┐
+↓      ┌→─┐ ┌→──┐ │
+│ I    │II│ │III│ │
+│ -    └──┘ └───┘ │
+│ ┌→─┐      ┌→─┐  │
+│ │IV│ V    │VI│  │
+│ └──┘ -    └──┘  │
+└∊────────────────┘
+</code></pre>
+<h3 id="under-over">Under Over</h3>
+<p>The <strong>over</strong> operator <code>⍺⍺⍥⍵⍵</code> was introduced in Dyalog in version 18.0. It can be thought of as applying the left operand function <code>⍺⍺</code> to arguments which have been pre-processed using the right operand function <code>⍵⍵</code>.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-APL">      1 3 2 +_O_× 5 0 ¯5                    ⍝ Sum of signs
+      'some text'≡_O_ 0∘(819⌶)'SOME TEXT'   ⍝ Case-insensitive match
+</code></pre>
+<p>The <strong>under</strong> (or <em>dual</em>) operator <code>⍺⍺⍢⍵⍵</code> has not been implemented in Dyalog. However, it can be partially modelled. It is the same as over <code>⍥</code>, except that the inverse of <code>⍵⍵</code> is applied to the result.</p>
+<p>Write the operator <code>_U_</code> to model the behaviour of under.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-APL">      3 +_U_⍟ 5          ⍝ Multiplication is addition under logarithm
+15
+      3 ×_U_* 5          ⍝ Plus is times under power
+8
+      'C'+_U_(⎕A∘⍳)'D'   ⍝ 7=3+4
+G
+</code></pre>
+<details class="hint">
+<summary>Hint</summary>
+<p>Use the <em>power operator</em> <code>F⍣n</code> to derive an inverse function.</p>
+</details>
+<h3 id="key-without">Key without <code>⌸</code></h3>
+<p>The <strong>key</strong> operator groups major cells of <code>⍵</code> according to keys <code>⍺</code>, where <code>⍺≡⍥≢⍵</code>. When called monadically, the derived function using key will use <code>⍵</code> itself as the keys. Write the operator <code>_Key</code> which works like <code>⌸</code> but does not use the <code>⌸</code> glyph.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-APL">      {⍺,≢⍵}_Key 'mississippi'
+</code></pre>
+<pre><code>m 1
+i 4
+s 4
+p 2
+</code></pre>
+<hr />
+<pre><code class="language-APL">      {⍺(≢⍵)}_Key 5 2⍴1 0 0
+</code></pre>
+<pre><code>┌───┬─┐
+│1 0│2│
+├───┼─┤
+│0 1│2│
+├───┼─┤
+│0 0│1│
+└───┴─┘
+</code></pre>
+<hr />
+<pre><code class="language-APL">      'aabcc'{⊂⍵}_Key 5 2⍴1 0 0
+</code></pre>
+<pre><code>┌───┬───┬───┐
+│1 0│0 0│1 0│
+│0 1│   │0 1│
+└───┴───┴───┘
+</code></pre>
+
+
+
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../Ufns/" class="md-footer__link md-footer__link--prev" aria-label="Previous: User-defined Functions" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              User-defined Functions
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../Quad%20names/" class="md-footer__link md-footer__link--next" aria-label="Next: Quad Names" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Quad Names
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant"], "search": "../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.9c69f0bc.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
