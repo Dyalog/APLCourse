@@ -7,9 +7,6 @@ Dyalog maintains long-term backwards compatibility, meaning that code which ran 
 ## Branch
 Despite long and widespread use in many programming languages, `:If :Else`-style control structures are a relatively recent introduction to some APLs. Early on, the only way to control the flow of execution in APL was to using the branching arrow `→`.
 
-!!! Warning
-	Do not using the branch arrow (except with `→0`) to jump out of or into `:Keyword`-type control structures. It is best not to combine these two methods in general.
-
 ```APL
    →ln             ⍝ Go to integer line number ln or label ln:
    →0              ⍝ Exit current function and resume calling line
