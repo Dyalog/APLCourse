@@ -4,7 +4,7 @@ A self-study introduction to Dyalog APL with exercises.
 This course consists of a series of short instructional notes interleaved with problem sets. The first few sessions are accompanied by video tutorials.
 
 ## Status
-This site is a work in progress. Currently we are transferring content from [APL Workshop](https://rikedyp.uk/APLWorkshop) while reviewing and updating it.
+The course is undergoing changes in structure and content. We do not currently recommend linking to specific pages or sections at the current time, as those links are likely to break in future updates.
 
 ## Getting Started
 If you're just starting out, you can use the [TryAPL](https://tryapl.org) online interpreter. Put TryAPL on one half of your screen, and [view the course](https://course.dyalog.com) on the other half. 
