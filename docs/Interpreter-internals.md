@@ -174,11 +174,6 @@ Although namespaces are pass-by-reference, the references themselves are still v
 99
 ```
 
-## APL item hierarchy
-This useful chart shows what operations are valid for different kinds of items.
-
-![APL item hierarchy](../img/APL_Citizens.png)
-
 ## Configuration parameters
 Many aspects of the interpreter environment can be modified before runtime using [**configuration parameters**](https://help.dyalog.com/latest/index.htm#UserGuide/Installation%20and%20Configuration/Configuration%20Parameters.htm). The values of configuration parameters are determined by a hierarchy of scope on the operating system. On Microsoft Windows, these are often registry settings at the base level. On Unix-like systems, they are environment variables.
 
