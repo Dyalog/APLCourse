@@ -9,6 +9,7 @@ markdown_extensions:
       use_pygments: false
   - admonition
   - pymdownx.details
+  - pymdownx.superfences
   - abbr
 extra_javascript:
   - javascripts/config.js
