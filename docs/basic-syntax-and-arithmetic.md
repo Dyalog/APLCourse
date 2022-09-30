@@ -66,11 +66,12 @@ Dyadic functions can map between a single value and an array of values.
 0 0 1 0 0
 ```
 
-Try this: replace the functions in the previous two expressions with:
+!!!Tip "Try this"
+	Replace the functions in the previous two expressions with:  
 
-- max `⍺⌈⍵`
-- min `⍺⌊⍵`
-- less-than `<`
+	- max `⌈`
+	- min `⌊`
+	- less-than `<`
 
 While experimenting, you may cause a `LENGTH ERROR`:
 
