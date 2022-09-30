@@ -1,9 +1,5 @@
 # Dfns and assignment
 
-<div align="center">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/A8xNTh8_F9g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
 ## Dfns
 A dfn (pronounced "*dee-fun*" with a very short "u" sound) is a way of writing functions in APL. It starts and ends with curly braces `{}`, has a right argument `⍵` (omega) and an optional left argument `⍺` (alpha).
 
@@ -25,7 +21,7 @@ SYNTAX ERROR: Missing right argument
 ## Function valence
 Most functions are either *monadic* or *dyadic*. Monadic functions take a single argument to their right and dyadic functions take two arguments, one to the right and one to the left. For example, *plus* is a dyadic function e.g. `3+4 5 6` and *iota* is a monadic function e.g. `⍳3`.
 
-From here, when functions are first introduced, `f⍵` ("eff omega") denotes a monadic function `f` and `⍺f⍵` ("alpha eff omega") denotes a dyadic function.
+From here, when functions are first introduced, `F⍵` ("eff omega") denotes a monadic function `f` and `⍺F⍵` ("alpha eff omega") denotes a dyadic function.
 
 ## Assignment
 Names are assigned with the left arrow `name ← expression`. We say "name gets [function or array]".
@@ -53,6 +49,69 @@ Read the following as "squared numbers divided by the sum of squares":
 ```
 
 ## Problem Set 2
+1. Write a function to count the number of vowels in some text
+	```APL
+	      CountVowels 'This text is made of characters.'
+	```
+	```
+	9
+	```
+	---
+	```APL
+	      CountVowels 'We have TWELVE vowels in this sentence.'
+	```
+	```
+	12
+	```
+1. A recipe serving 4 people uses 3 eggs. Write the function `Eggs` which computes the number of eggs which need cracking to serve `⍵` people. Using a fraction of an egg requires that a whole egg be cracked.
+	```APL
+	      Eggs 4
+	```
+	```
+	3
+	```
+	---
+	```APL
+	      Eggs 100
+	```
+	```
+	75
+	```
+	---
+	```APL
+	      Eggs ⍳12
+	```
+	```
+	1 2 3 3 4 5 6 6 7 8 9 9
+	```
+1. Write a function `To` which returns integers from `⍺` to `⍵` inclusive.
+	```APL
+	      3 To 3
+	3
+	      3 To 4
+	3 4
+	      1 To 7
+	1 2 3 4 5 6 7
+	      ¯3 To 5
+	¯3 ¯2 ¯1 0 1 2 3 4 5
+	```
+	**BONUS** Make `To` work even if `⍺>⍵`:  
+	```APL
+	      3 To 5
+	3 4 5
+	      5 To 3
+	5 4 3
+	      5 To ¯2
+	5 4 3 2 1 0 ¯1 ¯2
+	```
+1. The forumla to convert temperature from Celcius to Farenheit in traditional mathematical notation is as follows:
+	$$T_F = 32 + (9\over5)\times T_C$$  
+	Write the function `CtoF` to convert temperatures from Celcius to Farenheit.  
+	```APL
+	      CtoF 11.3 23 0 16 ¯10 38
+	52.34 73.4 32 60.8 14 100.4
+	```
+
 1. Utility Functions
 	1. Without using the *tally* `≢⍵` or *shape* `⍴⍵` functions, create a function named `Tally` which returns the number of elements in a vector.
 
