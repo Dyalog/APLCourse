@@ -8,6 +8,7 @@ markdown_extensions:
   - pymdownx.highlight:
       use_pygments: false
   - admonition
+  - pymdownx.extra
   - pymdownx.details
   - pymdownx.superfences
   - abbr
@@ -26,10 +27,11 @@ extra_css:
   - style/main.css
 nav:
   - About: index.md
-  - Basic syntax and arithmetic: basic-syntax-and-arithmetic.md
-  - Dfns and Assignment: Dfns.md
+  - Basic Syntax and Arithmetic: basic-syntax-and-arithmetic.md
+  - Array Logic and Data Driven Conditionals: array-logic-data-driven-conditionals.md
+  - Dfns and Assignment: dfns-and-assignment.md
+  - The Outer Product: outer-product-matrices.md
   - Selecting from Lists: Selecting-from-lists.md
-  - The Outer Product: Outer-product.md
   - Shape Reshape: Shape-Reshape.md
   - The Array Model: Array-model.md
   - Search, Sort and Select: Selecting-from-arrays.md
