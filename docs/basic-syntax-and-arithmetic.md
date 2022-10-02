@@ -496,3 +496,9 @@ A `VALUE ERROR` means that there is nothing associated with the name provided. W
 		```
 		</li>
 		</ol>
+
+1. Rewrite the following expressions so that they do not use parentheses.
+	1. `(÷a)×b`
+	1. `(÷a)÷b`
+	1. `(a+b)-5`
+	1. `(a+b)+5`
