@@ -1,8 +1,9 @@
 # Tmp
 Keeping useful things for later.
 
+## Lists, tables and lists of tables
 
-
+## Dfns and assignment
 
 1.   
 	The average daily temperatures, in degrees Celcius, for 7 days are stored in a variable `t_allweek`.
@@ -11,49 +12,26 @@ Keeping useful things for later.
 	t_allweek ← 11.7 8.6 9.7 14.2 6.7 11.8 9.2
 	```
 
-	1. The mean average temperature for the week
+	1. What is the mean average temperature for the week?
+	1. What percentage of days are over 10 degrees Celcius?
 	1. The mean average temperature rounded to 1 decimal place
 
+`(+/t_allweek)÷≢t_allweek`
+
 1. Remove the vowels `'aeiou'` in the text `'alphabetti spaghetti'`
+
+`('alphabetti spaghetti'∊'aeiou')/'alphabetti spaghetti'`
+
+`(text∊'aeiou')/text`
+`{(⍵∊'aeiou')/⍵}`
+
 1. Find the indices of the vowels `'aeiou'` in the text `'alphabetti spaghetti'`
+
+
 1. Count the number of vowels `'aeiou'` in the text `'alphabetti spaghetti'`
 1. Write an expression to test if there are any vowels `'aeiou'` in the text `'alphabetti spaghetti'`
 
-1. Early or late
-
-## Useful bits
-Try these exercises in creating and using Boolean vectors.
-
-1. These are the heights of some students in 3 classes.
-	```APL
-		student ← 'Kane' 'Jonah' 'Jessica' 'Padma' 'Katie' 'Charlie' 'Amil' 'David' 'Zara' 'Filipa'
-		class ← 'CBACCCBBAB'
-		height ← 167 177 171 176 178 164 177 177 173 160
-		↑student height class
-	```
-
-	???+Question "How do I get those boxes around my output?"
-		We are using [nested arrays](), although we have not yet formally introduced them.
-
-		Turn boxing on with the user command
-		```APL
-			]Box on
-		Was OFF
-		```
-
-	???+Question "What is `↑`?"
-		We created three lists: a simple character vector `class`; a simple numeric vector `height`; and a nested vector of character vectors `student`.
-
-		Placing them side by side created a single
-
-	1.	
-		1. Find the height of the tallest student
-		1. What is their name?
-		1. What class are they in?  
-	1.	  
-		1. What is the average height of students in class `B`?
-		1. Which class has the tallest average height?
-		1. Which class has the narrowest range of heights?
+1. Why does 101='101' evaluate to a 3-element list?
 
 1. Pass-fail
 	Provided a list of scores
@@ -66,74 +44,11 @@ Try these exercises in creating and using Boolean vectors.
 
 	```APL
 	      your_expression
-	||++++||||++
+	FFPPPPFFFFPP
+	      'FP'[1+40≤34 22 40 90 76 44 16 16 25 22 44 41]
+	FFPPPPFFFFPP
 	```
 
-## The shape of data
-Perhaps a subsection
-
-- shape of square bracket index is sum of shapes of indices (watch out for scalars!)
-- A reduction always results in rank 1 less (hence nested things return a nested scalar)
-	- `∨/('some text'='a')('some text'='b')('some text'='c')`
-	- `⊃{⍺,','⍵}/'join' 'these' 'words' 'with' 'commas'`
-
-- selective and indexed assignment
-	- Defang
-	- upper case
-		- even with non-alphabetic chars
-	- 'apple' ReplaceHead 'Eat' → Eatle
-		'apple' ReplaceHead 'rang' → 'rangle'
-		'apple' ReplaceHead 'ENTERPRISE'
-	- SpitOnFirst
-	- ReplaceRow
-
-1. Write an expression to convert `text` into upper case. Assume text consists of only lowercase alphabetic characters `a-z` and spaces.
-	```APL
-	      text ← 'convert to upper case'
-		  your_expression
-		  text
-	CONVERT TO UPPER CASE
-	```
-
-`(⎕A,' ')[alph⍳text]`
-
-> then later, turn these into multiline dfns
-
-1. Now try a version which includes any characters. Convert only lowercase alphabetic characters `a-z` into uppercase, and leave all others alone.
-	```APL
-	      text←'What? Ignore these $#!?# characters!?'
-	      your_expression
-	      text
-	WHAT? IGNORE THESE $#!?# CHARACTERS!?
-	```
-
-`((text∊alph)/text)←(⎕A,' ')[(text∊alph)/alph⍳text]`
-
-1. Write a function `Clean` that changes all non-digits into stars.
-	```APL
-	      Clean 'Easy as 1, 2 and 3'
-	********1**2*****3
-	      Clean '1000'
-	1000
-	      Clean 'APL works!'
-	**********
-	```
-
-`{d←~⍵∊⎕D ⋄ r←⍵ ⋄ (d/r)←'*' ⋄ r}`
-
-1. Create a function `ReplaceHead` which returns its left argument vector `⍺`, but with the first `⍴⍵` elements replaced with the contents of `⍵`.
-	```APL
-	      'apple' ReplaceHead 'Eat'
-	Eatle
-	      'apple' ReplaceHead 'rang'
-	range
-	      'apple' ReplaceHead 'ENTERPRISE'
-	ENTER
-	```
-
-`ReplaceHead ← {r←⍺ ⋄ s←(≢⍺)⌊≢⍵ ⋄ r[⍳s]←s↑⍵ ⋄ r}`
-
-## Problem Set
 1. Write a function to count the number of vowels in some text
 
 	```APL
@@ -173,6 +88,8 @@ Perhaps a subsection
 	1 2 3 3 4 5 6 6 7 8 9 9
 	```
 
+`Eggs ← {⌈⍵×3÷4}`
+
 1. Write a function `To` which returns integers from `⍺` to `⍵` inclusive.
 
 	```APL
@@ -205,16 +122,6 @@ Perhaps a subsection
 	52.34 73.4 32 60.8 14 100.4
 	```
 
-1. What Was In That Vector Again?
-	The temperature 
-	You should have a variable named `⎕AVU` in your workspace, from [problem set 1](../Problem set 1).
-
-	1. How many even numbers are there in `⎕AVU`?
-	2. What percentage of numbers in `⎕AVU` are odd numbers?
-	3. What percentage of numbers in `⎕AVU` are strictly negative?
-	4. What percentage of numbers in `⎕AVU` are strictly positive?
-	5. What do you notice about the percentage of strictly positive and negative numbers?
-
 1. Prime Time
 
 	A prime number is divisible only by itself and `1`.
@@ -226,6 +133,175 @@ Perhaps a subsection
 		          IsPrime 17
 	    1
 
+## Useful bits
+Try these exercises in creating and using Boolean vectors.
+
+1. These are the heights of some students in 3 classes. Students have numeric identifiers `id`.
+	```APL
+		student ← 'Kane' 'Jonah' 'Jessica' 'Padma' 'Katie' 'Charlie' 'Amil' 'David' 'Zara' 'Filipa'
+		id ← 1 2 3 4 5 6 7 8 9 10
+		class ← 'CBACCCBBAB'
+		height ← 167 177 171 176 178 164 177 177 173 160
+		↑student height class
+	```
+
+	???+Question "How do I get those boxes around my output?"
+		We are using [nested arrays](), although we have not yet formally introduced them.
+
+		Turn boxing on with the user command
+		```APL
+			]Box on
+		Was OFF
+		```
+
+	???+Question "What is `↑`?"
+		We created three lists: a simple character vector `class`; a simple numeric vector `height`; and a nested vector of character vectors `student`.
+
+		Placing them side by side created a single
+
+	1.	
+		1. Find the height of the tallest student
+		1. What is their ID?
+		1. What class are they in?  
+	1.	  
+		1. What is the average height of students in class `B`?
+		1. Which class has the tallest average height?
+		1. Which class has the narrowest range of heights?
+
+
+1. Write a function `FindWord` which accepts a character matrix left argument `⍺` and a character vector right argument `⍵` and returns a Boolean vector where a `1` indicates a row in `⍺` which matches the word `⍵`.
+	```APL
+	      fruits FindWord 'Apples'
+	1 0 0 0
+	      fruits FindWord 'Oranges'
+	0 0 1 0
+	```
+
+`FindWord←{⍺∧.=⍵↑⍨⊢⌿⍴⍺}`
+
+`FindWord←{⍺∧.=((⍴⍺)[2])↑⍵}`
+
+
+1. Anna, Ben and Charlie are having a competition. They want to see who can eat the most fruit in a week.
+
+	```APL
+	      fruits ← 4 7⍴'Apples MangoesOrangesBananas'
+	      days ← 7 3⍴'SunMonTueWedThuFriSat'
+	      names ← 3 7⍴'Anna   Ben    Charlie'
+	      ⎕RL ← 42 1 ⋄ ate ← ?3 4 7⍴3
+	```
+
+	1. Compute the names of the people who ate the most fruits 
+	1. Compute the name of the person who ate the most apples and oranges combined.
+	1. What is the name of the person who ate the most fruit overall?
+
+
+	`names[{⍵⍳⌈/⍵}+/+/ate[;fruits⍳2 7⍴'Apples Oranges';];]`
+
+	```APL
+	      f←fruits⍳2 7⍴'Apples Oranges'
+	      t←+/+/ate[;f;]
+	      n←t=⌈/t
+	      n⌿names
+	Anna
+	```
+
+## Arrays are made of arrays
+- high rank arrays, major cells
+
+- https://stackoverflow.com/questions/73578086/what-does-enclose-do-in-apl
+- use of each
+- Backwards (reverse the vector and its elements)
+- Create a variable `nest` which has the following properties
+	⍴nest
+	2 3
+	≡nest
+	̄2
+	⍴ ̈nest
+	┌─┬┬─┐
+	│ ││2│
+	├─┼┼─┤
+	│3││6│
+	└─┴┴─┘
+	]display ∊nest
+	┌→───────────────────┐
+	│I 3 am 1 5 8 amatrix│
+	└+───────────────────┘
+	⍴∊nest
+	14
+
+- nested arrays
+- each
+- indexing returns a scalar
+- shape and reshape
+
+- shape of square bracket index is sum of shapes of indices (watch out for scalars!)
+- A reduction always results in rank 1 less (hence nested things return a nested scalar)
+	- `∨/('some text'='a')('some text'='b')('some text'='c')`
+	- `⊃{⍺,','⍵}/'join' 'these' 'words' 'with' 'commas'`
+
+- selective and indexed assignment
+	- Defang
+	- upper case
+		- even with non-alphabetic chars
+	- 'apple' ReplaceHead 'Eat' → Eatle
+		'apple' ReplaceHead 'rang' → 'rangle'
+		'apple' ReplaceHead 'ENTERPRISE'
+	- SpitOnFirst
+	- ReplaceRow
+
+- Find all palindromes
+- Count vowels in each word
+
+1. Write a function `Clean` that changes all non-digits into stars.
+	```APL
+	      Clean 'Easy as 1, 2 and 3'
+	********1**2*****3
+	      Clean '1000'
+	1000
+	      Clean 'APL works!'
+	**********
+	```
+
+`{d←~⍵∊⎕D ⋄ r←⍵ ⋄ (d/r)←'*' ⋄ r}`
+
+1. Write an expression to convert `text` into upper case. Assume text consists of only lowercase alphabetic characters `a-z` and spaces.
+	```APL
+	      text ← 'convert to upper case'
+		  your_expression
+		  text
+	CONVERT TO UPPER CASE
+	```
+
+`(⎕A,' ')[alph⍳text]`
+
+> then later, turn these into multiline dfns
+
+1. Now try a version which includes any characters. Convert only lowercase alphabetic characters `a-z` into uppercase, and leave all others alone.
+	```APL
+	      text←'What? Ignore these $#!?# characters!?'
+	      your_expression
+	      text
+	WHAT? IGNORE THESE $#!?# CHARACTERS!?
+	```
+
+`((text∊alph)/text)←(⎕A,' ')[(text∊alph)/alph⍳text]`
+
+1. Create a function `ReplaceHead` which returns its left argument vector `⍺`, but with the first `⍴⍵` elements replaced with the contents of `⍵`.
+	```APL
+	      'apple' ReplaceHead 'Eat'
+	Eatle
+	      'apple' ReplaceHead 'rang'
+	range
+	      'apple' ReplaceHead 'ENTERPRISE'
+	ENTER
+	```
+
+`ReplaceHead ← {r←⍺ ⋄ s←(≢⍺)⌊≢⍵ ⋄ r[⍳s]←s↑⍵ ⋄ r}`
+
+- Multi-statement / multiline functions
+
+## Outer and inner product
 
 1. Back to School
 	1. Write a function to produce the multiplication table from `1` to `⍵`. 
@@ -310,6 +386,10 @@ Answers
 - fruits example
 
 ## Broken keyboard problems
+APL is a language which evolves over time. Some of the primitives available today exist because they represent patterns which are very common.
+
+It is a useful exercise in array thinking and use of APL to try and recreate the behaviour without using the primitive itself. This is also an excellent way to create regression tests to make sure that primitives behave as expected.
+
 - ((⍳≢text)=text⍳text)/text
 - {⍵/⍳≢⍵}
 - {+/⍵=⍵}
@@ -321,68 +401,19 @@ Answers
 - {+⌿(⍳≢⍵)∘.≤⍵⍳⍺}
 - {(0<⍵)-(0>⍵)}
 
-## Arrays are made of arrays
-- high rank arrays, major cells
+## Multiline functions, the editor and debugger
+You can do quite a lot in a single line of APL. However, it is not long before you want to keep sequences of multiple statements available for re-use. Of course we can write functions which consist of multiple statements.
 
-- https://stackoverflow.com/questions/73578086/what-does-enclose-do-in-apl
-- use of each
-- Backwards (reverse the vector and its elements)
-- Create a variable `nest` which has the following properties
-	⍴nest
-	2 3
-	≡nest
-	̄2
-	⍴ ̈nest
-	┌─┬┬─┐
-	│ ││2│
-	├─┼┼─┤
-	│3││6│
-	└─┴┴─┘
-	]display ∊nest
-	┌→───────────────────┐
-	│I 3 am 1 5 8 amatrix│
-	└+───────────────────┘
-	⍴∊nest
-	14
+The statement separator, `⋄` (diamond), is largely a hangover from when users really needed to get a lot done in a single line because they were sending commands over a network from a teletype terminal to a mainframe computer somewhere else which would perform the computations and return the results. It is considered more readable to spread multiple statements across multiple lines of a function. However, it is worth being aware that APL diamonds `⋄` are equivalent to newline characters in terms of execution.
+
+Separate statements are executed from left to right and top to bottom.
+
+The editor can be invoked with the system function `⎕ED`.
+
+System commands and system functions are explained a bit further in the section on [workspace basics](./Workspaces.md#system-commands), but we will introduce them as needed.
 
 ## The Shape of Data
 
-1. Write a function `FindWord` which accepts a character matrix left argument `⍺` and a character vector right argument `⍵` and returns a Boolean vector where a `1` indicates a row in `⍺` which matches the word `⍵`.
-	```APL
-	      fruits FindWord 'Apples'
-	1 0 0 0
-	      fruits FindWord 'Oranges'
-	0 0 1 0
-	```
-
-`FindWord←{⍺∧.=⍵↑⍨⊢⌿⍴⍺}`
-
-`FindWord←{⍺∧.=((⍴⍺)[2])↑⍵}`
-
-
-1. Anna, Ben and Charlie are having a competition. They want to see who can eat the most fruit in a week.
-
-	```APL
-	      fruits ← 4 7⍴'Apples MangoesOrangesBananas'
-	      days ← 7 3⍴'SunMonTueWedThuFriSat'
-	      names ← 3 7⍴'Anna   Ben    Charlie'
-	      ⎕RL ← 42 1 ⋄ ate ← ?3 4 7⍴3
-	```
-
-	1. Compute the names of the people who ate the most fruits 
-	1. Compute the name of the person who ate the most apples and oranges combined.
-	1. What is the name of the person who ate the most fruit overall?
-
-
-	`names[{⍵⍳⌈/⍵}+/+/ate[;fruits⍳2 7⍴'Apples Oranges';];]`
-
-	```APL
-	      f←fruits⍳2 7⍴'Apples Oranges'
-	      t←+/+/ate[;f;]
-	      n←t=⌈/t
-	      n⌿names
-	Anna
-	```
 
 ### Summary Statistics
 
@@ -402,17 +433,6 @@ In an attempt to make things fair, the score for fruits eaten is weighted by the
 1.  From the nested 3D array `Nest←2 3 4⍴(⍳17),(⊂2 3⍴'ab'(2 3⍴'dyalog'),'defg'),⎕A[⍳6]` , use a single selection to obtain:
 	1. The character scalar `'y'`
 	1. The numeric scalar `6`
-
-1. Two sorting expressions are `{(⊂⍋⍵)⌷⍵}` and `{⍵[⍋⍵]}`?  
-	
-	When might you use one over the other?
-
-1. When does `{(⍸∨/⍺⍷⍵) ≡ ⍸∧/⍵∊⍺}`?
-
-1. The membership function `⍺∊⍵` checks whether elements of `⍺` appear in `⍵`. Write a function `E` which checks whether major cells of `⍺` appear as major cells of `⍵`.
-	<pre><code>      text E ↑' APP' 'LESS' 
-0 1 1
-0 0 0</code></pre>
 
 ### Visit to the museum
 Here are some data and questions about visits to a museum.  
