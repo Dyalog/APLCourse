@@ -31,14 +31,13 @@ extra_css:
   - style/main.css
 nav:
   - About: index.md
-  - Basic Syntax and Arithmetic: basic-syntax-and-arithmetic.md
-  - Array Logic and Data Driven Conditionals: array-logic-data-driven-conditionals.md
-  - Dfns and Assignment: dfns-and-assignment.md
-  - The Outer Product: outer-product-matrices.md
-  - Selecting from Lists: Selecting-from-lists.md
-  - Shape Reshape: Shape-Reshape.md
+  - basic-syntax-and-arithmetic.md
+  - dfns-and-assignment.md
+  - array-logic-data-driven-conditionals.md
+  - selecting-from-arrays.md
+  - search-and-replace.md
+  - broken-keyboard-problems.md
   - The Array Model: Array-model.md
-  - Search, Sort and Select: Selecting-from-arrays.md
   - Loops and Recursion: Loops.md
   - Extra Assignment: Assignment.md
   - Workspace Basics: Workspaces.md
