@@ -1,4 +1,4 @@
-# Array logic and data-driven conditionals
+# Array Logic and Data-driven Conditionals
 
 ## Logic and conditions
 APL has logical and comparison functions as in-built primitives. Much like the arithmetic, these are symbols like those used in conventional notation.
@@ -50,10 +50,10 @@ Some of these are more general mathematical functions which happen to reduce to 
 ```
 ---
 ```APL
-      'X' ≠ 'X'           ⍝ Not equal to
+      'P' ≠ 'Q'           ⍝ Not equal to
 ```
 ```
-0
+1
 ```
 ---
 ```APL
@@ -66,16 +66,125 @@ Some of these are more general mathematical functions which happen to reduce to 
 !!!Info
 	The [16 possible logic functions for two binary variables](https://en.wikipedia.org/wiki/Truth_table#Binary_operations) can all be expressed succinctly in APL, as shown in the [notebook](https://nbviewer.org/github/Dyalog/dyalog-jupyter-notebooks/blob/master/Boolean%20Scans%20and%20Reductions.ipynb) and [webinar](https://dyalog.tv/Webinar/?v=erv_1LxEByk) on Boolean scans and reductions.
 
-## Membership?
+## The shape of data
+One of the distinguishing features of APL is the multidimensional array. Single elements, lists and tables are quite familiar constructs.
 
-It is common to make multiple equality comparisons.
+Tables are very useful for representing data which is related in some way. For example, let's say that the price of oranges changes daily. We can represent a week of prices as a 7-element numeric list.
 
 ```APL
-
+0.35 0.3 0.33 0.32 0.39 0.33 0.36
 ```
 
+How about the amount spent on 3 items? We could store this in 3 separate lists, but it is convenient to keep it in a table with 3 rows and 7 columns:
+
+```APL
+      cost ← 3 7⍴4.36 4.22 4.05 4.14 4.18 4.19 4.02 2.79 2.58 2.68 2.77 2.88 2.79 2.52 3.07 3 3.13 3 3.24 3.06 3.29
+	  cost
+```
+```
+4.36 4.22 4.05 4.14 4.18 4.19 4.02
+2.79 2.58 2.68 2.77 2.88 2.79 2.52
+3.07 3    3.13 3    3.24 3.06 3.29
+```
+
+So what is this table that we have created? In other languages, there are lists, and there are lists of lists. In APL, a list of lists is not the same thing as a table (also known as a matrix). APL arrays contain two essential pieces of information: their shape and their list of elements.
+
+The <dfn>shape</dfn> function `⍴⍵` returns the shape of its argument.
+
+```APL
+      ⍴4 12 31
+3
+```
+
+The following table lists the ranks (number of dimensions), some common names, and a geometric analogy for the three simplest types of multidimensional arrays.
+
+|Rank|Name|Geometric analogy|diagram|
+|---|---|---|---|
+|$0$|scalar|point|![point geometry diagram](./img/point.svg)|
+|$1$|vector or list|line|![line geometry diagram](./img/line.svg)|
+|$2$|matrix or table|rectangle|![rectangle geometry diagram](./img/rectangle.svg)|
+
+Arrays with $3$ or more dimensions are sometimes called <dfn>cube</dfn> or <dfn>cuboid</dfn>, but they are generally referred to as <dfn>N-dimensional arrays</dfn>, <dfn>rank-N arrays</dfn> or <dfn>high rank arrays</dfn>.
+
+The total spent on each item is a row-wise sum:
+```APL
+      +/cost    ⍝ The total cost over the week
+```
+```
+29.16 19.01 21.79
+```
+---
+```APL
+      ⍴+/cost   ⍝ For 3 items
+```
+```
+3
+```
+
+The total for each day across all items is a column-wise sum:
+
+```APL
+      +⌿cost    ⍝ The total cost of 3 items
+```
+```
+10.22 9.8 9.86 9.91 10.3 10.04 9.83
+```
+---
+```APL
+      ⍴+⌿cost   ⍝ Over 7 days
+```
+```
+7
+```
+
+## The outer product
+The "outer product" `∘.F` operator applies its function operand `F` between all combinations of elements of its left and right argument arrays. 
+
+```APL
+      F ← {⍺+⍵}
+      1 2 3 ∘.F 10 20 30
+11 21 31
+12 22 32
+13 23 33
+```
+
+For example, the catenate function `⍺,⍵` (comma) will join two lists together. We can use the outer product to join combinations of words from two lists. 
+
+```APL
+      1 4 9 , 6 5 4
+1 4 9 6 5 4
+      'joined up' , 'text vectors'
+joined uptext vectors
+
+      'chicken' 'pork' 'vegetable' ∘., ' chow mein' ' with cashew nuts'
+┌───────────────────┬──────────────────────────┐
+│chicken chow mein  │chicken with cashew nuts  │
+├───────────────────┼──────────────────────────┤
+│pork chow mein     │pork with cashew nuts     │
+├───────────────────┼──────────────────────────┤
+│vegetable chow mein│vegetable with cashew nuts│
+└───────────────────┴──────────────────────────┘
+```
+
+!!!Question "What are those boxes around the output?"
+	We have just created a <dfn>nested array</dfn>. These are arrays in which each element contains another array more complex than a single number or character. The next section on [selecting from arrays](./selecting-from-arrays.md) introduces them in more detail.
+
+	If you do not see lines around the output of the last expression above in your interpreter session, turn boxing on:
+	```APL
+	      ]box on
+	Was OFF
+	      ⍳3 3
+	┌───┬───┬───┐
+	│1 1│1 2│1 3│
+	├───┼───┼───┤
+	│2 1│2 2│2 3│
+	├───┼───┼───┤
+	│3 1│3 2│3 3│
+	└───┴───┴───┘
+	```
+
 ## Replicate/Compress
-The **replicate** function `⍺/⍵` (yes, some symbols have <a target="_blank" href="https://aplwiki.com/wiki/Function-operator_overloading">multiple meanings</a>) repeats elements of an array along rows.
+The <dfn>replicate</dfn> function `⍺/⍵` (yes, some symbols have <a target="_blank" href="https://aplwiki.com/wiki/Function-operator_overloading">multiple meanings</a>) repeats elements of an array along rows.
 
 ```APL
       1 2 3/'ABC'
@@ -110,6 +219,10 @@ Y
 O
 ```
 
+Just like the forward-slash `F/` as the *reduction operator* acts along rows and forward-slash-bar `F⌿` reduces down columns*, the replicate `⍺/⍵` and <dfn>replicate-first</dfn> `⍺⌿⍵` functions work along different axes of high rank arrays.
+
+*we will see a fuller description when we discuss 3D and higher rank arrays.
+
 ## Indexing
 In many other programming languages, "[selection](https://www.bbc.co.uk/bitesize/guides/zh66pbk/revision/3)" is used to describe control structures such as ["if then else"](https://en.wikipedia.org/wiki/Conditional_(computer_programming)#If%E2%80%93then(%E2%80%93else)) or ["switch case"](https://en.wikipedia.org/wiki/Conditional_(computer_programming)#Case_and_switch_statements). In APL, we can get a similar effect by literally "selecting" elements from arrays. 
 
@@ -117,63 +230,155 @@ In many other programming languages, "[selection](https://www.bbc.co.uk/bitesize
 	Indexing starts from 1 by default. You can change the index origin by setting `⎕IO←0`, but this course assumes `⎕IO←1`.
 
 ```APL
-      'APPLE'[1 3 4]                         ⍝ Select elements 1, 3 and 4
+      'APPLE'[1 3 4]
 ```
 ```
 APL
 ```
 ---
 ```APL
-      ⍸ 1 0 0 1 0 1                          ⍝ Where are the 1s?
+      ⍸ 1 0 0 1 0 1
 ```
 ```
 1 4 6
 ```
 ---
 ```APL
-      (⍳5) IsDivisibleBy 2                   ⍝ 1 Where ⍺ is even
+      IsDivisibleBy ← {0=⍵|⍺}
+      3 6 8 5 2 IsDivisibleBy 2
 ```
 ```
-0 1 0 1 0
+0 1 1 0 1
 ```
 ---
 ```APL
-      {⍵[⍸⍵ IsDivisibleBy 123]}⎕AVU          ⍝ Numbers in ⎕AVU divisible by 123
+      3 6 8 5 2 {⍺[⍸⍺ IsDivisibleBy ⍵]} 2
 ```
 ```
-0 123 8364 246
+6 8 2
 ```
-
-## The shape of data
-Multi-dimensional arrays are a useful way of handling . APL leverages arrays for both. Doing selections and summations with APL is like some beautiful answer to the question "what if Excel were a programming language (and that language no VBA)?".
 
 ## Problem set
 
-
-
-1.   
-	The average daily temperatures, in degrees Celcius, for 7 days are stored in a variable `t_allweek`.
+1. Define the numeric vector `nums`
 	
 	```APL
-	t_allweek ← 11.7 8.6 9.7 14.2 6.7 11.8 9.2
+	nums ← 3 5 8 2 1
 	```
 
-	1. The mean average temperature for the week
-	1. The mean average temperature rounded to 1 decimal place
+	1. Using `nums`, define `mat`
 
-1. Remove the vowels `'aeiou'` in the text `'alphabetti spaghetti'`
-1. Find the indices of the vowels `'aeiou'` in the text `'alphabetti spaghetti'`
+	```APL
+	      mat
+	```
+	```
+	3 5 8
+	2 1 3
+	```
+
+	1. Using `mat`, define `wide`
+
+	```APL
+	      wide
+	```
+	```
+	3 5 8 3 5 8
+	2 1 3 2 1 3
+	```
+
+	1. Using `mat`, define `stack`
+
+	```APL
+	      stack
+	```
+	```
+	3 5 8
+	3 5 8
+	2 1 3
+	2 1 3
+	```
+
+	???Example "Answers"
+		<ol type="a">
+		<li>
+		```APL
+		mat ← 2 3⍴nums
+		```
+		</li>
+		<li>
+		```APL
+		wide ← mat,mat
+		```
+		</li>
+		<li>
+		```APL
+		stack ← 2⌿mat
+		```
+		</li>
+		</ol>
+
+1. Pass-fail  
+
+	Write a function `PassFail` which takes an array of scores and returns an array of the same shape in which `F` corresponds to a score less than 40 and `P` corresponds to a score of 40 or more.
+
+	```APL
+	      PassFail 35 40 45
+	```
+	```
+	FPP
+	```
+	---
+	```APL
+	      PassFail 2 5⍴89 77 15 49 72 54 25 18 57 53
+	```
+	```
+	PPFPP
+	PFFPP
+	```
+
+	???+Example "Answer"
+		```APL
+		PassFail ← {'FP'[1+40≤⍵]}
+		```
+
+1. Write a function to count the number of vowels in some text
+
+	```APL
+	      CountVowels 'This text is made of characters.'
+	```
+	```
+	9
+	```
+	---
+	```APL
+	      CountVowels 'We have TWELVE vowels in this sentence.'
+	```
+	```
+	12
+	```
+
 1. Count the number of vowels `'aeiou'` in the text `'alphabetti spaghetti'`
 1. Write an expression to test if there are any vowels `'aeiou'` in the text `'alphabetti spaghetti'`
+1. Remove the vowels `'aeiou'` in the text `'alphabetti spaghetti'`
 
-1. Early or late
+`+/'aeiou'∊'alphabetti spaghetti'`
 
-## Useful bits
-Try these exercises in creating and using Boolean vectors.
+`∨/'aeiou'∊'alphabetti spaghetti'`
 
-1. These are the heights of some students in 3 classes.
+`('alphabetti spaghetti'∊'aeiou')/'alphabetti spaghetti'`
+
+`(text∊'aeiou')/text`
+`{(⍵∊'aeiou')/⍵}`
+
+1. Why does 101='101' evaluate to a 3-element list?
+
+`101` is a literal single number, whereas `'101'` is a literal 3-element character vector. Due to singleton extension, `101='101'` compares the single number `101` to each of the 3 characters in the 3-element character vector `'101'`. The character vector `'101'` is equivalent to `'1' '0' '1'` but the number `101` is not the same as the 3-element numeric vector `1 0 1`.
+
+1. Why negative fill with spaces and 0s?
+
+1. These are the heights of some students in 3 classes. Students have numeric identifiers `id`.
 	```APL
-		student ← 'Kane' 'Jonah' 'Jessica' 'Padma' 'Katie' 'Charlie' 'Amil' 'David' 'Zara' 'Filipa'
+		student ← 10 7⍴'Kane   Jonah  JessicaPadma  Katie  CharlieAmil   David  Zara   Filipa '
 		class ← 'CBACCCBBAB'
 		height ← 167 177 171 176 178 164 177 177 173 160
 		↑student height class
@@ -195,23 +400,150 @@ Try these exercises in creating and using Boolean vectors.
 
 	1.	
 		1. Find the height of the tallest student
-		1. What is their name?
+		1. What is their ID?
 		1. What class are they in?  
 	1.	  
 		1. What is the average height of students in class `B`?
 		1. Which class has the tallest average height?
 		1. Which class has the narrowest range of heights?
 
-1. Pass-fail
-	Provided a list of scores
+1. Use the shape function `⍴⍵` to find the shapes of the results of the following expressions.
+	1. `'APL IS COOL'`
+	1. `¯1 0 1 ∘.× 1 2 3 4 5` 
+	1. `+/⍳4`
+1. What does the dyadic form `⍺⍴⍵` do?
+1. Write an expression to create a 3-dimensional array.
+!!!Note
+	Now, two special results are worth thinking about.
+
+	1. What is the shape of `36.4`?
+	1. What is the shape of the shape of an array?
+
+???+Example "Answers"
+	<ol>
+	<li><ol>
+	<li>This is a simple character vector with $11$ characters, including space characters, so its shape is `11`.
+	```APL
+	      ⍴'APL IS COOL'
+	11
+	```
+	</li>	
+	<li>This is a matrix. The result of multiplying all combinations of elements from a 3-element vector and a 5-element vector is a 3 by 5 matrix. It has 3 rows and 5 columns, so its shape is `3 5`.
+	```APL
+	      ¯1 0 1 ∘.× 1 2 3 4 5
+	```
+	```
+	¯1 ¯2 ¯3 ¯4 ¯5
+	0  0  0  0  0
+	1  2  3  4  5
+	```
+	---
+	```APL
+	      ⍴¯1 0 1 ∘.× 1 2 3 4 5
+	```
+	```
+	3 5
+	```
+	If you swap the arguments around, you get a $5$ by $3$ matrix.</li>
+	```APL
+	      1 2 3 4 5 ∘.× ¯1 0 1
+	¯1 0 1
+	¯2 0 2
+	¯3 0 3
+	¯4 0 4
+	¯5 0 5
+	```
+	<li>This is a scalar. The reduce operator `F/` has the effect of *reducing* the rank of its argument array by 1.
+	
+	The shape of a scalar </li>
+	</ol></li>
+	</ol>
+
+1. Back to School
+	1. Write a function to produce the multiplication table from `1` to `⍵`. 
+
+		<pre><code class="language-APL">      MulTable 7</code></pre>
+		<pre><code class="language-APL">1  2  3  4  5  6  7
+		2  4  6  8 10 12 14
+		3  6  9 12 15 18 21
+		4  8 12 16 20 24 28
+		5 10 15 20 25 30 35
+		6 12 18 24 30 36 42
+		7 14 21 28 35 42 49</code></pre>
+
+	1. Write a function to produce the addition table from `0` to `⍵`.
+
+		<pre><code class="language-APL">      AddTable 6</code></pre>
+		<pre><code class="language-APL">0 1 2 3  4  5  6
+		1 2 3 4  5  6  7
+		2 3 4 5  6  7  8
+		3 4 5 6  7  8  9
+		4 5 6 7  8  9 10
+		5 6 7 8  9 10 11
+		6 7 8 9 10 11 12</code></pre>
+
+1. Making the Grade
+
+    |   |   |   |   |   |   |
+    |---|---|---|---|---|---|
+    |**Score Range**|`0-64`|`65-69`|`70-79`|`80-89`|`90-100`|
+    |**Letter Grade**|F|D|C|B|A|
+
+    Write a function that, given an array of integer test scores in the inclusive range 0 to 100, returns a list of letter grades according to the table above.
+
+	<pre><code class="language-APL">      Grade 0 10 75 78 85</code></pre>
+	<pre><code class="language-APL">FFCCB</code></pre>
+
+1. Bus stops in a town are labelled **A** to **E**. Define a function RouteMatrix which returns a Boolean matrix where `1`s indicate that buses go from one bus stop to the next.
 
 	```APL
-	34 22 40 90 76 44 16 16 25 22 44 41
+	      RouteMatrix 'BE' 'C' 'AE' 'BCE' 'A'
+	0 0 1 0 1
+	1 0 0 1 0
+	0 1 0 1 0
+	0 0 0 0 0
+	1 0 1 1 0
+
+	      'ABCDE'⍪RouteMatrix 'C' 'CDE' 'ABDE' 'E' 'B'
+	A B C D E
+	0 0 1 0 0
+	0 0 1 0 1
+	1 1 0 0 0
+	0 1 1 0 0
+	0 1 1 1 0
 	```
 
-	write an expression which evaluates to a list of characters of the same length, in which a vertical bar `'|'` corresponds to a score less than 40 while a plus `'+'` corresponds to a score of 40 or more.
+1. Optimus Prime
+
+	A prime number is divisible by only itself and `1`.
+
+	Write a dfn which returns all of the prime numbers between `1` and `⍵`.
 
 	```APL
-	      your_expression
-	||++++||||++
+	      Primes 10
 	```
+	```
+	2 3 5 7
+	```
+	---
+	```
+	      Primes 30
+	```
+	```
+	2 3 5 7 11 13 17 19 23 29
+	```
+
+1. Write a function `FindWord` which accepts a character matrix left argument `⍺` and a character vector right argument `⍵` and returns a Boolean vector where a `1` indicates a row in `⍺` which matches the word `⍵`.
+	```APL
+	      fruits FindWord 'Apples'
+	1 0 0 0
+	      fruits FindWord 'Oranges'
+	0 0 1 0
+	```
+
+`FindWord←{⍺∧.=⍵↑⍨⊢⌿⍴⍺}`
+
+`FindWord←{⍺∧.=((⍴⍺)[2])↑⍵}`
+
+1. AddRows
+1. NormRows
