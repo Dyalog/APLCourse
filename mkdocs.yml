@@ -7,6 +7,10 @@ markdown_extensions:
       generic: true
   - pymdownx.highlight:
       use_pygments: false
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
   - admonition
   - pymdownx.extra
   - pymdownx.details
