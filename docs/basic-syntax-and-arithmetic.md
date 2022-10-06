@@ -25,7 +25,7 @@ Some functions map between elements of their left and right argument arrays. It 
 5 7 9
 ```
 
-Negative numbers are written with a high minus `¯` to differentiate between negation (`-3`) and literal negative numbers (`¯3`).
+Negative numbers are written with a <dfn>high minus</dfn> `¯` to differentiate between negation (`-3`) and literal negative numbers (`¯3`).
 ```APL
       1 2 3 - 1 0 ¯1
 ```
@@ -48,7 +48,23 @@ There are also one-argument, prefix functions. These are called <dfn>monadic</df
 5 4 3 2 1
 ```
 
-Some symbols represent both a monadic and a dyadic function, but these are often closely related. As we will see later, even user-defined functions can be monadic, dyadic or even both (ambivalent).
+Some symbols represent both a monadic and a dyadic function, but these are often closely related. As we will see later, even user-defined functions can be monadic, dyadic or even both (<dfn>ambivalent</dfn>).
+
+**:bulb: Try this**: Use these functions monadically and dyadically:
+
+<div class="center language-APL" markdown="span">
+<div class="displayBox" markdown="span">
+<a class="glyph" title="Plus">`+`</a>
+<a class="glyph" title="Minus/Negate">`-`</a>
+<a class="glyph" title="Times/Sign">`×`</a>
+<a class="glyph" title="Divide/Inverse">`÷`</a>
+<a class="glyph" title="Residue/Magnitude">`|`</a>
+<a class="glyph" title="Power">`*`</a>
+<a class="glyph" title="Logarithm">`⍟`</a>
+<a class="glyph" title="Max/Ceiling">`⌈`</a>
+<a class="glyph" title="Min/Floor">`⌊`</a>
+</div>
+</div>
 
 ## Singleton extension
 Dyadic functions can map between a single value and an array of values.
@@ -66,12 +82,10 @@ Dyadic functions can map between a single value and an array of values.
 0 0 1 0 0
 ```
 
-!!!Tip "Try this"
-	Replace the functions in the previous two expressions with:  
-
-	- max `⌈`
-	- min `⌊`
-	- less-than `<`
+**:bulb: Try this**: Replace the functions in the previous two expressions with:
+<a class="glyph" title="Max">`⌈`</a>
+		<a class="glyph" title="Min">`⌊`</a>
+		<a class="glyph" title="Less than">`<`</a>
 
 While experimenting, you may cause a `LENGTH ERROR`:
 
@@ -257,7 +271,7 @@ DOMAIN ERROR
       ∧
 ```
 
-The `DOMAIN ERROR` means that APL cannot compute what you are asking for. In this case, it cannot generate indices up to a negative number. Negative numbers are <em>outside the domain</em> of the index generator function. How might you [generate numbers up to negative four]()?
+The `DOMAIN ERROR` means that APL cannot compute what you are asking for. In this case, it cannot generate indices up to a negative number. Negative numbers are <em>outside the domain</em> of the index generator function. How might you [generate integers from 1 to negative four]()?
 
 ```APL
       1+
@@ -289,7 +303,7 @@ A `VALUE ERROR` means that there is nothing associated with the name provided. W
 	
 	1. The highest daily temperature
 	1. The lowest daily temperature
-	1. The range of (difference between the largest and the smallest) numbers in `nums`
+	1. The range of (difference between the largest and the smallest) temperatures
 	1. Each temperature rounded to the nearest whole number
 
 	??? Example "Answers"
@@ -502,3 +516,11 @@ A `VALUE ERROR` means that there is nothing associated with the name provided. W
 	1. `(÷a)÷b`
 	1. `(a+b)-5`
 	1. `(a+b)+5`
+
+	???Example "Answers"
+		<ol type="a">
+		<li>Multiplication is commutative, so we can write `b×÷a`</li>
+		<li>${{{1}\over{a}}\div{b}} = {{1}\over{a\times{b}}}$ so we can write `÷a×b`</li>
+		<li>Use a literal negative five:`¯5+a+b`</li>
+		<li>No parentheses needed: `a+b+5`</li>
+		</ol>
