@@ -385,13 +385,30 @@ Over time you will learn from experience what is the most appropriate thing to u
 1.  From the nested 3D array
 	
 	```APL
-	nest←2 3 4⍴(⍳17),(⊂2 3⍴'ab'(2 3⍴'dyalog'),'defg'),⎕A[⍳6]
+	nest←2 3 4⍴(⍳17),(⊂2 3⍴'ab'(2 3⍴'dyalog'),'defg'),6↑⎕A
 	```
 	
 	use a single selection to obtain:
 
 	1. The character scalar `'y'`
 	1. The numeric scalar `6`
+
+	???+Example "Answers"
+		It can be tricky to simplify these to a single use of pick `⍺⊃⍵`. Although understanding these selections can help with understanding complicated nested array structures, it is not very common to need to do this in real code.
+		<ol type="a">
+		<li>
+		```APL
+		      (2 2 2)(1 2)(1 2)⊃nest
+		y
+		```
+		</li>
+		<li>
+		```APL
+		      (⊂1 2 2)⊃nest
+		6
+		```
+		</li>
+		</ol>
 
 1. Write the function `Backwards` which accepts a nested vector of character vectors as its argument and reverses both the order of elements and the contents of each vector within.
 	```APL
@@ -400,6 +417,13 @@ Over time you will learn from experience what is the most appropriate thing to u
 	│sdrow│eseht│esrever│
 	└─────┴─────┴───────┘
 	```
+
+	???+Example "Answer"
+		You can write the reverse and reverse-each in either order.
+		```APL
+		Backwards ← {⌽¨⌽⍵}
+		Backwards ← {⌽⌽¨⍵}
+		```
 
 1. Write a dyadic `Join` function which takes a nested vector of character vectors `⍵` and returns a simple character vector consisting of the contents of each nested vector joined by a delimiting character `⍺`.
 
