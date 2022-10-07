@@ -67,10 +67,16 @@ Just like [their function counterparts](Ufns/#traditional-functions), traditiona
 [6]    :EndIf                                               
      ∇  
 ```
+```
+      
+```
 ---
 ```APL
       3 (÷ TradOp +) 5     ⍝ Shy results 
       ⎕←3 (÷ TradOp +) 5   ⍝ The result
+```
+```
+0.125
 ```
 
 ## Dop
