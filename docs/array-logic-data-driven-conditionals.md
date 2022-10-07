@@ -341,8 +341,10 @@ APL
 
 1. Why does 101='101' evaluate to a 3-element list?
 
-	???+Example "Answer"
-		`101` is a literal single number, whereas `'101'` is a literal 3-element character vector. Due to singleton extension, `101='101'` compares the single number `101` to each of the 3 characters in the 3-element character vector `'101'`. The character vector `'101'` is equivalent to `'1' '0' '1'` but the number `101` is not the same as the 3-element numeric vector `1 0 1`.
+	???Example "Answer"
+		`101` is a literal single number (a scalar), whereas `'101'` is a literal 3-element character vector.
+		
+		Due to [singleton extension](./basic-syntax-and-arithmetic.md#singleton-extension), `101='101'` compares the single number `101` to each of the 3 characters in the 3-element character vector `'101'`.	The character vector `'101'` is equivalent to `'1' '0' '1'` but the number `101` is not the same as the 3-element numeric vector `1 0 1`.
 
 1. Pass-fail  
 
@@ -391,6 +393,38 @@ APL
 		5 6 7 8  9 10 11
 		6 7 8 9 10 11 12</code></pre>
 
+	???Example "Answers"
+		<ol type="a">
+		<li>
+
+		```APL
+		MulTable ← {(⍳⍵)∘.×⍳⍵}
+		```
+
+		Avoid repeating yourself by assigning values to a name:
+
+		```APL
+		MulTable ← {i∘.×i←⍳⍵}
+		```
+
+		Or, if left and right arguments to a dyadic function are the same, use a <dfn>selfie</dfn> `F⍨⍵`:
+
+		```APL
+		MulTable ← {∘.×⍨⍳⍵}
+		```
+
+		</li>
+		<li>
+
+		```APL
+		AddTable ← {(¯1+⍳1+⍵)∘.+¯1+⍳1+⍵}
+		AddTable ← {i∘.+i←¯1+⍳1+⍵}
+		AddTable ← {∘.+⍨¯1+⍳1+⍵}
+		```
+
+		</li>
+		</ol>
+
 1. Making the Grade
 
     |   |   |   |   |   |   |
@@ -403,6 +437,18 @@ APL
 	<pre><code class="language-APL">      Grade 0 10 75 78 85</code></pre>
 	<pre><code class="language-APL">FFCCB</code></pre>
 
+	???Example "Answer"
+		Use an outer product to compare between lower bounds and the scores. The column-wise sum then tells us which "bin" each score belongs to:
+
+		```APL
+		Grade ← {'FDCBA'[+⌿0 65 70 80 90∘.≤⍵]}
+		```
+
+		You can use a different comparison if you choose to use upper bounds:
+
+		```APL
+		{'ABCDF'[+⌿64 69 79 89 100∘.≥⍵]}
+		```
 
 1. Analysing text
 
@@ -418,14 +464,14 @@ APL
 	1. Write a function to count the number of vowels in its character vector argument `⍵`
 
 		```APL
-		      CountVowels 'This text is made of characters.'
+		      CountVowels 'this text is made of characters'
 		```
 		```
 		9
 		```
 		---
 		```APL
-		      CountVowels 'We have TWELVE vowels in this sentence.'
+		      CountVowels 'we have twelve vowels in this sentence'
 		```
 		```
 		12
@@ -438,31 +484,161 @@ APL
 		ths txt s md f chrctrs
 		```
 
-	???+Example "Answers"
-		{∨/,'aeiou'∘.=⍵}
-		{∨/∨/'aeiou'∘.=⍵}
-		{+/,'aeiou'∘.=⍵}
-		{⍵⌿⍨~∨⌿'aeiou'∘.=⍵}
+	???Example "Answers"
+		<ol type="a">
+		<li>
+		With two *or-reductions*, we ask "are there any `1`s in each row?" Then, "are there any `1`s in any of the rows?"
+		
+		```APL
+		AnyVowels ← {∨/∨/'aeiou'∘.=⍵}
+		```
 
-1. AddRows
-1. NormRows
+		Or we can ravel the contents of the array into a vector to perform one big or-reduction across all elements:
 
-1. These are the heights of some students in 3 classes. Students have numeric identifiers `id`.
+		```APL
+		AnyVowels ← {∨/,'aeiou'∘.=⍵}
+		```
+
+		</li>
+		<li>
+
+		Similar techniques can be used for counting the ones:
+
+		```APL
+		CountVowels ← {+/+/'aeiou'∘.=⍵}
+		CountVowels ← {+/,'aeiou'∘.=⍵}
+		```
+
+		Because we are comparing a single vector, +⌿ and ∨⌿ both tell us if there is any vowel in that position:
+
+		```APL
+		CountVowels ← {+/+⌿'aeiou'∘.=⍵}
+		CountVowels ← {+/∨⌿'aeiou'∘.=⍵}
+		```
+
+		</li>
+		<li>
+		To remove vowels, we must consider the columns of our outer product equality. We then keep elements which are not `~⍵` vowels.
+
+		```APL
+		RemoveVowels ← {⍵/⍨~∨⌿'aeiou'∘.=⍵}
+		```
+
+		Or rows if the arguments to our outer product are swapped:
+
+		```APL
+		RemoveVowels ← {⍵/⍨~∨/'aeiou'∘.=⍵}
+		```
+
+		Since we are compressing elements out of a vector, we can use either replicate `⍺/⍵` or replicate-first `⍺⌿⍵`. This is because a vector only has a single dimension, or axis, and that axis is both the first and the last.
+
+		```APL
+		RemoveVowels ← {⍵/⍨∨⌿'aeiou'∘.=⍵}
+		RemoveVowels ← {⍵⌿⍨∨⌿'aeiou'∘.=⍵}
+		```
+
+		</li>
+
+1. Matching shapes
+	1. 
+		Write a function to add a vector `⍵` to each row of a matrix `⍺`:
+
+		```APL
+		      (3 2⍴1 100) {⍺+(⍴⍺)⍴⍵} 1 9
+		2 109
+		2 109
+		2 109
+		      1 2 3{⍵+(⍴⍵)⍴⍺}5 3⍴1 10 100 1000
+		   2   12  103
+		1001    3   13
+		 101 1002    4
+		  11  102 1003
+		   2   12  103
+		```
+
+	1. Write a function to add a vector to each row of a matrix, regardless of the order in which they are supplied:
+
+		```APL
+		```
+
+	???Example "Answers"
+		<ol type="a">
+		<li>
+		Reshape recycles elements. We can use this to duplicate rows until we have the correct shape to allow `+` to map between elements for us:
+		```APL
+		AddRows ← {⍵+(⍴⍵)⍴⍺}
+		```
+		</li>
+		<li>
+		Finding the maximum shape is a more general solution:
+		```APL
+		AddRows ← {s←(⍴⍺)⌈⍴⍵ ⋄ (s⍴⍺)+s⍴⍵}
+		```
+
+		This way of applying functions between arrays of different shapes is very common. As with many things in this course, eventually we will discover more elegant ways to do these things. Here is an example of using [the rank operator](./array-model.md#matching-dimensions):
+
+		```APL
+		AddRows ← +⍤1
+		```
+		</li>
+		</ol>
+
+1. These are the heights of some students in 3 classes.
 	```APL
 		student ← 10 7⍴'Kane   Jonah  JessicaPadma  Katie  CharlieAmil   David  Zara   Filipa '
 		class ← 'CBACCCBBAB'
 		height ← 167 177 171 176 178 164 177 177 173 160
-		↑student height class
 	```
 
-	1. Use APL to:
-		1. Find the height of the tallest student
-		1. Find the name of the tallest student
-		1. Find the class to which the tallest student belongs  
-	1.	  
-		1. Find the average height of students in class `B`
-		1. Find the class which class has the tallest average height
-		1. Find the class with the narrowest range of heights
+	Use APL to:
+
+	1. Find the height of the tallest student
+	1. Find the name of the tallest student
+	1. Find the class to which the tallest student belongs  
+	1. Find the average height of students in class `B`
+	
+	???Example "Answers"
+		<ol type="a">
+		<li>
+		```APL
+		      ⌈/height
+		178
+		```
+		</li>
+		<li>
+		```APL
+		      (height=⌈/height)⌿student
+		Katie
+		```
+		</li>
+		<li>
+		```APL
+		      (height=⌈/height)⌿class
+		C
+		```
+
+		You might have tried to use indexing and gotten an error:
+
+		```APL
+		RANK ERROR
+				student[⍸height=⌈/height]
+						∧
+		```	
+
+		There is [additional syntax](./selecting-from-arrays.md#square-bracket-indexing) in order to select from matrices and higher rank arrays.
+
+		</li>
+		<li>
+		We can use either compress or indexing to select from the `height` vector:
+		```APL
+		      Mean ← {(+/⍵)÷≢⍵}
+		      Mean (class='B')/height
+		172.75
+		      Mean height[⍸class='B']
+		172.75
+		```
+		</li>
+		</ol>
 
 1. Without using the shape function `⍴⍵`, what are the shapes of the results of the following expressions?
 	1. `'APL IS COOL'`
