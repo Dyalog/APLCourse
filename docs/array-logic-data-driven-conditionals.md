@@ -139,6 +139,26 @@ The total for each day across all items is a column-wise sum:
 7
 ```
 
+## Ravel means unravel
+Monadic comma is the function <dfn>ravel</dfn> `,⍵` and it lays out the elements of an array as a vector, one row at a time - a bit like pulling thread from a spool.
+
+```APL
+      mat ← 3 3⍴⎕A
+      mat
+```
+```
+ABC
+DEF
+GHI
+```
+---
+```APL
+      ,mat
+```
+```
+ABCDEFGHI
+```
+
 ## The outer product
 The "outer product" `∘.F` operator applies its function operand `F` between all combinations of elements of its left and right argument arrays. 
 
