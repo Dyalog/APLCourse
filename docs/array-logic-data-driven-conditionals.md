@@ -209,7 +209,7 @@ D  AAA
 L  GGG
 ```
 
-When used with a Boolean array, the function is called **compress**.
+When used with a Boolean array, the function is called <dfn>compress</dfn>.
 
 ```APL
       0 1 0/2 3⍴'DYALOG'
@@ -317,6 +317,11 @@ APL
 		</li>
 		</ol>
 
+1. Why does 101='101' evaluate to a 3-element list?
+
+	???+Example "Answer"
+		`101` is a literal single number, whereas `'101'` is a literal 3-element character vector. Due to singleton extension, `101='101'` compares the single number `101` to each of the 3 characters in the 3-element character vector `'101'`. The character vector `'101'` is equivalent to `'1' '0' '1'` but the number `101` is not the same as the 3-element numeric vector `1 0 1`.
+
 1. Pass-fail  
 
 	Write a function `PassFail` which takes an array of scores and returns an array of the same shape in which `F` corresponds to a score less than 40 and `P` corresponds to a score of 40 or more.
@@ -336,128 +341,10 @@ APL
 	PFFPP
 	```
 
-	???+Example "Answer"
+	???Example "Answer"
 		```APL
 		PassFail ← {'FP'[1+40≤⍵]}
 		```
-
-1. Write a function to count the number of vowels in some text
-
-	```APL
-	      CountVowels 'This text is made of characters.'
-	```
-	```
-	9
-	```
-	---
-	```APL
-	      CountVowels 'We have TWELVE vowels in this sentence.'
-	```
-	```
-	12
-	```
-
-1. Count the number of vowels `'aeiou'` in the text `'alphabetti spaghetti'`
-1. Write an expression to test if there are any vowels `'aeiou'` in the text `'alphabetti spaghetti'`
-1. Remove the vowels `'aeiou'` in the text `'alphabetti spaghetti'`
-
-`+/'aeiou'∊'alphabetti spaghetti'`
-
-`∨/'aeiou'∊'alphabetti spaghetti'`
-
-`('alphabetti spaghetti'∊'aeiou')/'alphabetti spaghetti'`
-
-`(text∊'aeiou')/text`
-`{(⍵∊'aeiou')/⍵}`
-
-1. Why does 101='101' evaluate to a 3-element list?
-
-`101` is a literal single number, whereas `'101'` is a literal 3-element character vector. Due to singleton extension, `101='101'` compares the single number `101` to each of the 3 characters in the 3-element character vector `'101'`. The character vector `'101'` is equivalent to `'1' '0' '1'` but the number `101` is not the same as the 3-element numeric vector `1 0 1`.
-
-1. Why negative fill with spaces and 0s?
-
-1. These are the heights of some students in 3 classes. Students have numeric identifiers `id`.
-	```APL
-		student ← 10 7⍴'Kane   Jonah  JessicaPadma  Katie  CharlieAmil   David  Zara   Filipa '
-		class ← 'CBACCCBBAB'
-		height ← 167 177 171 176 178 164 177 177 173 160
-		↑student height class
-	```
-
-	???+Question "How do I get those boxes around my output?"
-		We are using [nested arrays](), although we have not yet formally introduced them.
-
-		Turn boxing on with the user command
-		```APL
-			]Box on
-		Was OFF
-		```
-
-	???+Question "What is `↑`?"
-		We created three lists: a simple character vector `class`; a simple numeric vector `height`; and a nested vector of character vectors `student`.
-
-		Placing them side by side created a single
-
-	1.	
-		1. Find the height of the tallest student
-		1. What is their ID?
-		1. What class are they in?  
-	1.	  
-		1. What is the average height of students in class `B`?
-		1. Which class has the tallest average height?
-		1. Which class has the narrowest range of heights?
-
-1. Use the shape function `⍴⍵` to find the shapes of the results of the following expressions.
-	1. `'APL IS COOL'`
-	1. `¯1 0 1 ∘.× 1 2 3 4 5` 
-	1. `+/⍳4`
-1. What does the dyadic form `⍺⍴⍵` do?
-1. Write an expression to create a 3-dimensional array.
-!!!Note
-	Now, two special results are worth thinking about.
-
-	1. What is the shape of `36.4`?
-	1. What is the shape of the shape of an array?
-
-???+Example "Answers"
-	<ol>
-	<li><ol>
-	<li>This is a simple character vector with $11$ characters, including space characters, so its shape is `11`.
-	```APL
-	      ⍴'APL IS COOL'
-	11
-	```
-	</li>	
-	<li>This is a matrix. The result of multiplying all combinations of elements from a 3-element vector and a 5-element vector is a 3 by 5 matrix. It has 3 rows and 5 columns, so its shape is `3 5`.
-	```APL
-	      ¯1 0 1 ∘.× 1 2 3 4 5
-	```
-	```
-	¯1 ¯2 ¯3 ¯4 ¯5
-	0  0  0  0  0
-	1  2  3  4  5
-	```
-	---
-	```APL
-	      ⍴¯1 0 1 ∘.× 1 2 3 4 5
-	```
-	```
-	3 5
-	```
-	If you swap the arguments around, you get a $5$ by $3$ matrix.</li>
-	```APL
-	      1 2 3 4 5 ∘.× ¯1 0 1
-	¯1 0 1
-	¯2 0 2
-	¯3 0 3
-	¯4 0 4
-	¯5 0 5
-	```
-	<li>This is a scalar. The reduce operator `F/` has the effect of *reducing* the rank of its argument array by 1.
-	
-	The shape of a scalar </li>
-	</ol></li>
-	</ol>
 
 1. Back to School
 	1. Write a function to produce the multiplication table from `1` to `⍵`. 
@@ -494,24 +381,112 @@ APL
 	<pre><code class="language-APL">      Grade 0 10 75 78 85</code></pre>
 	<pre><code class="language-APL">FFCCB</code></pre>
 
-1. Bus stops in a town are labelled **A** to **E**. Define a function RouteMatrix which returns a Boolean matrix where `1`s indicate that buses go from one bus stop to the next.
 
+1. Analysing text
+
+	1. Write a function test if there are any vowels `'aeiou'` in text vector `⍵`
+
+		```APL
+		      AnyVowels 'this text is made of characters'
+		1
+		      AnyVowels 'bgxkz'
+		0
+		```
+
+	1. Write a function to count the number of vowels in its character vector argument `⍵`
+
+		```APL
+		      CountVowels 'This text is made of characters.'
+		```
+		```
+		9
+		```
+		---
+		```APL
+		      CountVowels 'We have TWELVE vowels in this sentence.'
+		```
+		```
+		12
+		```
+
+	1. Write a function to remove the vowels from its argument
+
+		```APL
+		      RemoveVowels 'this text is made of characters'
+		ths txt s md f chrctrs
+		```
+
+	???+Example "Answers"
+		{∨/,'aeiou'∘.=⍵}
+		{∨/∨/'aeiou'∘.=⍵}
+		{+/,'aeiou'∘.=⍵}
+		{⍵⌿⍨~∨⌿'aeiou'∘.=⍵}
+
+1. AddRows
+1. NormRows
+
+1. These are the heights of some students in 3 classes. Students have numeric identifiers `id`.
 	```APL
-	      RouteMatrix 'BE' 'C' 'AE' 'BCE' 'A'
-	0 0 1 0 1
-	1 0 0 1 0
-	0 1 0 1 0
-	0 0 0 0 0
-	1 0 1 1 0
-
-	      'ABCDE'⍪RouteMatrix 'C' 'CDE' 'ABDE' 'E' 'B'
-	A B C D E
-	0 0 1 0 0
-	0 0 1 0 1
-	1 1 0 0 0
-	0 1 1 0 0
-	0 1 1 1 0
+		student ← 10 7⍴'Kane   Jonah  JessicaPadma  Katie  CharlieAmil   David  Zara   Filipa '
+		class ← 'CBACCCBBAB'
+		height ← 167 177 171 176 178 164 177 177 173 160
+		↑student height class
 	```
+
+	1. Use APL to:
+		1. Find the height of the tallest student
+		1. Find the name of the tallest student
+		1. Find the class to which the tallest student belongs  
+	1.	  
+		1. Find the average height of students in class `B`
+		1. Find the class which class has the tallest average height
+		1. Find the class with the narrowest range of heights
+
+1. Without using the shape function `⍴⍵`, what are the shapes of the results of the following expressions?
+	1. `'APL IS COOL'`
+	1. `¯1 0 1 ∘.× 1 2 3 4 5` 
+	1. `1 2 3 4∘.+¯1 0 1∘.×1 10`
+	1. `+/⍳4`
+
+	???+Example "Answers"
+		<ol>
+		<li><ol>
+		<li>This is a simple character vector with $11$ characters, including space characters, so its shape is `11`.
+		```APL
+		      ⍴'APL IS COOL'
+		11
+		```
+		</li>	
+		<li>This is a matrix. The result of multiplying all combinations of elements from a 3-element vector and a 5-element vector is a 3 by 5 matrix. It has 3 rows and 5 columns, so its shape is `3 5`.
+		```APL
+		      ¯1 0 1 ∘.× 1 2 3 4 5
+		```
+		```
+		¯1 ¯2 ¯3 ¯4 ¯5
+		0  0  0  0  0
+		1  2  3  4  5
+		```
+		---
+		```APL
+		      ⍴¯1 0 1 ∘.× 1 2 3 4 5
+		```
+		```
+		3 5
+		```
+		If you swap the arguments around, you get a $5$ by $3$ matrix.</li>
+		```APL
+		      1 2 3 4 5 ∘.× ¯1 0 1
+		¯1 0 1
+		¯2 0 2
+		¯3 0 3
+		¯4 0 4
+		¯5 0 5
+		```
+		<li>This is a scalar. The reduce operator `F/` has the effect of *reducing* the rank of its argument array by 1.
+
+		The shape of a scalar </li>
+		</ol></li>
+		</ol>
 
 1. Optimus Prime
 
@@ -532,18 +507,3 @@ APL
 	```
 	2 3 5 7 11 13 17 19 23 29
 	```
-
-1. Write a function `FindWord` which accepts a character matrix left argument `⍺` and a character vector right argument `⍵` and returns a Boolean vector where a `1` indicates a row in `⍺` which matches the word `⍵`.
-	```APL
-	      fruits FindWord 'Apples'
-	1 0 0 0
-	      fruits FindWord 'Oranges'
-	0 0 1 0
-	```
-
-`FindWord←{⍺∧.=⍵↑⍨⊢⌿⍴⍺}`
-
-`FindWord←{⍺∧.=((⍴⍺)[2])↑⍵}`
-
-1. AddRows
-1. NormRows
