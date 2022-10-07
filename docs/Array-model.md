@@ -1,4 +1,4 @@
-# The array model
+# The Array Model
 
 ## Viewing array structure
 The default display forms of arrays can make it difficult to see why two arrays are different:
@@ -14,7 +14,7 @@ The default display forms of arrays can make it difficult to see why two arrays 
 ```
 
 
-The `]box` user command is a way to display arrays with extra markings which indicate the structure:
+The `]box` [user command](./Code.md#user-commands) is a way to display arrays with extra markings which indicate the structure:
 
 ```APL
       ]box on -style=max
@@ -273,7 +273,7 @@ Why does the `4` appear flush next to `def` when there is a space between `abc` 
 ### Pick and Mix
 There are two more useful constructs for modifying array structures: **first** `⊃⍵` and **mix** `↑⍵`.
 
-First is a special case of **pick** `⍺⊃⍵`, which is a way of [selecting items from nested arrays](../Selecting from arrays/#reach-indexing). 
+First is a special case of **pick** `⍺⊃⍵`, which is a way of [selecting items from nested arrays](./selecting-from-arrays.md#reach-indexing). 
 
 Mix will increment the rank while decrementing the depth:
 ```APL
@@ -302,7 +302,27 @@ Experiment with the following expressions to determine what the each `¨` and bi
       (⍴∘3 4 5)¨2 2
 ```
 
-## Problem set 6
+## Problem set
+
+1. Create the variable `nest` which has the following properties
+	```APL
+	      ⍴nest
+	2 3
+	      ≡nest
+	̄2
+	      ⍴ ̈nest
+	┌─┬┬─┐
+	│ ││2│
+	├─┼┼─┤
+	│3││6│
+	└─┴┴─┘
+	      ]display ∊nest
+	┌→───────────────────┐
+	│I 3 am 1 5 8 amatrix│
+	└+───────────────────┘
+	      ⍴∊nest
+	14
+	```
 
 ### Summary Statistics
 
@@ -467,46 +487,6 @@ Experiment with the following expressions to determine what the each `¨` and bi
 	│1 2 3│4 5 6│7 8 9│
 	└─────┴─────┴─────┘</code></pre>
 
-## An APL model of the rank operator
-The primitive rank operator `F⍤k` was introduced in Dyalog version 14.0. An APL model compatible with earlier versions is as follows:  
-```APL
- _Rank_←{
-     ⍺←{⍵}
-     ⍺ ⍺⍺{⍺←{⍵} ⋄ ⍺ ⍺⍺ ⍵}{
-         0 1000::⎕SIGNAL ⎕EN
-         effrank←{0≤⍺:⍺⌊⍴⍴⍵ ⋄ 0⌈⍺+⍴⍴⍵}   ⍝ effective rank
-         cells←{⊂[(-⍺ effrank ⍵)↑⍳⍴⍴⍵]⍵}
-         (m l r)←⌽3⍴⌽⍵⍵
-         ⎕ML←0                           ⍝ needed by ↑⍵
-         0=⎕NC'⍺':↑⍺⍺¨(m cells ⍵)        ⍝ monadic case
-         x←l cells ⍺
-         y←r cells ⍵
-         ((⍴x)≡⍴y)⍱0=(⍴⍴x)⌊⍴⍴y:⎕SIGNAL 4+(⍴⍴x)≡⍴⍴y
-         ↑x ⍺⍺¨y                         ⍝ dyadic  case
-     }⍵⍵{⍵}⍵
- }
-```
-
-## An APL model of the rank operator
-The primitive rank operator `F⍤k` was introduced in Dyalog version 14.0. An APL model compatible with earlier versions is as follows:  
-```APL
- _Rank_←{
-     ⍺←{⍵}
-     ⍺ ⍺⍺{⍺←{⍵} ⋄ ⍺ ⍺⍺ ⍵}{
-         0 1000::⎕SIGNAL ⎕EN
-         effrank←{0≤⍺:⍺⌊⍴⍴⍵ ⋄ 0⌈⍺+⍴⍴⍵}   ⍝ effective rank
-         cells←{⊂[(-⍺ effrank ⍵)↑⍳⍴⍴⍵]⍵}
-         (m l r)←⌽3⍴⌽⍵⍵
-         ⎕ML←0                           ⍝ needed by ↑⍵
-         0=⎕NC'⍺':↑⍺⍺¨(m cells ⍵)        ⍝ monadic case
-         x←l cells ⍺
-         y←r cells ⍵
-         ((⍴x)≡⍴y)⍱0=(⍴⍴x)⌊⍴⍴y:⎕SIGNAL 4+(⍴⍴x)≡⍴⍴y
-         ↑x ⍺⍺¨y                         ⍝ dyadic  case
-     }⍵⍵{⍵}⍵
- }
-```
-
 ## Reduce on an empty vector?
 For your interest, here are some reductions of note. Try to ask yourself why they give the results they do. Could they have been given different definitions?
 
@@ -518,3 +498,13 @@ For your interest, here are some reductions of note. Try to ask yourself why the
 ```
 
 As mentioned previously, more detailed treatments of the rank operator can be found in the [Dyalog webinars on function rank](https://www.youtube.com/playlist?list=PLA9gQgjzcpKFW0-KldlJW6FSwHGQ1WMAJ).
+
+
+1. These are the heights of some students in 3 classes. Students have numeric identifiers `id`.
+	```APL
+		student ← 10 7⍴'Kane   Jonah  JessicaPadma  Katie  CharlieAmil   David  Zara   Filipa '
+		class ← 'CBACCCBBAB'
+		height ← 167 177 171 176 178 164 177 177 173 160
+	```
+	1. Find the class which class has the tallest average height
+		1. Find the class with the narrowest range of heights
