@@ -1,18 +1,26 @@
 # Selecting from Arrays
-- take and drop
-- nested arrays
-- each
-- arrays are made of scalars (enclose info)
-- the rank operator
-- cells and axes
-- rank and depth
 
 ## Arrays are made of arrays
 You might have already noticed some awkwardness when we tried to represent a list of names as a character matrix. The main problem being that names do not usually have uniform length!
 
-This problem is known in the array language community as "dealing with ragged arrays". There are [many useful techniques](#aplcart-flat-partitioned) for dealing with non-rectangular data using rectangular arrays. However, it is usually just more convenient to have a real nested structure to deal with.
+```APL
+      student ← 10 7⍴'Kane   Jonah  JessicaPadma  Katie  CharlieAmil   David  Zara   Filipa '
+	  ' '=student
+```
+```
+0 0 0 0 1 1 1
+0 0 0 0 0 1 1
+0 0 0 0 0 0 0
+0 0 0 0 0 1 1
+0 0 0 0 0 1 1
+0 0 0 0 0 0 0
+0 0 0 0 1 1 1
+0 0 0 0 0 1 1
+0 0 0 0 1 1 1
+0 0 0 0 0 0 1
+```
 
-Enter: general nested arrays.
+Any code using this representation is going to have to be aware of the trailing space characters. This is an efficient representation of this data, and there are [some interesting techniques](#aplcart-flat-partitioned) for dealing with non-rectangular data using rectangular arrays. However, it is usually just more convenient to have a real nested structure to deal with.
 
 ```APL
       2 3⍴(1 2)(3 4 5)('AB')(2 2⍴'CDEF')
@@ -34,11 +42,11 @@ Enter: general nested arrays.
 	```
 	Boxing affects the display of output in the APL session, but does not affect the structure or values of arrays in any way.
 
-In general, arrays are made of arrays. More specifically, the individual elements of any array are scalars - but they may lie along zero or more [axes](./array-model.md#cells-and-axes).
+In general, arrays are made of arrays. More specifically, the individual elements of any array are <dfn>scalar</dfn> - but they may lie along zero or more [axes](./array-model.md#cells-and-axes).
 
 How can we fit an arbitrary array as a single element in another array? We have to somehow package it up as one of these scalars.
 
-The example above uses <dfn>stranding notation</dfn> to implicitly wrap each sub-array in a scalar. This is a convenient notation for writing vectors by writing arrays separated by spaces or parentheses. Above we wrote APL expressions which evaluate to arrays, but we could have written the names of some pre-defined arrays.
+The example above uses a special notation to implicitly wrap each sub-array in a scalar. We have actually been using it this whole time. <dfn>Stranding notation</dfn> is a convenient notation for writing vectors by having arrays separated by spaces or parentheses. Above we wrote APL expressions which evaluate to arrays, but we could have written the names of some pre-defined arrays.
 
 ```APL
       a ← 1 2
@@ -54,7 +62,7 @@ The example above uses <dfn>stranding notation</dfn> to implicitly wrap each sub
 └───┴─────┴─────┘
 ```
 
-We can reshape the result of an expression, without naming it, by using the <dfn>enclose</dfn> functoin `⊂⍵`.
+We can reshape the result of an expression, without naming it, by using the <dfn>enclose</dfn> function `⊂⍵`.
 
 ```APL
       3⍴⊂'Hello'
@@ -63,7 +71,7 @@ We can reshape the result of an expression, without naming it, by using the <dfn
 └─────┴─────┴─────┘
 ```
 
-## How can we determine the structure of arrays without guessing based on visual output?
+## Arrays have rank and depth
 Nested arrays have depth, which is different to rank in APL. Rank is the number of dimensions an array has (scalar 0, vector 1, matrix 2 etc.) whereas depth is how many arrays are inside our arrays.
 
 The <dfn>depth</dfn> function `≡⍵` returns the depth of an array. The absolute value of depth `|≡⍵` is the level of nesting, starting at 0 for simple scalars.
@@ -153,6 +161,56 @@ ABC
 │DEF│DEF│DEF│
 └───┴───┴───┘
 ```
+
+## The shape of a scalar
+What is the shape of `46.2`? Here are some common incorrect answers.
+
+`4`?
+
+No, the shape of the character vector `'46.2'` is four, but that is not the same as the scalar number `46.2` - see [problem 2 from the previous section](./array-logic-data-driven-conditionals.md#problem-set).
+
+`1`?
+
+Not quite. The tally `≢⍵` gives `1`, but the shape function `⍴⍵` only returns `1` for a 1-element vector. `46.2` is not a vector, it is a scalar.
+
+`0`?
+
+This would be the shape of a 0-element vector.
+
+To get to the answer, it helps to think about the rank as well. The rank is simply the number of dimensions.
+
+```APL
+      ⍴⍴¯1 0 1∘.×⍳5     ⍝ A matrix has two dimensions
+```
+```
+2
+```
+---
+```APL
+      ⍴⍴'ABCDE'         ⍝ A vector has just one dimension
+```
+```
+1
+```
+---
+```APL
+      ⍴⍴'A'             ⍝ How many dimensions does a scalar have? 
+```
+```
+0
+```
+
+If the result of `⍴'A'` is an array with shape `0` - that means that the shape of a scalar is an empty vector. To be specific, it is an <dfn>empty numeric vector</dfn>. This empty numeric vector can also be represented by the symbol <dfn>zilde</dfn> (`⍬`), which is a zero (`0`) combined with a tilde (`~`). When executed, it displays as a blank line.
+
+```APL
+      ⍬
+
+```
+
+!!!Note "The tally is a scalar whereas the shape is a vector"
+	You might have noticed that the tally `≢⍵` always returns one number, whereas the shape `⍴⍵` may return several. The tally of an array is a *scalar* representing the length of the first (leading) axis. For a matrix, this is the number of rows.
+
+	The shape returns a vector which describes the length of each axis. Whether there are five axes or no axes, the result of `⍴⍵` is always a vector.
 
 ## Selecting from arrays
 In an array-oriented language, perhaps it's no surprise that there are umpteen ways to select values from arrays. There are also many ways to [modify or assign values](../Assignment) within arrays.
@@ -257,7 +315,7 @@ IJ
 ### Select / From
 Some APLers find squad-index semantics awkward, and have proposed yet another mechanism, called **select** or [**from**](https://aplwiki.com/wiki/From). It can be defined as:
 ```APL
-      I←((⊃⊣)⌷⊢)_Rank_ 0 99
+      I←(⊃⍤⊣⌷⊢)⍤0 99
 ```
 
 Select provides the best of both simple indexing and choose indexing, allowing you to select arbitrary collections of cells.
@@ -270,7 +328,7 @@ Over time you will learn from experience what is the most appropriate thing to u
 
 |Selection type|Selection construct|
 |---|---|
-|Arbitrary scalars from a vector|Square bracket simple or [compress](Selecting from lists/#replicatecompress)|
+|Arbitrary scalars from a vector|Square bracket simple or [compress](./array-logic-data-driven-conditionals.md#replicatecompress)|
 |Rectangular subarrays|Simple|
 |Arbitrary scalars from an array of rank ≥2|Choose|
 |Nested arrays|Reach|
@@ -278,54 +336,129 @@ Over time you will learn from experience what is the most appropriate thing to u
 
 ## Problem set
 
+### Search, sort, slice and select
+
 1. Write a function `FindWord` which accepts a character matrix left argument `⍺` and a character vector right argument `⍵` and returns a Boolean vector where a `1` indicates a row in `⍺` which matches the word `⍵`.
 	```APL
-	      fruits FindWord 'Apples'
+	      fruits←↑'apples' 'mangoes' 'oranges' 'bananas'
+	      fruits FindWord 'apples'
 	1 0 0 0
-	      fruits FindWord 'Oranges'
+	      fruits FindWord 'oranges'
 	0 0 1 0
 	```
 
-`FindWord←{∧/∨/⍺∘.=⍵↑⍨(⍴⍺)[2]}`
+	???+Question "What is `↑`?"
+		We created a nested vector of different length character vectors using [strand notation](#arrays-are-made-of-arrays). The mix function `↑⍵` is used to turn this from a nested vector of vectors into a flat matrix made of simple character scalars. In order to make the matrix rectangular, shorter vectors are padded with spaces.
 
-`FindWords←{∧/⍺=(⍴⍺)⍴⍵↑⍨(⍴⍺)[2]}`
+		```APL
+		      ' '=↑'apples' 'mangoes' 'oranges' 'bananas'
+		0 0 0 0 0 0 1
+		0 0 0 0 0 0 0
+		0 0 0 0 0 0 0
+		0 0 0 0 0 0 0
+		```
 
-`FindWord←{⍺∧.=((⍴⍺)[2])↑⍵}`
+	???+Example "Answer"
+		An outer product or reshape can be used for the comparison, but we need to make sure our character vector has the right shape.
+		```APL
+		FindWord ← {∧/∨/⍺∘.=⍵↑⍨2⌷⍴⍺}
+		```
 
-### Search, sort, slice and select
+		This outer product generates a 3-dimensional array. It is more efficient to reshape the vector to match the matrix:
 
-1.  From the nested 3D array `Nest←2 3 4⍴(⍳17),(⊂2 3⍴'ab'(2 3⍴'dyalog'),'defg'),⎕A[⍳6]` , use a single selection to obtain:
+		```APL
+		FindWord ← {∧/⍺=(⍴⍺)⍴⍵↑⍨2⌷⍴⍺}
+		```
+		
+		This idea of using a function between one row and several can be expressed using a concept we have not yet formally introduced: [the rank operator](./array-model.md#matching-dimensions).
+
+		```APL
+		FindWord ← {∧/⍺(=⍤1)⍵↑⍨(⍴⍺)[2]}
+		```
+
+		The comparison followed by a reduction is also expressed neatly using [the inner product operator](./Operators.md#the-inner-product).
+
+		```APL
+		FindWord ← {⍺∧.=⍵↑⍨2⌷⍴⍺}
+		```
+
+1.  From the nested 3D array
+	
+	```APL
+	nest←2 3 4⍴(⍳17),(⊂2 3⍴'ab'(2 3⍴'dyalog'),'defg'),⎕A[⍳6]
+	```
+	
+	use a single selection to obtain:
+
 	1. The character scalar `'y'`
 	1. The numeric scalar `6`
 
-- Backwards (reverse the vector and its elements)
+1. Write the function `Backwards` which accepts a nested vector of character vectors as its argument and reverses both the order of elements and the contents of each vector within.
+	```APL
+	      Backwards 'reverse' 'these' 'words'
+	┌─────┬─────┬───────┐
+	│sdrow│eseht│esrever│
+	└─────┴─────┴───────┘
+	```
 
-- selective and indexed assignment
+1. Write a dyadic `Join` function which takes a nested vector of character vectors `⍵` and returns a simple character vector consisting of the contents of each nested vector joined by a delimiting character `⍺`.
 
-- Create a variable `nest` which has the following properties
-	⍴nest
-	2 3
-	≡nest
-	̄2
-	⍴ ̈nest
-	┌─┬┬─┐
-	│ ││2│
-	├─┼┼─┤
-	│3││6│
-	└─┴┴─┘
-	]display ∊nest
-	┌→───────────────────┐
-	│I 3 am 1 5 8 amatrix│
-	└+───────────────────┘
-	⍴∊nest
-	14
-
-- Find all palindromes
-- Count vowels in each word
+	```APL
+	      Join 'join' 'these' 'words'
+	join,these,words
+	      Join 'and' 'also' 'these' 'words'
+	and,also,these,words
+	```
 
 - A reduction always results in rank 1 less (hence nested things return a nested scalar)
 	- `∨/('some text'='a')('some text'='b')('some text'='c')`
 	- `⊃{⍺,','⍵}/'join' 'these' 'words' 'with' 'commas'`
+
+1. Without using the shape function `⍴⍵`, what are the shapes of the results of the following expressions?
+	1. `'APL IS COOL'`
+	1. `¯1 0 1 ∘.× 1 2 3 4 5` 
+	1. `1 2 3 4∘.+¯1 0 1∘.×1 10`
+	1. `+/⍳4`
+
+	???+Example "Answers"
+		<ol>
+		<li><ol>
+		<li>This is a simple character vector with $11$ characters, including space characters, so its shape is `11`.
+		```APL
+		      ⍴'APL IS COOL'
+		11
+		```
+		</li>	
+		<li>This is a matrix. The result of multiplying all combinations of elements from a 3-element vector and a 5-element vector is a 3 by 5 matrix. It has 3 rows and 5 columns, so its shape is `3 5`.
+		```APL
+		      ¯1 0 1 ∘.× 1 2 3 4 5
+		```
+		```
+		¯1 ¯2 ¯3 ¯4 ¯5
+		0  0  0  0  0
+		1  2  3  4  5
+		```
+		---
+		```APL
+		      ⍴¯1 0 1 ∘.× 1 2 3 4 5
+		```
+		```
+		3 5
+		```
+		If you swap the arguments around, you get a $5$ by $3$ matrix.</li>
+		```APL
+		      1 2 3 4 5 ∘.× ¯1 0 1
+		¯1 0 1
+		¯2 0 2
+		¯3 0 3
+		¯4 0 4
+		¯5 0 5
+		```
+		<li>This is a scalar. The reduce operator `F/` has the effect of *reducing* the rank of its argument array by 1.
+
+		The shape of a scalar </li>
+		</ol></li>
+		</ol>
 
 ### Visit to the museum
 Here are some data and questions about visits to a museum.  
@@ -405,3 +538,38 @@ The 3D array `rain` gives the monthly rainfall in millimeters over 7 years in 5 
 1. Which month in each year in each country had the highest rainfall?
 1. In the data, the countries are in order 1 to 5. Sort the countries in descending order of average monthly rainfall
 1. Sort the countries in ascending order of total yearly rainfall
+
+1. Making scalars
+
+	1. Turn the 1-element vector `v` into a scalar.
+	1. Write an expression using `⍴` which returns an empty numeric vector.
+	1. Write an expression using `⍳` which returns an empty numeric vector.
+
+	???+Example "Answer"
+		<ol type="a">
+		<li>
+		The shape of a scalar is an empty numeric vector. We can therefore use the empty numeric vector as the left argument to the reshape function:
+		```APL
+		⍬⍴v
+		```
+		</li>
+		<li>
+		The shape of any scalar is an empty numeric vector.
+		```APL
+		      ⍴0
+		
+		      ⍴35
+		
+		      ⍴'Q'
+		
+		```
+		</li>
+		<li>
+		If we can generate a length `n` vector with `⍳n`, what happens when `n=0`?
+
+		```APL
+		      ⍳0
+		
+		```
+		</li>
+		</ol>
