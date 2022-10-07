@@ -187,11 +187,17 @@ Experiment with these altered definitions:
 [2]    }                  
      ∇                    
 ```
+```
+ 
+```
 ---
 ```
      ∇ Tradfn arg;var  
 [1]    var←'dynamic'arg
      ∇   
+```
+```
+ 
 ```
 
 In Tradfns, references to local names within a function are said to "*shadow*" the same names from outer scopes. Notice how the following definition of `Tradfn` fails.
@@ -201,7 +207,6 @@ In Tradfns, references to local names within a function are said to "*shadow*" t
 [1]    var,←'dynamic'arg
      ∇   
 ```
----
 
 A similar dfn succeeds because, in dfns, modification will search namespaces in the local scope and then any parent scopes.
 
