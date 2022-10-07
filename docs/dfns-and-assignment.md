@@ -75,7 +75,7 @@ In Dyalog APL, if a name already has a function assigned, that same name cannot 
 ## Multiline functions and the editor
 You can do quite a lot in a single line of APL. However, it is not long before you want to keep sequences of multiple statements available for re-use. Of course we can write functions which consist of multiple statements.
 
-The <<dfn>statement separator</dfn>, `⋄` (diamond), allows us to write multiple APL statements in a single line. It is considered more readable to spread multiple statements across multiple lines of a function. However, it is worth being aware that APL diamonds `⋄` are equivalent to newline characters in terms of execution. The following two definitions of the `Mean` function are equivalent.
+The <dfn>statement separator</dfn>, `⋄` (diamond), allows us to write multiple APL statements in a single line. It is considered more readable to spread multiple statements across multiple lines of a function. However, it is worth being aware that APL diamonds `⋄` are equivalent to newline characters in terms of execution. The following two definitions of the `Mean` function are equivalent.
 
 ```APL
  Mean ← {
