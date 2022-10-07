@@ -544,11 +544,11 @@ APL
 		Write a function to add a vector `⍵` to each row of a matrix `⍺`:
 
 		```APL
-		      (3 2⍴1 100) {⍺+(⍴⍺)⍴⍵} 1 9
+		      (3 2⍴1 100) AddRows 1 9
 		2 109
 		2 109
 		2 109
-		      1 2 3{⍵+(⍴⍵)⍴⍺}5 3⍴1 10 100 1000
+		      1 2 3 AddRows 5 3⍴1 10 100 1000
 		   2   12  103
 		1001    3   13
 		 101 1002    4
@@ -559,6 +559,16 @@ APL
 	1. Write a function to add a vector to each row of a matrix, regardless of the order in which they are supplied:
 
 		```APL
+		      1 9 AddRows 3 2⍴1 100
+		2 109
+		2 109
+		2 109
+		      1 2 3 AddRows 5 3⍴1 10 100 1000
+		   2   12  103
+		1001    3   13
+		 101 1002    4
+		  11  102 1003
+		   2   12  103
 		```
 
 	???Example "Answers"
@@ -640,52 +650,6 @@ APL
 		</li>
 		</ol>
 
-1. Without using the shape function `⍴⍵`, what are the shapes of the results of the following expressions?
-	1. `'APL IS COOL'`
-	1. `¯1 0 1 ∘.× 1 2 3 4 5` 
-	1. `1 2 3 4∘.+¯1 0 1∘.×1 10`
-	1. `+/⍳4`
-
-	???+Example "Answers"
-		<ol>
-		<li><ol>
-		<li>This is a simple character vector with $11$ characters, including space characters, so its shape is `11`.
-		```APL
-		      ⍴'APL IS COOL'
-		11
-		```
-		</li>	
-		<li>This is a matrix. The result of multiplying all combinations of elements from a 3-element vector and a 5-element vector is a 3 by 5 matrix. It has 3 rows and 5 columns, so its shape is `3 5`.
-		```APL
-		      ¯1 0 1 ∘.× 1 2 3 4 5
-		```
-		```
-		¯1 ¯2 ¯3 ¯4 ¯5
-		0  0  0  0  0
-		1  2  3  4  5
-		```
-		---
-		```APL
-		      ⍴¯1 0 1 ∘.× 1 2 3 4 5
-		```
-		```
-		3 5
-		```
-		If you swap the arguments around, you get a $5$ by $3$ matrix.</li>
-		```APL
-		      1 2 3 4 5 ∘.× ¯1 0 1
-		¯1 0 1
-		¯2 0 2
-		¯3 0 3
-		¯4 0 4
-		¯5 0 5
-		```
-		<li>This is a scalar. The reduce operator `F/` has the effect of *reducing* the rank of its argument array by 1.
-
-		The shape of a scalar </li>
-		</ol></li>
-		</ol>
-
 1. Optimus Prime
 
 	A prime number is divisible by only itself and `1`.
@@ -705,3 +669,17 @@ APL
 	```
 	2 3 5 7 11 13 17 19 23 29
 	```
+
+	???Example "Answer"
+		```APL
+		Primes ← {⍸2=+⌿0=∘.|⍨⍳⍵}
+		```
+
+		An alternative coding uses the multiplication table:
+
+		```APL
+		Primes ← {i~∘.×⍨i←1↓⍳⍵}
+		```
+
+		Of course, the outer product `∘.F` indicates that the number of calculations to compute both of these solutions increases with the square of the input size. We say they have a computational complexity "*of order n squared*" or $O(n^2)$ in [big-O notation](https://en.wikipedia.org/wiki/Big_O_notation). This is a very inefficient way to find prime numbers.
+		To see discussions around more efficient ways to compute prime numbers in APL, see [the dfns page on prime numbers](https://dfns.dyalog.com/n_pco.htm).
