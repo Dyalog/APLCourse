@@ -224,6 +224,24 @@ but this can lead to some surprises if we are not aware:
 	      6 6
 	```
 
+## Comments
+Anything after a lamp symbol `⍝` is ignored.
+
+```APL
+      ⍝ nothing happens on this line
+      2 × 3 ⍝ 4 5
+```
+```
+6
+```
+---
+```APL
+	  'A'   ⍝ lamp is not an "A"
+```
+```
+A
+```
+
 ## The reduction operator
 Adding a list of numbers *could* become very tedious...
 ```APL
