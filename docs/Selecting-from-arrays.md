@@ -337,6 +337,34 @@ Over time you will learn from experience what is the most appropriate thing to u
 ## Problem set
 
 ### Search, sort, slice and select
+1. Anna, Ben and Charlie are having a competition. They want to see who can eat the most fruit in a week.
+
+	```APL
+	fruits ← 4 7⍴'Apples MangoesOrangesBananas'
+	days ← 7 3⍴'SunMonTueWedThuFriSat'
+	names ← 3 7⍴'Anna   Ben    Charlie'
+	⎕RL ← 42 1 ⋄ ate ← ?3 4 7⍴3
+	```
+
+	???+Question "What is `⎕RL`?"
+		The <dfn>roll</dfn> function `?⍵` generates random numbers for each simple scalar number in `⍵`.
+
+		Setting the <dfn>Random Link</dfn> [system variable](./Quad%20names.md#system-variables) `⎕RL` lets us generate the same random numbers repeatedly.
+
+	1. Compute the names of the people who ate the most fruits 
+	1. Compute the name of the person who ate the most apples and oranges combined.
+	1. What is the name of the person who ate the most fruit overall?
+
+
+	`names[{⍵⍳⌈/⍵}+/+/ate[;fruits⍳2 7⍴'Apples Oranges';];]`
+
+	```APL
+	      f←fruits⍳2 7⍴'Apples Oranges'
+	      t←+/+/ate[;f;]
+	      n←t=⌈/t
+	      n⌿names
+	Anna
+	```
 
 1. Write a function `FindWord` which accepts a character matrix left argument `⍺` and a character vector right argument `⍵` and returns a Boolean vector where a `1` indicates a row in `⍺` which matches the word `⍵`.
 	```APL
