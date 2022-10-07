@@ -191,6 +191,7 @@ dyalog
 ⎕ML    Migration Level 
 ⎕LX    Latent eXpression
 ⎕PATH  where to find functions 
+⎕RL    random number generation seed value
 ```
 
 ### Division control
