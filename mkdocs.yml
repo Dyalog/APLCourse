@@ -37,7 +37,7 @@ nav:
   - selecting-from-arrays.md
   - search-and-replace.md
   - broken-keyboard-problems.md
-  - The Array Model: Array-model.md
+  - array-model.md
   - Loops and Recursion: Loops.md
   - Extra Assignment: Assignment.md
   - Workspace Basics: Workspaces.md

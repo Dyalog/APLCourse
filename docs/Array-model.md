@@ -84,6 +84,8 @@ UVWX
 2
 ```
 
+The display may look like 2 separate matrices, but the array `2 3 4⍴⎕A` is a single, 3 dimensional array.
+
 The dimensions of an array are also known as **axes**. The most major cells, the rank `k-1` cells for an array of rank `k`, lie along the *first* axis. The least major cells are columns which lie along the *last* axis.
 
 In Dyalog, arrays can have up to 15 dimensions.
@@ -217,30 +219,6 @@ For a more in-depth look at the relationship between function rank and function 
 
 A list of functions with bracket-axis definitions can be found on [the APL Wiki page for function axis](https://aplwiki.com/wiki/Function_axis).
 
-## Nested arrays
-Arrays in Dyalog APL are always collections of scalars, regardless of rank. However, we can create arbitrarily complex scalars by a process known as enclosing. This means putting something in a “box”. It looks like so:
-
-```APL
-      v ← 1 2 3
-      ⊂v         ⍝ Enclose the vector 1 2 3
-┌─────┐
-│1 2 3│
-└─────┘
-      v≡⊂v       ⍝ Does the vector v match the enclosed v? Of course not!
-0
-```
-
-Boxing a simple scalar returns the same scalar. This becomes very relevant when we learn [more about indexing](../Selecting from arrays). In technical terms, a simple scalar is a rank-0 array which contains itself as its value.
-
-```APL
-      'a'≡⊃'a'       ⍝ The disclose of a simple scalar is itself
-      42≡⊂42         ⍝ As is the enclose
-      'abc'≡⊃'abc'   ⍝ Disclose on a simple array picks the first element
-      'abc'≡⊂'abc'   ⍝ Enclosing an array results in a nested scalar
-```
-
-Verify that enclosing creates a scalar by checking the rank of `⊂v`
-
 ### Stranding
 We introduced [stranding](https://aplwiki.com/wiki/Strand_notation) to show how it formed vectors before the application of dyadic functions, for example:
 
@@ -291,9 +269,6 @@ So **enclose** `⊂⍵` allows us to box up individual arrays into scalars.
 ```
 
 Why does the `4` appear flush next to `def` when there is a space between `abc` and `3`?
-
-### Depth
-The depth of an array can be found using the **depth** `≡⍵` function. It returns `1+the level of nesting`.
 
 ### Pick and Mix
 There are two more useful constructs for modifying array structures: **first** `⊃⍵` and **mix** `↑⍵`.

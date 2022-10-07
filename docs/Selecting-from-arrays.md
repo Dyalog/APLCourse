@@ -1,4 +1,158 @@
-# Search, Sort and Select
+# Selecting from Arrays
+- take and drop
+- nested arrays
+- each
+- arrays are made of scalars (enclose info)
+- the rank operator
+- cells and axes
+- rank and depth
+
+## Arrays are made of arrays
+You might have already noticed some awkwardness when we tried to represent a list of names as a character matrix. The main problem being that names do not usually have uniform length!
+
+This problem is known in the array language community as "dealing with ragged arrays". There are [many useful techniques](#aplcart-flat-partitioned) for dealing with non-rectangular data using rectangular arrays. However, it is usually just more convenient to have a real nested structure to deal with.
+
+Enter: general nested arrays.
+
+```APL
+      2 3⍴(1 2)(3 4 5)('AB')(2 2⍴'CDEF')
+```
+```
+┌───┬─────┬─────┐
+│1 2│3 4 5│AB   │
+├───┼─────┼─────┤
+│CD │1 2  │3 4 5│
+│EF │     │     │
+└───┴─────┴─────┘
+```
+
+!!!Question "How do I get those boxes around my output?"
+	Turn boxing on with the user command
+	```APL
+		]Box on
+	Was OFF
+	```
+	Boxing affects the display of output in the APL session, but does not affect the structure or values of arrays in any way.
+
+In general, arrays are made of arrays. More specifically, the individual elements of any array are scalars - but they may lie along zero or more [axes](./array-model.md#cells-and-axes).
+
+How can we fit an arbitrary array as a single element in another array? We have to somehow package it up as one of these scalars.
+
+The example above uses <dfn>stranding notation</dfn> to implicitly wrap each sub-array in a scalar. This is a convenient notation for writing vectors by writing arrays separated by spaces or parentheses. Above we wrote APL expressions which evaluate to arrays, but we could have written the names of some pre-defined arrays.
+
+```APL
+      a ← 1 2
+      b ← 3 4 5
+	  c ← 'AB'
+	  d ← 2 2⍴'CDEF'
+      2 3 ⍴ a b c d
+┌───┬─────┬─────┐
+│1 2│3 4 5│AB   │
+├───┼─────┼─────┤
+│CD │1 2  │3 4 5│
+│EF │     │     │
+└───┴─────┴─────┘
+```
+
+We can reshape the result of an expression, without naming it, by using the <dfn>enclose</dfn> functoin `⊂⍵`.
+
+```APL
+      3⍴⊂'Hello'
+┌─────┬─────┬─────┐
+│Hello│Hello│Hello│
+└─────┴─────┴─────┘
+```
+
+## How can we determine the structure of arrays without guessing based on visual output?
+Nested arrays have depth, which is different to rank in APL. Rank is the number of dimensions an array has (scalar 0, vector 1, matrix 2 etc.) whereas depth is how many arrays are inside our arrays.
+
+The <dfn>depth</dfn> function `≡⍵` returns the depth of an array. The absolute value of depth `|≡⍵` is the level of nesting, starting at 0 for simple scalars.
+
+```APL
+      ≡'a'  ⍝ Simple scalar has depth 0
+0
+      ≡x    ⍝ Simple matrix has depth 1
+1
+      ≢⍴x   ⍝ Simple matrix has rank 2
+2
+      ≡⊂x   ⍝ Enclosing increases the depth
+2
+      ≡⊂⊂x
+3
+      ≡⊂⊂⊂x
+4
+```
+
+Negative depth indicates uneven nesting:
+
+```APL
+      ≡(1 2)(3 4)         ⍝ Evenly nested arrays have positive depth
+2
+      ≡(1 2)(3 4 (4 5))   ⍝ Unevenly nested arrays have negative depth
+¯3
+```
+
+If you have a complex structure like this, you can use the <dfn>each</dfn> operator `F¨⍵` to keep drilling down until you feel you have a better understanding.
+
+```APL
+      nv ← (1 2)(3 4 (4 5))
+	  nv
+┌───┬─────────┐
+│1 2│┌─┬─┬───┐│
+│   ││3│4│4 5││
+│   │└─┴─┴───┘│
+└───┴─────────┘
+
+      ⍴nv     ⍝ 2-element vector
+2
+      ≡nv     ⍝ Unevenly nested
+¯3
+
+      ⍴¨nv    ⍝ 2 vectors of lengths 2 and 3
+┌─┬─┐
+│2│3│
+└─┴─┘
+      ≡¨nv    ⍝ 1st element is simple, 2nd is unevenly nested
+1 ¯2
+
+      ⍴¨¨nv   ⍝ 2nd element appears to be made of 2 scalars followed by a vector
+┌───┬─────┐
+│┌┬┐│┌┬┬─┐│
+││││││││2││
+│└┴┘│└┴┴─┘│
+└───┴─────┘
+      ≡¨¨nv   ⍝ 2nd element is 2 simple scalars and a non-nested array
+┌───┬─────┐
+│0 0│0 0 1│
+└───┴─────┘
+```
+
+So we can tell we have a 2 element nested vector. The 1st element is a simple 2-element vector. The 2nd element contains 2 simple scalars and a simple vector of length 2.
+
+## Arrays are made of scalars
+Arrays in APL are always made of scalars (rank-0 arrays) as their elements.
+
+So the vector `1 2 3` is made of three scalar numbers, and `2 3⍴⎕A` is made of 6 scalar characters arranged in 2 rows with 3 columns.
+
+A simple scalar is a single character, a single number or a single [namespace reference](./Namespaces.md). Enclosing simple scalars is a no-op (it does not do anything):
+
+```APL
+      3 ≡ ⊂⊂⊂⊂⊂⊂3
+1
+```
+
+But enclosing an array allows us to include it as part of another array:
+
+```APL
+      x ← 2 3⍴⎕A   ⍝ x is a simple matrix
+      3⍴x          ⍝ Reshape uses the elements within
+ABC
+      3⍴⊂x         ⍝ Enclosing turns the whole array into an element
+┌───┬───┬───┐
+│ABC│ABC│ABC│
+│DEF│DEF│DEF│
+└───┴───┴───┘
+```
 
 ## Selecting from arrays
 In an array-oriented language, perhaps it's no surprise that there are umpteen ways to select values from arrays. There are also many ways to [modify or assign values](../Assignment) within arrays.
@@ -122,81 +276,56 @@ Over time you will learn from experience what is the most appropriate thing to u
 |Nested arrays|Reach|
 |Arbitrary collections of cells|Select|
 
-## Searching and finding
-**Membership** `⍺∊⍵` will return a boolean array indicating the elements in `⍺` which are present in `⍵`.
+## Problem set
 
-**Find** `⍺⍷⍵` will give a `1` indicating the location of the first element of `⍺` when the entire array `⍺` is found as a subarray in `⍵`.
+1. Write a function `FindWord` which accepts a character matrix left argument `⍺` and a character vector right argument `⍵` and returns a Boolean vector where a `1` indicates a row in `⍺` which matches the word `⍵`.
+	```APL
+	      fruits FindWord 'Apples'
+	1 0 0 0
+	      fruits FindWord 'Oranges'
+	0 0 1 0
+	```
 
-**Index of** `⍺⍳⍵` will return the index in `⍵` where `⍺` is found as a major cell.
+`FindWord←{∧/∨/⍺∘.=⍵↑⍨(⍴⍺)[2]}`
 
-```APL
-      text ← 2 3 4⍴'SOME APPLES'
-      text∊'LESS'
-      'LESS'⍷text
-      (1⌷text)⍳'LESS'
-```
+`FindWords←{∧/⍺=(⍴⍺)⍴⍵↑⍨(⍴⍺)[2]}`
 
-## Total Array Ordering
-To sort, index by the **grade**:
-
-```APL
-      Sort←{(⊂⍋⍵)⌷⍵}
-      Sort 'the alphabet'
-```
-
-Grouping is an incredibly common operation when handling data. The python "dataframe" framework Pandas [has a groupby function](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html) and anybody who has used SQL [is likely to be familiar with this idea](https://www.w3schools.com/sql/sql_groupby.asp).
-
-The **key** operator was introduced in Dyalog version 14.0. Begin to familiarise yourself by experimenting with the following examples:
-```APL
-      'mississippi'{≢⍵}⌸'mississippi'
-      {≢⍵}⌸'mississippi'
-      'interpreter'{⍺⍵}⌸'mississippi'
-```
-
-**Interval index** is a function for classifying data by boundaries.
-
-At this point it is worth familiarising yourself with older APL constructs which perform similar functionality to key, and are likely to exist in code bases written before Dyalog version 14.0. 
-
-1. You already wrote Interval Index [in problem set 4](/Outer product/#problem-set-4) using the outer product `∘.F`. See if you can rewrite that `Grade` function using **interval index** `⍺⍸⍵`.
-
-1. Try to write the interval index function `⍺⍸⍵` without using the `⍸` glyph
-
-Iverson's [dictionary of APL](https://www.jsoftware.com/papers/APLDictionary1.htm) defines monadic equals `=⍵` as "nub in":
-
-```APL
-      NubIn ← (∪≡⍤99 ¯1⍤¯1 99⊢)
-      NubIn 'abbcab'
-1 0 0 0 1 0
-0 1 1 0 0 1
-0 0 0 1 0 0
-      NubIn 3 3⍴6↑⎕A
-1 0 1
-0 1 0
-```
-
-## Problem set 7
+`FindWord←{⍺∧.=((⍴⍺)[2])↑⍵}`
 
 ### Search, sort, slice and select
-1. Write two indexing expressions which apply to a scalar and return that scalar
-
-1. Write a function `IRep` which is equivalent to `⍺/⍵` but uses indexing instead of replicate.
-
-1. `NVec ← '' '34' 'donut' ⍬` is a four-element nested vector. Use a single pick `⍺⊃⍵` to obtain the sub-item `'o'`.
 
 1.  From the nested 3D array `Nest←2 3 4⍴(⍳17),(⊂2 3⍴'ab'(2 3⍴'dyalog'),'defg'),⎕A[⍳6]` , use a single selection to obtain:
 	1. The character scalar `'y'`
 	1. The numeric scalar `6`
 
-1. Two sorting expressions are `{(⊂⍋⍵)⌷⍵}` and `{⍵[⍋⍵]}`?  
-	
-	When might you use one over the other?
+- Backwards (reverse the vector and its elements)
 
-1. When does `{(⍸∨/⍺⍷⍵) ≡ ⍸∧/⍵∊⍺}`?
+- selective and indexed assignment
 
-1. The membership function `⍺∊⍵` checks whether elements of `⍺` appear in `⍵`. Write a function `E` which checks whether major cells of `⍺` appear as major cells of `⍵`.
-	<pre><code>      text E ↑' APP' 'LESS' 
-0 1 1
-0 0 0</code></pre>
+- Create a variable `nest` which has the following properties
+	⍴nest
+	2 3
+	≡nest
+	̄2
+	⍴ ̈nest
+	┌─┬┬─┐
+	│ ││2│
+	├─┼┼─┤
+	│3││6│
+	└─┴┴─┘
+	]display ∊nest
+	┌→───────────────────┐
+	│I 3 am 1 5 8 amatrix│
+	└+───────────────────┘
+	⍴∊nest
+	14
+
+- Find all palindromes
+- Count vowels in each word
+
+- A reduction always results in rank 1 less (hence nested things return a nested scalar)
+	- `∨/('some text'='a')('some text'='b')('some text'='c')`
+	- `⊃{⍺,','⍵}/'join' 'these' 'words' 'with' 'commas'`
 
 ### Visit to the museum
 Here are some data and questions about visits to a museum.  
