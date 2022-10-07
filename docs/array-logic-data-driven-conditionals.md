@@ -19,7 +19,7 @@ APL has logical and comparison functions as in-built primitives. Much like the a
 </div>
 </div>
 
-Some of these are more general mathematical functions which happen to reduce to logical functions when used with Booeleans:
+Some of these are more general mathematical functions which happen to be the same as logical functions when used with Booeleans (`1`s and `0`s):
 
 ```APL
       3 ∧ 4               ⍝ Lowest common multiple
@@ -75,7 +75,9 @@ Tables are very useful for representing data which is related in some way. For e
 0.35 0.3 0.33 0.32 0.39 0.33 0.36
 ```
 
-How about the amount spent on 3 items? We could store this in 3 separate lists, but it is convenient to keep it in a table with 3 rows and 7 columns:
+How about the amount spent on 3 items? We could store this in 3 separate lists, but it is convenient to keep it in a table with 3 rows and 7 columns.
+
+The <dfn>reshape</dfn> function `⍺⍴⍵` takes data from `⍵` and uses it to fill out an array of shape `⍺`, one row at a time.
 
 ```APL
       cost ← 3 7⍴4.36 4.22 4.05 4.14 4.18 4.19 4.02 2.79 2.58 2.68 2.77 2.88 2.79 2.52 3.07 3 3.13 3 3.24 3.06 3.29
@@ -106,7 +108,7 @@ The following table lists the <dfn>rank</dfn> (number of dimensions), some commo
 
 Arrays with $3$ or more dimensions are sometimes called <dfn>cube</dfn> or <dfn>cuboid</dfn>, but they are generally referred to as <dfn>N-dimensional arrays</dfn>, <dfn>rank-N arrays</dfn> or <dfn>high rank arrays</dfn>.
 
-The total spent on each item is a row-wise sum:
+For our `cost` matrix, the total spent on each item is a row-wise sum:
 ```APL
       +/cost    ⍝ The total cost over the week
 ```
