@@ -66,17 +66,26 @@ They allow some rather neat and memorable ways to write short functions.
 Dyalog is a modern APL implementation. Since early APL implementations there has been a way of defining functions with a header line and named arguments and results. Since the introduction of dfns, functions of the original style are called *traditional functions* or [*tradfns*](https://aplwiki.com/wiki/Defined_function).
 
 ```APL
-      Mean ← +⌿÷≢         ⍝ A 3-train (fork) for the arithmetic mean
+ Mean ← +⌿÷≢         ⍝ A 3-train (fork) for the arithmetic mean
+```
+```
+ 
 ```
 ---
 ```APL
-      Mean ← {(+⌿⍵)÷≢⍵}   ⍝ A dfn for the arithmetic mean
+ Mean ← {(+⌿⍵)÷≢⍵}   ⍝ A dfn for the arithmetic mean
+```
+```
+ 
 ```
 ---
 ```APL
-      ∇ m ← Mean a        ⍝ A tradfn for the arithmetic mean
-        m ← (+⌿a) ÷ ≢a
-      ∇
+ ∇ m ← Mean a        ⍝ A tradfn for the arithmetic mean
+   m ← (+⌿a) ÷ ≢a
+ ∇
+```
+```
+ 
 ```
 
 !!! Note
