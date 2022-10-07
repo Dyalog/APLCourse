@@ -96,7 +96,7 @@ The <dfn>shape</dfn> function `⍴⍵` returns the shape of its argument.
 3
 ```
 
-The following table lists the ranks (number of dimensions), some common names, and a geometric analogy for the three simplest types of multidimensional arrays.
+The following table lists the <dfn>rank</dfn> (number of dimensions), some common names, and a geometric analogy for the three simplest types of multidimensional arrays.
 
 |Rank|Name|Geometric analogy|diagram|
 |---|---|---|---|
