@@ -339,7 +339,7 @@ APL
 		</li>
 		</ol>
 
-1. Why does 101='101' evaluate to a 3-element list?
+1. Why does `101='101'` evaluate to a 3-element list?
 
 	???Example "Answer"
 		`101` is a literal single number (a scalar), whereas `'101'` is a literal 3-element character vector.
