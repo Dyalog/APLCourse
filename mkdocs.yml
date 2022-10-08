@@ -46,7 +46,7 @@ nav:
   - User-defined Functions: Ufns.md
   - Operators: Operators.md
   - Quad Names: Quad names.md
-  - Error Handling and Debugging: Errors.md
+  - error-handling-and-debugging.md
   - Data IO: Data.md
   - Code IO: Code.md
   - External Interfaces: Interfaces.md
