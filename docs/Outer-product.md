@@ -135,8 +135,16 @@ It is also worth mentioning at this point that pressing `F1` in Dyalog with the 
 
 	Write a dfn which returns all of the prime numbers between `1` and `⍵`.
 
-	<pre><code class="language-APL">      Primes 10</code></pre>
-	<pre><code class="language-APL">2 3 5 7</code></pre>
-	<hr>
-	<pre><code class="language-APL">      Primes 30</code></pre>
-	<pre><code class="language-APL">2 3 5 7 11 13 17 19 23 29</code></pre>
+	```APL
+	      Primes 10
+	```
+	```
+	2 3 5 7
+	```
+	---
+	```APL
+	      Primes 30
+	```
+	```
+	2 3 5 7 11 13 17 19 23 29
+	```
