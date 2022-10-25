@@ -68,15 +68,21 @@ Dyalog is a modern APL implementation. Since early APL implementations there has
 ```APL
       Mean ← +⌿÷≢         ⍝ A 3-train (fork) for the arithmetic mean
 ```
+```
+```
 ---
 ```APL
       Mean ← {(+⌿⍵)÷≢⍵}   ⍝ A dfn for the arithmetic mean
+```
+```
 ```
 ---
 ```APL
       ∇ m ← Mean a        ⍝ A tradfn for the arithmetic mean
         m ← (+⌿a) ÷ ≢a
       ∇
+```
+```
 ```
 
 !!! Note
@@ -178,11 +184,15 @@ Experiment with these altered definitions:
 [2]    }                  
      ∇                    
 ```
+```
+```
 ---
 ```
      ∇ Tradfn arg;var  
 [1]    var←'dynamic'arg
      ∇   
+```
+```
 ```
 
 In Tradfns, references to local names within a function are said to "*shadow*" the same names from outer scopes. Notice how the following definition of `Tradfn` fails.
@@ -192,7 +202,6 @@ In Tradfns, references to local names within a function are said to "*shadow*" t
 [1]    var,←'dynamic'arg
      ∇   
 ```
----
 
 A similar dfn succeeds because, in dfns, modification will search namespaces in the local scope and then any parent scopes.
 
