@@ -43,17 +43,34 @@ A *simple array* contains only single numbers and/or characters as elements. Sin
 ## Problem set 5
 1. 
 	1. Write a function `IsEmpty` to determine if an array has an empty axis.
-		<pre><code class="language-APL">      IsEmpty 2 0 3⍴⍳4</code></pre>
-		<pre><code>1</code></pre>
-		<hr>
-		<pre><code class="language-APL">      IsEmpty 2 2 3⍴⍳4</code></pre>
-		<pre><code>0</code></pre>
-		<hr>
-		<pre><code class="language-APL">      IsEmpty 0</code></pre>
-		<pre><code>0</code></pre>
-		<hr>
-		<pre><code class="language-APL">      IsEmpty 0⍴0</code></pre>
-		<pre><code>1</code></pre>
+
+		```APL
+		      IsEmpty 2 0 3⍴⍳4
+		```
+		```
+		1
+		```
+		---
+		```APL
+		      IsEmpty 2 2 3⍴⍳4
+		```
+		```
+		0
+		```
+		---
+		```APL
+		      IsEmpty 0
+		```
+		```
+		0
+		```
+		---
+		```APL
+		      IsEmpty 0⍴0
+		```
+		```
+		1
+		```
 
 	1. Any simple array can be described using two vectors. Which two [primitive functions](https://aplwiki.com/wiki/Primitive_function) (that is, functions represented by symbols) return these vectors when given a simple array argument?
 
@@ -76,17 +93,33 @@ A *simple array* contains only single numbers and/or characters as elements. Sin
 
 	1. Write a function `NormRows` to normalise each vector in `pos` so that the sum of squares of each vector is `1`.
 
-		<pre><code class="language-APL">      +/pos\*2</code></pre>
-		<pre><code>10 20 26 5 29</code></pre>
-		<hr>
-		<pre><code class="language-APL">      +/(NormRows pos)\*2</code></pre>
-		<pre><code>1 1 1 1 1</code></pre>
-		<hr>
-		<pre><code class="language-APL">      ÷/2-/pos</code></pre>
-		<pre><code>0.5 1 2 ¯2 ¯0.5</code></pre>
-		<hr>
-		<pre><code class="language-APL">      ÷/2-/NormRows pos   ⍝ Relative proportions stay the same</code></pre>
-		<pre><code>0.5 1 2 ¯2 ¯0.5</code></pre>
+		```APL
+		      +/pos*2
+		```
+		```
+		10 20 26 5 29
+		```
+		---
+		```APL
+		      +/(NormRows pos)\*2
+		```
+		```
+		1 1 1 1 1
+		```
+		---
+		```APL
+		      ÷/2-/pos
+		```
+		```
+		0.5 1 2 ¯2 ¯0.5
+		```
+		---
+		```APL
+		      ÷/2-/NormRows pos   ⍝ Relative proportions stay the same
+		```
+		```
+		0.5 1 2 ¯2 ¯0.5
+		```
 
 		??? Hint
 			The replicate <code class='language-apl'>/</code> and reshape <code class='language-apl'>⍴</code> functions might be useful.

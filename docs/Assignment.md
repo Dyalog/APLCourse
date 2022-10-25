@@ -92,17 +92,3 @@ We can assign items in `nest` to the three variables `s←'A'` `v←1 2 3` and `
 	<pre><code class="language-APL">      {a←3 ⋄ f←+ ⋄ a f∘{⍵}←3 ⋄ a}⍬
 	6</code></pre>
 
-## An APL model of At
-The primitive operator "*at*" (`F@i`) was introduced to Dyalog in version 16.0. A model compatible with earlier versions is as follows:  
-```
- _At_←{
-     ⍺←{⍵}                                       ⍝ Substitution: (⍺ ⍺⍺ ⍵) at ⍵⍵ in ⍵.
-     0::⎕SIGNAL ⎕EN                              ⍝ signal any error to caller
-     3=⎕NC'⍵⍵':⍺ ⍺⍺ ∇∇({(,⍵)/,⍳⍴⍵}⍵{⍵}¨⍵⍵ ⍵){⍵}⍵ ⍝ selector is function: bool mask
-     3∧.≠⎕NC 2 2⍴'⍺ ⍺⍺':⎕SIGNAL 2                ⍝ both ⍺ and ⍺⍺ arrays: syntax err
-     3≠⎕NC'⍺⍺':⍺⍺{⍺}∇∇ ⍵⍵{⍵}⍵                    ⍝ modifier is array: substitution
-     1<|≡⍵⍵:A{⍺}A[⍵⍵]←⍺ ⍺⍺(A←⍵)[⍵⍵]              ⍝ nested: reach/choose indexing
-     I←(⊂⍵⍵)⌷[⎕IO]⍳⍴⍵                            ⍝ simple: major cell selection
-     A{⍺}A[I]←⍺ ⍺⍺(A←⍵)[I]                       ⍝ nb: duplicate indices ignored
- }
-```

@@ -103,7 +103,7 @@ IJ
 ### Select / From
 Some APLers find squad-index semantics awkward, and have proposed yet another mechanism, called **select** or [**from**](https://aplwiki.com/wiki/From). It can be defined as:
 ```APL
-      I←((⊃⊣)⌷⊢)_Rank_ 0 99
+      I←(⊃⍤⊣⌷⊢)⍤0 99
 ```
 
 Select provides the best of both simple indexing and choose indexing, allowing you to select arbitrary collections of cells.

@@ -70,10 +70,14 @@ When an error occurs in a [multi-line function](../Ufns), the interpreter will p
 [4]    r[;even]-1←x   
      ∇   
 ```
+```
+```
 ---
 ```APL
       ⎕RL ← 73
       ⎕←forecast ← 10×?4 6⍴55
+```
+```
 ```
 
 <center>
@@ -337,6 +341,8 @@ To get the same diagnostic error messages printed to the session without buildin
 [2]    ↑1↓⎕DMX.DM                                                                        
      ∇  
 ```
+```
+```
 ---
 ```APL
       ⎕TRAP←0 'C' '#.Error'
@@ -351,6 +357,8 @@ Foo[1] 1÷0
 ```APL
       )SI
       
+```
+```
 ```
 
 The long, awkward expression in `Error` above can be found [in APLcart](https://aplcart.info/?q=print%20error%20message#).

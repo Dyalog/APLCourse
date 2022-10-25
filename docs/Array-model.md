@@ -148,7 +148,7 @@ LOG
 |LOG
 ```
 
-Some functions and operators can be used along specified axes using the **function axis operator** `[]` (more <a target="_blank" href="https://aplwiki.com/wiki/Function-operator_overloading">duplicitous</a> symbols).
+Some functions and operators can be used along specified axes using the **function axis operator** which is denoted by square brackets `[]` (more <a target="_blank" href="https://aplwiki.com/wiki/Function-operator_overloading">duplicitous</a> symbols).
 
 <center>
 	<figure>
@@ -293,12 +293,12 @@ So **enclose** `⊂⍵` allows us to box up individual arrays into scalars.
 Why does the `4` appear flush next to `def` when there is a space between `abc` and `3`?
 
 ### Depth
-The depth of an array can be found using the **depth** `≡⍵` function. It returns `1+the level of nesting`.
+The depth of an array can be found using the **depth** `≡⍵` function. It returns the level of nesting of an array. A simple scalar has depth `0`. These ideas are further explained in an answer to the question [what does enclose do in APL?](https://stackoverflow.com/questions/73578086/what-does-enclose-do-in-apl) on Stack Overflow.
 
 ### Pick and Mix
 There are two more useful constructs for modifying array structures: **first** `⊃⍵` and **mix** `↑⍵`.
 
-First is a special case of **pick** `⍺⊃⍵`, which is a way of [selecting items from nested arrays](../Selecting from arrays/#reach-indexing). 
+*First* is a special case of **pick** `⍺⊃⍵`, which is a way of [selecting items from nested arrays](../Selecting from arrays/#reach-indexing). 
 
 Mix will increment the rank while decrementing the depth:
 ```APL
@@ -356,14 +356,27 @@ Experiment with the following expressions to determine what the each `¨` and bi
 	1. Write an expression to find the average annual rainfall over the 7 years for each of the 5 countries.
 
 	1. Assign scalar numeric values (single numbers) to the variables `years` `countries` `months` such that the `rain` data can be summarised as follows:
-		<pre><code class="language-APL">      ⍴(+⌿⍤years)rain       ⍝ Sum over years</code></pre>
-		<pre><code>5 12</code></pre>
-		<hr>
-		<pre><code class="language-APL">      ⍴(+⌿⍤countries)rain   ⍝ Sum over countries</code></pre>
-		<pre><code>7 12</code></pre>
-		<hr>
-		<pre><code class="language-APL">      ⍴(+⌿⍤months)rain      ⍝ Sum over months</code></pre>
-		<pre><code>7 5</code></pre>
+
+		```APL
+		      ⍴(+⌿⍤years)rain       ⍝ Sum over years
+		```
+		```
+		5 12
+		```
+		---
+		```APL
+		      ⍴(+⌿⍤countries)rain   ⍝ Sum over countries
+		```
+		```
+		7 12
+		```
+		---
+		```APL
+		      ⍴(+⌿⍤months)rain      ⍝ Sum over months
+		```
+		```
+		7 5
+		```
 
 ### Rank Practice
 
@@ -446,7 +459,6 @@ Experiment with the following expressions to determine what the each `¨` and bi
 	
 		<pre><code class="language-APL">      0 10(×⍤j k)pos2</code></pre>
 		<pre><code>0 10
-		0 10
 		0 40
 		0 70
 		0 30
@@ -491,46 +503,6 @@ Experiment with the following expressions to determine what the each `¨` and bi
 	│7 8 9│1 2 3│4 5 6│
 	│1 2 3│4 5 6│7 8 9│
 	└─────┴─────┴─────┘</code></pre>
-
-## An APL model of the rank operator
-The primitive rank operator `F⍤k` was introduced in Dyalog version 14.0. An APL model compatible with earlier versions is as follows:  
-```APL
- _Rank_←{
-     ⍺←{⍵}
-     ⍺ ⍺⍺{⍺←{⍵} ⋄ ⍺ ⍺⍺ ⍵}{
-         0 1000::⎕SIGNAL ⎕EN
-         effrank←{0≤⍺:⍺⌊⍴⍴⍵ ⋄ 0⌈⍺+⍴⍴⍵}   ⍝ effective rank
-         cells←{⊂[(-⍺ effrank ⍵)↑⍳⍴⍴⍵]⍵}
-         (m l r)←⌽3⍴⌽⍵⍵
-         ⎕ML←0                           ⍝ needed by ↑⍵
-         0=⎕NC'⍺':↑⍺⍺¨(m cells ⍵)        ⍝ monadic case
-         x←l cells ⍺
-         y←r cells ⍵
-         ((⍴x)≡⍴y)⍱0=(⍴⍴x)⌊⍴⍴y:⎕SIGNAL 4+(⍴⍴x)≡⍴⍴y
-         ↑x ⍺⍺¨y                         ⍝ dyadic  case
-     }⍵⍵{⍵}⍵
- }
-```
-
-## An APL model of the rank operator
-The primitive rank operator `F⍤k` was introduced in Dyalog version 14.0. An APL model compatible with earlier versions is as follows:  
-```APL
- _Rank_←{
-     ⍺←{⍵}
-     ⍺ ⍺⍺{⍺←{⍵} ⋄ ⍺ ⍺⍺ ⍵}{
-         0 1000::⎕SIGNAL ⎕EN
-         effrank←{0≤⍺:⍺⌊⍴⍴⍵ ⋄ 0⌈⍺+⍴⍴⍵}   ⍝ effective rank
-         cells←{⊂[(-⍺ effrank ⍵)↑⍳⍴⍴⍵]⍵}
-         (m l r)←⌽3⍴⌽⍵⍵
-         ⎕ML←0                           ⍝ needed by ↑⍵
-         0=⎕NC'⍺':↑⍺⍺¨(m cells ⍵)        ⍝ monadic case
-         x←l cells ⍺
-         y←r cells ⍵
-         ((⍴x)≡⍴y)⍱0=(⍴⍴x)⌊⍴⍴y:⎕SIGNAL 4+(⍴⍴x)≡⍴⍴y
-         ↑x ⍺⍺¨y                         ⍝ dyadic  case
-     }⍵⍵{⍵}⍵
- }
-```
 
 ## Reduce on an empty vector?
 For your interest, here are some reductions of note. Try to ask yourself why they give the results they do. Could they have been given different definitions?
