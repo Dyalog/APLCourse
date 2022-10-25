@@ -1,0 +1,829 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A guided introduction to Dyalog APL">
+      
+      
+      
+        <link rel="canonical" href="https://dyalog.com/1.0/Assignment/">
+      
+      <link rel="icon" href="../img/favicon-32.png">
+      <meta name="generator" content="mkdocs-1.4.0, mkdocs-material-8.5.6">
+    
+    
+      
+        <title>Extra Assignment - APL Course</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../style/main.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#assigning-to-arrays" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="APL Course" class="md-header__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APL Course
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Extra Assignment
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="APL Course" class="md-nav__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    APL Course
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../First-steps.md" class="md-nav__link">
+        First Steps
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Dfns/" class="md-nav__link">
+        Dfns and Assignment
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Selecting-from-lists/" class="md-nav__link">
+        Selecting from Lists
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Outer-product/" class="md-nav__link">
+        The Outer Product
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Shape-Reshape/" class="md-nav__link">
+        Shape Reshape
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Array-model/" class="md-nav__link">
+        The Array Model
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Selecting-from-arrays/" class="md-nav__link">
+        Search, Sort and Select
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Loops/" class="md-nav__link">
+        Loops and Recursion
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Extra Assignment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Extra Assignment
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indexed-assignment" class="md-nav__link">
+    Indexed Assignment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selective-assignment" class="md-nav__link">
+    Selective Assignment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modified-assignment" class="md-nav__link">
+    Modified Assignment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#at" class="md-nav__link">
+    At
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strand-assignment" class="md-nav__link">
+    Strand Assignment
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Workspaces/" class="md-nav__link">
+        Workspace Basics
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Namespaces/" class="md-nav__link">
+        Namespaces and Other Objects
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Help/" class="md-nav__link">
+        Getting Help
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Ufns/" class="md-nav__link">
+        User-defined Functions
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Operators/" class="md-nav__link">
+        Operators
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quad%20names/" class="md-nav__link">
+        Quad Names
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Errors/" class="md-nav__link">
+        Error Handling and Debugging
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Data/" class="md-nav__link">
+        Data IO
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Code/" class="md-nav__link">
+        Code IO
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interfaces/" class="md-nav__link">
+        External Interfaces
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quirks/" class="md-nav__link">
+        Historical Quirks
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interpreter-internals/" class="md-nav__link">
+        Interpreter Internals
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Reading/" class="md-nav__link">
+        Further Reading
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indexed-assignment" class="md-nav__link">
+    Indexed Assignment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selective-assignment" class="md-nav__link">
+    Selective Assignment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modified-assignment" class="md-nav__link">
+    Modified Assignment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#at" class="md-nav__link">
+    At
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strand-assignment" class="md-nav__link">
+    Strand Assignment
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="assigning-to-arrays">Assigning to arrays</h1>
+<h2 id="indexed-assignment">Indexed Assignment</h2>
+<p>Assign values at specified indices.</p>
+<pre class="highlight"><code class="language-APL">      t←4 4⍴'some sample text'
+      t[⍸t∊'aeiou']←'!'</code></pre>
+<h2 id="selective-assignment">Selective Assignment</h2>
+<p>Define <code>n←5 5⍴⍳25</code> in your workspace.</p>
+<ol>
+<li>
+<p>Using selections, find at least four different ways to set the bottom-right 3 by 3 submatrix in <code>n</code> to <code>0</code>.
+    For example, <code>(2 2↓n)←0</code>.</p>
+<details class="hint">
+<summary>Hint</summary>
+<p>See which primitives may be used in a <a href='http://help.dyalog.com/latest/#Language/Primitive%20Functions/Assignment%20Selective.htm?Highlight=selective%20assignment'>selective assignment</a></p>
+</details>
+</li>
+</ol>
+<h2 id="modified-assignment">Modified Assignment</h2>
+<p>Experiment with the following expressions, paying particular attention to the <code>name f← array</code> construct.</p>
+<pre class="highlight"><code class="language-APL">      salaries←18250 42500 56000 57250 48640
+      codes←'ACDDC'
+      salaries×←1.1
+      salaries[⍸codes='C']×←1.05
+
+      a←⎕A
+      (3↑a),←'abcd'</code></pre>
+<h2 id="at">At</h2>
+<p>Monadic functions take a single right argument array as input. Dyadic functions take two argument arrays.</p>
+<p>Monadic operators take a single left operand which can be a function or an array (as in <code>+/</code> where plus <code>+</code> is the function operand and reduce <code>/</code> is the operator). </p>
+<p>Dyadic operators take two operands which could be functions or arrays depending on the operator's definition. For example, the rank operator <code>F⍤k</code> takes a function left operand <code>F</code> and array right operand <code>k</code> of up to 3 elements.</p>
+<p>Selective and indexed assignment methods will change the values of variables. The "at" operator <code>@</code> merges two arrays at specified indices and returns a new array.</p>
+<p>If a function right operand returns a boolean array when applied to <code>⍵</code> (e.g. <code>3=1 3 5</code>) then ones <code>1</code> in the boolean array determine where scalars of <code>⍺</code> are inserted.</p>
+<pre class="highlight"><code class="language-APL">      ('∆⍥'@{⍵∊'AEIOU'})2 3⍴'DYALOG'
+      (' '@2 3 4)'DYALOG'
+      (' '@(1 2)(1 3)(2 1))2 3⍴'DYALOG'</code></pre>
+<ol>
+<li>The following expression contains an error:<br />
+<code>('∆⍥'@1)2 3⍴'DYALOG'</code><br />
+    Change the parenthesised function containing <code>@</code> in <strong>two</strong> ways so that it gives the following results:  <ol>
+<li>
+<p><pre><code>∆∆∆
+LOG</code></pre>  </p>
+</li>
+<li>
+<p><pre><code>∆∆∆
+⍥⍥⍥</code></pre></p>
+</li>
+</ol>
+</li>
+</ol>
+<p>Generally, the left operand to <code>@</code> is a function applied to scalars in <code>⍵</code> which are specified by a right operand that is either an array of scalar (simple or enclosed vector) indices or a boolean array returned by a right operand function. An array left operand is shorthand for a <a href="https://aplwiki.com/wiki/Constant">constant function</a> that returns the array.</p>
+<pre class="highlight"><code class="language-APL">      {1↓(1∘(819⌶)@{¯1⌽' '=⍵})' ',⍵}'my excellent heading'</code></pre>
+<h2 id="strand-assignment">Strand Assignment</h2>
+<p><a href="http://help.dyalog.com/latest/#Language/Introduction/Namespaces/Distributed Assignment.htm"><strong>Distributed assignment</strong></a> or <strong>strand assignment</strong> allows multiple names to be defined using a single assignment arrow <code>←</code>.</p>
+<pre class="highlight"><code class="language-APL">      (max min avg)←{(⌈⌿⍵)(⌊⌿⍵)((+⌿÷≢)⍵)}3 1 4 1 5</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Strand assignment does not require names to be parenthesised, but we strongly recommend it for clarity.</p>
+</div>
+<p>We can assign items in <code>nest</code> to the three variables <code>s←'A'</code> <code>v←1 2 3</code> and <code>m←3 3⍴⍳9</code> using a single assignment arrow.</p>
+<pre class="highlight"><code class="language-APL">      nest←('A'(1 2 3))(3 3⍴⍳9)
+      ((s v) m)←nest</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You might have some issues when using inline, modified or strand assignment in dfns. This is by design, but can be a source of confusion.
+<pre><code class="language-APL">      {a←3 ⋄ f←+ ⋄ a f←3 ⋄ a}⍬
+3
+      a←3 ⋄ f←+ ⋄ a f←3 ⋄ a
+6</code></pre>  </p>
+<p>You can get around these problems by writing <code>∘⊢</code> (or in 12.1: <code>∘{⍵}</code> ) to the immediate right of any function involved:
+<pre><code class="language-APL">      {a←3 ⋄ f←+ ⋄ a f∘{⍵}←3 ⋄ a}⍬
+6</code></pre></p>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../Loops/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Loops and Recursion" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Loops and Recursion
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../Workspaces/" class="md-footer__link md-footer__link--next" aria-label="Next: Workspace Basics" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Workspace Basics
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant"], "search": "../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.078830c0.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

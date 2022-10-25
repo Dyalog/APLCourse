@@ -1,0 +1,1185 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A guided introduction to Dyalog APL">
+      
+      
+      
+        <link rel="canonical" href="https://dyalog.com/1.0/Selecting-from-arrays/">
+      
+      <link rel="icon" href="../img/favicon-32.png">
+      <meta name="generator" content="mkdocs-1.4.0, mkdocs-material-8.5.6">
+    
+    
+      
+        <title>Search, Sort and Select - APL Course</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../style/main.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#search-sort-and-select" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="APL Course" class="md-header__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APL Course
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Search, Sort and Select
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="APL Course" class="md-nav__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    APL Course
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../First-steps.md" class="md-nav__link">
+        First Steps
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Dfns/" class="md-nav__link">
+        Dfns and Assignment
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Selecting-from-lists/" class="md-nav__link">
+        Selecting from Lists
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Outer-product/" class="md-nav__link">
+        The Outer Product
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Shape-Reshape/" class="md-nav__link">
+        Shape Reshape
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Array-model/" class="md-nav__link">
+        The Array Model
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Search, Sort and Select
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Search, Sort and Select
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#selecting-from-arrays" class="md-nav__link">
+    Selecting from arrays
+  </a>
+  
+    <nav class="md-nav" aria-label="Selecting from arrays">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#square-bracket-indexing" class="md-nav__link">
+    Square bracket indexing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#squad-aka-functional-indexing" class="md-nav__link">
+    Squad (A.K.A. "Functional") indexing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#take-and-drop" class="md-nav__link">
+    Take and drop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simple-indexing" class="md-nav__link">
+    Simple indexing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#choose-indexing" class="md-nav__link">
+    Choose indexing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reach-indexing" class="md-nav__link">
+    Reach indexing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#select-from" class="md-nav__link">
+    Select / From
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#so-which-type-of-indexing-do-i-use" class="md-nav__link">
+    So which type of indexing do I use?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#searching-and-finding" class="md-nav__link">
+    Searching and finding
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#total-array-ordering" class="md-nav__link">
+    Total Array Ordering
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-set-7" class="md-nav__link">
+    Problem set 7
+  </a>
+  
+    <nav class="md-nav" aria-label="Problem set 7">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#search-sort-slice-and-select" class="md-nav__link">
+    Search, sort, slice and select
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visit-to-the-museum" class="md-nav__link">
+    Visit to the museum
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#word-problems" class="md-nav__link">
+    Word Problems
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rain-facts" class="md-nav__link">
+    Rain facts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Loops/" class="md-nav__link">
+        Loops and Recursion
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Assignment/" class="md-nav__link">
+        Extra Assignment
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Workspaces/" class="md-nav__link">
+        Workspace Basics
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Namespaces/" class="md-nav__link">
+        Namespaces and Other Objects
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Help/" class="md-nav__link">
+        Getting Help
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Ufns/" class="md-nav__link">
+        User-defined Functions
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Operators/" class="md-nav__link">
+        Operators
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quad%20names/" class="md-nav__link">
+        Quad Names
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Errors/" class="md-nav__link">
+        Error Handling and Debugging
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Data/" class="md-nav__link">
+        Data IO
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Code/" class="md-nav__link">
+        Code IO
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interfaces/" class="md-nav__link">
+        External Interfaces
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quirks/" class="md-nav__link">
+        Historical Quirks
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interpreter-internals/" class="md-nav__link">
+        Interpreter Internals
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Reading/" class="md-nav__link">
+        Further Reading
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#selecting-from-arrays" class="md-nav__link">
+    Selecting from arrays
+  </a>
+  
+    <nav class="md-nav" aria-label="Selecting from arrays">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#square-bracket-indexing" class="md-nav__link">
+    Square bracket indexing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#squad-aka-functional-indexing" class="md-nav__link">
+    Squad (A.K.A. "Functional") indexing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#take-and-drop" class="md-nav__link">
+    Take and drop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simple-indexing" class="md-nav__link">
+    Simple indexing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#choose-indexing" class="md-nav__link">
+    Choose indexing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reach-indexing" class="md-nav__link">
+    Reach indexing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#select-from" class="md-nav__link">
+    Select / From
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#so-which-type-of-indexing-do-i-use" class="md-nav__link">
+    So which type of indexing do I use?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#searching-and-finding" class="md-nav__link">
+    Searching and finding
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#total-array-ordering" class="md-nav__link">
+    Total Array Ordering
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-set-7" class="md-nav__link">
+    Problem set 7
+  </a>
+  
+    <nav class="md-nav" aria-label="Problem set 7">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#search-sort-slice-and-select" class="md-nav__link">
+    Search, sort, slice and select
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visit-to-the-museum" class="md-nav__link">
+    Visit to the museum
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#word-problems" class="md-nav__link">
+    Word Problems
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rain-facts" class="md-nav__link">
+    Rain facts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="search-sort-and-select">Search, Sort and Select</h1>
+<h2 id="selecting-from-arrays">Selecting from arrays</h2>
+<p>In an array-oriented language, perhaps it's no surprise that there are umpteen ways to select values from arrays. There are also many ways to <a href="../Assignment">modify or assign values</a> within arrays.</p>
+<p>The exact terminology can vary between array languages, but here we will refer to two types of fundamental array pieces:</p>
+<ul>
+<li><strong>Scalars</strong> (0-cells) are the things returned by indexing expressions</li>
+<li><strong>Elements</strong> (or <strong>items</strong>) are the arrays inside of scalars. For a simple scalar <em>this is the same thing</em>! <a href="../Array model/#nested-arrays">Remember enclosing and diclosing scalars before?</a>.</li>
+</ul>
+<p>These notes summarise the different constructs available. There is also a <a href="https://dyalog.tv/Webinar/?v=AgYDvSF2FfU">Dyalog webinar dedicated to selecting from arrays</a>.</p>
+<h3 id="square-bracket-indexing">Square bracket indexing</h3>
+<p>This is the type of indexing we have used exclusively up to now. For vectors, it is very intuitive:
+<pre class="highlight"><code class="language-APL">      'LE CHAT'[6 4 1 2 3 5 6]
+THE CAT</code></pre></p>
+<p>For higher rank arrays, we can return rectangular sub-arrays by separating the indices into each axis by a semicolon:
+<pre class="highlight"><code class="language-APL">      (2 3 4⍴⎕A)[1 2;1 3;1 4]   ⍝ The corner elements of the cuboid
+AD
+IL
+
+MP
+UX</code></pre></p>
+<ol>
+<li>What happens if you omit an axis? For example, <code>array[3;4 5;;]</code>?</li>
+<li>What happens if you use too many or too few semicolons?</li>
+</ol>
+<h3 id="squad-aka-functional-indexing">Squad (A.K.A. "Functional") indexing</h3>
+<p>Square-bracket indexing requires you to know the exact rank of the array and have the correct number of semicolons in your indexing expression. You might also notice that it is a special or <a href="https://aplwiki.com/wiki/APL_syntax#Syntactic_elements">anomalous syntax</a>.</p>
+<p>There is also an <strong>index</strong> function <code>⍺⌷⍵</code> which has two distinctions:</p>
+<ul>
+<li>It is a function with the same syntax as other functions</li>
+<li>It applies to any rank array by automatically filling in less-major cells (those cells defined by trailing axes)</li>
+</ul>
+<pre class="highlight"><code class="language-APL">      (1 2)(2 3)⌷(2 3 4⍴⎕A)
+      (2 3 4⍴⎕A)[1 2;2 3;]</code></pre>
+<h3 id="take-and-drop">Take and drop</h3>
+<p>We can chop off the edges of an array using <strong>take</strong> <code>⍺↑⍵</code> and <strong>drop</strong> <code>⍺↓⍵</code>.
+<pre class="highlight"><code class="language-APL">      ¯1 3 2↑2 3 4⍴⎕A 
+MN
+QR
+UV
+      1 0 ¯2↓2 3 4⍴⎕A 
+MN
+QR
+UV</code></pre></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While similar subarrays can be retrieved using indexing, take or drop, note that <em>take</em> and <em>drop</em> <strong>return</strong> arrays of <strong>the same rank</strong> as their argument.
+<pre><code class="language-APL">      ≢⍴1 1↑2 3 4⍴⎕A 
+3
+      ≢⍴1 1⌷2 3 4⍴⎕A 
+1</code></pre></p>
+</div>
+<h3 id="simple-indexing">Simple indexing</h3>
+<p>The selection of rectangular sub-arrays as demonstrated above using square brackets <code>[]</code> and squad <code>⌷</code> is also known as <strong>simple indexing</strong>.</p>
+<h3 id="choose-indexing">Choose indexing</h3>
+<p>Square brackets have a magic trick up their sleeve. Simple indexing with square brackets uses scalars or vectors separated by semicolons. If you index using square brackets and a nested vector of numeric vectors, you can select any collection of scalars.</p>
+<pre class="highlight"><code class="language-APL">      (2 3 4⍴⎕A)[(1 1 1)(2 1 4)(1 3 4)]</code></pre>
+<p>An interesting relationship appears between indices into an array and indices into its ravel when <code>⎕IO←0</code>:</p>
+<pre class="highlight"><code class="language-APL">      ⎕IO←0
+      (2 3 4⍴⎕A)[↓[0]2 3 4⊤0 15 11]
+      ⎕A⌷⍨⊂2 3 4⊥↑[0](0 0 0)(1 0 3)(0 2 3)</code></pre>
+<h3 id="reach-indexing">Reach indexing</h3>
+<p>Indexing into an array will retrieve some cell of an array. If it is a nested array, then selecting a scalar will return an enclosed array. Sometimes what you actually want is the item inside of that scalar.</p>
+<p>While it is common and perfectly valid to simply use <em>first</em> <code>⊃⍵</code> to disclose the contents of a scalar, the <em>pick</em> function <code>⍺⊃⍵</code> can be used to retrieve the element directly:
+<pre class="highlight"><code class="language-APL">      3⌷'here' 'are' 'some' 'words'   ⍝ With ]Boxing on
+┌─────┐
+│words│
+└─────┘
+      3⊃'here' 'are' 'some' 'words'
+words</code></pre></p>
+<p>Reach indexing allows you to pull items from deep within a nested array:
+<pre class="highlight"><code class="language-APL">      (2 1)(2 2) ⊃ 2 3⍴0 1 2 (2 3⍴'AB' 'CD' 'EF' 'GH' 'IJ' 'KL') 4 5
+IJ</code></pre></p>
+<h3 id="select-from">Select / From</h3>
+<p>Some APLers find squad-index semantics awkward, and have proposed yet another mechanism, called <strong>select</strong> or <a href="https://aplwiki.com/wiki/From"><strong>from</strong></a>. It can be defined as:
+<pre class="highlight"><code class="language-APL">      I←(⊃⍤⊣⌷⊢)⍤0 99</code></pre></p>
+<p>Select provides the best of both simple indexing and choose indexing, allowing you to select arbitrary collections of cells.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Select is a very general and convenient function, but it is potentially much slower than using the in-built indexing constructs. We provide it here for completeness and your interest.</p>
+</div>
+<h2 id="so-which-type-of-indexing-do-i-use">So which type of indexing do I use?</h2>
+<p>Over time you will learn from experience what is the most appropriate thing to use in different situations. However, here is a rough guide:</p>
+<table>
+<thead>
+<tr>
+<th>Selection type</th>
+<th>Selection construct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arbitrary scalars from a vector</td>
+<td>Square bracket simple or <a href="Selecting from lists/#replicatecompress">compress</a></td>
+</tr>
+<tr>
+<td>Rectangular subarrays</td>
+<td>Simple</td>
+</tr>
+<tr>
+<td>Arbitrary scalars from an array of rank ≥2</td>
+<td>Choose</td>
+</tr>
+<tr>
+<td>Nested arrays</td>
+<td>Reach</td>
+</tr>
+<tr>
+<td>Arbitrary collections of cells</td>
+<td>Select</td>
+</tr>
+</tbody>
+</table>
+<h2 id="searching-and-finding">Searching and finding</h2>
+<p><strong>Membership</strong> <code>⍺∊⍵</code> will return a boolean array indicating the elements in <code>⍺</code> which are present in <code>⍵</code>.</p>
+<p><strong>Find</strong> <code>⍺⍷⍵</code> will give a <code>1</code> indicating the location of the first element of <code>⍺</code> when the entire array <code>⍺</code> is found as a subarray in <code>⍵</code>.</p>
+<p><strong>Index of</strong> <code>⍺⍳⍵</code> will return the index in <code>⍵</code> where <code>⍺</code> is found as a major cell.</p>
+<pre class="highlight"><code class="language-APL">      text ← 2 3 4⍴'SOME APPLES'
+      text∊'LESS'
+      'LESS'⍷text
+      (1⌷text)⍳'LESS'</code></pre>
+<h2 id="total-array-ordering">Total Array Ordering</h2>
+<p>To sort, index by the <strong>grade</strong>:</p>
+<pre class="highlight"><code class="language-APL">      Sort←{(⊂⍋⍵)⌷⍵}
+      Sort 'the alphabet'</code></pre>
+<p>Grouping is an incredibly common operation when handling data. The python "dataframe" framework Pandas <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html">has a groupby function</a> and anybody who has used SQL <a href="https://www.w3schools.com/sql/sql_groupby.asp">is likely to be familiar with this idea</a>.</p>
+<p>The <strong>key</strong> operator was introduced in Dyalog version 14.0. Begin to familiarise yourself by experimenting with the following examples:
+<pre class="highlight"><code class="language-APL">      'mississippi'{≢⍵}⌸'mississippi'
+      {≢⍵}⌸'mississippi'
+      'interpreter'{⍺⍵}⌸'mississippi'</code></pre></p>
+<p><strong>Interval index</strong> is a function for classifying data by boundaries.</p>
+<p>At this point it is worth familiarising yourself with older APL constructs which perform similar functionality to key, and are likely to exist in code bases written before Dyalog version 14.0. </p>
+<ol>
+<li>
+<p>You already wrote Interval Index <a href="/Outer product/#problem-set-4">in problem set 4</a> using the outer product <code>∘.F</code>. See if you can rewrite that <code>Grade</code> function using <strong>interval index</strong> <code>⍺⍸⍵</code>.</p>
+</li>
+<li>
+<p>Try to write the interval index function <code>⍺⍸⍵</code> without using the <code>⍸</code> glyph</p>
+</li>
+</ol>
+<p>Iverson's <a href="https://www.jsoftware.com/papers/APLDictionary1.htm">dictionary of APL</a> defines monadic equals <code>=⍵</code> as "nub in":</p>
+<pre class="highlight"><code class="language-APL">      NubIn ← (∪≡⍤99 ¯1⍤¯1 99⊢)
+      NubIn 'abbcab'
+1 0 0 0 1 0
+0 1 1 0 0 1
+0 0 0 1 0 0
+      NubIn 3 3⍴6↑⎕A
+1 0 1
+0 1 0</code></pre>
+<h2 id="problem-set-7">Problem set 7</h2>
+<h3 id="search-sort-slice-and-select">Search, sort, slice and select</h3>
+<ol>
+<li>
+<p>Write two indexing expressions which apply to a scalar and return that scalar</p>
+</li>
+<li>
+<p>Write a function <code>IRep</code> which is equivalent to <code>⍺/⍵</code> but uses indexing instead of replicate.</p>
+</li>
+<li>
+<p><code>NVec ← '' '34' 'donut' ⍬</code> is a four-element nested vector. Use a single pick <code>⍺⊃⍵</code> to obtain the sub-item <code>'o'</code>.</p>
+</li>
+<li>
+<p>From the nested 3D array <code>Nest←2 3 4⍴(⍳17),(⊂2 3⍴'ab'(2 3⍴'dyalog'),'defg'),⎕A[⍳6]</code> , use a single selection to obtain:</p>
+<ol>
+<li>The character scalar <code>'y'</code></li>
+<li>The numeric scalar <code>6</code></li>
+</ol>
+</li>
+<li>
+<p>Two sorting expressions are <code>{(⊂⍋⍵)⌷⍵}</code> and <code>{⍵[⍋⍵]}</code>?  </p>
+<p>When might you use one over the other?</p>
+</li>
+<li>
+<p>When does <code>{(⍸∨/⍺⍷⍵) ≡ ⍸∧/⍵∊⍺}</code>?</p>
+</li>
+<li>
+<p>The membership function <code>⍺∊⍵</code> checks whether elements of <code>⍺</code> appear in <code>⍵</code>. Write a function <code>E</code> which checks whether major cells of <code>⍺</code> appear as major cells of <code>⍵</code>.
+    <pre><code>      text E ↑' APP' 'LESS' 
+0 1 1
+0 0 0</code></pre></p>
+</li>
+</ol>
+<h3 id="visit-to-the-museum">Visit to the museum</h3>
+<p>Here are some data and questions about visits to a museum.  </p>
+<p>The <code>section_names</code> are the names of each of the four sections in the museum.  </p>
+<pre><code class="language-APL">section_names ← 'Bugs' 'Art' 'Fossils' 'Sea Life'</code></pre>
+
+<p>The variable <code>sections</code> is a nested list of text matrices. Each matrix lists the items or creatures which belong to each section.  </p>
+<pre><code class="language-APL">sections ← ↑¨('Grasshopper' 'Giant Cicada' 'Earth-boring Dung Beetle' 'Scarab Beetle' 'Miyama Stag' 'Giant Stag' 'Brown Cicada' 'Giraffe Stag' 'Horned Dynastid' 'Walking Stick' 'Walking Leaf') ('The Blue Boy by Thomas Gainsborough' ('Rooster and Hen with Hydrangeas by It',(⎕ucs 333),' Jakuch',(⎕ucs 363)) 'The Great Wave off Kanagawa by Hokusai' 'Mona Lisa by Leonardo da Vinci' 'Sunflowers by Vincent van Gogh' 'Still Life with Apples and Oranges by Paul Cézanne' 'Girl with a Pearl Earring by Johannes Vermeer' ('Shak',(⎕ucs 333),'ki dog',(⎕ucs 363),' by Unknown') 'David by Michelangelo di Lodovico Buonarroti Simoni' 'Rosetta Stone by Unknown') ('Amber' 'Ammonite' 'Diplodocus' 'Stegosaur' 'Tyrannosaurus Rex' 'Triceratops') ('Puffer Fish' 'Blue Marlin' 'Ocean Sunfish' 'Acorn Barnacle' 'Mantis Shrimp' 'Octopus' 'Pearl Oyster' 'Scallop' 'Sea Anemone' 'Sea Slug' 'Sea Star' 'Whelk' 'Horseshoe Crab')</code></pre>
+
+<p>The <code>visits</code> table represents 1000 visits to museum sections over a two week period. The four columns represent:  </p>
+<ul>
+<li>The section that was visited as an index into the <code>section_names</code></li>
+<li>The day of the visit in <a href="http://help.dyalog.com/latest/#Language/System%20Functions/dt.htm">Dyalog Date Number</a> format.</li>
+<li>The arrival time in minutes from midnight. For example, 15:30 is 930 minutes.</li>
+<li>The departure time in minutes from midnight.</li>
+</ul>
+<pre><code class="language-APL">⎕RL←42 ⋄ days←43589+?1000⍴28 ⋄ (arr lïv)←539+?2⍴⊂1000⍴510 ⋄ section←?1000⍴4
+visits←(⊂⍋days)⌷section,days,(⊂∘⍋⌷⊢)⍤1⍉↑arr lïv</code></pre>
+
+<p>In the boolean matrix <code>display</code>, each row corresponds to a museum piece and each column corresponds to a day. A <code>1</code> indicates days when a particular museum piece was out on display. The order of rows corresponds to the order of pieces in the <code>sections</code> table.  </p>
+<pre><code>display ← 40 28⍴(9/0),1,(4/0),1,(9/0),1,(3/0),(5/1),0,(10/1),0,(5/1),0,(8/1),0,(8/1),0,(4/1),0 0 1 1 0 1 0 1 0 1 1 0 1 0,(5/1),(3/0),1 0 1 0 1 1,(4/0),1 0 1 1 0 0 1 1 0,(6/1),0 1 0 1 0 0 1 1 0 0 1 1 0 1 0 0 1 1 0,(3/1),(3/0),(4/1),0 1 1 0 1 0 0,(7/1),0 1 0 1 1 0 1 1 0 1 1 0,(3/1),0 1 1 0,(4/1),0,(3/1),0 1 0,(3/1),0 0 1 1,(5/0),1 1 0,(3/1),0 1 0 0 1 1,(3/0),(5/1),0,(9/1),0,(3/1),0 1,(3/0),(5/1),0,(3/1),0,(3/1),(3/0),1 1 0 0 1 0 1,(4/0),1 1 0 1 0 1 0 1 0,(9/1),0,(7/1),0,(3/1),0 0 1 1 0 1 1 0 0 1 0 0 1 0,(5/1),0 1,(3/0),1 1 0 1 0 0,(3/1),0,(4/1),0 0 1 1,(7/0),(3/1),(3/0),1 1,(3/0),1 1 0 1 0 1,(6/0),1 1,(4/0),1 0 1 1,(5/0),1 0 1 0 1,(6/0),(3/1),(9/0),1 1,(3/0),1 0 1 0 1 1,(13/0),1 1,(11/0),1 0 1 1,(4/0),1 0 0,(4/1),0,(12/1),0,(5/1),0 1 0 0 1 1 0,(5/1),0,(4/1),0,(4/1),0 0 1,(5/0),1 1,(3/0),(8/1),0 0 1,(3/0),1,(3/0),1,(3/0),1 0 0 1 0 1 0 1 0 1 0 1 1 0,(3/1),(4/0),(3/1),0,(3/1),0 1 1,(3/0),(4/1),0 1 1 0 1 1,(3/0),1 1 0 1 0 1 0 1,(6/0),1 1,(14/0),(8/1),(4/0),(8/1),0,(3/1),0,(4/1),(6/0),1 0 0 1 1,(3/0),1 1 0 0 1 0 1 0 0 1 0 1,(5/0),1 0 0 1 0 1 0 0 1 1,(3/0),1,(8/0),1 0 1 0,(6/1),0 0,(7/1),0 1 1 0,(3/1),0,(9/1),0,(12/1),0 1 1 0,(9/1),0,(3/1),0 0,(3/1),(3/0),(3/1),0,(3/1),(5/0),(7/1),0 1 0,(5/1),0,(3/1),0 0,(3/1),0 0 1 1 0,(4/1),0 1,(3/0),(3/1),(5/0),1 0 1 1 0 1 0,(3/1),0,(5/1),0,(3/1),0,(4/1),0 1,(4/0),1 0 1 0 0 1 1,(5/0),1,(3/0),1 0 0 1 0 1,(3/0),1 0 1 0 0 1,(4/0),1 0 0 1,(6/0),1,(14/0),1 0 0,(4/1),(3/0),(6/1),0 0 1 0,(3/1),0,(4/1),0,(3/1),0 1 0 1,(3/0),(5/1),(3/0),1 0 0 1 0,(3/1),0 1,(4/0),1 0 1 1,(11/0),1,(15/0),(3/1),(4/0),1,(15/0),(5/1),0 1 0,(8/1),0,(3/1),(4/0),(5/1),0 1,(9/0),1 0 1 1 0 0 1 0 0 1,(4/0),1 0,(4/1),0,(7/1),(3/0),1 0 0 1,(3/0),(3/1),0 1 1
+</code></pre>
+
+<ol>
+<li>How many visitors arrived before 10AM?</li>
+<li>What was the most popular section by visit duration?</li>
+<li>Estimate the opening and closing times of each of the sections.</li>
+<li>Which animal being on display corresponded with the highest increase in visit duration for its section?</li>
+</ol>
+<h3 id="word-problems">Word Problems</h3>
+<p>We are going to do some text processing on a dictionary of words. </p>
+<p>If you have access to the internet, the following expressions will download a text file dictionary (917kB in size) and store it as a nested vector of character vectors named <code>words</code>.</p>
+<pre class="highlight"><code class="language-APL">      ]Load HttpCommand
+      words ← (⎕UCS 10) {(⍺≠⍵)⊆⍵} (HttpCommand.Get'https://tinyurl.com/y7asendy').Data</code></pre>
+<p>If you have the file on your computer (maybe you were given it on a USB drive, for example) then you can load it into your workspace from disk using the following expressions.</p>
+<pre class="highlight"><code class="language-APL">      (content encoding newline) ← ⎕NGET'/path/to/words.txt'
+      words ← (⎕UCS newline) (≠⊆⊢) content</code></pre>
+<p>Now answer the following questions about <code>words</code>.</p>
+<ol>
+<li>
+<p>How many words have at least 3 <code>'e'</code>s in them?</p>
+</li>
+<li>
+<p>How many words have exactly two consecutive <code>'e'</code>s in them? 
+    The first three such words are <code>Aberdeen</code> <code>Abderdeen's</code> and <code>Aileen</code>.</p>
+</li>
+<li>
+<p>What is the shortest word with two consecutive <code>'a'</code>s?</p>
+</li>
+<li>
+<p>What words have three consecutive double letters? For example, <code>mississippi</code> does not but <code>misseetto</code> does. Misseetto is not a real word.</p>
+<p>A palindrome is the same when reversed. For example, <strong>racecar</strong> is a palindrome but <strong>racecat</strong> is not.</p>
+</li>
+<li>
+<p>How many palindromes are there in <code>words</code>?</p>
+</li>
+<li>
+<p>Which palindrome in <code>words</code> is the longest?</p>
+</li>
+<li>
+<p>How many words are in alphabetical order?</p>
+</li>
+</ol>
+<h3 id="rain-facts">Rain facts</h3>
+<p>The 3D array <code>rain</code> gives the monthly rainfall in millimeters over 7 years in 5 countries.</p>
+<pre class="highlight"><code class="language-APL">      ⎕RL←42 ⋄ rain←?7 5 12⍴250</code></pre>
+<ol>
+<li>Which month in each year in each country had the highest rainfall?</li>
+<li>In the data, the countries are in order 1 to 5. Sort the countries in descending order of average monthly rainfall</li>
+<li>Sort the countries in ascending order of total yearly rainfall</li>
+</ol>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../Array-model/" class="md-footer__link md-footer__link--prev" aria-label="Previous: The Array Model" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              The Array Model
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../Loops/" class="md-footer__link md-footer__link--next" aria-label="Next: Loops and Recursion" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Loops and Recursion
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant"], "search": "../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.078830c0.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

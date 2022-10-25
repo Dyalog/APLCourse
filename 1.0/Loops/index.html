@@ -1,0 +1,1078 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A guided introduction to Dyalog APL">
+      
+      
+      
+        <link rel="canonical" href="https://dyalog.com/1.0/Loops/">
+      
+      <link rel="icon" href="../img/favicon-32.png">
+      <meta name="generator" content="mkdocs-1.4.0, mkdocs-material-8.5.6">
+    
+    
+      
+        <title>Loops and Recursion - APL Course</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../style/main.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#loops-and-recursion" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="APL Course" class="md-header__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APL Course
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Loops and Recursion
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="APL Course" class="md-nav__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    APL Course
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../First-steps.md" class="md-nav__link">
+        First Steps
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Dfns/" class="md-nav__link">
+        Dfns and Assignment
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Selecting-from-lists/" class="md-nav__link">
+        Selecting from Lists
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Outer-product/" class="md-nav__link">
+        The Outer Product
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Shape-Reshape/" class="md-nav__link">
+        Shape Reshape
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Array-model/" class="md-nav__link">
+        The Array Model
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Selecting-from-arrays/" class="md-nav__link">
+        Search, Sort and Select
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Loops and Recursion
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Loops and Recursion
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#an-introduction-to-an-introduction-to-an-introduction-to-an-introduction-to-an-int" class="md-nav__link">
+    An introduction to an introduction to an introduction to an introduction to an int...
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-sort-of-detour" class="md-nav__link">
+    A sort of detour
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#you-have-the-power" class="md-nav__link">
+    You have the power
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#primitive-iterations-are-still-loops" class="md-nav__link">
+    Primitive iterations are still loops
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reduction-is-a-loop" class="md-nav__link">
+    Reduction is a loop
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#moving-windows" class="md-nav__link">
+    Moving windows
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dont-forget-scan" class="md-nav__link">
+    Don't forget scan!
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#for-and-while" class="md-nav__link">
+    For and While
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-set-8" class="md-nav__link">
+    Problem set 8
+  </a>
+  
+    <nav class="md-nav" aria-label="Problem set 8">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bell-numbers" class="md-nav__link">
+    Bell Numbers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#four-is-magic" class="md-nav__link">
+    Four is Magic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hash-counting-string" class="md-nav__link">
+    Hash counting string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backspace" class="md-nav__link">
+    Backspace
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Assignment/" class="md-nav__link">
+        Extra Assignment
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Workspaces/" class="md-nav__link">
+        Workspace Basics
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Namespaces/" class="md-nav__link">
+        Namespaces and Other Objects
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Help/" class="md-nav__link">
+        Getting Help
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Ufns/" class="md-nav__link">
+        User-defined Functions
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Operators/" class="md-nav__link">
+        Operators
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quad%20names/" class="md-nav__link">
+        Quad Names
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Errors/" class="md-nav__link">
+        Error Handling and Debugging
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Data/" class="md-nav__link">
+        Data IO
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Code/" class="md-nav__link">
+        Code IO
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interfaces/" class="md-nav__link">
+        External Interfaces
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quirks/" class="md-nav__link">
+        Historical Quirks
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interpreter-internals/" class="md-nav__link">
+        Interpreter Internals
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Reading/" class="md-nav__link">
+        Further Reading
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#an-introduction-to-an-introduction-to-an-introduction-to-an-introduction-to-an-int" class="md-nav__link">
+    An introduction to an introduction to an introduction to an introduction to an int...
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-sort-of-detour" class="md-nav__link">
+    A sort of detour
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#you-have-the-power" class="md-nav__link">
+    You have the power
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#primitive-iterations-are-still-loops" class="md-nav__link">
+    Primitive iterations are still loops
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reduction-is-a-loop" class="md-nav__link">
+    Reduction is a loop
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#moving-windows" class="md-nav__link">
+    Moving windows
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dont-forget-scan" class="md-nav__link">
+    Don't forget scan!
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#for-and-while" class="md-nav__link">
+    For and While
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-set-8" class="md-nav__link">
+    Problem set 8
+  </a>
+  
+    <nav class="md-nav" aria-label="Problem set 8">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bell-numbers" class="md-nav__link">
+    Bell Numbers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#four-is-magic" class="md-nav__link">
+    Four is Magic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hash-counting-string" class="md-nav__link">
+    Hash counting string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backspace" class="md-nav__link">
+    Backspace
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="loops-and-recursion">Loops and recursion</h1>
+<p>Looping is an incredibly basic and fundamental programming construct which you will notice we have barely used at all so far. Or at least, we haven't used many explicit loops.</p>
+<div class="admonition note">
+<p class="admonition-title">Terminology</p>
+<p>The type of looping over items in a collection as provided by <em>for</em> and <em>while</em> loops is sometimes referred to as <strong>scalar looping</strong>. Other types of looping in APL might, for example, process each row of a matrix in turn but process whole rows at a time. In contrast, <a href="/Nested/#each-a-primitive-for-explicit-loops">each <code>¨</code></a> is a mechanism for looping over every item of an array (the <a href="/Array model/#cells-and-axes">scalars</a>); its operand function can see arrays nested within the scalars.</p>
+</div>
+<h2 id="an-introduction-to-an-introduction-to-an-introduction-to-an-introduction-to-an-int">An introduction to an introduction to an introduction to an introduction to an int...</h2>
+<pre class="highlight"><code class="language-APL">      {⍺←1 1 ⋄ ⍵=2:⍺ ⋄ (⍺,(+/¯2↑⍺))∇⍵-1}</code></pre>
+<p>Try the dfn above with various numeric arguments and consider the following questions:</p>
+<ol>
+<li>Which symbol refers to the function itself? </li>
+<li>Which symbol separates expressions? </li>
+<li>Which part represents a conditional? This is where one part of code executes only if a preceding statement is true.</li>
+<li>What is the default left argument? What happens if you call this function dyadically?</li>
+</ol>
+<p>Give the function <a href="https://en.wikipedia.org/wiki/Fibonacci_number">an appropriate name</a>.</p>
+<p>When a function calls itself like this it is called <em>recursion</em>. APL tends to rely less on explicit iteration and recursion than most popular programming languages, but it is good to be able to do it when you need to.</p>
+<p>If a function gets stuck in an infinite loop, use <code>Action → Interrupt</code> in the menu. You can also use the key combination <code>Ctrl+Break</code> to interrupt a running function.</p>
+<ol>
+<li>
+<p>Write the shortest dfn which causes infinite recursion.</p>
+</li>
+<li>
+<p>Write the shortest dfn which causes infinite recursion unless its argument is <code>0</code>.</p>
+</li>
+<li>
+<p>The factorial function multiplies integers up to <code>⍵</code>. Write the factorial function as a <strong>recursive</strong> dfn called <code>Factorial</code>. Use the primitive <code>!⍵</code> factorial function to check your solution. </p>
+</li>
+<li>
+<p>Write an expression for the factorial function as a reduction (an expression which includes <code>f/</code> for some function <code>f</code>).</p>
+</li>
+</ol>
+<h2 id="a-sort-of-detour">A sort of detour</h2>
+<p>Dyalog's <em>grade-up</em> <code>⍋</code> and <em>grade-down</em> <code>⍒</code> functions are able to <a href="https://aplwiki.com/wiki/Total_array_ordering">sort any array</a>. However, it is interesting and useful to look at other approaches to sorting.</p>
+<p>Here is a function 'NSort' for sorting numeric lists.</p>
+<pre class="highlight"><code class="language-APL">      NSort←{0=⍴⍵:⍬ ⋄ (U/⍵),∇(~U←⍵=⌊/⍵)/⍵}</code></pre>
+<p>Try <code>NSort</code> with some numeric arguments. Here it is presented piece-by-piece. For each comment prompt <code>⍝</code>, write a brief description of what that part of the function does. The first one has been done for you.</p>
+<pre class="highlight"><code class="language-APL">      NSort←{
+             0=⍴⍵:⍬                         ⍝ Reached end of list, return empty numeric vector
+                    ⋄                       ⍝ 
+                      (U/⍵),                ⍝ 
+                            ∇               ⍝
+                             (~U←⍵=⌊/⍵)     ⍝
+                                       /⍵   ⍝
+                                         }</code></pre>
+<p>Below is a function <code>TSort</code> for sorting character matrices.</p>
+<pre class="highlight"><code class="language-APL">      TSort←{⍺[((⍴⍵)[2])S ⍺⍳⍵]}
+      S←{⍺=0:⍵ ⋄ (⍺-1)S ⍵[⍋⍵[;⍺];]}</code></pre>
+<p>Examine <code>TSort</code> and replace <code>⍺</code> below with an appropriate left argument to sort the character matrix <code>WORDS</code>.</p>
+<pre class="highlight"><code class="language-APL">      WORDS←↑'DOLPHIN' 'BRACKEN' 'SAUCER' 'MAGNET' 'FLOP'
+      ⍺ TSort WORDS
+BRACKEN
+DOLPHIN
+FLOP   
+MAGNET 
+SAUCER </code></pre>
+<p>What do the following expressions tell you about the <code>⍋</code> grade-up and <code>⍒</code> grade-down functions on high-rank arrays?</p>
+<pre class="highlight"><code class="language-APL">      ⍋4 2 2⍴'ABDCAADCBCDECDEF'
+2 1 3 4
+      ⍒4 2 2⍴'ABDCAADCBCDECDEF'
+4 3 1 2</code></pre>
+<h2 id="you-have-the-power">You have the power</h2>
+<p>One common type of iteration is to apply the same function again to the result of the previous application. In traditional mathematics, this is expressed with superscript notation:</p>
+<p><span class="arithmatex">\(f(x) = 1 + x\)</span> Increment<br />
+<span class="arithmatex">\(p(x,y) = f^y(x)\)</span> Add<br />
+<span class="arithmatex">\(m(x,y) = p^y(x,0)\)</span> Multiply</p>
+<p>We can express this with the <strong>power</strong> operator:</p>
+<pre class="highlight"><code class="language-APL">      Inc←{1+⍵}
+      Plus←{(Inc⍣⍺)⍵}
+      Times←{⍺(Plus⍣⍵)0}
+      Power←{⍺(Times⍣⍵)1}</code></pre>
+<h2 id="primitive-iterations-are-still-loops">Primitive iterations are still loops</h2>
+<p>You might have noticed this already, but it is important to know that the rank operator <code>F⍤j k l</code> is conceptually a loop. It just happens to be that certain operations are parallelisable, and some of those are parallelised within the Dyalog interpreter.</p>
+<p>We will give some details later in <a href="../Interpreter-internals/#performance">the section on performance</a>.</p>
+<h2 id="reduction-is-a-loop">Reduction is a loop</h2>
+<p>Primitive reductions are often optimised. For example, <strong>plus-reduction</strong> <code>+/</code> is able to take advantage of <a href="https://dyalog.tv/Dyalog19/?v=TqmpSP8Knvg">vector instructions</a> on certain machines and <strong>and-reduction</strong> <code>∧/</code> can quit early if a zero is found in the array.</p>
+<p>We can observe differences by writing a custom function and comparing runtimes:
+<pre class="highlight"><code>      ]runtime +/?1e7⍴0
+
+* Benchmarking "+/?1e7⍴0"
+             (ms) 
+ CPU (avg):    94 
+ Elapsed:      99 
+
+
+
+      ]runtime {⍺+⍵}/?1e7⍴0
+
+* Benchmarking "{⍺+⍵}/?1e7⍴0"
+             (ms) 
+ CPU (avg):  3688 
+ Elapsed:    3723 </code></pre></p>
+<h2 id="moving-windows">Moving windows</h2>
+<p><strong>Windowed-reduction</strong> <code>⍺ F/ ⍵</code> is an extension to reduction which applies an <em>F-reduction</em> <code>F/</code> for a function <code>F</code> on a sliding window of size <code>⍺</code>.</p>
+<p>It is useful to use catenate to display the windowed selection of the array to which the reduction will be applied:
+<pre class="highlight"><code class="language-APL">      3,/⍳10</code></pre>
+<pre class="highlight"><code>┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬──────┐
+│1 2 3│2 3 4│3 4 5│4 5 6│5 6 7│6 7 8│7 8 9│8 9 10│
+└─────┴─────┴─────┴─────┴─────┴─────┴─────┴──────┘</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      3+/⍳10</code></pre>
+<pre class="highlight"><code>6 9 12 15 18 21 24 27</code></pre></p>
+<p>You can think of this as a special case of <a href="https://en.wikipedia.org/wiki/Iterative_Stencil_Loops">stencil code</a>, for which the <a href="https://aplwiki.com/wiki/Primitive_operator">primitive operator</a> <strong>stencil</strong> <code>⌺</code> was added in version 16.0.</p>
+<p><pre class="highlight"><code class="language-APL">      1↓¯1↓{+/⍵}⌺3⊢⍳10</code></pre>
+<pre class="highlight"><code>6 9 12 15 18 21 24 27</code></pre></p>
+<h2 id="dont-forget-scan">Don't forget scan!</h2>
+<p><strong>Scan</strong> <code>F\⍵</code> is another construct which is simple in a way that misleads you into thinking it is only used for very specific things. It is exactly a reduction <code>F/</code> on successive prefixes of <code>⍵</code>. The final value is <code>F/⍵</code>.</p>
+<pre class="highlight"><code class="language-APL">      +/⍳10
+55
+      +\⍳10
+1 3 6 10 15 21 28 36 45 55
+
+      ⌈\2 0 3 ¯1 4 2 6
+2 2 3 3 4 4 6</code></pre>
+<p>However, scan can be used in many scenarios that you might not expect. Scans are often used in high performance expressions of <strong>partitioned-application</strong> functions which nowadays can be implemented with partitioning primitives (<code>⍺⊂⍵</code> and <code>⍺⊆⍵</code>), nested arrays and the each operator <code>F¨</code>. </p>
+<p>For example, one <a href="https://youtu.be/QtvvQ7MdwKY">YouTube video comparing APL and Haskell</a> demonstrates one of the big differences in the APL approach in contrast to other types of programming. </p>
+<p><pre class="highlight"><code class="language-APL">      4 {1↓∊' '∘,¨⍺↑' '(≠⊆⊢)⍵} 'take the first four words'</code></pre>
+<pre class="highlight"><code>take the first four</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      4 {⍵⌿⍨⍺&gt;+\' '=⍵} 'take the first four words'</code></pre>
+<pre class="highlight"><code>take the first four</code></pre></p>
+<p>Despite both having types of function composition, Haskell and other functional programming languages tend to focus on the composition of those functions as the fundamental process to finding and refining solutions. In APL, we are usually most interested in the fundamental data transformation that is occuring, and using APL's inherently parallel, array-at-a-time primitives to achieve that transformation in a way that can tend towards simple and fast code.</p>
+<p>Between integer and boolean arguments alone there are more interesting constructs than can be covered well here. You can find more on this topic by going to the following links:  </p>
+<ul>
+<li>Watch the Dyalog webinar about <a href="https://www.youtube.com/watch?v=erv_1LxEByk&amp;list=PLA9gQgjzcpKGwmgzlayqzS_z1ThDwFzl4&amp;index=3">Boolean Scans and Reductions</a></li>
+<li>Experiment with the examples in an <a href="https://tryapl.org/?notebook=https%3A%2F%2Fgithub.com%2FDyalog%2Fdyalog-jupyter-notebooks%2Fblob%2Fmaster%2FBoolean+Scans+and+Reductions.ipynb">interactive notebook on TryAPL</a></li>
+<li>You can <a href="https://nbviewer.jupyter.org/github/Dyalog/dyalog-jupyter-notebooks/blob/master/Boolean%20Scans%20and%20Reductions.ipynb">view the static notebook online</a></li>
+</ul>
+<h2 id="for-and-while">For and While</h2>
+<p>The traditional control structures such as <em>for loops</em>, <em>while loops</em> and <em>if statements</em> weren't introduced in Dyalog <a href="https://aplwiki.com/wiki/Dyalog_APL#Versions">until version 8.0 in 1996</a>. Usually, they are only used for program control on the outer levels, or if an algorithm explicitly requires that type of <a href="#">scalar looping</a>.</p>
+<p>The syntax is mentioned in the <a href="../Ufns/#marking-tests">section on user-defined functions</a>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Peformance note</p>
+<p>When constructing loops, think about whether unnecessary computation is being performed.</p>
+<p>For example,</p>
+<p><pre><code class="language-APL">:While LikelyToBeFales
+:AndIf ExpensiveTest</code></pre></p>
+<p>is probably better than</p>
+<p><pre><code class="language-APL">:While LikelyToBeFales∧ExpensiveTest</code></pre></p>
+<p>You will also often see:</p>
+<p><pre><code class="language-APL">:While PreCondition
+:AndIf OnlyComputableIfPreCondition</code></pre></p>
+</div>
+<h2 id="problem-set-8">Problem set 8</h2>
+<h3 id="bell-numbers">Bell Numbers</h3>
+<p>A <a href="https://en.wikipedia.org/wiki/Bell_number">Bell number</a> counts the possible partitions of a set. The n<sup>th</sup> Bell number <span class="arithmatex">\(B_n\)</span> counts the ways you can partition a set of <span class="arithmatex">\(n\)</span> elements.</p>
+<p>Here we will investigate 3 ways of computing Bell numbers.</p>
+<ol>
+<li>
+<p>Brute force</p>
+<p>Write a function <code>BellBrute</code> which counts all of the unique partitions of length <code>⍵</code> by creating partitions as nested arrays.</p>
+<details class="hint">
+<summary>Hint</summary>
+<p>Binary representations of decimal numbers can be used as partition vectors.</p>
+</details>
+</li>
+<li>
+<p>Triangle scheme</p>
+<p>Implement the <a href="https://en.wikipedia.org/wiki/Bell_number#Triangle_scheme_for_calculations">triangle scheme</a> for calculations.</p>
+</li>
+<li>
+<p>Recurrance relation of binomial coefficients
+    The Bell numbers satisfy a recurrence relation involving binomial coefficients:</p>
+<p><span class="arithmatex">\(B_{n+1} = \sum_{k=0}^{n}\binom{n}{k}B_k\)</span></p>
+<p>Implement <code>BellRecur</code> using this formula.</p>
+</li>
+</ol>
+<h3 id="four-is-magic">Four is Magic</h3>
+<p><a href="http://rosettacode.org/wiki/Four_is_magic">Rosetta Code</a> has the full problem description.</p>
+<p>Start with a number. Spell that number out in words, count the number of letters and say it all aloud. For example, start with 6, print <code>'Six is three'</code> and continue with the number 3. Once you reach 4, print <code>four is magic</code>. </p>
+<pre class="highlight"><code>      FourMagic 11
+Eleven is six, six is three, three is five, five is four, four is magic.</code></pre>
+<h3 id="hash-counting-string">Hash counting string</h3>
+<p>This problem is from <a href="https://theweeklychallenge.org/blog/perl-weekly-challenge-102/">week 102 of the Perl Weekly Challenge</a>.</p>
+<p>Write a monadic function <code>HashCount</code> which takes a scalar integer argument and returns a simple character vector where:</p>
+<ul>
+<li>the string consists only of digits 0-9 and octothorpes AKA hashes, ‘#’</li>
+<li>there are no two consecutive hashes: ‘##’ does not appear in your string</li>
+<li>the last character is a hash</li>
+<li>the number immediately preceding each hash (if it exists) is the position of that hash in the string, with the position being counted up from 1</li>
+</ul>
+<pre class="highlight"><code>      HashCount 1
+#
+      HashCount 2
+2#
+      HashCount 3
+#3#
+      HashCount 10
+#3#5#7#10#
+      HashCount 14
+2#4#6#8#11#14#</code></pre>
+<h3 id="backspace">Backspace</h3>
+<p>Write a function <code>Backspace</code> which takes a simple numeric vector argument and treats <code>0</code>s like backspaces, removing successive numbers to their left unless none remain.</p>
+<pre class="highlight"><code>      Backspace 1 2 0
+1
+      Backspace 1 5 5 0 2 0 0 8
+1 8</code></pre>
+<p>For an extra challenge, modify your function so that it can also accept a character vector where <code>\b</code> is treated as a single token and signifies a backspace character.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../Selecting-from-arrays/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Search, Sort and Select" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Search, Sort and Select
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../Assignment/" class="md-footer__link md-footer__link--next" aria-label="Next: Extra Assignment" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Extra Assignment
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant"], "search": "../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.078830c0.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
