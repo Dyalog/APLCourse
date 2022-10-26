@@ -106,7 +106,7 @@ The following table lists the <dfn>rank</dfn> (number of dimensions), some commo
 |$1$|vector or list|line|![line geometry diagram](./img/line.svg)|
 |$2$|matrix or table|rectangle|![rectangle geometry diagram](./img/rectangle.svg)|
 
-Arrays with $3$ or more dimensions are sometimes called <dfn>cube</dfn> or <dfn>cuboid</dfn>, but they are generally referred to as <dfn>N-dimensional arrays</dfn>, <dfn>rank-N arrays</dfn> or <dfn>high rank arrays</dfn>.
+Arrays with $3$ or more dimensions are sometimes called <dfn>cube</dfn> or <dfn>cuboid</dfn>, but they are generally referred to as <dfn>N-dimensional arrays</dfn>, <dfn>rank-N arrays</dfn> or <dfn>high rank arrays</dfn>. Arrays of rank greater than $3$ are sometimes called <dfn>noble arrays</dfn>.
 
 For our `cost` matrix, the total spent on each item is a row-wise sum:
 ```APL
@@ -140,7 +140,7 @@ The total for each day across all items is a column-wise sum:
 ```
 
 ## Ravel means unravel
-Monadic comma is the function <dfn>ravel</dfn> `,⍵` and it lays out the elements of an array as a vector, one row at a time - a bit like pulling thread from a spool.
+Monadic comma is the function <dfn>ravel</dfn> `,⍵` and it lays out the elements of an array as a vector, one row at a time — a bit like pulling thread from a spool.
 
 ```APL
       mat ← 3 3⍴⎕A
@@ -585,7 +585,7 @@ APL
 		AddRows ← {s←(⍴⍺)⌈⍴⍵ ⋄ (s⍴⍺)+s⍴⍵}
 		```
 
-		This way of applying functions between arrays of different shapes is very common. As with many things in this course, eventually we will discover more elegant ways to do these things. Here is an example of using [the rank operator](./array-model.md#matching-dimensions):
+		This way of applying functions between arrays of different shapes is very common. As with many things in this course, eventually we will discover more elegant ways to do these things. Here is an example of using [the rank operator](#TODO):
 
 		```APL
 		AddRows ← +⍤1
