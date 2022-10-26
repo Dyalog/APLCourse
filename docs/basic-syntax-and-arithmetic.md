@@ -98,7 +98,7 @@ LENGTH ERROR: Mismatched left and right argument shapes
          ∧
 ```
 
-Functions such as `+ × ⌈` apply between elements of two arrays of the same shape, or between one element and many if one of the arguments is a single value. However, if the arrays are of two different shapes, it is not clear how the function should be applied. Of course, you may want to [apply a function between all combinations of elements of the left and right argument](./Outer-product.md), but that will be addressed soon enough.
+Functions such as `+ × ⌈` apply between elements of two arrays of the same shape, or between one element and many if one of the arguments is a single value. However, if the arrays are of two different shapes, it is not clear how the function should be applied. Of course, you may want to [apply a function between all combinations of elements of the left and right argument](./array-logic-data-driven-conditionals.md#the-outer-product), but that will be addressed soon enough.
 
 ## Order of execution
 Expressions are executed from right to left.
@@ -289,7 +289,7 @@ DOMAIN ERROR
       ∧
 ```
 
-The `DOMAIN ERROR` means that APL cannot compute what you are asking for. In this case, it cannot generate indices up to a negative number. Negative numbers are <em>outside the domain</em> of the index generator function. How might you [generate integers from 1 to negative four]()?
+The `DOMAIN ERROR` means that APL cannot compute what you are asking for. In this case, it cannot generate indices up to a negative number. Negative numbers are <em>outside the domain</em> of the index generator function. How might you [generate integers from 1 to negative four](#TODO)?
 
 ```APL
       1+
