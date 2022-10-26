@@ -398,7 +398,7 @@ The <dfn>rank operator</dfn> (`F⍤k`) allows us to pair up *scalars* (rank 0) f
 5 15 105
 ```
 
-In the case where we apply to sub-arrays of the same rank in both `⍺` and `⍵`, we can 
+In the case where we apply to sub-arrays of the same rank in both `⍺` and `⍵`, we only need specify that rank once:
 
 ```APL
       1 0 ¯1(×⍤1 1) 5 3⍴⍳15
@@ -429,6 +429,6 @@ LENGTH ERROR: It must be that either the left and right frames match or one of t
 or 
 
 !!!Note Conforming arrays have either same shape or one is a unit
-	With functions like `+ × ÷`, arrays must either have the same shape, or one of them be a scalar. The result of the function application has the same shape as the largest of the input arrays. The rank operator generalises this to the concept of <dfn>frames</dfn>. A frame is a rank-k cell of some array.
+	With functions like `+ × ÷`, arrays must either have the same shape, or one of them be a scalar. The result of the function application has the same shape as the largest of the input arrays. The rank operator generalises this to the concept of <dfn>frames</dfn>. A frame is a rank-k cell of some array. For frames to "match" means that there are the same number of rank **j** subarrays of `⍺` as there are rank **k** subarrays of `⍵` when a function `⍺ F ⍵` is applied as `⍺ (F⍤j k) ⍵`.
 
 ## Problem set
