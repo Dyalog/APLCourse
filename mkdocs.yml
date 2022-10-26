@@ -34,6 +34,7 @@ nav:
   - basic-syntax-and-arithmetic.md
   - dfns-and-assignment.md
   - array-logic-data-driven-conditionals.md
+  - multidimensional-and-nested-arrays.md
   - selecting-from-arrays.md
   - finding-and-replacing-values.md
   - broken-keyboard-problems.md
