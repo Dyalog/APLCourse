@@ -319,3 +319,71 @@ Clearly, selecting subarrays in this way can become tedious, laborious and even 
 
 ## Problem set
 What indexing array must be used to select from a simple scalar?
+
+1. Write a monadic function `Join` which joins a nested vector of character vectors `⍵` into a single, non-nested character vector in which elements from `⍵` are separated by the character scalar `,` (comma).
+
+	```APL
+	      Join 'join' 'these' 'words'
+	```
+	```
+	join,these,words
+	```
+
+	**BONUS** Can you write `Join` as a *dyadic* function which accepts a separator scalar as `⍺`?
+
+	```APL
+	      ' ' Join 'join' 'these' 'words'
+	```
+	```
+	join these words
+	```
+	---
+	```APL
+	      '|' Join 'join' 'these' 'words'
+	```
+	```
+	join|these|words
+	```
+
+1. Create a variable `nest` which has the following properties
+
+	```APL
+	      ⍴nest
+	```
+	```
+	2 3
+	```
+	---
+	```APL
+	      ≡nest
+	```
+	```
+	 ̄2
+	```
+	---
+	```APL
+	      ⍴ ̈nest
+	```
+	```
+	┌─┬┬─┐
+	│ ││2│
+	├─┼┼─┤
+	│3││6│
+	└─┴┴─┘
+	```
+	---
+	```APL
+	      ]display ∊nest
+	```
+	```
+	┌→───────────────────┐
+	│I 3 am 1 5 8 amatrix│
+	└+───────────────────┘
+	```
+	---
+	```APL
+	      ⍴∊nest
+	```
+	```
+	14
+	```
