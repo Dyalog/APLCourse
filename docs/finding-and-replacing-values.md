@@ -1,15 +1,32 @@
 # Finding and replacing values
 
 ## Searching and finding
-The <dfn>membership</dfn> function `⍺∊⍵` will return a boolean array indicating the elements in `⍺` which are present in `⍵`.
+It is common to make multiple equality comparisons. Doing this one at a time becomes tedious.
 
 ```APL
-      (3 4⍴⎕A)∊'BFGQ'
+      text ← 'This is my sentence'
+      (text='a')∨(text='e')∨(text='i')∨(text='o')∨(text='u')
 ```
 ```
-0 1 0 0
-0 1 1 0
-0 0 0 0
+0 0 1 0 0 1 0 0 0 0 0 0 1 0 0 1 0 0 1
+```
+
+The <dfn>membership</dfn> function returns a Boolean array (`1`s and `0`s) of the same shape as `⍺` where a `1` indicates the location of any one of the elements in `⍵`.
+
+```APL
+      text∊'aeiou'
+```
+```
+0 0 1 0 0 1 0 0 0 0 0 0 1 0 0 1 0 0 1
+```
+---
+```APL
+      text ← 2 6⍴'I LIKE APL  '
+      text∊'AEIOU'
+```
+```
+1 0 0 1 0 1
+0 1 0 0 0 0
 ```
 
 <dfn>Find</dfn> `⍺⍷⍵` will give a `1` indicating the location of the first element of `⍺` when the entire array `⍺` is found as a subarray in `⍵`.
