@@ -36,10 +36,10 @@ nav:
   - array-logic-data-driven-conditionals.md
   - multidimensional-and-nested-arrays.md
   - the-rank-operator.md
+  - broken-keyboard-problems.md
   - selecting-from-arrays.md
   - finding-and-replacing-values.md
-  - broken-keyboard-problems.md
-  - array-model.md
+  - Array-model.md
   - Loops and Recursion: Loops.md
   - Extra Assignment: Assignment.md
   - Workspace Basics: Workspaces.md
