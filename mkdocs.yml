@@ -35,6 +35,7 @@ nav:
   - dfns-and-assignment.md
   - array-logic-data-driven-conditionals.md
   - multidimensional-and-nested-arrays.md
+  - the-rank-operator.md
   - selecting-from-arrays.md
   - finding-and-replacing-values.md
   - broken-keyboard-problems.md

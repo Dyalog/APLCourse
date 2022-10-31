@@ -11,13 +11,13 @@ The exact terminology can vary between array languages, but here we will refer t
 These notes summarise the different constructs available. There is also a [Dyalog webinar dedicated to selecting from arrays](https://dyalog.tv/Webinar/?v=AgYDvSF2FfU).
 
 ### Square bracket indexing
-This is the type of indexing we have used exclusively up to now. For vectors, it is very intuitive:
+This is the type of indexing we have been using so far. For vectors, it is very intuitive:
 ```APL
       'LE CHAT'[6 4 1 2 3 5 6]
 THE CAT
 ```
 
-For higher rank arrays, we can return rectangular sub-arrays by separating the indices into each axis by a semicolon:
+For higher rank arrays, we can return rectangular sub-arrays by separating the indices into each axis by semicolons:
 ```APL
       (2 3 4⍴⎕A)[1 2;1 3;1 4]   ⍝ The corner elements of the cuboid
 AD
@@ -40,17 +40,41 @@ There is also an **index** function `⍺⌷⍵` which has two distinctions:
 
 ```APL
       (1 2)(2 3)⌷(2 3 4⍴⎕A)
+```
+```
+EFGH
+IJKL
+
+QRST
+UVWX
+```
+---
+```APL
       (2 3 4⍴⎕A)[1 2;2 3;]
+```
+```
+EFGH
+IJKL
+
+QRST
+UVWX
 ```
 
 ### Take and drop
 We can chop off the edges of an array using **take** `⍺↑⍵` and **drop** `⍺↓⍵`.
 ```APL 
-      ¯1 3 2↑2 3 4⍴⎕A 
+      ¯1 3 2↑2 3 4⍴⎕A
+```
+```
 MN
 QR
 UV
+```
+---
+```APL
       1 0 ¯2↓2 3 4⍴⎕A 
+```
+```
 MN
 QR
 UV
@@ -67,10 +91,13 @@ UV
 The selection of rectangular sub-arrays as demonstrated above using square brackets `[]` and squad `⌷` is also known as **simple indexing**.
 
 ### Choose indexing
-Square brackets have a magic trick up their sleeve. Simple indexing with square brackets uses scalars or vectors separated by semicolons. If you index using square brackets and a nested vector of numeric vectors, you can select any collection of scalars.
+Simple indexing with square brackets uses scalars or vectors separated by semicolons. Index using square brackets and a nested array of numeric vectors and we can select any collection of scalars:
 
 ```APL
       (2 3 4⍴⎕A)[(1 1 1)(2 1 4)(1 3 4)]
+```
+```
+APL
 ```
 
 An interesting relationship appears between indices into an array and indices into its ravel when `⎕IO←0`:
@@ -413,3 +440,6 @@ The 3D array `rain` gives the monthly rainfall in millimeters over 7 years in 5 
 		```
 		</li>
 		</ol>
+
+### More problems
+- What type of indexing is used in `grid[⍸grille=' ']`

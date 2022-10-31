@@ -1,23 +1,17 @@
-# Multidimensional and nested arrays
+# Multidimensional and Nested Arrays
 
 ## Arrays are made of arrays
 You might have already noticed some awkwardness when we tried to represent a list of names as a character matrix. The main problem being that names do not usually have uniform length!
 
 ```APL
-      student ← 10 7⍴'Kane   Jonah  JessicaPadma  Katie  CharlieAmil   David  Zara   Filipa '
-	  ' '=student
+      student ← 4 7⍴'Kane   Jonah  JessicaPadma  '
+      student = ' '
 ```
 ```
 0 0 0 0 1 1 1
 0 0 0 0 0 1 1
 0 0 0 0 0 0 0
 0 0 0 0 0 1 1
-0 0 0 0 0 1 1
-0 0 0 0 0 0 0
-0 0 0 0 1 1 1
-0 0 0 0 0 1 1
-0 0 0 0 1 1 1
-0 0 0 0 0 0 1
 ```
 
 Any code using this representation is going to have to be aware of the trailing space characters. This is an efficient representation of this data, and there are [some interesting techniques](#aplcart-flat-partitioned #TODO) for dealing with non-rectangular data using rectangular arrays. However, it is usually just more convenient to have a real nested structure to deal with.
@@ -42,11 +36,11 @@ Any code using this representation is going to have to be aware of the trailing 
 	```
 	Boxing affects the display of output in the APL session, but does not affect the structure or values of arrays in any way.
 
-In general, arrays are made of arrays. More specifically, the individual elements of any array are <dfn>scalar</dfn> - but they may lie along zero or more [axes](./array-model.md#cells-and-axes).
+In general, arrays are made of arrays. More specifically, the individual elements of any array are <dfn>scalar</dfn> - but they may lie along zero or more [axes](#TODO).
 
 How can we fit an arbitrary array as a single element in another array? We have to somehow package it up as one of these scalars.
 
-The example above uses a special notation to implicitly wrap each sub-array in a scalar. We have actually been using it this whole time. <dfn>Stranding notation</dfn> is a convenient notation for writing vectors by having arrays separated by spaces or parentheses. Above we wrote APL expressions which evaluate to arrays, but we could have written the names of some pre-defined arrays.
+The example above uses a special notation to implicitly wrap each sub-array in a scalar. We have actually used it many times already. <dfn>Stranding notation</dfn> is a convenient notation for writing vectors by having arrays separated by spaces or parentheses. Above we wrote parenthesised APL expressions which evaluate to arrays, but we could have written the names of some pre-defined arrays instead.
 
 ```APL
       a ← 1 2
@@ -54,6 +48,8 @@ The example above uses a special notation to implicitly wrap each sub-array in a
 	  c ← 'AB'
 	  d ← 2 2⍴'CDEF'
       2 3 ⍴ a b c d
+```
+```
 ┌───┬─────┬─────┐
 │1 2│3 4 5│AB   │
 ├───┼─────┼─────┤
@@ -66,6 +62,8 @@ We can reshape the result of an expression, without naming it, by using the <dfn
 
 ```APL
       3⍴⊂'Hello'
+```
+```
 ┌─────┬─────┬─────┐
 │Hello│Hello│Hello│
 └─────┴─────┴─────┘
@@ -225,11 +223,13 @@ If the result of `⍴'A'` is an array with shape `0` - that means that the shape
 	The shape returns a vector which describes the length of each axis. Whether there are five axes or no axes, the result of `⍴⍵` is always a vector.
 
 ## Simple array selection
-When you have a collection of data represented as an array, you usually want to select some subset of the data. There are several selection methods available, and the next section is dedicated to them. For now, we present just a couple to help solidify the notion of an APL array and get you used to thinking using the correct terminology.
+When you have a collection of data represented as an array, you often want to use only some subset of the data. There are a few selection methods in APL, and [the next section](./selecting-from-arrays.md) is dedicated to them. Here we show two constructs which can be used to select any sub-array from any array.
 
 ```APL
       a ← 2 3 4⍴⎕A
       a
+```
+```
 ABCD
 EFGH
 IJKL
@@ -237,13 +237,14 @@ IJKL
 MNOP
 QRST
 UVWX
-      a[1 2;2 3;3 4]
-GH
-KL
+```
 
-ST
-WX
-      a[;2 3;3 4]
+When we have an array of rank > 1, selections along each axis are separated by semicolons:
+
+```APL
+      a[1 2;2 3;3 4]
+```
+```
 GH
 KL
 
@@ -251,9 +252,26 @@ ST
 WX
 ```
 
+Omitting a specification selects from that entire axis:
+
+```APL
+      a[;2 3;3 4]
+```
+```
+GH
+KL
+
+ST
+WX
+```
+
+Indexing expressions always return a collection of scalars. If we want to obtain the array nested inside of a scalar, we can use the <dfn>first</dfn> function `⊃⍵` to *disclose* the contents of that scalar.
+
 ```APL
       n ← 2 3⍴1 (2 3) 'abc' (2 2⍴(1 2)3 4 5) 'ghi' 'k'
       n
+```
+```
 ┌───────┬───┬───┐
 │1      │2 3│abc│
 ├───────┼───┼───┤
@@ -263,172 +281,29 @@ WX
 ││4  │5││   │   │
 │└───┴─┘│   │   │
 └───────┴───┴───┘
+```
+
+With `]Box on`, we can see that our selection of the element in the 2<sup>nd</sup> row and 2<sup>nd</sup> column is a nested array of some kind.
+
+```APL
       n[2;2]
+```
+```
 ┌───┐
 │ghi│
 └───┘
+```
+
+After disclosing, we are left with a simple character vector.
+
+```APL
       ⊃n[2;2]
+```
+```
 ghi
 ```
 
 Clearly, selecting subarrays in this way can become tedious, laborious and even onerous. The main code smell in APL is typically *too much code*, so of course there are other methods to select from arrays in various ways depending on your use case. These are covered in the next section on [selecting from arrays](#TODO). However, between these two techniques you will be able to obtain any subset of any array, even if it takes a few steps to get what you want.
 
-## The rank operator
-Many times you may select a subset of the data and apply further processing to it, sometimes you want to divide the data into a collection of subsets and apply the same processing to each. In fact, this idea is built in to the "array-at-a-time" processing of some primitive functions and operators, but is generalised for all functions using the rank operator.
-
-Let us take a 3D array representing the cost of 3 products over 2 weeks bought on all 7 days of each week.
-
-```APL
-      cost ← ?3 2 7⍴9
-```
-
-Sum between the *planes* to get the total cost over all 3 products each day of each week:
-
-```APL
-      +⌿cost
-```
-```
-12 21 13 14 17 20 17
-12 25 18 10  9 26 14
-```
----
-```APL
-      ⍴+⌿cost       ⍝ 2 weeks, 7 days per week
-```
-```
-2 7
-```
-
-We can tell the function `+⌿` to only *see* rank-2 subarrays. The first axis of each rank-2 subarray is that along which the columns lie. This way, we can get the total spent on each week day over the two weeks:
-
-```APL
-      (+⌿⍤2)cost
-```
-```
- 4 18 12  7 9 13  6
-17 14  9  7 9 17 13
- 3 14 10 10 8 16 12
-```
----
-```APL
-      ⍴(+⌿⍤2)cost   ⍝ 3 products, 7 days per week
-```
-```
-3 7
-```
-
-The total spent on each product each week is the row-wise sum.
-
-```APL
-      (+⌿⍤1)cost
-```
-```
-28 41
-51 35
-35 38
-```
-
-This is the same as `+/`:
-
-```APL
-      +/cost
-```
-```
-28 41
-51 35
-35 38
-```
----
-```APL
-      ⍴(+⌿⍤1)cost   ⍝ 3 products, 2 weeks
-```
-```
-3 2
-```
-
-!!!Note "A helpful tip for operators"
-	Many operators accept one or more function <dfn>operands</dfn> and apply them to their arguments in some particular way. The enclose function can be used to get a view of the arguments *as the operand function sees them*.
-
-	Apply our function to rank-2 subarrays of the `cost` array.
-
-	```APL
-	      (⊂⍤2)cost
-	```
-	```
-	┌─────────────┬─────────────┬─────────────┐
-	│2 9 4 1 5 5 2│9 6 8 5 7 8 8│1 6 1 8 5 7 7│
-	│2 9 8 6 4 8 4│8 8 1 2 2 9 5│2 8 9 2 3 9 5│
-	└─────────────┴─────────────┴─────────────┘
-	```
-
-	The result is like doing `+⌿⍵` to each of these matrices.
-
-	```APL
-	      (+⌿⍤2)cost
-	```
-	```
-	 4 18 12  7 9 13  6
-	17 14  9  7 9 17 13
-	 3 14 10 10 8 16 12
-	```
-
-In the dyadic case, the rank operator is a powerful way to pair up subarrays of `⍺` with a conforming collection of subarrays from `⍵`.
-
-Let us say that we want to add each of the numbers $1$ to $5$ to corresponding rows in a matrix. We cannot simply add a vector to a matrix because these arrays have different ranks.
-
-```APL
-      1 2 3 4 5 + 5 3⍴0 10 100
-```
-```
-RANK ERROR: Mismatched left and right argument ranks
-      1 2 3 4 5+5 3⍴0 10 100
-               ∧
-```
-
-The <dfn>rank operator</dfn> (`F⍤k`) allows us to pair up *scalars* (rank 0) from `⍺` and *vectors* (rank 1) from `⍵` and apply our function `+` between these.
-
-```APL
-      1 2 3 4 5 (+⍤0 1) 5 3⍴0 10 100
-```
-```
-1 11 101
-2 12 102
-3 13 103
-4 14 104
-5 15 105
-```
-
-In the case where we apply to sub-arrays of the same rank in both `⍺` and `⍵`, we only need specify that rank once:
-
-```APL
-      1 0 ¯1(×⍤1 1) 5 3⍴⍳15
- 1 0  ¯3
- 4 0  ¯6
- 7 0  ¯9
-10 0 ¯12
-13 0 ¯15
-      1 0 ¯1(×⍤1) 5 3⍴⍳15
- 1 0  ¯3
- 4 0  ¯6
- 7 0  ¯9
-10 0 ¯12
-13 0 ¯15
-```
-
-Of course, if you want to apply a function in this way, you must ensure there are the same number of scalars in `⍺` as rows in `⍵`:
-
-```APL
-      1 0 ¯1(×⍤0 1) 5 3⍴⍳15
-```
-```
-LENGTH ERROR: It must be that either the left and right frames match or one of them has length 0
-      1 0 ¯1(×⍤0 1)5 3⍴⍳15
-            ∧
-```
-
-or 
-
-!!!Note Conforming arrays have either same shape or one is a unit
-	With functions like `+ × ÷`, arrays must either have the same shape, or one of them be a scalar. The result of the function application has the same shape as the largest of the input arrays. The rank operator generalises this to the concept of <dfn>frames</dfn>. A frame is a rank-k cell of some array. For frames to "match" means that there are the same number of rank **j** subarrays of `⍺` as there are rank **k** subarrays of `⍵` when a function `⍺ F ⍵` is applied as `⍺ (F⍤j k) ⍵`.
-
 ## Problem set
+What indexing array must be used to select from a simple scalar?
