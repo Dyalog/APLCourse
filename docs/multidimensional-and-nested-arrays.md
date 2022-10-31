@@ -135,6 +135,18 @@ If you have a complex structure like this, you can use the <dfn>each</dfn> opera
 
 So we can tell we have a 2 element nested vector. The 1st element is a simple 2-element vector. The 2nd element contains 2 simple scalars and a simple vector of length 2.
 
+!!!Tip
+	The `]Repr` (represent) [user command](./Code.md#user-commands) can provide an APL expression which evaluates to almost any given array:
+
+	```APL
+	      mysterious_value ← 2 4∘.⍴⊂5 6 7
+	      ]repr mysterious_value
+	```
+	```
+	(5 6) (5 6 7 5)
+	```
+
+
 ## Arrays are made of scalars
 Arrays in APL are always made of scalars (rank-0 arrays) as their elements.
 
