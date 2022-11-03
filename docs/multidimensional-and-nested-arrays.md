@@ -14,7 +14,7 @@ You might have already noticed some awkwardness when we tried to represent a lis
 0 0 0 0 0 1 1
 ```
 
-Any code using this representation is going to have to be aware of the trailing space characters. This is an efficient representation of this data, and there are [some interesting techniques](#aplcart-flat-partitioned #TODO) for dealing with non-rectangular data using rectangular arrays. However, it is usually just more convenient to have a real nested structure to deal with.
+Any code using this representation is going to have to be aware of the trailing space characters. This can be an efficient representation of this data, but it can sometimes be more convenient to have a real nested structure to deal with.
 
 ```APL
       2 3⍴(1 2)(3 4 5)('AB')(2 2⍴'CDEF')
@@ -320,6 +320,21 @@ Clearly, selecting subarrays in this way can become tedious, laborious and even 
 ## Problem set
 What indexing array must be used to select from a simple scalar?
 
+1. Write the function `Backwards` which accepts a nested vector of character vectors as its argument and reverses both the order of elements and the contents of each vector within.
+	```APL
+	      Backwards 'reverse' 'these' 'words'
+	┌─────┬─────┬───────┐
+	│sdrow│eseht│esrever│
+	└─────┴─────┴───────┘
+	```
+
+	???Example "Answer"
+		You can write reverse and reverse-each in either order.
+		```APL
+		Backwards ← {⌽¨⌽⍵}
+		Backwards ← {⌽⌽¨⍵}
+		```
+
 1. Write a monadic function `Join` which joins a nested vector of character vectors `⍵` into a single, non-nested character vector in which elements from `⍵` are separated by the character scalar `,` (comma).
 
 	```APL
@@ -345,6 +360,77 @@ What indexing array must be used to select from a simple scalar?
 	join|these|words
 	```
 
+	???Example "Answer"
+		We can define a dyadic function which catenates two character vectors with a comma:
+
+		```APL
+		{⍺,',',⍵}
+		```
+
+		We can then apply this using the reduction operator on a list of character vectors:
+
+		```APL
+		      {⍺,',',⍵}/'join' 'these' 'words'
+		```
+		```
+		┌────────────────┐
+		│join,these,words│
+		└────────────────┘
+		```
+
+		Because the rank of the result of a reduction is always one less than the rank of the argument, a vector argument (rank 1) must cause a scalar (rank 0) result. That is why our result is a nested scalar which contains a character vector. To get our desired simple character vector, we disclose this result.
+
+		```APL
+		      ⊃{⍺,',',⍵}/'join' 'these' 'words'
+		```
+		```
+		join,these,words		
+		```
+
+		You might think to wrap this expression to make a dfn, and that is also valid, but you do not need to:
+
+		```APL
+		      Join ← {⊃{⍺,',',⍵}/⍵}
+		      Join ← ⊃{⍺,',',⍵}/
+		      Join 'join' 'these' 'words'
+		```
+		```
+		join,these,words
+		```
+
+		Writing functions in this way is called [tacit definition](./Ufns.md#the-three-function-styles). It usually looks better without raw dfn definitions inside in this author's opinion.
+
+		```APL
+		Join ← ⊃(⊣,',',⊢)/
+		```
+
+		You might have found it difficult to define the dyadic version because dfns can only accept two arguments. The trick is to use assignment to make a temporary name for our joining character.	
+
+		```APL
+		      Join ← {s←⍺ ⋄ ⊃{⍺,s,⍵}/⍵}
+		      '|' Join 'join' 'these' 'words'
+		```
+		```
+		join|these|words
+		```
+
+		We can even make an ambivalent function by assigning to `⍺`. In the monadic case, we will join with a comma.
+
+		```APL
+		      Join ← {⍺←',' ⋄ s←⍺ ⋄ ⊃{⍺,s,⍵}/⍵}
+		      Join 'join' 'these' 'words'
+		```
+		```
+		join,these,words
+		```
+		---
+		```APL
+		      '|' Join 'join' 'these' 'words'
+		```
+		```
+		join|these|words
+		```
+
 1. Create a variable `nest` which has the following properties
 
 	```APL
@@ -358,11 +444,11 @@ What indexing array must be used to select from a simple scalar?
 	      ≡nest
 	```
 	```
-	 ̄2
+	¯2
 	```
 	---
 	```APL
-	      ⍴ ̈nest
+	      ⍴¨nest
 	```
 	```
 	┌─┬┬─┐
@@ -387,3 +473,76 @@ What indexing array must be used to select from a simple scalar?
 	```
 	14
 	```
+
+	???+Example "Answer"
+		We have a 2 row, 3 column matrix. It is unevenly nested with a maximum depth of 2. In ravel order there are: two scalars; a 2-element vector; a 3-element vector; a scalar; and a 6-element vector.
+
+		We can lay out the simple scalar elements of the array in a simple vector using the <dfn>enlist</dfn> function.
+		
+		We can then see that there are 14 scalar elements in total. This makes sense given the description above.
+		
+		```
+		14 = +/1 1 2 3 1 6`
+		```
+
+		Therefore, our ravel of elements is `'I' 3 'am' (1 5 8) 'a' 'matrix'`. The definition of `nest` is:
+
+		```APL
+		nest ← 2 3⍴'I' 3 'am' (1 5 8) 'a' 'matrix'
+		```
+
+1. Without using the shape function `⍴⍵`, what are the shapes of the results of the following expressions?
+	1. `'APL IS COOL'`
+	1. `¯1 0 1 ∘.× 1 2 3 4 5` 
+	1. `1 2 3 4∘.+¯1 0 1∘.×1 10`
+	1. `+/⍳4`
+
+	???+Example "Answers"
+		<ol>
+		<li>This is a simple character vector with $11$ characters, including space characters, so its shape is `11`.
+		```APL
+		      ⍴'APL IS COOL'
+		11
+		```
+		</li>	
+
+		<li>This is a matrix. The result of multiplying all combinations of elements from a 3-element vector and a 5-element vector is a 3 by 5 matrix. It has 3 rows and 5 columns, so its shape is `3 5`.
+
+		```APL
+		      ¯1 0 1 ∘.× 1 2 3 4 5
+		```
+		```
+		¯1 ¯2 ¯3 ¯4 ¯5
+		0  0  0  0  0
+		1  2  3  4  5
+		```
+		---
+		```APL
+		      ⍴¯1 0 1 ∘.× 1 2 3 4 5
+		```
+		```
+		3 5
+		```
+
+		If you swap the arguments around, you get a $5$ by $3$ matrix.
+
+		```APL
+		      1 2 3 4 5 ∘.× ¯1 0 1
+		```
+		```
+		¯1 0 1
+		¯2 0 2
+		¯3 0 3
+		¯4 0 4
+		¯5 0 5
+		```
+
+		</li>
+
+		<li>This is a 3D array of shape `4 3 2`. The shape of the result of applying a function using the outer product operator is the concatenation of the shapes of the arguments.
+		
+		The first (rightmost) outer product takes a $3$-element vector and a $2$-element vector and returns a $3$ by $2$ matrix. This becomes the right argument to the next outer product which takes a $4$-element vector on its left to result in a $4$-plane, $3$-column, $2$-row multidimensional array.</li>
+
+		<li>This is a scalar. The reduce operator `F/` has the effect of *reducing* the rank of its argument array by 1. Since we have a vector (rank 1) input, we must have a scalar (rank 0) output.</li>
+
+		</ol>
