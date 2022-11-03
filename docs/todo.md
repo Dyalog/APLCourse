@@ -15,6 +15,17 @@
 - Mean {+⌿⍵÷≢⍵} vs {(+⌿⍵)÷≢⍵}
 - find-replace-vals AnyVowels use Any idiom `∨/`
 - The idiom for joining a nested list into a simple list is `⊃,/`
+- outer product
+	- takeout menu
+	- times table
+	- addition table
+	- identity matrix
+	- membership
+	- countful membership
+- shape, reshape
+	- look-and-say
+- take, drop
+- replicate/compress
 
 ## NOTES
 For chaining the rank operator, think of doing multiple pairings – from the outside inwards. So we have a vector of scalars `ABC`, and a matrix of rows of scalars (2 3⍴⍳6). The result wants to pair scalars from ⍺ with scalars from ⍵. However, we cannot do this simply F⍤0 because of our rank mismatch. What we can do is use rank once to pair up equivalent shapes, and then use rank 0. Therefore we have to pair rows (vectors, rank 1) first (outside) and then within each of those pairings, pair up our scalars (rank 0) inside.
