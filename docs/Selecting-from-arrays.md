@@ -253,80 +253,6 @@ Over time you will learn from experience what is the most appropriate thing to u
 		</li>
 		</ol>
 
-1. Write the function `Backwards` which accepts a nested vector of character vectors as its argument and reverses both the order of elements and the contents of each vector within.
-	```APL
-	      Backwards 'reverse' 'these' 'words'
-	┌─────┬─────┬───────┐
-	│sdrow│eseht│esrever│
-	└─────┴─────┴───────┘
-	```
-
-	???+Example "Answer"
-		You can write the reverse and reverse-each in either order.
-		```APL
-		Backwards ← {⌽¨⌽⍵}
-		Backwards ← {⌽⌽¨⍵}
-		```
-
-1. Write a dyadic `Join` function which takes a nested vector of character vectors `⍵` and returns a simple character vector consisting of the contents of each nested vector joined by a delimiting character `⍺`.
-
-	```APL
-	      Join 'join' 'these' 'words'
-	join,these,words
-	      Join 'and' 'also' 'these' 'words'
-	and,also,these,words
-	```
-
-- A reduction always results in rank 1 less (hence nested things return a nested scalar)
-	- `∨/('some text'='a')('some text'='b')('some text'='c')`
-	- `⊃{⍺,','⍵}/'join' 'these' 'words' 'with' 'commas'`
-
-1. Without using the shape function `⍴⍵`, what are the shapes of the results of the following expressions?
-	1. `'APL IS COOL'`
-	1. `¯1 0 1 ∘.× 1 2 3 4 5` 
-	1. `1 2 3 4∘.+¯1 0 1∘.×1 10`
-	1. `+/⍳4`
-
-	???+Example "Answers"
-		<ol>
-		<li><ol>
-		<li>This is a simple character vector with $11$ characters, including space characters, so its shape is `11`.
-		```APL
-		      ⍴'APL IS COOL'
-		11
-		```
-		</li>	
-		<li>This is a matrix. The result of multiplying all combinations of elements from a 3-element vector and a 5-element vector is a 3 by 5 matrix. It has 3 rows and 5 columns, so its shape is `3 5`.
-		```APL
-		      ¯1 0 1 ∘.× 1 2 3 4 5
-		```
-		```
-		¯1 ¯2 ¯3 ¯4 ¯5
-		0  0  0  0  0
-		1  2  3  4  5
-		```
-		---
-		```APL
-		      ⍴¯1 0 1 ∘.× 1 2 3 4 5
-		```
-		```
-		3 5
-		```
-		If you swap the arguments around, you get a $5$ by $3$ matrix.</li>
-		```APL
-		      1 2 3 4 5 ∘.× ¯1 0 1
-		¯1 0 1
-		¯2 0 2
-		¯3 0 3
-		¯4 0 4
-		¯5 0 5
-		```
-		<li>This is a scalar. The reduce operator `F/` has the effect of *reducing* the rank of its argument array by 1.
-
-		The shape of a scalar </li>
-		</ol></li>
-		</ol>
-
 ### Visit to the museum
 Here are some data and questions about visits to a museum.  
 
@@ -357,43 +283,6 @@ In the boolean matrix `display`, each row corresponds to a museum piece and each
 1. What was the most popular section by visit duration?
 1. Estimate the opening and closing times of each of the sections.
 1. Which animal being on display corresponded with the highest increase in visit duration for its section?
-
-### Word Problems
-
-We are going to do some text processing on a dictionary of words. 
-
-If you have access to the internet, the following expressions will download a text file dictionary (917kB in size) and store it as a nested vector of character vectors named `words`.
-
-```APL
-      ]Load HttpCommand
-      words ← (⎕UCS 10) {(⍺≠⍵)⊆⍵} (HttpCommand.Get'https://tinyurl.com/y7asendy').Data
-```
-
-If you have the file on your computer (maybe you were given it on a USB drive, for example) then you can load it into your workspace from disk using the following expressions.
-
-```APL
-      (content encoding newline) ← ⎕NGET'/path/to/words.txt'
-      words ← (⎕UCS newline) (≠⊆⊢) content
-```
-
-Now answer the following questions about `words`.
-
-1. How many words have at least 3 `'e'`s in them?
-
-1. How many words have exactly two consecutive `'e'`s in them? 
-    The first three such words are `Aberdeen` `Abderdeen's` and `Aileen`.
-
-1. What is the shortest word with two consecutive `'a'`s?
-
-1. What words have three consecutive double letters? For example, `mississippi` does not but `misseetto` does. Misseetto is not a real word.
-
-	A palindrome is the same when reversed. For example, **racecar** is a palindrome but **racecat** is not.
-
-1. How many palindromes are there in `words`?
-
-1. Which palindrome in `words` is the longest?
-
-1. How many words are in alphabetical order?
 
 ### Rain facts
 The 3D array `rain` gives the monthly rainfall in millimeters over 7 years in 5 countries.

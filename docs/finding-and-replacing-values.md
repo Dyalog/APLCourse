@@ -292,6 +292,45 @@ We can assign items in `nest` to the three variables `s←'A'` `v←1 2 3` and `
 	```
 
 ## Problem set
+### Word Problems
+
+We are going to do some text processing on a dictionary of words. 
+
+If you have access to the internet, the following expressions will download a text file dictionary (917kB in size) and store it as a nested vector of character vectors named `words`.
+
+```APL
+      ]Load HttpCommand
+      words ← (⎕UCS 10) {(⍺≠⍵)⊆⍵} (HttpCommand.Get'https://tinyurl.com/y7asendy').Data
+```
+
+If you have the file on your computer (maybe you were given it on a USB drive, for example) then you can load it into your workspace from disk using the following expressions.
+
+```APL
+      (content encoding newline) ← ⎕NGET'/path/to/words.txt'
+      words ← (⎕UCS newline) (≠⊆⊢) content
+```
+
+Now answer the following questions about `words`.
+
+1. How many words have at least 3 `'e'`s in them?
+
+1. How many words have exactly two consecutive `'e'`s in them? 
+    The first three such words are `Aberdeen` `Abderdeen's` and `Aileen`.
+
+1. What is the shortest word with two consecutive `'a'`s?
+
+1. What words have three consecutive double letters? For example, `mississippi` does not but `misseetto` does. Misseetto is not a real word.
+
+	A palindrome is the same when reversed. For example, **racecar** is a palindrome but **racecat** is not.
+
+1. How many palindromes are there in `words`?
+
+1. Which palindrome in `words` is the longest?
+
+1. How many words are in alphabetical order?
+
+---
+
 1. Analysing text
 
 	1. Write a function test if there are any vowels `'aeiou'` in text vector `⍵`

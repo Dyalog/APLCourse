@@ -1,4 +1,58 @@
-# The Rank Operator
+# Cells and axes
+
+## Fundamentals of high rank arrays
+From the APL Wiki: 
+<blockquote>
+      A <a target="_blank" href="https://aplwiki.com/wiki/Cell">cell</a> is a subarray which is formed by selecting a single index along some number of leading axes and the whole of each trailing axis. Cells are classified by their rank, which may be between 0 (scalars) and the array's rank (in which case the cell must be the entire array). Cells with rank k are called k-cells of an array. A major cell is a cell whose rank is one less than the entire array, or a 0-cell of a scalar. 
+</blockquote>
+If the text above feels confusing, don't worry. Possibly after this chapter, and almost certainly after [the next section on selecting from arrays](../Selecting from arrays), you will be able to read it again and say to yourself "oh yeah, that makes sense". What you need to know for now is that arrays are arranged like rectangles in many dimensions. The three simplest cases should feel somewhat familiar to you.
+
+```APL
+      0            ⍝ A scalar
+0
+      'APL'        ⍝ A vector
+APL
+      0 1 2∘.*⍳5   ⍝ A matrix
+0 0 0  0  0
+1 1 1  1  1
+2 4 8 16 32
+```
+
+Now let us look at an array with 3 dimensions. We will call it a **cuboid**:
+
+```APL
+      ⍴cuboid←2 3∘.+3 4 5∘.×4 5 6 7
+2 3 4 ← trailing (last) axis
+↑
+leading (first) axis
+```
+
+In the array `cuboid` defined above, there are `2` **major cells**, which are those of rank `¯1+≢⍴cuboid`.
+
+```APL
+      2 3 4⍴⎕A
+ABCD
+EFGH
+IJKL
+    
+MNOP
+QRST
+UVWX
+      ≢2 3 4⍴⎕A      ⍝ Tally counts the major cells
+2
+```
+
+The display may look like 2 separate matrices, but the array `2 3 4⍴⎕A` is a single, 3 dimensional array.
+
+The dimensions of an array are also known as **axes**. The most major cells, the rank `k-1` cells for an array of rank `k`, lie along the *first* axis. The least major cells are columns which lie along the *last* axis.
+
+In Dyalog, arrays can have up to 15 dimensions.
+
+For more details on the APL array model in Dyalog and other array languages, see [the APL Wiki article on the array model](https://aplwiki.com/wiki/Array_model).
+
+Now that you know how to describe the structure of an array in terms of its sub-arrays, let us look at how to apply functions to sub-arrays.
+
+## The rank operator
 Many times you may select a subset of the data and apply further processing to it, sometimes you want to divide the data into a collection of subsets and apply the same processing to each. In fact, this idea is built in to the "array-at-a-time" processing of some primitive functions and operators, but is generalised for all functions using the rank operator.
 
 Let us take a 3D array representing the cost of 3 products over 2 weeks bought on all 7 days of each week.
@@ -163,59 +217,7 @@ LENGTH ERROR: It must be that either the left and right frames match or one of t
 !!!Note Conforming arrays have either same shape or one is a unit
 	With functions like `+ × ÷`, arrays must either have the same shape, or one of them be a scalar. The result of the function application has the same shape as the largest of the input arrays. The rank operator generalises this to the concept of <dfn>frames</dfn>. A frame is a rank-k cell of some array. For frames to "match" means that there are the same number of rank **j** subarrays of `⍺` as there are rank **k** subarrays of `⍵` when a function `⍺ F ⍵` is applied as `⍺ (F⍤j k) ⍵`.
 
-## Fundamentals of high rank arrays
 
-### Cells and axes
-From the APL Wiki: 
-<blockquote>
-      A <a target="_blank" href="https://aplwiki.com/wiki/Cell">cell</a> is a subarray which is formed by selecting a single index along some number of leading axes and the whole of each trailing axis. Cells are classified by their rank, which may be between 0 (scalars) and the array's rank (in which case the cell must be the entire array). Cells with rank k are called k-cells of an array. A major cell is a cell whose rank is one less than the entire array, or a 0-cell of a scalar. 
-</blockquote>
-If the text above feels confusing, don't worry. Possibly after this chapter, and almost certainly after [the next section on selecting from arrays](../Selecting from arrays), you will be able to read it again and say to yourself "oh yeah, that makes sense". What you need to know for now is that arrays are arranged like rectangles in many dimensions. The three simplest cases should feel somewhat familiar to you.
-
-```APL
-      0            ⍝ A scalar
-0
-      'APL'        ⍝ A vector
-APL
-      0 1 2∘.*⍳5   ⍝ A matrix
-0 0 0  0  0
-1 1 1  1  1
-2 4 8 16 32
-```
-
-Now let us look at an array with 3 dimensions. We will call it a **cuboid**:
-
-```APL
-      ⍴cuboid←2 3∘.+3 4 5∘.×4 5 6 7
-2 3 4 ← trailing (last) axis
-↑
-leading (first) axis
-```
-
-In the array `cuboid` defined above, there are `2` **major cells**, which are those of rank `¯1+≢⍴cuboid`.
-
-```APL
-      2 3 4⍴⎕A
-ABCD
-EFGH
-IJKL
-    
-MNOP
-QRST
-UVWX
-      ≢2 3 4⍴⎕A      ⍝ Tally counts the major cells
-2
-```
-
-The display may look like 2 separate matrices, but the array `2 3 4⍴⎕A` is a single, 3 dimensional array.
-
-The dimensions of an array are also known as **axes**. The most major cells, the rank `k-1` cells for an array of rank `k`, lie along the *first* axis. The least major cells are columns which lie along the *last* axis.
-
-In Dyalog, arrays can have up to 15 dimensions.
-
-For more details on the APL array model in Dyalog and other array languages, see [the APL Wiki article on the array model](https://aplwiki.com/wiki/Array_model).
-
-Now that you know how to describe the structure of an array in terms of its sub-arrays, let us look at how to apply functions to sub-arrays.
 
 ### First- and last-axis primitives
 
