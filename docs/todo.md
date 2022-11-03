@@ -13,24 +13,10 @@
 - [in problem set N](./array-logic-data-driven-conditionals.md#problem-set (finding replacing)
 - proper treatment of scalar functions
 - Mean {+⌿⍵÷≢⍵} vs {(+⌿⍵)÷≢⍵}
+- find-replace-vals AnyVowels use Any idiom `∨/`
+- The idiom for joining a nested list into a simple list is `⊃,/`
 
 ## NOTES
-
-Indeed that *was* the idea, but in the new edition there will be proper introductions of these concepts and worked solutions.
-
-Those problems are trying to lead the user to thinking about the dimensions as representing things, but without explained solutions they’re just confusing in my opinion.
-
-You can write a first-axis mean function and apply the whole thing using rank:
-({(+⌿⍵)÷≢⍵}⍤3)
-
-Or , as you have done, apply sub-functions with rank – which is better for performance, but more annoying if you want to change things:
-{(+⌿⍤3)÷(≢⍤3)⍵}
-
-If you know that your input is always rank 3, then you don’t need to use ⍤3. But if you might apply to a rank 4 array in the future (to batch process a collection of these rain data), then you might want to use ⍤3.
-{(+⌿⍵)÷≢⍵}
-
-Frankly that type of discussion ↑ is too detailed for an intro course anyway, and might be included as an appendix or separate tutorial thing. The rank operator is considered by some seasoned APLers to be an advanced topic, but I think it is an powerful tool for understanding multidimensional arrays properly, so I am adamant to include it in any new APL tutorial content. In practice, most arrays are rank 2 at most (like Excel tables), and rank 3 arrays are used more like collections of matrices than they are used as real rank-3 mathematical tensors (e.g. in machine learning).
-
 For chaining the rank operator, think of doing multiple pairings – from the outside inwards. So we have a vector of scalars `ABC`, and a matrix of rows of scalars (2 3⍴⍳6). The result wants to pair scalars from ⍺ with scalars from ⍵. However, we cannot do this simply F⍤0 because of our rank mismatch. What we can do is use rank once to pair up equivalent shapes, and then use rank 0. Therefore we have to pair rows (vectors, rank 1) first (outside) and then within each of those pairings, pair up our scalars (rank 0) inside.
 
       'ABC' ({⍺⍵}⍤0) 2 3⍴⍳6
