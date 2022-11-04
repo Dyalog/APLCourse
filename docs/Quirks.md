@@ -14,6 +14,8 @@ Despite long and widespread use in many programming languages, `:If :Else`-style
    →               ⍝ Clear one stack suspension
    →condition/ln   ⍝ If condition is true (1), go to line ln, otherwise go to next line
 ```
+```
+```
 ---
 ```APL
     ∇  r←BFac n   ⍝ Branching Factorial
@@ -22,6 +24,8 @@ Despite long and widespread use in many programming languages, `:If :Else`-style
 [3]    r←n×BFac n-1 ⋄ →0               
 [4]    r←n                             
     ∇   
+```
+```
 ```
 
 Keeping track of line numbers in this way would be a hassle for large programs. The introduction of *labels* makes understanding code easier.
