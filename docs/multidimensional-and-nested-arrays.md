@@ -235,7 +235,7 @@ If the result of `⍴'A'` is an array with shape `0` - that means that the shape
 	The shape returns a vector which describes the length of each axis. Whether there are five axes or no axes, the result of `⍴⍵` is always a vector.
 
 ## Simple array selection
-When you have a collection of data represented as an array, you often want to use only some subset of the data. There are a few selection methods in APL, and [the next section](./selecting-from-arrays.md) is dedicated to them. Here we show two constructs which can be used to select any sub-array from any array.
+When you have a collection of data represented as an array, you often want to use only some subset of the data. There are a few selection methods in APL, and [there is a section](./selecting-from-arrays.md) dedicated to them. Here we show two constructs which can be used to select any sub-array from any array.
 
 ```APL
       a ← 2 3 4⍴⎕A
