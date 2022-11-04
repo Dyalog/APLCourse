@@ -332,3 +332,5 @@ The 3D array `rain` gives the monthly rainfall in millimeters over 7 years in 5 
 
 ### More problems
 - What type of indexing is used in `grid[⍸grille=' ']`
+
+- What indexing array must be used to select from a simple scalar?
