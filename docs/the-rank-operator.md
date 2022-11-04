@@ -53,7 +53,7 @@ For more details on the APL array model in Dyalog and other array languages, see
 Now that you know how to describe the structure of an array in terms of its sub-arrays, let us look at how to apply functions to sub-arrays.
 
 ## The rank operator
-Many times you may select a subset of the data and apply further processing to it, sometimes you want to divide the data into a collection of subsets and apply the same processing to each. In fact, this idea is built in to the "array-at-a-time" processing of some primitive functions and operators, but is generalised for all functions using the rank operator.
+Many times you may select a subset of the data and apply further processing to it, sometimes you want to divide the data into a collection of subsets and apply the same processing to each. In fact, this idea is built in to the "array-at-a-time" processing of some primitive functions and operators, but it is generalised for all functions using the rank operator.
 
 Let us take a 3D array representing the cost of 3 products over 2 weeks bought on all 7 days of each week.
 
@@ -217,20 +217,7 @@ LENGTH ERROR: It must be that either the left and right frames match or one of t
 !!!Note Conforming arrays have either same shape or one is a unit
 	With functions like `+ × ÷`, arrays must either have the same shape, or one of them be a scalar. The result of the function application has the same shape as the largest of the input arrays. The rank operator generalises this to the concept of <dfn>frames</dfn>. A frame is a rank-k cell of some array. For frames to "match" means that there are the same number of rank **j** subarrays of `⍺` as there are rank **k** subarrays of `⍵` when a function `⍺ F ⍵` is applied as `⍺ (F⍤j k) ⍵`.
 
-
-
-### First- and last-axis primitives
-
-Which of the following functions are affected by the rank operator `⍤` and why are the other functions not affected?
-
-```APL
-      ⌽    ⍝ Reverse
-      ⊖    ⍝ Reverse first
-      +/   ⍝ Plus reduce
-      +⌿   ⍝ Plus reduce-first
-```
-
-### Rank vs. Axis
+## The bracket axis operator
 We have seen two pairs of *first-* and *last-axis* primitives.
 
 ```APL
@@ -316,48 +303,71 @@ Compare the behaviour of the monadic function `⊂` *enclose* when applied with 
 └────┴────┘
 ```
 
+We mention the axis operator because you are likely. The [section about older features](./Quirks.md) has more examples of bracket axis, but for newer users it has fallen out of favour because:
+
+- it can only be used with a few particular primitives, whereas the rank operator can be used with any function including those defined by the user
+- it is defined on an ad-hoc basis for each function to which it applies, whereas rank has consistent behaviour for all functions
+- it involves implicit transposes of the array data
+
 For a more in-depth look at the relationship between function rank and function axis, watch the Dyalog webinars on [Selecting from Arrays](https://dyalog.tv/Webinar/?v=AgYDvSF2FfU) and [The Rank Operator and Dyadic Transpose](https://dyalog.tv/Webinar/?v=zBqdeDJPPRc).
 
 A list of functions with bracket-axis definitions can be found on [the APL Wiki page for function axis](https://aplwiki.com/wiki/Function_axis).
 
 ## Problem set
+1. 
+	Which of the following functions are affected by the rank operator `⍤` and why are the other functions not affected?
 
-1. Create the variable `nest` which has the following properties
 	```APL
-	      ⍴nest
-	2 3
-	      ≡nest
-	̄2
-	      ⍴ ̈nest
-	┌─┬┬─┐
-	│ ││2│
-	├─┼┼─┤
-	│3││6│
-	└─┴┴─┘
-	      ]display ∊nest
-	┌→───────────────────┐
-	│I 3 am 1 5 8 amatrix│
-	└+───────────────────┘
-	      ⍴∊nest
-	14
+	      ⌽    ⍝ Reverse
+	      ⊖    ⍝ Reverse first
+	      +/   ⍝ Plus reduce
+	      +⌿   ⍝ Plus reduce-first
 	```
-
-### Summary Statistics
 
 1.  
 
 	The 3D array `rain` gives the monthly rainfall in millimeters over 7 years in 5 countries.  
-	<pre><code class="language-APL">      rain←?7 5 12⍴250</code></pre>
-	
-	For each expression below, write a brief description of the resulting statistic. If necessary, consult the hint which follows the group of expressions. 
 
-	<pre><code class="language-APL">      (+⌿⍤1)rain      ⍝ Total rainfall for each of 7 years in each of 5 countries
-	      +⌿rain
-	      (+⌿⍤2)rain
-	      (+⌿⍤3)rain
-	      ⌈⌿rain
-	      (⌈⌿⍤2)rain
-	      rain[⍸rain>250]</code></pre>
+	```APL
+	rain←?7 5 12⍴250
+	```
+
+	There are 12 columns in each row; the rows represent the months. The sum along the rows...
+	
+	```APL
+	      (+⌿⍤1)rain
+	```
+	```
+	1476 1764 1733 1320 1678
+	1698 1943  798 2226 1813
+	2050 1821 1209 1763 1625
+	2006 1218 1615 1516 1536
+	1372 1584 1946 1604 1623
+	1831 1705 1998 1312 1224
+	1499 1369 1437 1597 1279
+	```
+	---
+	```APL
+	      ⍴(+⌿⍤1)rain
+	```
+	```
+	7 5
+	```
+
+	...gives the total rainfall in each year in each country over 12 months. Put another way, it is the total annual rainfall each year in each country.
+	
+	For each expression below, write a brief description of the resulting statistic.
+
+	```APL
+	+⌿rain
+	(+⌿⍤2)rain
+	(+⌿⍤3)rain
+	⌈⌿rain
+	(⌈⌿⍤2)rain
+	rain[⍸rain>250]
+	```
+	```
+	```
 
 	??? Hint
 		Look at the shapes of the arguments and the results, <code class='language-apl'>⍴rain</code> and <code class='language-apl'>⍴+⌿rain</code> etc.
@@ -369,16 +379,33 @@ A list of functions with bracket-axis definitions can be found on [the APL Wiki 
 	1. Write an expression to find the average annual rainfall over the 7 years for each of the 5 countries.
 
 	1. Assign scalar numeric values (single numbers) to the variables `years` `countries` `months` such that the `rain` data can be summarised as follows:
-		<pre><code class="language-APL">      ⍴(+⌿⍤years)rain       ⍝ Sum over years</code></pre>
-		<pre><code>5 12</code></pre>
-		<hr>
-		<pre><code class="language-APL">      ⍴(+⌿⍤countries)rain   ⍝ Sum over countries</code></pre>
-		<pre><code>7 12</code></pre>
-		<hr>
-		<pre><code class="language-APL">      ⍴(+⌿⍤months)rain      ⍝ Sum over months</code></pre>
-		<pre><code>7 5</code></pre>
-
-### Rank Practice
+		```APL
+		      ⍴(+⌿⍤years)rain       ⍝ Sum over years
+		```
+		```
+		5 12
+		```
+		---
+		```APL
+		      ⍴(+⌿⍤countries)rain   ⍝ Sum over countries
+		```
+		```
+		7 12
+		```
+		---
+		```APL
+		      ⍴(+⌿⍤months)rain      ⍝ Sum over months
+		```
+		```
+		7 5
+		```
+	
+	???+Example "Answers"
+		`+⌿rain` is the total rainfall each month in each country over all 7 years  
+		`(+⌿⍤2)rain` is the total rainfall each year in each month over all 5 countries  
+		`(+⌿⍤3)rain` is the same as `+⌿rain` because `rain` is a rank-3 array  
+		`⌈⌿rain` is the maximum rainfall in each month in each country out of any of the 7 years  
+		`rain[⍸rain>250]` is the rainfall for months for which it was greater than 250mm.
 
 1. Common Names for Arrays of Rank-n
 
