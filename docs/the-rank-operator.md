@@ -58,7 +58,7 @@ A lot of the time you might want to take a subset of the data and do stuff to it
 Let us take a 3D array representing the cost of 3 products over 2 weeks bought on all 7 days of each week.
 
 ```APL
-      cost ← ?3 2 7⍴9
+cost ← ?3 2 7⍴9
 ```
 
 Sum between the *layers* (rank 2, matrices) of this array to get the total cost over all 3 products each day of each week:
@@ -553,3 +553,9 @@ As mentioned previously, more detailed treatments of the rank operator can be fo
 	```
 	1. Find the class which class has the tallest average height
 		1. Find the class with the narrowest range of heights
+
+## Problems
+- match word problem `∧⌿=⍤1`
+- reverse the rows in each submatrix `⊖⍤2`
+- find the maximum *something*, where something is defined not in array terms but obviously refers to some subarrays
+
