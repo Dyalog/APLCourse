@@ -468,3 +468,10 @@ Now answer the following questions about `words`.
 	- SplitOnFirst
 	- ReplaceRow
 
+1. Broken keyboard unique
+
+	Write the **unique** function `∪⍵` without using the **downshoe** `∪` glyph.
+
+	???+Example "Answers"
+		Index-of returns the index of the first occurance of an element. For `⍵⍳⍵`, this becomes a list of integer ID numbers which correspond to major cells as they appear.
+	((⍳≢text)=text⍳text)/text

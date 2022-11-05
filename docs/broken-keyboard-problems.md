@@ -29,12 +29,6 @@ For each of the following problems:
 		{⍵⌿⍥,⍳⍴⍵}
 		```
 
-1. This primitive function returns the unique major cells of any array.
-
-	???+Example "Answers"
-		Index-of returns the index of the first occurance of an element. For `⍵⍳⍵`, this becomes a list of integer ID numbers which correspond to major cells as they appear.
-	((⍳≢text)=text⍳text)/text
-
 1. This primitive function counts the number of elements in a vector.
 	{+/⍵=⍵}
 
