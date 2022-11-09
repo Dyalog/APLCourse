@@ -29,6 +29,8 @@ leading (first) axis
 
 In the array `cuboid` defined above, there are `2` **major cells**, which are those of rank `¯1+≢⍴cuboid`.
 
+Here is another 3D array containing letters of the alphabet:
+
 ```APL
       2 3 4⍴⎕A
 ABCD
@@ -45,6 +47,15 @@ UVWX
 The display may look like 2 separate matrices, but the array `2 3 4⍴⎕A` is a single, 3 dimensional array.
 
 The dimensions of an array are also known as **axes**. The most major cells, the rank `k-1` cells for an array of rank `k`, lie along the *first* axis. The least major cells are columns which lie along the *last* axis.
+
+<center>
+	<figure>
+		<img src="../img/3DAxes.png" alt="Axes of a 3D array"/>
+		<figcaption>
+			Axes of a 3D array
+		</figcaption>
+	</figure>
+</center>
 
 In Dyalog, arrays can have up to 15 dimensions.
 
@@ -584,15 +595,6 @@ LOG
 ```
 
 Some functions and operators can be used along specified axes using the **function axis operator** `[]` (more <a target="_blank" href="https://aplwiki.com/wiki/Function-operator_overloading">duplicitous</a> symbols).
-
-<center>
-	<figure>
-		<img src="../img/3DAxes.png" alt="Axes of a 3D array"/>
-		<figcaption>
-			Axes of a 3D array
-		</figcaption>
-	</figure>
-</center>
 
 Compare the behaviour of the monadic function `⊂` *enclose* when applied with the rank operator `⍤` versus when it is applied using **bracket axis** (another name for the *function axis operator* `[]`).
 
