@@ -12,8 +12,11 @@ For each of the following problems:
 
 1. This primitive function is used to find the indices of a Boolean array.
 
+	???+Hint "What primitive function is this?"
+		We want to model the **where** function `⍸⍵` without using the **iota-underbar** glyph `⍸`.
+
 	???+Example "Answers"
-		We want to model the **where** functoin `⍸⍵` without using the **iota-underbar** glyph `⍸`.
+		We want to model the **where** function `⍸⍵` without using the **iota-underbar** glyph `⍸`.
 
 		For Boolean vectors:
 
@@ -26,16 +29,35 @@ For each of the following problems:
 		
 		```APL
 		{(,⍵)/,⍳⍴⍵}
-		{⍵⌿⍥,⍳⍴⍵}
+		{⍵/⍥,⍳⍴⍵}
 		```
 
 1. This primitive function counts the number of elements in a vector.
-	{+/⍵=⍵}
 
-1. This primitive function 
-	{⍵=⌊⍵}
-	{{⍵=⌊⍵}⍺÷⍵}
-	{(⍺∊⍵)/⍺}
+	???+Hint "What primitive function is this?"
+		We want to model the **shape** `⍴⍵` or **tally** function `≢⍵` without using the **rho** `⍴` or **not-identical-to** `≢` glyphs. We might need to use different approaches depending on the type and structure of our argument.
+
+	???+Example "Answers"
+		For simple numeric vectors, we can use any mathemtical function which always returns `1` and add up the ones.
+
+		```APL
+		{+/⍵÷⍵}
+		{+/⍵*0}
+		{+/1+0×⍵}
+		{+/×1+|⍵}
+		```
+
+		For any simple vector, we can ask equality with the argument itself:
+
+		```APL
+		{+/⍵=⍵}
+		```
+
+		For any vector, we can use each `⍺ F¨ ⍵` to map the match function `⍺≡⍵` between each element of `⍵` and itself.
+
+		```APL
+		{+/≡¨⍨⍵}
+		```
 
 1. This primitive function reverses the order of the elements in a vector.
 
@@ -65,10 +87,15 @@ For each of the following problems:
 	- takes a numeric right argument vector `⍵`
 	- returns an integer vector of the same length as `⍵`, indicating the intervals in `⍺` in which elements in `⍵` belong
 	- **BONUS:** write a version which also works with characters arrays
+
 	```APL
 	      'ADG' Function 'ABCDEFG'
 	1 1 1 2 2 2 3
 	```
+
+	???+Hint "What primitive function is this?"
+	???+Example "Answer"
+
 	{+⌿⍺∘.=⍵}
 
 	{+⌿(⍳≢⍵)∘.≤⍵⍳⍺}
