@@ -370,6 +370,42 @@ APL
 		PassFail ← {'FP'[1+40≤⍵]}
 		```
 
+1. Grille cypher
+	This problem is taken from the [2019 APL Problem Solving Competition](https://www.dyalog.com/student-competition.htm).
+
+	A Grille is a square sheet with holes cut out of it which, when laid on top of a similarly-sized character matrix, reveals a hidden message.
+
+	![The application of a grille to a character grid](./img/Grille.png)
+
+	Write an APL function `Grille` which:
+
+	- takes a character matrix left argument where a hash `'#'` represents opaque material and a space `' '` represents a hole.
+	- takes a character matrix of the same shape as right argument
+	- returns the hidden message as a character vector
+
+	```APL
+	      (2 2⍴'# # ') Grille 2 2⍴'LHOI'
+	```
+	```
+	HI
+	```
+	---
+	```APL
+	      grid   ← 5 5⍴'VRYIALCLQIFKNEVPLARKMPLFF'
+		  grille ← 5 5⍴'⌺⌺⌺ ⌺ ⌺⌺⌺ ⌺ ⌺ ⌺⌺⌺ ⌺⌺⌺  ⌺⌺'
+		  grid grille
+	┌─────┬─────┐
+	│VRYIA│⌺⌺⌺ ⌺│
+	│LCLQI│ ⌺⌺⌺ │
+	│FKNEV│⌺ ⌺ ⌺│
+	│PLARK│⌺⌺ ⌺⌺│
+	│MPLFF│⌺  ⌺⌺│
+	└─────┴─────┘
+		  grille Grille grid
+	```
+	THISISFUN
+	```
+
 1. Back to School
 	1. Write a function to produce the multiplication table from `1` to `⍵`. 
 
