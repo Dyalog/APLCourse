@@ -11,7 +11,7 @@ It is common to make multiple equality comparisons. Doing this one at a time bec
 0 0 1 0 0 1 0 0 0 0 0 0 1 0 0 1 0 0 1
 ```
 
-The <dfn>membership</dfn> function returns a Boolean array (`1`s and `0`s) of the same shape as `⍺` where a `1` indicates the location of any one of the elements in `⍵`.
+The <dfn>membership</dfn> function returns a Boolean array (`1`s and `0`s) of the same shape as `⍺` where `1` indicates the location of any of the elements in `⍵`.
 
 ```APL
       text∊'aeiou'
@@ -292,92 +292,70 @@ We can assign items in `nest` to the three variables `s←'A'` `v←1 2 3` and `
 	```
 
 ## Problem set
-### Word Problems
 
-We are going to do some text processing on a dictionary of words. 
+### Part 1: Text processing
 
-If you have access to the internet, the following expressions will download a text file dictionary (917kB in size) and store it as a nested vector of character vectors named `words`.
+1. Write a function test if there are any vowels `'aeiou'` in text vector `⍵`
 
-```APL
-      ]Load HttpCommand
-      words ← (⎕UCS 10) {(⍺≠⍵)⊆⍵} (HttpCommand.Get'https://tinyurl.com/y7asendy').Data
-```
+	```APL
+	      AnyVowels 'this text is made of characters'
+	```
+	```
+	1
+	```
+	---
+	```APL
+	      AnyVowels 'bgxkz'
+	```
+	```
+	0
+	```
 
-If you have the file on your computer (maybe you were given it on a USB drive, for example) then you can load it into your workspace from disk using the following expressions.
-
-```APL
-      (content encoding newline) ← ⎕NGET'/path/to/words.txt'
-      words ← (⎕UCS newline) (≠⊆⊢) content
-```
-
-Now answer the following questions about `words`.
-
-1. How many words have at least 3 `'e'`s in them?
-
-1. How many words have exactly two consecutive `'e'`s in them? 
-    The first three such words are `Aberdeen` `Abderdeen's` and `Aileen`.
-
-1. What is the shortest word with two consecutive `'a'`s?
-
-1. What words have three consecutive double letters? For example, `mississippi` does not but `misseetto` does. Misseetto is not a real word.
-
-	A palindrome is the same when reversed. For example, **racecar** is a palindrome but **racecat** is not.
-
-1. How many palindromes are there in `words`?
-
-1. Which palindrome in `words` is the longest?
-
-1. How many words are in alphabetical order?
-
----
-
-1. Analysing text
-
-	1. Write a function test if there are any vowels `'aeiou'` in text vector `⍵`
-
-		```APL
-		      AnyVowels 'this text is made of characters'
-		1
-		      AnyVowels 'bgxkz'
-		0
-		```
-
-	1. Write a function to count the number of vowels in its character vector argument `⍵`
-
-		```APL
-		      CountVowels 'this text is made of characters'
-		```
-		```
-		9
-		```
-		---
-		```APL
-		      CountVowels 'we have twelve vowels in this sentence'
-		```
-		```
-		12
-		```
-
-	???Example "Answers"
-		<ol type="a">
-		<li>
+	???+Example "Answer"
 		We can use membership to see which elements of our argument belong to the set `'aeiou'`. Then we can use membership to check whether `1` exists in the resulting Boolean array.
-		
+	
 		```APL
 		AnyVowels ← {1∊⍵∊'aeiou'}
 		```
 
-		</li>
-		<li>
+1. Write a function to count the number of vowels in its character vector argument `⍵`
 
+	```APL
+	      CountVowels 'this text is made of characters'
+	```
+	```
+	9
+	```
+	---
+	```APL
+	      CountVowels 'we have twelve vowels in this sentence'
+	```
+	```
+	12
+	```
+
+	???+Example "Answer"
 		Counting the `1`s in the Boolean result of the first membership function counts the vowels.
 
 		```APL
 		CountVowels ← {+/⍵∊'aeiou'}
 		```
 
-		</li>
-		</ol>
+1. Write a function `FoundIn` which accepts a nested scalar or vector of character vectors and returns a `1` where each vector contains letters in the simple character vector `⍺`.
+
+	```APL
+	      'ei' FoundIn 'Katie' 'Bob' 'Stephen' 'Jessica' 'Andy'
+	```
+	```
+	1 0 1 1 0
+	```
+
+	???Example "Answer"
+		We bind `⍺` to the membership function (`∊∘⍺`) to form a monadic function "contains alpha" which can be applied on each vector in our nested argument.
+
+		```APL
+		FoundIn ← {∨/¨∊∘⍺¨⍵}
+		```
 
 1. Write a function `Clean` that changes all non-digits into stars.
 	```APL
@@ -390,6 +368,8 @@ Now answer the following questions about `words`.
 	```
 
 	???+Example "Answer"
+		We cannot assign to `⍵` in a dfn, so we must create an intermediate variable name.
+		
 		```APL
 		 Clean ← {
 		    r←⍵ ⋄ d←~⍵∊⎕D
@@ -415,24 +395,48 @@ Now answer the following questions about `words`.
 1. Now try a version which includes any characters. Convert only lowercase alphabetic characters `a-z` into uppercase, and leave all others alone.
 	```APL
 	      text←'What? Ignore these $#!?# characters!?'
-	      your_expression
-	      text
+	      ToUpper text
+	```
+	```
 	WHAT? IGNORE THESE $#!?# CHARACTERS!?
 	```
 
-`((text∊alph)/text)←(⎕A,' ')[(text∊alph)/alph⍳text]`
+	???+Example "Answer"
+		There are other valid approaches, but here is one way to use selective assignment:
+
+		```APL
+		((text∊alph)/text) ← (⎕A,' ')[(text∊alph)/alph⍳text]
+		```
 
 1. Create a function `ReplaceHead` which returns its left argument vector `⍺`, but with the first `⍴⍵` elements replaced with the contents of `⍵`.
+
 	```APL
 	      'apple' ReplaceHead 'Eat'
+	```
+	```
 	Eatle
+	```
+	---
+	```APL
 	      'apple' ReplaceHead 'rang'
+	```
+	```
 	range
+	```
+	---
+	```APL
 	      'apple' ReplaceHead 'ENTERPRISE'
+	```
+	```
 	ENTER
 	```
 
-`ReplaceHead ← {r←⍺ ⋄ s←(≢⍺)⌊≢⍵ ⋄ r[⍳s]←s↑⍵ ⋄ r}`
+	???+Example "Answers"
+		This solution uses indexed assignment:
+
+		```APL
+		ReplaceHead ← {r←⍺ ⋄ s←(≢⍺)⌊≢⍵ ⋄ r[⍳s]←s↑⍵ ⋄ r}
+		```
 
 1. Bus stops in a town are labelled **A** to **E**. Define a function RouteMatrix which returns a Boolean matrix where `1`s indicate that buses go from one bus stop to the next.
 
@@ -464,14 +468,68 @@ Now answer the following questions about `words`.
 		RouteMatrix ← {'ABCDE'∘.∊⍵}
 		```
 
+### Part 2: Word problems
+We are going to do some text processing on a dictionary of words. 
 
-	- SplitOnFirst
-	- ReplaceRow
+If you have access to the internet, paste the following into your session to download a text file dictionary (917kB in size) and store it as a nested vector of character vectors named `words`.
 
-1. Broken keyboard unique
+```APL
+]Get bit.ly/unixwords
+words ← (⎕UCS 10)(≠⊆⊢)unixwords
+```
 
-	Write the **unique** function `∪⍵` without using the **downshoe** `∪` glyph.
+If you have the file on your computer (maybe it was given to you on a USB drive, for example) then you can load it into your workspace from disk using the following expressions.
+
+```APL
+(content encoding newline) ← ⎕NGET'/path/to/words.txt'
+words ← (⎕UCS newline) (≠⊆⊢) content
+```
+
+Now answer the following questions about `words`.
+
+1. How many words have at least 3 `'e'`s in them?
+
+1. How many words have exactly two consecutive `'e'`s in them? 
+    The first three such words are `Aberdeen` `Abderdeen's` and `Aileen`.
+
+1. What is the shortest word with two consecutive `'a'`s?
+
+1. What words have three consecutive double letters? For example, `mississippi` does not but `misseetto` does. Misseetto is not a real word.
+
+	A palindrome is the same when reversed. For example, **racecar** is a palindrome but **racecat** is not.
+
+1. How many palindromes are there in `words`?
+
+1. Which palindrome in `words` is the longest?
+
+1. How many words are in alphabetical order?
+
+### Part 3: Broken keyboard problems
+1. Write the **unique** function `∪⍵` without using the **downshoe** `∪` glyph.
 
 	???+Example "Answers"
 		Index-of returns the index of the first occurance of an element. For `⍵⍳⍵`, this becomes a list of integer ID numbers which correspond to major cells as they appear.
-	((⍳≢text)=text⍳text)/text
+
+		```APL
+		{((⍳≢⍵)=⍵⍳⍵)/⍵}
+		```
+
+		This is a good opportunity to mention the **swap** `⍺ F⍨ ⍵` and **selfie** `F⍨⍵` operators.
+
+		```APL
+		{⍵/⍨(⍳≢⍵)=⍳⍨⍵}
+		```
+
+1. Write the **without** function `⍺~⍵` without using the **tilde** `~` glyph.
+
+	???+Example "Answer"
+		```APL
+		{(~⍺∊⍵)/⍺}
+		```
+
+1. Write the **intersection** function `⍺∩⍵` without using the **upshoe** `∩` glyph.
+
+	???+Example "Answer"
+		```APL
+		{(⍺∊⍵)/⍺}
+		```
