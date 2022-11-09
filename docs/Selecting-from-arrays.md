@@ -253,6 +253,10 @@ Over time you will learn from experience what is the most appropriate thing to u
 		</li>
 		</ol>
 
+1. What type of indexing is used in the expression `grid[⍸grille=' ']` ?
+
+1. What indexing array can be used to select a simple scalar from itself?
+
 ### Visit to the museum
 Here are some data and questions about visits to a museum.  
 
@@ -288,7 +292,7 @@ In the boolean matrix `display`, each row corresponds to a museum piece and each
 The 3D array `rain` gives the monthly rainfall in millimeters over 7 years in 5 countries.
 
 ```APL
-      ⎕RL←42 ⋄ rain←?7 5 12⍴250
+⎕RL←42 ⋄ rain←?7 5 12⍴250
 ```
 
 1. Which month in each year in each country had the highest rainfall?
@@ -304,7 +308,7 @@ The 3D array `rain` gives the monthly rainfall in millimeters over 7 years in 5 
 	???+Example "Answer"
 		<ol type="a">
 		<li>
-		The shape of a scalar is an empty numeric vector. We can therefore use the empty numeric vector as the left argument to the reshape function:
+		The shape of a scalar is an empty numeric vector. We can therefore use an empty numeric vector as the left argument to the reshape function:
 		```APL
 		⍬⍴v
 		```
@@ -313,11 +317,30 @@ The 3D array `rain` gives the monthly rainfall in millimeters over 7 years in 5 
 		The shape of any scalar is an empty numeric vector.
 		```APL
 		      ⍴0
-		
+		```
+		```
+		 
+		```
+		---
+		```APL
 		      ⍴35
-		
+		```
+		```
+		 
+		```
+		---
+		```APL
 		      ⍴'Q'
-		
+		```
+		```
+		 
+		```
+		---
+		```APL
+		      ⍬≡⍴42
+		```
+		```
+		1
 		```
 		</li>
 		<li>
@@ -325,12 +348,9 @@ The 3D array `rain` gives the monthly rainfall in millimeters over 7 years in 5 
 
 		```APL
 		      ⍳0
-		
+		```
+		```
+		 
 		```
 		</li>
 		</ol>
-
-### More problems
-- What type of indexing is used in `grid[⍸grille=' ']`
-
-- What indexing array must be used to select from a simple scalar?
