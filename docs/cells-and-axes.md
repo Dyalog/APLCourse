@@ -217,113 +217,113 @@ LENGTH ERROR: It must be that either the left and right frames match or one of t
 !!!Note Conforming arrays have either same shape or one is a unit
 	With functions like `+ × ÷`, arrays must either have the same shape, or one of them be a scalar. The result of the function application has the same shape as the largest of the input arrays. The rank operator generalises this to the concept of <dfn>frames</dfn>. A frame is a rank-k cell of some array. For frames to "match" means that there are the same number of rank **j** subarrays of `⍺` as there are rank **k** subarrays of `⍵` when a function `⍺ F ⍵` is applied as `⍺ (F⍤j k) ⍵`.
 
-## The bracket axis operator
-We have seen two pairs of *first-* and *last-axis* primitives.
+## Transpose
+To <dfn>transpose</dfn> array is to rearrange its axes. Or rather, to rearrange along which axes its data lies.
+
+Transposing a matrix is to flip along its diagonal:
 
 ```APL
-      n←2 3⍴1 2 3 1 0 ¯1
-      n
-1 2  3
-1 0 ¯1
-      +/n                ⍝ Sum along the last axis
-6 0
-      +⌿n                ⍝ Sum along the first axis
-2 2 2
-      '-'⍪2 3⍴'DYALOG'   ⍝ Catenate first
+      3 3⍴⍳9
+```
+```
+1 2 3
+4 5 6
+7 8 9
+```
 ---
-DYA
-LOG
-      '|',2 3⍴'DYALOG'   ⍝ Catenate last
-|DYA
-|LOG
+```APL
+      ⍉3 3⍴⍳9
+```
+```
+1 4 7
+2 5 8
+3 6 9
 ```
 
-Some functions and operators can be used along specified axes using the **function axis operator** `[]` (more <a target="_blank" href="https://aplwiki.com/wiki/Function-operator_overloading">duplicitous</a> symbols).
-
-<center>
-	<figure>
-		<img src="../img/3DAxes.png" alt="Axes of a 3D array"/>
-		<figcaption>
-			Axes of a 3D array
-		</figcaption>
-	</figure>
-</center>
-
-Compare the behaviour of the monadic function `⊂` *enclose* when applied with the rank operator `⍤` versus when it is applied using **bracket axis** (another name for the *function axis operator* `[]`).
+In the monadic case, we reverse the order of the axes:
 
 ```APL
-      ⊂⍤1⊢3 2 4⍴⎕A
-┌────┬────┐
-│ABCD│EFGH│
-├────┼────┤
-│IJKL│MNOP│
-├────┼────┤
-│QRST│UVWX│
-└────┴────┘
-      ⊂⍤2⊢3 2 4⍴⎕A
-┌────┬────┬────┐
-│ABCD│IJKL│QRST│
-│EFGH│MNOP│UVWX│
-└────┴────┴────┘
-      ⊂⍤3⊢3 2 4⍴⎕A
-┌────┐
-│ABCD│
-│EFGH│
-│    │
-│IJKL│
-│MNOP│
-│    │
-│QRST│
-│UVWX│
-└────┘
+      2 3 4⍴⎕A
 ```
+```
+ABCD
+EFGH
+IJKL
+
+MNOP
+QRST
+UVWX
+```
+---
+```APL
+      ⍉2 3 4⍴⎕A
+```
+```
+AM
+EQ
+IU
+
+BN
+FR
+JV
+
+CO
+GS
+KW
+
+DP
+HT
+LX
+```
+
+It is possibly easiest to see this by inspecting the shape before and after transposing.
 
 ```APL
-      ⊂[1]⊢3 2 4⍴⎕A
-┌───┬───┬───┬───┐
-│AIQ│BJR│CKS│DLT│
-├───┼───┼───┼───┤
-│EMU│FNV│GOW│HPX│
-└───┴───┴───┴───┘
-      ⊂[2]⊢3 2 4⍴⎕A
-┌──┬──┬──┬──┐
-│AE│BF│CG│DH│
-├──┼──┼──┼──┤
-│IM│JN│KO│LP│
-├──┼──┼──┼──┤
-│QU│RV│SW│TX│
-└──┴──┴──┴──┘
-      ⊂[3]⊢3 2 4⍴⎕A
-┌────┬────┐
-│ABCD│EFGH│
-├────┼────┤
-│IJKL│MNOP│
-├────┼────┤
-│QRST│UVWX│
-└────┴────┘
+      ⍴2 3 4⍴⎕A
+```
+```
+2 3 4
+```
+---
+```APL
+      ⍴⍉2 3 4⍴⎕A   ⍝ 4 3 2 ≡ ⌽2 3 4
+```
+```
+4 3 2
 ```
 
-We mention the axis operator because you are likely. The [section about older features](./Quirks.md) has more examples of bracket axis, but for newer users it has fallen out of favour because:
+In the dyadic case, the left argument says where each corresponding axis in `⍴⍵` should end up in the result.
 
-- it can only be used with a few particular primitives, whereas the rank operator can be used with any function including those defined by the user
-- it is defined on an ad-hoc basis for each function to which it applies, whereas rank has consistent behaviour for all functions
-- it involves implicit transposes of the array data
+For example:
 
-For a more in-depth look at the relationship between function rank and function axis, watch the Dyalog webinars on [Selecting from Arrays](https://dyalog.tv/Webinar/?v=AgYDvSF2FfU) and [The Rank Operator and Dyadic Transpose](https://dyalog.tv/Webinar/?v=zBqdeDJPPRc).
+- move the 1st axis to become the 2nd
+- move the 2nd axis to become the 1st
+- leave the 3rd axis as the 3rd
 
-A list of functions with bracket-axis definitions can be found on [the APL Wiki page for function axis](https://aplwiki.com/wiki/Function_axis).
+```APL
+      2 1 3⍉2 3 4⍴⎕A
+```
+```
+ABCD
+MNOP
+
+EFGH
+QRST
+
+IJKL
+UVWX
+```
+---
+```APL
+      ⍴2 1 3⍉2 3 4⍴⎕A
+```
+```
+3 2 4
+```
+
+Because the rank operator only works along *trailing* axes, we may want to transpose our data in order to work along certain dimensions.
 
 ## Problem set
-1. 
-	Which of the following functions are affected by the rank operator `⍤` and why are the other functions not affected?
-
-	```APL
-	      ⌽    ⍝ Reverse
-	      ⊖    ⍝ Reverse first
-	      +/   ⍝ Plus reduce
-	      +⌿   ⍝ Plus reduce-first
-	```
-
 1.  
 
 	The 3D array `rain` gives the monthly rainfall in millimeters over 7 years in 5 countries.  
@@ -371,13 +371,7 @@ A list of functions with bracket-axis definitions can be found on [the APL Wiki 
 
 	??? Hint
 		Look at the shapes of the arguments and the results, <code class='language-apl'>⍴rain</code> and <code class='language-apl'>⍴+⌿rain</code> etc.
-
-	1. Write an expression to find the average monthly rainfall for each individual month over the 7 years in each of the 5 countries.
-
-	1. Write an expression to find the average monthly rainfall for each year for each of the 5 countries.
-
-	1. Write an expression to find the average annual rainfall over the 7 years for each of the 5 countries.
-
+		
 	1. Assign scalar numeric values (single numbers) to the variables `years` `countries` `months` such that the `rain` data can be summarised as follows:
 		```APL
 		      ⍴(+⌿⍤years)rain       ⍝ Sum over years
@@ -405,7 +399,16 @@ A list of functions with bracket-axis definitions can be found on [the APL Wiki 
 		`(+⌿⍤2)rain` is the total rainfall each year in each month over all 5 countries  
 		`(+⌿⍤3)rain` is the same as `+⌿rain` because `rain` is a rank-3 array  
 		`⌈⌿rain` is the maximum rainfall in each month in each country out of any of the 7 years  
-		`rain[⍸rain>250]` is the rainfall for months for which it was greater than 250mm.
+
+1. 
+	Which of the following functions are affected by the rank operator `⍤` and why are the other functions not affected?
+
+	```APL
+	⌽    ⍝ Reverse
+	⊖    ⍝ Reverse first
+	+/   ⍝ Plus reduce
+	+⌿   ⍝ Plus reduce-first
+	```
 
 1. Common Names for Arrays of Rank-n
 
@@ -559,3 +562,104 @@ As mentioned previously, more detailed treatments of the rank operator can be fo
 - reverse the rows in each submatrix `⊖⍤2`
 - find the maximum *something*, where something is defined not in array terms but obviously refers to some subarrays
 
+## The bracket axis operator
+We have seen two pairs of *first-* and *last-axis* primitives.
+
+```APL
+      n←2 3⍴1 2 3 1 0 ¯1
+      n
+1 2  3
+1 0 ¯1
+      +/n                ⍝ Sum along the last axis
+6 0
+      +⌿n                ⍝ Sum along the first axis
+2 2 2
+      '-'⍪2 3⍴'DYALOG'   ⍝ Catenate first
+---
+DYA
+LOG
+      '|',2 3⍴'DYALOG'   ⍝ Catenate last
+|DYA
+|LOG
+```
+
+Some functions and operators can be used along specified axes using the **function axis operator** `[]` (more <a target="_blank" href="https://aplwiki.com/wiki/Function-operator_overloading">duplicitous</a> symbols).
+
+<center>
+	<figure>
+		<img src="../img/3DAxes.png" alt="Axes of a 3D array"/>
+		<figcaption>
+			Axes of a 3D array
+		</figcaption>
+	</figure>
+</center>
+
+Compare the behaviour of the monadic function `⊂` *enclose* when applied with the rank operator `⍤` versus when it is applied using **bracket axis** (another name for the *function axis operator* `[]`).
+
+```APL
+      (⊂⍤1)2 2 5⍴'RIGHTHELLOTHERE'
+┌─────┬─────┐
+│RIGHT│HELLO│
+├─────┼─────┤
+│THERE│RIGHT│
+└─────┴─────┘
+      (⊂⍤2)2 2 5⍴'RIGHTHELLOTHERE'
+┌─────┬─────┐
+│RIGHT│THERE│
+│HELLO│RIGHT│
+└─────┴─────┘
+      (⊂⍤3)2 2 5⍴'RIGHTHELLOTHERE'
+┌─────┐
+│RIGHT│
+│HELLO│
+│     │
+│THERE│
+│RIGHT│
+└─────┘
+      ⊂[1]2 2 5⍴'RIGHTHELLOTHERE'
+┌──┬──┬──┬──┬──┐
+│RT│IH│GE│HR│TE│
+├──┼──┼──┼──┼──┤
+│HR│EI│LG│LH│OT│
+└──┴──┴──┴──┴──┘
+      ⊂[2]2 2 5⍴'RIGHTHELLOTHERE'
+┌──┬──┬──┬──┬──┐
+│RH│IE│GL│HL│TO│
+├──┼──┼──┼──┼──┤
+│TR│HI│EG│RH│ET│
+└──┴──┴──┴──┴──┘
+      ⊂[3]2 2 5⍴'RIGHTHELLOTHERE'
+┌─────┬─────┐
+│RIGHT│HELLO│
+├─────┼─────┤
+│THERE│RIGHT│
+└─────┴─────┘
+      ⊂[1 2]2 2 5⍴'RIGHTHELLOTHERE'
+┌──┬──┬──┬──┬──┐
+│RH│IE│GL│HL│TO│
+│TR│HI│EG│RH│ET│
+└──┴──┴──┴──┴──┘
+      ⊂[2 3]2 2 5⍴'RIGHTHELLOTHERE'
+┌─────┬─────┐
+│RIGHT│THERE│
+│HELLO│RIGHT│
+└─────┴─────┘
+      ⊂[1 2 3]2 2 5⍴'RIGHTHELLOTHERE'
+┌─────┐
+│RIGHT│
+│HELLO│
+│     │
+│THERE│
+│RIGHT│
+└─────┘
+```
+
+The [section about older features](./Quirks.md) has more examples of bracket axis, but for newer users it has fallen out of favour because:
+
+- it can only be used with a few particular primitives, whereas the rank operator can be used with any function including those defined by the user
+- it works slightly differently depending on the function to which it is applied, whereas rank has consistent behaviour for all functions
+- it involves implicit transposes of the array data
+
+For a more in-depth look at the relationship between function rank and function axis, watch the Dyalog webinars on [Selecting from Arrays](https://dyalog.tv/Webinar/?v=AgYDvSF2FfU) and [The Rank Operator and Dyadic Transpose](https://dyalog.tv/Webinar/?v=zBqdeDJPPRc).
+
+A list of functions with bracket-axis definitions can be found on [the APL Wiki page for function axis](https://aplwiki.com/wiki/Function_axis).

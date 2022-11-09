@@ -213,7 +213,7 @@ Over time you will learn from experience what is the most appropriate thing to u
 		FindWord ← {∧/⍺=(⍴⍺)⍴⍵↑⍨2⌷⍴⍺}
 		```
 		
-		This idea of using a function between one row and several can be expressed using a concept we have not yet formally introduced: [the rank operator](./array-model.md#matching-dimensions).
+		We can compare one row with several using [the rank operator](./cells-and-axes.md#the-rank-operator).
 
 		```APL
 		FindWord ← {∧/⍺(=⍤1)⍵↑⍨(⍴⍺)[2]}
