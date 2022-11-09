@@ -595,9 +595,9 @@ APL
 
 1. These are the heights of some students in 3 classes.
 	```APL
-		student ← 10 7⍴'Kane   Jonah  JessicaPadma  Katie  CharlieAmil   David  Zara   Filipa '
-		class ← 'CBACCCBBAB'
-		height ← 167 177 171 176 178 164 177 177 173 160
+	student ← 10 7⍴'Kane   Jonah  JessicaPadma  Katie  CharlieAmil   David  Zara   Filipa '
+	class ← 'CBACCCBBAB'
+	height ← 167 177 171 176 178 164 177 177 173 160
 	```
 
 	Use APL to:
