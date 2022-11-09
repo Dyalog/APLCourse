@@ -1,4 +1,5 @@
 # TODO
+- move finding and replacing problems interval index broken keyboard problems
 - the rank operator properly
 	- split "selecting from arrays"
 	1. multidimensional and nested arrays AKA multidimensional arrays of arrays
