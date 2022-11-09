@@ -5,7 +5,7 @@ Imagine that your keyboard is broken such that it is impossible to type a partic
 
 For each of the following problems:
 
-- Read the prompt and think of which primitive function behaves in the way described.
+- Read the prompt and think about which primitive function behaves in the way described.
 - Write a function which matches the description but does not use that primitive function.
 
 ---
@@ -16,8 +16,6 @@ For each of the following problems:
 		We want to model the **where** function `⍸⍵` without using the **iota-underbar** glyph `⍸`.
 
 	???+Example "Answers"
-		We want to model the **where** function `⍸⍵` without using the **iota-underbar** glyph `⍸`.
-
 		For Boolean vectors:
 
 		```APL
@@ -56,14 +54,15 @@ For each of the following problems:
 		For any vector, we can use each `⍺ F¨ ⍵` to map the match function `⍺≡⍵` between each element of `⍵` and itself.
 
 		```APL
-		{+/≡¨⍨⍵}
+		{+/⍵≡¨⍵}
 		```
 
 1. This primitive function reverses the order of the elements in a vector.
 
-	???+Example "Answer"
+	???+Hint "What primitive function is this?"
 		We want to model the reverse function `⌽⍵` without using the circle-stile `⌽` glyph.
-
+	
+	???+Example "Answer"
 		```APL
 		{⍵[(≢⍵)-⍳≢⍵]}
 		{⍵[(⍴⍵)-⍳⍴⍵]}
