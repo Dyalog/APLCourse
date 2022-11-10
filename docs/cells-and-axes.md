@@ -367,23 +367,24 @@ Because the rank operator only works along *trailing* axes, we may want to trans
 
 	...gives the total rainfall in each year in each country over 12 months. Put another way, it is the total annual rainfall each year in each country.
 	
-	For each expression below, write a brief description of the resulting statistic.
+	1. For each expression below, write a brief description of the resulting statistic.
 
-	```APL
-	+⌿rain
-	(+⌿⍤2)rain
-	(+⌿⍤3)rain
-	⌈⌿rain
-	(⌈⌿⍤2)rain
-	rain[⍸rain>250]
-	```
-	```
-	```
+		```APL
+		+⌿rain
+		(+⌿⍤2)rain
+		(+⌿⍤3)rain
+		⌈⌿rain
+		(⌈⌿⍤2)rain
+		rain[⍸rain>250]
+		```
+		```
+		```
 
-	??? Hint
-		Look at the shapes of the arguments and the results, <code class='language-apl'>⍴rain</code> and <code class='language-apl'>⍴+⌿rain</code> etc.
-		
+		??? Hint
+			Look at the shapes of the arguments and the results, <code class='language-apl'>⍴rain</code> and <code class='language-apl'>⍴+⌿rain</code> etc.
+
 	1. Assign scalar numeric values (single numbers) to the variables `years` `countries` `months` such that the `rain` data can be summarised as follows:
+
 		```APL
 		      ⍴(+⌿⍤years)rain       ⍝ Sum over years
 		```
@@ -404,6 +405,8 @@ Because the rank operator only works along *trailing* axes, we may want to trans
 		```
 		7 5
 		```
+
+	1. Compute the total
 	
 	???+Example "Answers"
 		`+⌿rain` is the total rainfall each month in each country over all 7 years  
@@ -568,6 +571,8 @@ As mentioned previously, more detailed treatments of the rank operator can be fo
 	1. Find the class which class has the tallest average height
 		1. Find the class with the narrowest range of heights
 
+1. 
+
 ## Problems
 - match word problem `∧⌿=⍤1`
 - reverse the rows in each submatrix `⊖⍤2`
@@ -660,8 +665,86 @@ The [section about older features](./Quirks.md) has more examples of bracket axi
 
 - it can only be used with a few particular primitives, whereas the rank operator can be used with any function including those defined by the user
 - it works slightly differently depending on the function to which it is applied, whereas rank has consistent behaviour for all functions
+- it is special syntax unlike most other operators
 - it involves implicit transposes of the array data
 
 For a more in-depth look at the relationship between function rank and function axis, watch the Dyalog webinars on [Selecting from Arrays](https://dyalog.tv/Webinar/?v=AgYDvSF2FfU) and [The Rank Operator and Dyadic Transpose](https://dyalog.tv/Webinar/?v=zBqdeDJPPRc).
 
 A list of functions with bracket-axis definitions can be found on [the APL Wiki page for function axis](https://aplwiki.com/wiki/Function_axis).
+
+## TODO
+Mean
+TicTacToe
+Grille w/ rank?
+
+A row of street lamps? have light-sensitive switches.
+A series of ovens in an industrial kitchen are controlled by computers. These large ovens each have a set of 4 temperature sensors.
+
+A company owns 5 stores which each sell the same 3 items.
+
+The quantity sold of each product in each store over a 7-day week are given in the array `qty`:
+
+```APL
+⎕RL←42 ⋄ qty←¯1+?5 3 7⍴10
+```
+
+The prices of the three products are £4.99, £24.99 and £99.99.
+
+```APL
+price ← .99 + 4 24 99
+```
+
+The total costs each day to run each store are given in the matrix `cost`:
+
+```APL
+⎕RL←42 ⋄ costs ← 94+?5 7⍴11
+```
+
+Each store has its own weekly profit target:
+
+```APL
+target ← 3000 1250 800 6000 3200
+```
+
+- what is the price of each item?
+£4.99 £24.99 £99.99
+
+- which day had the most?
+- which stores made at least their target profit?
+
+target←400
+
+--------
+
+The game naughts and cross, also known as tic-tac-toe, is played on a 3 by 3 grid. Two players take turns placing their tokens on the grid until one player has made a complete line either horizontally, vertically or diagonally which consists of just that player's tokens.
+
+We can represent a game using a character matrix. 
+
+1. 
+
+Now, instead of several 2-dimensional games, we will use a 3-dimensional array to represent a single 3-dimensional game.
+
+--------
+Some things may be simpler to express using bracket-axis.
+
+The following functions can be used with the axis operator:
+
+|Monadic Functions|Function Names|
+|---|---|
+|`↑⍵` and `↓⍵`|Mix and Split|
+|`⌽⍵` or `⊖⍵`|Reverse|
+|`,⍵`|Ravel with axis|
+|`⊂⍵`|Enclose with axis|
+|`F/⍵` or `F⌿⍵`|Reductions|
+|`F\⍵` or `F⍀⍵`|Scans|
+
+|Dyadic Functions|Function Names|
+|---|---|
+|`+ × ⌈ ∧ ≤` etc...|All *scalar dyadic functions*|
+|`⍺↑⍵` and `⍺↓⍵`|Take and Drop|
+|`⍺/⍵` or `⍺⌿⍵`|Replicate/compress|
+|`⍺\⍵` or `⍺⍀⍵`|Expand|
+|`⍺,⍵` or `⍺⍪⍵`|Catenate|
+|`⍺⊂⍵`|Partitioned-enclose|
+|`⍺⊆⍵`|Partition|
+|`⍺F/⍵` or `⍺F⌿⍵`|Windowed-reduction|
