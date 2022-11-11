@@ -1,14 +1,9 @@
 # TODO
+- more description in [array logic problem 1](./array-logic-data-driven-conditionals.md#problem-set)
 - move finding and replacing problems interval index broken keyboard problems
-- the rank operator properly
-	- split "selecting from arrays"
-	1. multidimensional and nested arrays AKA multidimensional arrays of arrays
-	2. selecting from arrays
-
 - link to section: http://localhost:8000/array-logic-data-driven-conditionals/#the-outer-product
 - outer product link: http://localhost:8000/basic-syntax-and-arithmetic/#singleton-extension
 - #TODO links
-- rank vs axis probably
 - windows `2f/`
 - key
 - negative index generator link to problem: http://localhost:8000/basic-syntax-and-arithmetic/#what-do-these-errors-mean
@@ -20,11 +15,7 @@
 - find-replace-vals AnyVowels use Any idiom `∨/`
 - The idiom for joining a nested list into a simple list is `⊃,/`
 - outer product
-	- takeout menu
-	- times table
-	- addition table
 	- identity matrix
-	- membership
 	- countful membership
 - shape, reshape
 	- look-and-say
