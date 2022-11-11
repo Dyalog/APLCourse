@@ -709,38 +709,6 @@ The following functions can be used with the axis operator:
 		│2D array│                    │
 		└────────┴────────────────────┘</code></pre>
 
-1. Some Points in Space Revisited
-
-	These problems are identical to those about Some Points in Space in [problem set 5](../Shape Reshape/#problem-set-5). This time, create a function which works on vectors and use the rank operator to solve these problems.
-
-	The positions of 7 points in 2D space are given by the matrix `pos2`:
-
-	<pre><code class="language-APL">      pos2←7 2⍴3 1 3 4 2 7 3</code></pre>
-
-	1. Write a function `AddVec` to add two vectors together:
-		<pre><code class="language-APL">      ¯1 1(AddVec⍤1)pos2
-	2 2
-	2 5
-	1 8
-	2 4
-	0 4
-	3 3
-	6 4</code></pre>
-
-	1. Write a function `NormVec` to normalise a vector so that its sum of squares is `1`.
-
-		<pre><code class="language-APL">      +/pos2\*2</code></pre>
-		<pre><code>10 25 53 18 10 20 58</code></pre>
-		<hr>
-		<pre><code class="language-APL">      +/((NormVec⍤1)pos2)\*2</code></pre>
-		<pre><code>1 1 1 1 1 1 1</code></pre>
-		<hr>
-		<pre><code class="language-APL">      ÷/pos2</code></pre>
-		<pre><code>3 0.75 0.2857142857 1 0.3333333333 2 2.333333333</code></pre>
-		<hr>
-		<pre><code class="language-APL">      ÷/(NormVec⍤1)pos   ⍝ Relative proportions stay the same</code></pre>
-		<pre><code>3 0.75 0.2857142857 1 0.3333333333 2 2.333333333</code></pre>
-
 1. Find the values of `j` and `k` in each of the two expressions below.
 	1.  
 	
