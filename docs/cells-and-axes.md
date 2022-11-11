@@ -287,7 +287,7 @@ HT
 LX
 ```
 
-It is possibly easiest to see this by inspecting the shape before and after transposing.
+Inspecting the shape before and after transposing.
 
 ```APL
       ⍴2 3 4⍴⎕A
@@ -334,7 +334,250 @@ UVWX
 
 Because the rank operator only works along *trailing* axes, we may want to transpose our data in order to work along certain dimensions.
 
+## The bracket axis operator
+We have seen two pairs of *first-* and *last-axis* primitives.
+
+```APL
+      n←2 3⍴1 2 3 1 0 ¯1
+      n
+1 2  3
+1 0 ¯1
+      +/n                ⍝ Sum along the last axis
+6 0
+      +⌿n                ⍝ Sum along the first axis
+2 2 2
+      '-'⍪2 3⍴'DYALOG'   ⍝ Catenate first
+---
+DYA
+LOG
+      '|',2 3⍴'DYALOG'   ⍝ Catenate last
+|DYA
+|LOG
+```
+
+Some functions and operators can be used along specified axes using the **function axis operator** `[]` (more <a target="_blank" href="https://aplwiki.com/wiki/Function-operator_overloading">duplicitous</a> symbols).
+
+Compare the behaviour of the monadic function `⊂` *enclose* when applied with the rank operator `⍤` versus when it is applied using **bracket axis** (also called the *function axis operator* or *axis specification* `[]`).
+
+```APL
+      (⊂⍤1)2 2 5⍴'RIGHTHELLOTHERE'
+```
+```
+┌─────┬─────┐
+│RIGHT│HELLO│
+├─────┼─────┤
+│THERE│RIGHT│
+└─────┴─────┘
+```
+---
+```APL
+      (⊂⍤2)2 2 5⍴'RIGHTHELLOTHERE'
+```
+```
+┌─────┬─────┐
+│RIGHT│THERE│
+│HELLO│RIGHT│
+└─────┴─────┘
+```
+---
+```APL
+      (⊂⍤3)2 2 5⍴'RIGHTHELLOTHERE'
+```
+```
+┌─────┐
+│RIGHT│
+│HELLO│
+│     │
+│THERE│
+│RIGHT│
+└─────┘
+```
+---
+```APL
+      ⊂[1]2 2 5⍴'RIGHTHELLOTHERE'
+```
+```
+┌──┬──┬──┬──┬──┐
+│RT│IH│GE│HR│TE│
+├──┼──┼──┼──┼──┤
+│HR│EI│LG│LH│OT│
+└──┴──┴──┴──┴──┘
+```
+---
+```APL
+      ⊂[2]2 2 5⍴'RIGHTHELLOTHERE'
+```
+```
+┌──┬──┬──┬──┬──┐
+│RH│IE│GL│HL│TO│
+├──┼──┼──┼──┼──┤
+│TR│HI│EG│RH│ET│
+└──┴──┴──┴──┴──┘
+```
+---
+```APL
+      ⊂[3]2 2 5⍴'RIGHTHELLOTHERE'
+```
+```
+┌─────┬─────┐
+│RIGHT│HELLO│
+├─────┼─────┤
+│THERE│RIGHT│
+└─────┴─────┘
+```
+---
+```APL
+      ⊂[1 2]2 2 5⍴'RIGHTHELLOTHERE'
+```
+```
+┌──┬──┬──┬──┬──┐
+│RH│IE│GL│HL│TO│
+│TR│HI│EG│RH│ET│
+└──┴──┴──┴──┴──┘
+```
+---
+```APL
+      ⊂[2 3]2 2 5⍴'RIGHTHELLOTHERE'
+```
+```
+┌─────┬─────┐
+│RIGHT│THERE│
+│HELLO│RIGHT│
+└─────┴─────┘
+```
+---
+```APL
+      ⊂[1 2 3]2 2 5⍴'RIGHTHELLOTHERE'
+```
+```
+┌─────┐
+│RIGHT│
+│HELLO│
+│     │
+│THERE│
+│RIGHT│
+└─────┘
+```
+
+**Pros:**
+
+- some uses of bracket-axis are shorter simpler than their equivalent expression using rank and transpose
+- by forcing the user to apply it directly to primitives, it can lead to faster code in the Dyalog interpreter
+- some people are used to thinking in terms of axes using bracket-axis, rather than in terms of cells using the rank operator
+
+**Cons**
+
+- it can only be used with a few particular primitives, whereas the rank operator can be used with any function including those defined by the user
+- it works slightly differently depending on the function to which it is applied, whereas rank has consistent behaviour for all functions
+- it is special syntax unlike most other operators
+- it involves implicit transposes of the array data
+
+For a more in-depth look at the relationship between function rank and function axis, watch the Dyalog webinars on [Selecting from Arrays](https://dyalog.tv/Webinar/?v=AgYDvSF2FfU) and [The Rank Operator and Dyadic Transpose](https://dyalog.tv/Webinar/?v=zBqdeDJPPRc).
+
+A list of functions with bracket-axis definitions can be found on [the APL Wiki page for function axis](https://aplwiki.com/wiki/Function_axis).
+
+The [section about older features](./Quirks.md) has some more examples of bracket axis.
+
+The following functions can be used with the axis operator:
+
+|Monadic Functions|Function Names|
+|---|---|
+|`↑⍵` and `↓⍵`|Mix and Split|
+|`⌽⍵` or `⊖⍵`|Reverse|
+|`,⍵`|Ravel with axis|
+|`⊂⍵`|Enclose with axis|
+|`F/⍵` or `F⌿⍵`|Reductions|
+|`F\⍵` or `F⍀⍵`|Scans|
+
+|Dyadic Functions|Function Names|
+|---|---|
+|`+ × ⌈ ∧ ≤` etc...|All *scalar dyadic functions*|
+|`⍺↑⍵` and `⍺↓⍵`|Take and Drop|
+|`⍺/⍵` or `⍺⌿⍵`|Replicate/compress|
+|`⍺\⍵` or `⍺⍀⍵`|Expand|
+|`⍺,⍵` or `⍺⍪⍵`|Catenate|
+|`⍺⊂⍵`|Partitioned-enclose|
+|`⍺⊆⍵`|Partition|
+|`⍺F/⍵` or `⍺F⌿⍵`|Windowed-reduction|
+
+
 ## Problem set
+1. Write a function `FlipBlock` which reverses the columns in each sub-matrix of its argument array.
+
+	```APL
+	      FlipBlock 2 2 3⍴0 0 0 1 1 1
+	1 1 1
+	0 0 0
+
+	1 1 1
+	0 0 0
+	```
+
+	If there is only 1 row in each sub-matrix, reversing does nothing:
+	```APL
+	      FlipBlock 1 5⍴'abcde'
+	```
+	```
+	abcde
+	```
+
+	If there is only one dimension, the array will be reversed:
+
+	```APL
+	      FlipBlock 'abcde'
+	```
+	```
+	edcba
+	```
+
+1. Write a function `MatchWord` which takes a character vector left argument `⍺` and a character array `⍵` with the same number of columns as `⍺` and returns a Boolean array of rank `¯1+≢⍺` in which a `1` indicates rows in `⍵` that match `⍺`.
+
+	```APL
+	      'has' MatchWord 5 3⍴'hasnotnot'
+	```
+	```
+	1 0 0 1 0
+	```
+	---
+	```APL
+	      'simon' MatchWord 3 2 5⍴'maybesimonspoke'
+	```
+	```
+	0 1
+	0 0
+	1 0
+	```
+
+1. Extend the `Grille` function from the problem set about [array logic](./array-logic-data-driven-conditionals.md#TODO) to reveal multiple messages in a 3-dimensional array.
+
+	```APL
+	grille  ← 4 4⍴'⌺ ⌺⌺ ⌺ ⌺⌺ ⌺  ⌺⌺⌺'
+	grilles ← 3 4 4⍴'⌺⌺ ⌺⌺⌺⌺ ⌺⌺⌺⌺⌺ ⌺⌺⌺⌺⌺ ⌺⌺⌺⌺ ⌺⌺⌺⌺⌺ ⌺⌺⌺⌺⌺⌺ ⌺ ⌺⌺ ⌺⌺⌺⌺⌺'
+	grid    ← 3 4 4⍴'AREQEEVASEQALTOFBSMBESCTIRMETOGPGHIAAACPSKLERVRG'
+	```
+	
+	The single `grille` reveals 3 messages.
+	
+	```APL
+	      grille Grille grid
+	```
+	```
+	REVEAL
+	SECRET
+	HACKER
+	```
+	
+	The array `grilles` reveals 3 different messages when applied to the same grid.
+	
+	```APL
+	      grilles Grille grid
+	```
+	```
+	EAT
+	BIG
+	APL
+	```
+
 1.  
 
 	The 3D array `rain` gives the monthly rainfall in millimeters over 7 years in 5 countries.  
@@ -406,8 +649,8 @@ Because the rank operator only works along *trailing* axes, we may want to trans
 		7 5
 		```
 
-	1. Compute the total
-	
+	1. Compute the maximum *TODO* rainfall in any country...
+	 
 	???+Example "Answers"
 		`+⌿rain` is the total rainfall each month in each country over all 7 years  
 		`(+⌿⍤2)rain` is the total rainfall each year in each month over all 5 countries  
@@ -560,191 +803,3 @@ For your interest, here are some reductions of note. Try to ask yourself why the
 ```
 
 As mentioned previously, more detailed treatments of the rank operator can be found in the [Dyalog webinars on function rank](https://www.youtube.com/playlist?list=PLA9gQgjzcpKFW0-KldlJW6FSwHGQ1WMAJ).
-
-
-1. These are the heights of some students in 3 classes. Students have numeric identifiers `id`.
-	```APL
-		student ← 10 7⍴'Kane   Jonah  JessicaPadma  Katie  CharlieAmil   David  Zara   Filipa '
-		class ← 'CBACCCBBAB'
-		height ← 167 177 171 176 178 164 177 177 173 160
-	```
-	1. Find the class which class has the tallest average height
-		1. Find the class with the narrowest range of heights
-
-1. 
-
-## Problems
-- match word problem `∧⌿=⍤1`
-- reverse the rows in each submatrix `⊖⍤2`
-- find the maximum *something*, where something is defined not in array terms but obviously refers to some subarrays
-
-## The bracket axis operator
-We have seen two pairs of *first-* and *last-axis* primitives.
-
-```APL
-      n←2 3⍴1 2 3 1 0 ¯1
-      n
-1 2  3
-1 0 ¯1
-      +/n                ⍝ Sum along the last axis
-6 0
-      +⌿n                ⍝ Sum along the first axis
-2 2 2
-      '-'⍪2 3⍴'DYALOG'   ⍝ Catenate first
----
-DYA
-LOG
-      '|',2 3⍴'DYALOG'   ⍝ Catenate last
-|DYA
-|LOG
-```
-
-Some functions and operators can be used along specified axes using the **function axis operator** `[]` (more <a target="_blank" href="https://aplwiki.com/wiki/Function-operator_overloading">duplicitous</a> symbols).
-
-Compare the behaviour of the monadic function `⊂` *enclose* when applied with the rank operator `⍤` versus when it is applied using **bracket axis** (another name for the *function axis operator* `[]`).
-
-```APL
-      (⊂⍤1)2 2 5⍴'RIGHTHELLOTHERE'
-┌─────┬─────┐
-│RIGHT│HELLO│
-├─────┼─────┤
-│THERE│RIGHT│
-└─────┴─────┘
-      (⊂⍤2)2 2 5⍴'RIGHTHELLOTHERE'
-┌─────┬─────┐
-│RIGHT│THERE│
-│HELLO│RIGHT│
-└─────┴─────┘
-      (⊂⍤3)2 2 5⍴'RIGHTHELLOTHERE'
-┌─────┐
-│RIGHT│
-│HELLO│
-│     │
-│THERE│
-│RIGHT│
-└─────┘
-      ⊂[1]2 2 5⍴'RIGHTHELLOTHERE'
-┌──┬──┬──┬──┬──┐
-│RT│IH│GE│HR│TE│
-├──┼──┼──┼──┼──┤
-│HR│EI│LG│LH│OT│
-└──┴──┴──┴──┴──┘
-      ⊂[2]2 2 5⍴'RIGHTHELLOTHERE'
-┌──┬──┬──┬──┬──┐
-│RH│IE│GL│HL│TO│
-├──┼──┼──┼──┼──┤
-│TR│HI│EG│RH│ET│
-└──┴──┴──┴──┴──┘
-      ⊂[3]2 2 5⍴'RIGHTHELLOTHERE'
-┌─────┬─────┐
-│RIGHT│HELLO│
-├─────┼─────┤
-│THERE│RIGHT│
-└─────┴─────┘
-      ⊂[1 2]2 2 5⍴'RIGHTHELLOTHERE'
-┌──┬──┬──┬──┬──┐
-│RH│IE│GL│HL│TO│
-│TR│HI│EG│RH│ET│
-└──┴──┴──┴──┴──┘
-      ⊂[2 3]2 2 5⍴'RIGHTHELLOTHERE'
-┌─────┬─────┐
-│RIGHT│THERE│
-│HELLO│RIGHT│
-└─────┴─────┘
-      ⊂[1 2 3]2 2 5⍴'RIGHTHELLOTHERE'
-┌─────┐
-│RIGHT│
-│HELLO│
-│     │
-│THERE│
-│RIGHT│
-└─────┘
-```
-
-The [section about older features](./Quirks.md) has more examples of bracket axis, but for newer users it has fallen out of favour because:
-
-- it can only be used with a few particular primitives, whereas the rank operator can be used with any function including those defined by the user
-- it works slightly differently depending on the function to which it is applied, whereas rank has consistent behaviour for all functions
-- it is special syntax unlike most other operators
-- it involves implicit transposes of the array data
-
-For a more in-depth look at the relationship between function rank and function axis, watch the Dyalog webinars on [Selecting from Arrays](https://dyalog.tv/Webinar/?v=AgYDvSF2FfU) and [The Rank Operator and Dyadic Transpose](https://dyalog.tv/Webinar/?v=zBqdeDJPPRc).
-
-A list of functions with bracket-axis definitions can be found on [the APL Wiki page for function axis](https://aplwiki.com/wiki/Function_axis).
-
-## TODO
-Mean
-TicTacToe
-Grille w/ rank?
-
-A row of street lamps? have light-sensitive switches.
-A series of ovens in an industrial kitchen are controlled by computers. These large ovens each have a set of 4 temperature sensors.
-
-A company owns 5 stores which each sell the same 3 items.
-
-The quantity sold of each product in each store over a 7-day week are given in the array `qty`:
-
-```APL
-⎕RL←42 ⋄ qty←¯1+?5 3 7⍴10
-```
-
-The prices of the three products are £4.99, £24.99 and £99.99.
-
-```APL
-price ← .99 + 4 24 99
-```
-
-The total costs each day to run each store are given in the matrix `cost`:
-
-```APL
-⎕RL←42 ⋄ costs ← 94+?5 7⍴11
-```
-
-Each store has its own weekly profit target:
-
-```APL
-target ← 3000 1250 800 6000 3200
-```
-
-- what is the price of each item?
-£4.99 £24.99 £99.99
-
-- which day had the most?
-- which stores made at least their target profit?
-
-target←400
-
---------
-
-The game naughts and cross, also known as tic-tac-toe, is played on a 3 by 3 grid. Two players take turns placing their tokens on the grid until one player has made a complete line either horizontally, vertically or diagonally which consists of just that player's tokens.
-
-We can represent a game using a character matrix. 
-
-1. 
-
-Now, instead of several 2-dimensional games, we will use a 3-dimensional array to represent a single 3-dimensional game.
-
---------
-Some things may be simpler to express using bracket-axis.
-
-The following functions can be used with the axis operator:
-
-|Monadic Functions|Function Names|
-|---|---|
-|`↑⍵` and `↓⍵`|Mix and Split|
-|`⌽⍵` or `⊖⍵`|Reverse|
-|`,⍵`|Ravel with axis|
-|`⊂⍵`|Enclose with axis|
-|`F/⍵` or `F⌿⍵`|Reductions|
-|`F\⍵` or `F⍀⍵`|Scans|
-
-|Dyadic Functions|Function Names|
-|---|---|
-|`+ × ⌈ ∧ ≤` etc...|All *scalar dyadic functions*|
-|`⍺↑⍵` and `⍺↓⍵`|Take and Drop|
-|`⍺/⍵` or `⍺⌿⍵`|Replicate/compress|
-|`⍺\⍵` or `⍺⍀⍵`|Expand|
-|`⍺,⍵` or `⍺⍪⍵`|Catenate|
-|`⍺⊂⍵`|Partitioned-enclose|
-|`⍺⊆⍵`|Partition|
-|`⍺F/⍵` or `⍺F⌿⍵`|Windowed-reduction|
