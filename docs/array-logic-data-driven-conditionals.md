@@ -1,7 +1,7 @@
 # Array Logic and Data-driven Conditionals
 
 ## Logic and conditions
-APL has logical and comparison functions as in-built primitives. Much like the arithmetic, these are symbols like those used in conventional notation.
+APL has logical and comparison functions as in-built primitives. Much like the arithmetic, these symbols are like those used in conventional notation.
 
 <div class="center language-APL" markdown="span">
 <div class="displayBox" markdown="span">
@@ -139,7 +139,7 @@ The total for each day across all items is a column-wise sum:
 7
 ```
 
-## Ravel means unravel
+## Ravel means unravel :thread:
 Monadic comma is the function <dfn>ravel</dfn> `,⍵` and it lays out the elements of an array as a vector, one row at a time — a bit like pulling thread from a spool.
 
 ```APL
@@ -165,6 +165,8 @@ The "outer product" `∘.F` operator applies its function operand `F` between al
 ```APL
       F ← {⍺+⍵}
       1 2 3 ∘.F 10 20 30
+```
+```
 11 21 31
 12 22 32
 13 23 33
@@ -174,11 +176,23 @@ For example, the catenate function `⍺,⍵` (comma) will join two lists togethe
 
 ```APL
       1 4 9 , 6 5 4
+```
+```
 1 4 9 6 5 4
+```
+---
+```APL
       'joined up' , 'text vectors'
+```
+```
 joined uptext vectors
-
+ 
+```
+---
+```APL
       'chicken' 'pork' 'vegetable' ∘., ' chow mein' ' with cashew nuts'
+```
+```
 ┌───────────────────┬──────────────────────────┐
 │chicken chow mein  │chicken with cashew nuts  │
 ├───────────────────┼──────────────────────────┤
@@ -194,8 +208,15 @@ joined uptext vectors
 	If you do not see lines around the output of the last expression above in your interpreter session, turn boxing on:
 	```APL
 	      ]box on
+	```
+	```
 	Was OFF
+	```
+	---
+	```APL
 	      ⍳3 3
+	```
+	```
 	┌───┬───┬───┐
 	│1 1│1 2│1 3│
 	├───┼───┼───┤
@@ -231,7 +252,7 @@ D  AAA
 L  GGG
 ```
 
-When used with a Boolean array, the function is called <dfn>compress</dfn>.
+When used with a Boolean array, the function `⍺/⍵` is called <dfn>compress</dfn>.
 
 ```APL
       0 1 0/2 3⍴'DYALOG'
@@ -243,10 +264,10 @@ O
 
 Just like the forward-slash `F/` as the *reduction operator* acts along rows and forward-slash-bar `F⌿` reduces down columns*, the replicate `⍺/⍵` and <dfn>replicate-first</dfn> `⍺⌿⍵` functions work along different axes of high rank arrays.
 
-*we will see a fuller description when we discuss 3D and higher rank arrays.
+*we will see a fuller description [when we discuss 3D and higher rank arrays](./cells-and-axes.md).
 
 ## Indexing
-In many other programming languages, "[selection](https://www.bbc.co.uk/bitesize/guides/zh66pbk/revision/3)" is used to describe control structures such as ["if then else"](https://en.wikipedia.org/wiki/Conditional_(computer_programming)#If%E2%80%93then(%E2%80%93else)) or ["switch case"](https://en.wikipedia.org/wiki/Conditional_(computer_programming)#Case_and_switch_statements). In APL, we can get a similar effect by literally "selecting" elements from arrays. 
+In many other programming languages, "[selection](https://www.bbc.co.uk/bitesize/guides/zh66pbk/revision/3)" is used to describe control structures such as "[if then else](https://en.wikipedia.org/wiki/Conditional_(computer_programming)#If%E2%80%93then(%E2%80%93else))" or "[switch case](https://en.wikipedia.org/wiki/Conditional_(computer_programming)#Case_and_switch_statements)". In APL, we can get a similar effect by literally "selecting" elements from arrays. 
 
 !!!Info
 	Indexing starts from 1 by default. You can change the index origin by setting `⎕IO←0`, but this course assumes `⎕IO←1`.
@@ -280,7 +301,7 @@ APL
 6 8 2
 ```
 
-## Problem set
+## Problem set 3
 
 1. Define the numeric vector `nums`
 	
@@ -346,9 +367,7 @@ APL
 		
 		Due to [singleton extension](./basic-syntax-and-arithmetic.md#singleton-extension), `101='101'` compares the single number `101` to each of the 3 characters in the 3-element character vector `'101'`.	The character vector `'101'` is equivalent to `'1' '0' '1'` but the number `101` is not the same as the 3-element numeric vector `1 0 1`.
 
-1. Pass-fail  
-
-	Write a function `PassFail` which takes an array of scores and returns an array of the same shape in which `F` corresponds to a score less than 40 and `P` corresponds to a score of 40 or more.
+1. Write a function `PassFail` which takes an array of scores and returns an array of the same shape in which `F` corresponds to a score less than 40 and `P` corresponds to a score of 40 or more.
 
 	```APL
 	      PassFail 35 40 45
@@ -370,8 +389,7 @@ APL
 		PassFail ← {'FP'[1+40≤⍵]}
 		```
 
-1. Grille cypher
-	This problem is taken from the [2019 APL Problem Solving Competition](https://www.dyalog.com/student-competition.htm).
+1. This problem is taken from the [2019 APL Problem Solving Competition](https://www.dyalog.com/student-competition.htm).
 
 	A Grille is a square sheet with holes cut out of it which, when laid on top of a similarly-sized character matrix, reveals a hidden message.
 
@@ -394,6 +412,8 @@ APL
 	      grid   ← 5 5⍴'VRYIALCLQIFKNEVPLARKMPLFF'
 		  grille ← 5 5⍴'⌺⌺⌺ ⌺ ⌺⌺⌺ ⌺ ⌺ ⌺⌺⌺ ⌺⌺⌺  ⌺⌺'
 		  grid grille
+	```
+	```
 	┌─────┬─────┐
 	│VRYIA│⌺⌺⌺ ⌺│
 	│LCLQI│ ⌺⌺⌺ │
@@ -401,10 +421,28 @@ APL
 	│PLARK│⌺⌺ ⌺⌺│
 	│MPLFF│⌺  ⌺⌺│
 	└─────┴─────┘
+	```
+	---
+	```APL
 		  grille Grille grid
+	```
 	```
 	THISISFUN
 	```
+
+	???Example "Answer"
+
+		We can use the **where** function `⍸⍵` to compute indices of spaces:
+
+		```APL
+		Grille ← {⍵[⍸⍺=' ']}
+		```
+
+		Or, we can use **compress** `⍺/⍵` if we first ravel `,⍵` both arguments:
+
+		```APL
+		Grille ← {(,⍺=' ')/,⍵}
+		```
 
 1. Back to School
 	1. Write a function to produce the multiplication table from `1` to `⍵`. 
@@ -463,10 +501,26 @@ APL
 
 1. Making the Grade
 
-    |   |   |   |   |   |   |
-    |---|---|---|---|---|---|
-    |**Score Range**|`0-64`|`65-69`|`70-79`|`80-89`|`90-100`|
-    |**Letter Grade**|F|D|C|B|A|
+	<table id="gradeBoundaryTable" style="border-top: none;">
+	<tbody>
+	<tr>
+	<td><strong>Score Range</strong></td>
+	<td><code>0-64</code></td>
+	<td><code>65-69</code></td>
+	<td><code>70-79</code></td>
+	<td><code>80-89</code></td>
+	<td><code>90-100</code></td>
+	</tr>
+	<tr>
+	<td><strong>Letter Grade</strong></td>
+	<td>F</td>
+	<td>D</td>
+	<td>C</td>
+	<td>B</td>
+	<td>A</td>
+	</tr>
+	</tbody>
+	</table>
 
     Write a function that, given an array of integer test scores in the inclusive range 0 to 100, returns a list of letter grades according to the table above.
 
