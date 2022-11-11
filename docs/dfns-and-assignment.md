@@ -98,7 +98,7 @@ Separate statements are executed from left to right and top to bottom.
 3. Type `}` and press just <kbd>Enter</kbd>
 4. The function `Sum` is now defined in your workspace. Try the expression `3 Sum 4`.
 
-## Problem set
+## Problem set 2
 1. Eggs
 
 	A recipe serving 4 people uses 3 eggs. Write the function `Eggs` which computes the number of eggs which need cracking to serve `⍵` people. Using a fraction of an egg requires that a whole egg be cracked.
