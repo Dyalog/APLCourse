@@ -36,7 +36,7 @@ Any code using this representation is going to have to be aware of the trailing 
 	```
 	Boxing affects the display of output in the APL session, but does not affect the structure or values of arrays in any way.
 
-In general, arrays are made of arrays. More specifically, the individual elements of any array are <dfn>scalar</dfn> - but they may lie along zero or more [axes](#TODO).
+In general, arrays are made of arrays. More specifically, the individual elements of any array are <dfn>scalar</dfn> - but they may lie along zero or more [axes](./cells-and-axes.md).
 
 How can we fit an arbitrary array as a single element in another array? We have to somehow package it up as one of these scalars.
 
@@ -76,16 +76,43 @@ The <dfn>depth</dfn> function `≡⍵` returns the depth of an array. The absolu
 
 ```APL
       ≡'a'  ⍝ Simple scalar has depth 0
+```
+```
 0
+```
+---
+```APL
       ≡x    ⍝ Simple matrix has depth 1
+```
+```
 1
+```
+---
+```APL
       ≢⍴x   ⍝ Simple matrix has rank 2
+```
+```
 2
+```
+---
+```APL
       ≡⊂x   ⍝ Enclosing increases the depth
+```
+```
 2
+```
+---
+```APL
       ≡⊂⊂x
+```
+```
 3
+```
+---
+```APL
       ≡⊂⊂⊂x
+```
+```
 4
 ```
 
@@ -150,7 +177,7 @@ So we can tell we have a 2 element nested vector. The 1st element is a simple 2-
 ## Arrays are made of scalars
 Arrays in APL are always made of scalars (rank-0 arrays) as their elements.
 
-So the vector `1 2 3` is made of three scalar numbers, and `2 3⍴⎕A` is made of 6 scalar characters arranged in 2 rows with 3 columns.
+So the vector `1 2 3` is made of three scalar numbers, and `2 3⍴⎕A` is made of 6 scalar characters arranged in a table with 2 rows with 3 columns.
 
 A simple scalar is a single character, a single number or a single [namespace reference](./Namespaces.md). Enclosing simple scalars is a no-op (it does not do anything):
 
@@ -164,8 +191,15 @@ But enclosing an array allows us to include it as part of another array:
 ```APL
       x ← 2 3⍴⎕A   ⍝ x is a simple matrix
       3⍴x          ⍝ Reshape uses the elements within
+```
+```
 ABC
+```
+---
+```APL
       3⍴⊂x         ⍝ Enclosing turns the whole array into an element
+```
+```
 ┌───┬───┬───┐
 │ABC│ABC│ABC│
 │DEF│DEF│DEF│
@@ -177,7 +211,7 @@ What is the shape of `46.2`? Here are some common incorrect answers.
 
 `4`?
 
-No, the shape of the character vector `'46.2'` is four, but that is not the same as the scalar number `46.2` - see [problem 2 from the previous section](./array-logic-data-driven-conditionals.md#problem-set).
+No, the shape of the character vector `'46.2'` is four, but that is not the same as the scalar number `46.2` - see [problem set 3 - problem 2 from the previous section](./array-logic-data-driven-conditionals.md#problem-set-3).
 
 `1`?
 
@@ -315,9 +349,9 @@ After disclosing, we are left with a simple character vector.
 ghi
 ```
 
-Clearly, selecting subarrays in this way can become tedious, laborious and even onerous. The main code smell in APL is typically *too much code*, so of course there are other methods to select from arrays in various ways depending on your use case. These are covered in the section on [selecting from arrays](#TODO). However, between these two techniques you will be able to obtain any subset of any array, even if it takes a few steps to get what you want.
+Clearly, selecting subarrays in this way can become tedious, laborious and even onerous. One of the code smells in a line of APL is typically *too much code*, so of course there are other methods to select from arrays in various ways depending on your use case. These are covered in the section on [selecting from arrays](./selecting-from-arrays.md). However, between these two techniques you will be able to obtain any piece of any array, even if it takes a few steps to get what you want.
 
-## Problem set
+## Problem set 4
 1. Write the function `Backwards` which accepts a nested vector of character vectors as its argument and reverses both the order of elements and the contents of each vector within.
 	```APL
 	      Backwards 'reverse' 'these' 'words'
@@ -472,7 +506,7 @@ Clearly, selecting subarrays in this way can become tedious, laborious and even 
 	14
 	```
 
-	???+Example "Answer"
+	???Example "Answer"
 		We have a 2 row, 3 column matrix. It is unevenly nested with a maximum depth of 2. In ravel order there are: two scalars; a 2-element vector; a 3-element vector; a scalar; and a 6-element vector.
 
 		We can lay out the simple scalar elements of the array in a simple vector using the <dfn>enlist</dfn> function.
@@ -480,7 +514,7 @@ Clearly, selecting subarrays in this way can become tedious, laborious and even 
 		We can then see that there are 14 scalar elements in total. This makes sense given the description above.
 		
 		```
-		14 = +/1 1 2 3 1 6`
+		14 = +/1 1 2 3 1 6
 		```
 
 		Therefore, our ravel of elements is `'I' 3 'am' (1 5 8) 'a' 'matrix'`. The definition of `nest` is:
@@ -489,13 +523,13 @@ Clearly, selecting subarrays in this way can become tedious, laborious and even 
 		nest ← 2 3⍴'I' 3 'am' (1 5 8) 'a' 'matrix'
 		```
 
-1. Without using the shape function `⍴⍵`, what are the shapes of the results of the following expressions?
+1. Try to work out the shapes of the results of the following expressions by hand, without executing them.
 	1. `'APL IS COOL'`
 	1. `¯1 0 1 ∘.× 1 2 3 4 5` 
 	1. `1 2 3 4∘.+¯1 0 1∘.×1 10`
 	1. `+/⍳4`
 
-	???+Example "Answers"
+	???Example "Answers"
 		<ol>
 		<li>This is a simple character vector with $11$ characters, including space characters, so its shape is `11`.
 		```APL
