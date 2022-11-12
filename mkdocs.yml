@@ -36,8 +36,8 @@ nav:
   - array-logic-data-driven-conditionals.md
   - multidimensional-and-nested-arrays.md
   - cells-and-axes.md
-  - selecting-from-arrays.md
   - finding-and-replacing-values.md
+  - selecting-from-arrays.md
   - broken-keyboard-problems.md
   - Loops and Recursion: Loops.md
   - Extra Assignment: Assignment.md
