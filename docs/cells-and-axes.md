@@ -61,18 +61,18 @@ In Dyalog, arrays can have up to 15 dimensions.
 
 For more details on the APL array model in Dyalog and other array languages, see [the APL Wiki article on the array model](https://aplwiki.com/wiki/Array_model).
 
-Now that you know how to describe the structure of an array in terms of its sub-arrays, let us look at how to apply functions to sub-arrays.
+Now that we have the words to describe the structure of an array in terms of its sub-arrays, let us look at how to apply functions to those sub-arrays.
 
 ## The rank operator
 A lot of the time you might want to take a subset of the data and do stuff to it. Sometimes you want to think of the data as a collection of similar parts and apply the same processing to each part. In fact, this idea is built in to the "array-at-a-time" nature of some primitive functions and operators, but the rank operator lets us do this for all functions.
 
-Let us take a 3D array representing the cost of 3 products over 2 weeks bought on all 7 days of each week.
+Let us take a 3D array representing the cost of 3 products each day over 2 weeks.
 
 ```APL
 cost ← ?3 2 7⍴9
 ```
 
-Sum between the *layers* (rank 2, matrices) of this array to get the total cost over all 3 products each day of each week:
+The total cost over all 3 products each day of each week is the *sum* between the *layers* (rank 2, matrices):
 
 ```APL
       +⌿cost
@@ -89,7 +89,7 @@ Sum between the *layers* (rank 2, matrices) of this array to get the total cost 
 2 7
 ```
 
-We can tell the function `+⌿` to only *see* rank-2 subarrays. The first axis of each rank-2 subarray is that along which the columns lie. This way, we can get the total spent on each week day over the two weeks:
+To get the total spent on each week day over the two weeks, we can tell the function `+⌿` to only *see* the tables for each product — the rank-2 subarrays. The first axes of each rank-2 subarray are the columns of each product table:
 
 ```APL
       (+⌿⍤2)cost
@@ -151,7 +151,7 @@ This is the same as `+/`:
 	└─────────────┴─────────────┴─────────────┘
 	```
 
-	The result is like doing `+⌿⍵` to each of these matrices.
+	The result of `(+⌿⍤2)⍵` is like doing `+⌿⍵` to each of these matrices.
 
 	```APL
 	      (+⌿⍤2)cost
@@ -201,6 +201,26 @@ In the same way that some functions can apply between a single value and an arra
 13 0 ¯15
 ```
 
+!!!Note "Another helpful tip for operators"
+	If we derive a *dyadic* function using an operator, the dfn `{⍺⍵}` can be used to get a view of the arguments *as the operand function sees them*.
+
+	```APL
+	      1 0 ¯1 ({⍺⍵}⍤1 1) 5 3⍴⍳15
+	```
+	```
+	┌──────┬────────┐
+	│1 0 ¯1│1 2 3   │
+	├──────┼────────┤
+	│1 0 ¯1│4 5 6   │
+	├──────┼────────┤
+	│1 0 ¯1│7 8 9   │
+	├──────┼────────┤
+	│1 0 ¯1│10 11 12│
+	├──────┼────────┤
+	│1 0 ¯1│13 14 15│
+	└──────┴────────┘
+	```
+
 In the case where we apply to sub-arrays of the same rank in both `⍺` and `⍵`, we only need specify that rank once:
 
 ```APL
@@ -226,12 +246,12 @@ LENGTH ERROR: It must be that either the left and right frames match or one of t
 ```
 
 !!!Note Conforming arrays have either same shape or one is a unit
-	With functions like `+ × ÷`, arrays must either have the same shape, or one of them be a scalar. The result of the function application has the same shape as the largest of the input arrays. The rank operator generalises this to the concept of <dfn>frames</dfn>. A frame is a rank-k cell of some array. For frames to "match" means that there are the same number of rank **j** subarrays of `⍺` as there are rank **k** subarrays of `⍵` when a function `⍺ F ⍵` is applied as `⍺ (F⍤j k) ⍵`.
+	With functions like `+ × ÷`, arrays must either have the same shape, or one of them be a scalar.  The result of the function application has the same shape as the largest of the input arrays.  The rank operator generalises this to the concept of <dfn>frames</dfn>.  For a particular cell rank, the leading axes form the frame and the trailing k axes form the cell shape.  For frames to "match" means that there is the same shape of rank **j** subarrays in `⍺` as there is for rank **k** subarrays in `⍵` when a function `⍺ F ⍵` is applied as `⍺ (F⍤j k) ⍵`.
 
 ## Transpose
 To <dfn>transpose</dfn> array is to rearrange its axes. Or rather, to rearrange along which axes its data lies.
 
-Transposing a matrix is to flip along its diagonal:
+Transposing a matrix is to flip along its leading diagonal (top-left to bottom-right):
 
 ```APL
       3 3⍴⍳9
@@ -332,10 +352,8 @@ UVWX
 3 2 4
 ```
 
-Because the rank operator only works along *trailing* axes, we may want to transpose our data in order to work along certain dimensions.
-
 ## The bracket axis operator
-We have seen two pairs of *first-* and *last-axis* primitives.
+Here are two pairs of *first-* and *last-axis* primitives.
 
 ```APL
       n←2 3⍴1 2 3 1 0 ¯1
@@ -355,9 +373,9 @@ LOG
 |LOG
 ```
 
-Some functions and operators can be used along specified axes using the **function axis operator** `[]` (more <a target="_blank" href="https://aplwiki.com/wiki/Function-operator_overloading">duplicitous</a> symbols).
+Some functions and operators can be used along specified axes using the **bracket-axis operator** `[]` (more <a target="_blank" href="https://aplwiki.com/wiki/Function-operator_overloading">duplicitous</a> symbols).
 
-Compare the behaviour of the monadic function `⊂` *enclose* when applied with the rank operator `⍤` versus when it is applied using **bracket axis** (also called the *function axis operator* or *axis specification* `[]`).
+Compare the behaviour of the monadic function `⊂` *enclose* when applied with the rank operator `⍤` versus when it is applied using bracket-axis (also called the *function axis operator* or *axis specification*).
 
 ```APL
       (⊂⍤1)2 2 5⍴'RIGHTHELLOTHERE'
@@ -459,26 +477,7 @@ Compare the behaviour of the monadic function `⊂` *enclose* when applied with 
 └─────┘
 ```
 
-**Pros:**
-
-- some uses of bracket-axis are shorter simpler than their equivalent expression using rank and transpose
-- by forcing the user to apply it directly to primitives, it can lead to faster code in the Dyalog interpreter
-- some people are used to thinking in terms of axes using bracket-axis, rather than in terms of cells using the rank operator
-
-**Cons**
-
-- it can only be used with a few particular primitives, whereas the rank operator can be used with any function including those defined by the user
-- it works slightly differently depending on the function to which it is applied, whereas rank has consistent behaviour for all functions
-- it is special syntax unlike most other operators
-- it involves implicit transposes of the array data
-
-For a more in-depth look at the relationship between function rank and function axis, watch the Dyalog webinars on [Selecting from Arrays](https://dyalog.tv/Webinar/?v=AgYDvSF2FfU) and [The Rank Operator and Dyadic Transpose](https://dyalog.tv/Webinar/?v=zBqdeDJPPRc).
-
-A list of functions with bracket-axis definitions can be found on [the APL Wiki page for function axis](https://aplwiki.com/wiki/Function_axis).
-
-The [section about older features](./Quirks.md) has some more examples of bracket axis.
-
-The following functions can be used with the axis operator:
+Only the following primitive constructs can be used with the axis operator:
 
 |Monadic Functions|Function Names|
 |---|---|
@@ -500,9 +499,23 @@ The following functions can be used with the axis operator:
 |`⍺⊆⍵`|Partition|
 |`⍺F/⍵` or `⍺F⌿⍵`|Windowed-reduction|
 
+## Rank vs Axis
+The bracket-axis operator has always been in Dyalog APL. The rank operator was introduced in version 14.0. They both offer similar functionality, however:
 
-## Problem set
-1. Write a function `FlipBlock` which reverses the columns in each sub-matrix of its argument array.
+- some uses of bracket-axis are shorter than their equivalent expression using rank and transpose, and vice versa
+- sometimes it makes sense to think in terms of axes using bracket-axis, other times in terms of cells using the rank operator
+- bracket-axis can only be used with a few particular primitives, whereas the rank operator can be used with any function including those defined by the user
+- bracket-axis works slightly differently depending on the function to which it is applied, whereas the rank operator has consistent behaviour for all functions
+- bracket-axis is special syntax unlike most other operators
+
+In some ways, bracket-axis can be thought of as [syntactic sugar](https://www.quora.com/What-is-syntactic-sugar-in-programming-languages) for the behaviour of the rank operator in conjunction with dyadic transpose.
+
+For a more in-depth look at the relationship between function rank and function axis, watch the Dyalog webinars on [Selecting from Arrays](https://dyalog.tv/Webinar/?v=AgYDvSF2FfU) and [The Rank Operator and Dyadic Transpose](https://dyalog.tv/Webinar/?v=zBqdeDJPPRc).
+
+The [section about older features](./Quirks.md) has some more examples of bracket axis.
+
+## Problem set 5
+1. Write a function `FlipBlock` which reverses the order of rows in each sub-matrix of its argument array.
 
 	```APL
 	      FlipBlock 2 2 3⍴0 0 0 1 1 1
@@ -530,6 +543,31 @@ The following functions can be used with the axis operator:
 	edcba
 	```
 
+	???+Example "Answer"
+
+		```APL
+		FlipBlock ← {⍺(⊖⍤2)⍵}
+		```
+
+		We can also use the **right/identity** function `⊢⍵` to separate the array *operand* of the rank **operator** from the array *argument* of the derived **function** reverse-first-rank-two `⊖⍤2`. Otherwise, stranding would bind `2 ⍵` into a vector, causing unexpected behaviour.
+
+		This author prefers to isolate operands using parentheses most of the time.
+
+		```APL
+		FlipBlock ← {⍺⊖⍤2⊢⍵}
+		```
+
+		Alternatively, we can write this as a [tacit function](./Ufns.md#the-three-function-styles). This form is also known as a <dfn>derived</dfn> function because a new function is derived from functions and operators.
+
+		Parentheses are not required, but this author thinks they make derived functions more distinced from array values when viewed together in source code.
+
+		```APL
+		FlipBlock ←  ⊖⍤2
+		FlipBlock ← (⊖⍤2)
+		```
+
+		These four spellings of `FlipBlock` are all equivalent. Whichever you choose to write is a matter of taste.
+
 1. Write a function `MatchWord` which takes a character vector left argument `⍺` and a character array `⍵` with the same number of columns as `⍺` and returns a Boolean array of rank `¯1+≢⍺` in which a `1` indicates rows in `⍵` that match `⍺`.
 
 	```APL
@@ -548,18 +586,38 @@ The following functions can be used with the axis operator:
 	1 0
 	```
 
+	???+Example "Answer"
+
+		Are all characters in a row equal?
+
+		```APL
+		MatchWord ← {∧/⍺(=⍤1)⍵}
+		```
+
+		Or using the **match** function `⍺≡⍵`:
+
+		```APL
+		MatchWord ← {⍺(≡⍤1)⍵}
+		```
+
+		As a tacit definition:
+
+		```APL
+		MatchWord ← (≡⍤1)
+		```
+
 1. Extend the `Grille` function from the problem set about [array logic](./array-logic-data-driven-conditionals.md#TODO) to reveal multiple messages in a 3-dimensional array.
 
 	```APL
 	grille  ← 4 4⍴'⌺ ⌺⌺ ⌺ ⌺⌺ ⌺  ⌺⌺⌺'
 	grilles ← 3 4 4⍴'⌺⌺ ⌺⌺⌺⌺ ⌺⌺⌺⌺⌺ ⌺⌺⌺⌺⌺ ⌺⌺⌺⌺ ⌺⌺⌺⌺⌺ ⌺⌺⌺⌺⌺⌺ ⌺ ⌺⌺ ⌺⌺⌺⌺⌺'
-	grid    ← 3 4 4⍴'AREQEEVASEQALTOFBSMBESCTIRMETOGPGHIAAACPSKLERVRG'
+	grids   ← 3 4 4⍴'AREQEEVASEQALTOFBSMBESCTIRMETOGPGHIAAACPSKLERVRG'
 	```
 	
 	The single `grille` reveals 3 messages.
 	
 	```APL
-	      grille Grille grid
+	      grille Grille grids
 	```
 	```
 	REVEAL
@@ -570,13 +628,70 @@ The following functions can be used with the axis operator:
 	The array `grilles` reveals 3 different messages when applied to the same grid.
 	
 	```APL
-	      grilles Grille grid
+	      grilles Grille grids
 	```
 	```
 	EAT
 	BIG
 	APL
 	```
+
+	???+Example "Answer"
+
+		In the individual case, using rank-2 `F⍤2` pairs the single grille with each grid in `grids`:
+
+		```APL
+		      grille ({⍺⍵}⍤2) grid
+		```
+		```
+		┌────┬────┐
+		│⌺ ⌺⌺│AREQ│
+		│ ⌺ ⌺│EEVA│
+		│⌺ ⌺ │SEQA│
+		│ ⌺⌺⌺│LTOF│
+		├────┼────┤
+		│⌺ ⌺⌺│BSMB│
+		│ ⌺ ⌺│ESCT│
+		│⌺ ⌺ │IRME│
+		│ ⌺⌺⌺│TOGP│
+		├────┼────┤
+		│⌺ ⌺⌺│GHIA│
+		│ ⌺ ⌺│AACP│
+		│⌺ ⌺ │SKLE│
+		│ ⌺⌺⌺│RVRG│
+		└────┴────┘
+		```
+
+		We can also use a different grille for each grid, provided that we have one grille per grid:
+
+		```APL
+		      grilles ({⍺⍵}⍤2) grid
+		```
+		```
+		┌────┬────┐
+		│⌺⌺ ⌺│AREQ│
+		│⌺⌺⌺ │EEVA│
+		│⌺⌺⌺⌺│SEQA│
+		│⌺ ⌺⌺│LTOF│
+		├────┼────┤
+		│⌺⌺⌺ │BSMB│
+		│⌺⌺⌺⌺│ESCT│
+		│ ⌺⌺⌺│IRME│
+		│⌺⌺ ⌺│TOGP│
+		├────┼────┤
+		│⌺⌺⌺⌺│GHIA│
+		│⌺ ⌺ │AACP│
+		│⌺⌺ ⌺│SKLE│
+		│⌺⌺⌺⌺│RVRG│
+		└────┴────┘
+		```
+
+		Using the definitions of `Grille` given previously:
+
+		```APL
+		Grille ← {⍵[⍸⍺=' ']}⍤2
+		Grille ← {(,⍺=' ')/,⍵}⍤2
+		```
 
 1.  
 
@@ -613,12 +728,11 @@ The following functions can be used with the axis operator:
 	1. For each expression below, write a brief description of the resulting statistic.
 
 		```APL
-		+⌿rain
-		(+⌿⍤2)rain
-		(+⌿⍤3)rain
 		⌈⌿rain
-		(⌈⌿⍤2)rain
-		rain[⍸rain>250]
+		(+⌿⍤2)rain
+		(⌈⌿⍤1)rain
+		(⌈⌿⍤3)rain
+		⌊/rain
 		```
 		```
 		```
@@ -648,14 +762,26 @@ The following functions can be used with the axis operator:
 		```
 		7 5
 		```
-
-	1. Compute the maximum *TODO* rainfall in any country...
 	 
 	???+Example "Answers"
-		`+⌿rain` is the total rainfall each month in each country over all 7 years  
-		`(+⌿⍤2)rain` is the total rainfall each year in each month over all 5 countries  
-		`(+⌿⍤3)rain` is the same as `+⌿rain` because `rain` is a rank-3 array  
-		`⌈⌿rain` is the maximum rainfall in each month in each country out of any of the 7 years  
+		<ol type="a">
+		<li>
+
+		- `⌈⌿rain` is the maximum rainfall each month in each country over all 7 years.
+		- `(+⌿⍤2)rain` is the total rainfall each year in each month across all 5 countries.
+		- `(⌈⌿⍤1)rain` is the maximum monthly rainfall for any month in each year in each country.
+		- `(⌈⌿⍤3)rain` is the same as `⌈⌿rain` because `rain` is a rank-3 array.
+		- `⌊/rain` is the minimum rainfall in any month in each year in each country.
+
+		</li>
+		<li>
+		
+		```APL
+		(years countries months) ← 3 2 1
+		```
+		
+		</li>
+		</ol>
 
 1. 
 	Which of the following functions are affected by the rank operator `⍤` and why are the other functions not affected?
@@ -667,54 +793,93 @@ The following functions can be used with the axis operator:
 	+⌿   ⍝ Plus reduce-first
 	```
 
-1. Common Names for Arrays of Rank-n
+	???+Example "Answer"
+		**Reverse** `⌽⍵` and **reduce** `F/⍵` work along the last axis of an array. The rank operator makes a function act on subarrays defined in terms of trailing axes of an array. These trailing axes always contains the last axis, so there is no change in behaviour for last-axis reverse `⌽⍵` and reduce `F/⍵`. For example, `F⍤2` forces `F` to work on matrices, and matrices have rows.
 
-	1. Match the following rank operands with their descriptions. Each use of rank (**a** to **e**) pairs with two of the 10 description boxes below.
+		As their names suggest, reverse-first and reduce-first act along the first axis of an array. For a cuboid, this is *between the planes* or *across sub-matrices*. For a matrix, this is *between the rows* or *along the columns*. A vector only has one axis, so both forms act in the same way.
 
-		<pre><code class="language-APL">   a    b    c    d     e
-		┌────┬────┬───┬─────┬──────┐
-		│⍤1 3│⍤2 1│⍤¯1│⍤0 99│⍤99 ¯1│
-		└────┴────┴───┴─────┴──────┘
-		`-----------------------------------------`
-		┌─┐ ┌────────────────┐ ┌────────────┐
-		│⍵│ │major cells of ⍺│ │vectors of ⍺│
-		└─┘ └────────────────┘ └────────────┘
-		┌────────────────┐ ┌─┐ ┌──────────────┐
-		│major cells of ⍵│ │⍺│ │3D arrays of ⍵│
-		└────────────────┘ └─┘ └──────────────┘
-		┌────────────────┐ ┌────────────┐
-		│major cells of ⍵│ │scalars of ⍺│
-		└────────────────┘ └────────────┘
-		┌────────────────┐ ┌────────────────┐
-		│matrices of ⍺   │ │vectors of ⍵    │
-		└────────────────┘ └────────────────┘</code></pre>
+1. Match the following rank operands with their descriptions. Each use of rank (**a** to **e**) pairs with two of the 10 description boxes below.
 
-	1. For each name below, suggest the rank for arrays with that name.
+	<pre><code class="language-APL">   a    b    c    d     e
+	┌────┬────┬───┬─────┬──────┐
+	│⍤1 3│⍤2 1│⍤¯1│⍤0 99│⍤99 ¯1│
+	└────┴────┴───┴─────┴──────┘
+	`-----------------------------------------`
+	┌─┐ ┌────────────────┐ ┌────────────┐
+	│⍵│ │major cells of ⍺│ │vectors of ⍺│
+	└─┘ └────────────────┘ └────────────┘
+	┌────────────────┐ ┌─┐ ┌──────────────┐
+	│major cells of ⍵│ │⍺│ │3D arrays of ⍵│
+	└────────────────┘ └─┘ └──────────────┘
+	┌────────────────┐ ┌────────────┐
+	│major cells of ⍵│ │scalars of ⍺│
+	└────────────────┘ └────────────┘
+	┌────────────────┐ ┌────────────────┐
+	│matrices of ⍺   │ │vectors of ⍵    │
+	└────────────────┘ └────────────────┘</code></pre>
 
-		<pre><code class="language-APL">┌────────┬────────────────────┐
-		│Scalar  │                    │
+	???+Example "Answer"
+
+		```
+		a:     vectors of ⍺ (⍤1 3)   3D arrays of ⍵
+		b:    matrices of ⍺ (⍤2 1)   vectors of ⍵
+		c: major cells of ⍺ (⍤¯1)    major cells of ⍵
+		d:     scalars of ⍺ (⍤0 99)  ⍵
+		e:                ⍺ (⍤99 ¯1) major cells of ⍵
+		```
+
+1. For each name below, suggest the rank for arrays with that name.
+
+	<pre><code class="language-APL">┌────────┬────────────────────┐
+	│Scalar  │                    │
+	├────────┼────────────────────┤
+	│Vector  │rank-1              │
+	├────────┼────────────────────┤
+	│Matrix  │                    │
+	├────────┼────────────────────┤
+	│Table   │                    │
+	├────────┼────────────────────┤
+	│List    │                    │
+	├────────┼────────────────────┤
+	│Cube    │                    │
+	├────────┼────────────────────┤
+	│4D array│                    │
+	├────────┼────────────────────┤
+	│2D array│                    │
+	└────────┴────────────────────┘</code></pre>
+
+	???+Example "Answer"
+
+		```
+		┌────────┬────────────────────┐
+		│Scalar  │rank-0              │
 		├────────┼────────────────────┤
-		│Vector  │rank-1 array        │
+		│Vector  │rank-1              │
 		├────────┼────────────────────┤
-		│Matrix  │                    │
+		│Matrix  │rank-2              │
 		├────────┼────────────────────┤
-		│Table   │                    │
+		│Table   │rank-2              │
 		├────────┼────────────────────┤
-		│List    │                    │
+		│List    │rank-1              │
 		├────────┼────────────────────┤
-		│Cube    │                    │
+		│Cube    │rank-3              │
 		├────────┼────────────────────┤
-		│4D array│                    │
+		│4D array│rank-4              │
 		├────────┼────────────────────┤
-		│2D array│                    │
-		└────────┴────────────────────┘</code></pre>
+		│2D array│rank-2              │
+		└────────┴────────────────────┘
+		```
 
 1. Find the values of `j` and `k` in each of the two expressions below.
+
+	```APL
+	m ← 7 2⍴1 1 2 4 3 7 4 3 5 3 6 2 2 3
+	```
+
 	1.  
 	
-		<pre><code class="language-APL">      0 10(×⍤j k)pos2</code></pre>
+		<pre><code class="language-APL">      0 10(×⍤j k)m</code></pre>
 		<pre><code>0 10
-		0 10
 		0 40
 		0 70
 		0 30
@@ -724,14 +889,33 @@ The following functions can be used with the axis operator:
 
 	1.  
 	
-		<pre><code class="language-APL">      (2×⍳7)(+⍤j k)pos2</code></pre>
-		<pre><code> 5  3
-		 7  8
-		 8 13
-		11 11
-		11 13
-		16 14
-		21 17</code></pre>
+		<pre><code class="language-APL">      (2×⍳7)(+⍤j k)m</code></pre>
+		<pre><code> 3  3
+		 6  8
+		 9 13
+		12 11
+		15 13
+		18 14
+		16 17</code></pre>
+
+	???+Example "Answers"
+
+		<ol type="a">
+		<li>
+
+		```APL
+		(j k) ← 1
+		```
+
+		</li>
+		<li>
+
+		```APL
+		(j k) ← 0 1
+		```
+
+		</li>
+		</ol>
 
 1. Rank Matching  
 	Write a function `R1` which uses catenate `,` with the rank operator `⍤` to merge a vector and matrix into a single 3D array.
@@ -746,7 +930,65 @@ The following functions can be used with the axis operator:
 	C 6</code></pre>
 
 	??? Hint
-		You can apply rank multiple times e.g. `f⍤j⍤k`.
+		You can apply rank multiple times for a single function e.g. `F⍤j⍤k`.
+
+	???+Example "Answer"
+
+		```APL
+		R1 ← ,⍤0⍤1
+		```
+
+		When chaining multiple uses of the rank operator, think of doing multiple pairings — from the outside inwards. We have a vector of scalars `ABC`, and a matrix of rows of scalars `2 3⍴⍳6`. The result wants to pair scalars from `⍺` with scalars from `⍵`. However, we cannot do this simply `F⍤0` because of our rank mismatch. What we can do is use rank once to pair up equivalent shapes, and then use rank 0. Therefore we have to pair rows (vectors, rank 1) first (outside) and then within each of those pairings, pair up our scalars (rank 0) inside.
+
+		```APL
+		      'ABC' ({⍺⍵}⍤0) 2 3⍴⍳6
+		```
+		```
+		RANK ERROR
+		      'ABC'({⍺ ⍵}⍤0)2 3⍴⍳6
+		           ∧
+		```
+		---
+		```APL
+		      'ABC'({⍺ ⍵}⍤1)2 3⍴⍳6
+		```
+		```
+		┌───┬─────┐
+		│ABC│1 2 3│
+		├───┼─────┤
+		│ABC│4 5 6│
+		└───┴─────┘
+		```
+		---
+		```APL
+		      'ABC'({⍺ ⍵}⍤0⍤1)2 3⍴⍳6
+		```
+		```
+		A 1
+		B 2
+		C 3
+
+		A 4
+		B 5
+		C 6
+		```
+
+		It just so happens that stranding two scalars `{⍺⍵}` is the same as concatenating them `{⍺,⍵}`. For more complex arrays these will not be the same.
+
+		```APL
+		      'ABC'(,⍤0⍤1)2 3⍴⍳6
+		```
+		```
+		A 1
+		B 2
+		C 3
+
+		A 4
+		B 5
+		C 6
+		```
+
+		Chaining multiple uses of rank goes from right-to-left, outer most pairing to innermost. That is, in `(,⍤0⍤1)`, we pair rows (`1`) outside and scalars (`0`) within our row pairings.
 
 1. **Split k-cells**  
 	The *split* function `↓⍵` splits an array of rank ≥2 by rows, returning an array of shape `¯1↓⍴⍵`. Use *enclose* `⊂⍵` with the rank operator `⍤` to create a function `Split` which always splits an array into a nested vector of the major cells of `⍵`.
@@ -759,6 +1001,12 @@ The following functions can be used with the axis operator:
 	│7 8 9│1 2 3│4 5 6│
 	│1 2 3│4 5 6│7 8 9│
 	└─────┴─────┴─────┘</code></pre>
+
+	???+Example "Answer"
+
+		```APL
+		Split ← ⊂⍤¯1
+		```
 
 ## Reduce on an empty vector?
 For your interest, here are some reductions of note. Try to ask yourself why they give the results they do. Could they have been given different definitions?
