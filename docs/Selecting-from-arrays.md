@@ -1,6 +1,5 @@
 # Selecting from Arrays
 
-## Selecting from arrays
 In an array-oriented language, perhaps it's no surprise that there are umpteen ways to select values from arrays. There are also many ways to [modify or assign values](#TODO) within arrays.
 
 The exact terminology can vary between array languages, but here we will refer to two types of fundamental array pieces:
@@ -10,7 +9,7 @@ The exact terminology can vary between array languages, but here we will refer t
 
 These notes summarise the different constructs available. There is also a [Dyalog webinar dedicated to selecting from arrays](https://dyalog.tv/Webinar/?v=AgYDvSF2FfU).
 
-### Square bracket indexing
+## Square bracket indexing
 This is the type of indexing we have been using so far. For vectors, it is very intuitive:
 ```APL
       'LE CHAT'[6 4 1 2 3 5 6]
@@ -30,7 +29,7 @@ UX
 1. What happens if you omit an axis? For example, `array[3;4 5;;]`?
 1. What happens if you use too many or too few semicolons?
 
-### Squad (A.K.A. "Functional") indexing
+## Squad (A.K.A. "Functional") indexing
 Square-bracket indexing requires you to know the exact rank of the array and have the correct number of semicolons in your indexing expression. You might also notice that it is a special or [anomalous syntax](https://aplwiki.com/wiki/APL_syntax#Syntactic_elements).
 
 There is also an **index** function `⍺⌷⍵` which has two distinctions:
@@ -60,7 +59,7 @@ QRST
 UVWX
 ```
 
-### Take and drop
+## Take and drop
 We can chop off the edges of an array using **take** `⍺↑⍵` and **drop** `⍺↓⍵`.
 ```APL 
       ¯1 3 2↑2 3 4⍴⎕A
@@ -87,10 +86,10 @@ UV
 	      ≢⍴1 1⌷2 3 4⍴⎕A 
 	1</code></pre>
 
-### Simple indexing
+## Simple indexing
 The selection of rectangular sub-arrays as demonstrated above using square brackets `[]` and squad `⌷` is also known as **simple indexing**.
 
-### Choose indexing
+## Choose indexing
 Simple indexing with square brackets uses scalars or vectors separated by semicolons. Index using square brackets and a nested array of numeric vectors and we can select any collection of scalars:
 
 ```APL
@@ -108,7 +107,7 @@ An interesting relationship appears between indices into an array and indices in
       ⎕A⌷⍨⊂2 3 4⊥↑[0](0 0 0)(1 0 3)(0 2 3)
 ```
 
-### Reach indexing
+## Reach indexing
 Indexing into an array will retrieve some cell of an array. If it is a nested array, then selecting a scalar will return an enclosed array. Sometimes what you actually want is the item inside of that scalar.
 
 While it is common and perfectly valid to simply use *first* `⊃⍵` to disclose the contents of a scalar, the *pick* function `⍺⊃⍵` can be used to retrieve the element directly:
@@ -127,7 +126,7 @@ Reach indexing allows you to pull items from deep within a nested array:
 IJ
 ```
 
-### Select / From
+## Select / From
 Some APLers find squad-index semantics awkward, and have proposed yet another mechanism, called **select** or [**from**](https://aplwiki.com/wiki/From). It can be defined as:
 ```APL
       I←(⊃⍤⊣⌷⊢)⍤0 99
