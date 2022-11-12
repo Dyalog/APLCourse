@@ -1,4 +1,7 @@
 # TODO
+- bracket axis versions of rank problems?
+
+- horizontal scroll on narrow partial code blocks
 - more description in [array logic problem 1](./array-logic-data-driven-conditionals.md#problem-set)
 - move finding and replacing problems interval index broken keyboard problems
 - link to section: http://localhost:8000/array-logic-data-driven-conditionals/#the-outer-product
