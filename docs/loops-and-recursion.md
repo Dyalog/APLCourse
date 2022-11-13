@@ -1,4 +1,4 @@
-# Loops and recursion
+# Loops and Recursion
 Looping is an incredibly basic and fundamental programming construct which you will notice we have barely used at all so far. Or at least, we haven't used many explicit loops.
 
 !!! Note "Terminology"
@@ -254,13 +254,6 @@ Now answer the following questions about `words`.
 1. Which palindrome in `words` is the longest?
 
 1. How many words are in alphabetical order?
-
-???+Example "Answers"
-
-<ol type="a">
-<li>There are $3959$ words which contain at least 3 `'e'`s.</li>
-<li></li>
-</ol>
 
 ### Bell Numbers
 A [Bell number](https://en.wikipedia.org/wiki/Bell_number) counts the possible partitions of a set. The n<sup>th</sup> Bell number $B_n$ counts the ways you can partition a set of $n$ elements.
