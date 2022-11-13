@@ -32,15 +32,28 @@ The <dfn>membership</dfn> function returns a Boolean array (`1`s and `0`s) of th
 <dfn>Find</dfn> `⍺⍷⍵` will give a `1` indicating the location of the first element of `⍺` when the entire array `⍺` is found as a subarray in `⍵`.
 
 ```APL
-      'IONLESS'⍷y
-0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0
-      'NOW'⍷y
-0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 1 0 0
-      (2 3⍴'APPLES')⍷y
-1 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0
+      y ← 2 10⍴'APPLESLESSMOTIONSLOW'
+      'LESS'⍷y
+```
+```
+0 0 0 0 0 0 1 0 0 0
+0 0 0 0 0 0 0 0 0 0
+```
+---
+```APL
+      'LESION'⍷y
+```
+```
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+```
+---
+```APL
+      (2 3⍴'LESION')⍷y
+```
+```
+0 0 0 1 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
 ```
 
 <dfn>Index of</dfn> `⍺⍳⍵` will return the index in `⍺` where `⍵` is found as a major cell.
@@ -48,6 +61,8 @@ The <dfn>membership</dfn> function returns a Boolean array (`1`s and `0`s) of th
 ```APL
       text ← 2 3 4⍴'SOME APPLES'
       text∊'LESS'
+```
+```
 1 0 0 1
 0 0 0 0
 1 1 1 1
@@ -55,7 +70,11 @@ The <dfn>membership</dfn> function returns a Boolean array (`1`s and `0`s) of th
 0 0 1 0
 0 0 0 1
 1 1 1 0
+```
+---
+```APL
       'LESS'⍷text
+```
 0 0 0 0
 0 0 0 0
 1 0 0 0
@@ -63,7 +82,12 @@ The <dfn>membership</dfn> function returns a Boolean array (`1`s and `0`s) of th
 0 0 0 0
 0 0 0 0
 0 0 0 0
+```
+---
+```APL
       (1⌷text)⍳'LESS'
+```
+```
 3
 ```
 
@@ -75,16 +99,19 @@ For subarrays not found in `⍺`, index-of returns `1+≢⍺`.
 ```
 
 ## Sorting and grouping
-To sort, index by the <dfn>grade</dfn>.
+To <dfn>sort</dfn>, index by the <dfn>grade</dfn>.
 
 ```APL
       Sort←{(⊂⍋⍵)⌷⍵}
       Sort 'the alphabet'
 ```
+```
+ aabeehhlptt
+```
 
 Grouping is an incredibly common operation when handling data. The python "dataframe" framework Pandas [has a groupby function](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html) and anybody who has used SQL [is likely to be familiar with this idea](https://www.w3schools.com/sql/sql_groupby.asp).
 
-The <df>key</dfn> operator applies its operand function to groups of [major cells](./array-model.md#cells-and-axes) corresponding to the unique major cells in `⍵`. For a vector, this is the unique list of elements.
+The <dfn>key</dfn> operator applies its operand function to groups of [major cells](./array-model.md#cells-and-axes) corresponding to the unique major cells in `⍵`. For a vector, this is the unique list of elements.
 
 In the monadic case, `⍵` is a list of indices.
 
@@ -119,24 +146,6 @@ mississippi
 │C│s   │
 └─┴────┘
 ```
-
-<dfn>Interval index</dfn> is a function for classifying data by boundaries.
-
-At this point it is worth reminding yourself about APL constructs which perform similar functionality to key and interval index.
-
-1. You already wrote Interval Index [in problem set N](./array-logic-data-driven-conditionals.md#problem-set) using the outer product `∘.F`. See if you can rewrite that `Grade` function using **interval index** `⍺⍸⍵`.
-
-	???Example "Answer"
-		```APL
-		Grade ← {'FDCBA'[0 65 70 80 90⍸⍵]}
-		```
-
-1. Write the interval index function `⍺⍸⍵` for two vectors without using the `⍸` glyph
-
-	???Example "Answer"
-		```APL
-		IntervalIndex ← {+⌿⍺∘.≤⍵}
-		```
 
 ## Set functions
 Those familiar with set theory from traditional mathematics will recognise the following symbols. The APL functions are closely related to their set theory counterparts.
@@ -175,57 +184,37 @@ t[⍸t∊'aeiou']←'!'
 ```
 
 ### Selective Assignment
-Define `n←5 5⍴⍳25` in your workspace.
+Most ways of [selecting from arrays](./selecting-from-arrays.md) can be used to change values in an array. Here is an example using **compress**:
 
-1. Using selections, find at least four different ways to set the bottom-right 3 by 3 submatrix in `n` to `0`.
-	For example, `(2 2↓n)←0`.
-
-	??? Hint
-		See which primitives may be used in a <a href='http://help.dyalog.com/latest/#Language/Primitive%20Functions/Assignment%20Selective.htm?Highlight=selective%20assignment'>selective assignment</a>
-
-	???+Example "Answers"
-		Compute the indices:
-		
-		```APL
-		n[2+⍳3;2+⍳3]←0
-		```
-
-		Use negative take:
-
-		```APL
-		(¯3 ¯3↑n)←0
-		```
-
-		Use two compressions:
-
-		```APL
-		b←2 3/0 1
-		(b/b⌿n)←0
-		```
-
-		
-
+```APL
+      a ← 2 3⍴⎕A
+      (1 0⌿a)←'⌺'
+      a
+```
+```
+⌺⌺⌺
+DEF
+```
 
 ### Modified Assignment
 Experiment with the following expressions, paying particular attention to the `name f← array` construct.
 
 ```APL
-      salaries←18250 42500 56000 57250 48640
-      codes←'ACDDC'
-      salaries×←1.1
-      salaries[⍸codes='C']×←1.05
+salaries←18250 42500 56000 57250 48640
+codes←'ACDDC'
+salaries×←1.1
+salaries[⍸codes='C']×←1.0
 
-      a←⎕A
-      (3↑a),←'abcd'
+a←⎕A
+(3↑a),←'abcd'
 ```
 
 ### The At operator
-
 Monadic functions take a single right argument array as input. Dyadic functions take two argument arrays.
 
 Monadic operators take a single left operand which can be a function or an array (as in `+/` where plus `+` is the function operand and reduce `/` is the operator). 
 
-Dyadic operators take two operands which could be functions or arrays depending on the operator's definition. For example, the [rank operator](./array-model.md#matching-dimensions) `F⍤k` takes a function left operand `F` and array right operand `k` of up to 3 elements.
+Dyadic operators take two operands which could be functions or arrays depending on the operator's definition. For example, the [rank operator](./array-model.md#matching-dimensions) `F⍤k` takes a function left operand `F` and array right operand vector `k` of up to 3 elements.
 
 Selective and indexed assignment methods will change the values of variables. The "at" operator `@` merges two arrays at specified indices and returns a new array.
 
@@ -233,24 +222,33 @@ If a function right operand returns a boolean array when applied to `⍵` (e.g. 
 
 ```APL
       ('∆⍥'@{⍵∊'AEIOU'})2 3⍴'DYALOG'
+```
+```
+DY∆
+L⍥G
+```
+---
+```APL
       (' '@2 3 4)'DYALOG'
+```
+```
+D   OG
+```
+---
+```APL
       (' '@(1 2)(1 3)(2 1))2 3⍴'DYALOG'
 ```
-
-1. The following expression contains an error:  
-	`      ('∆⍥'@1)2 3⍴'DYALOG'`  
-	Change the parenthesised function containing `@` in **two** ways so that it gives the following results:  
-	1. 
-		<pre><code>∆∆∆
-		LOG</code></pre>  
-	1. 
-		<pre><code>∆∆∆
-		⍥⍥⍥</code></pre>
+```
+D  
+ OG
+```
 
 Generally, the left operand to `@` is a function applied to scalars in `⍵` which are specified by a right operand that is either an array of scalar (simple or enclosed vector) indices or a boolean array returned by a right operand function. An array left operand is shorthand for a [constant function](https://aplwiki.com/wiki/Constant) that returns the array.
 
 ```APL
-      {1↓(1∘(819⌶)@{¯1⌽' '=⍵})' ',⍵}'my excellent heading'
+      Upper ← 1∘⎕C
+      {Upper@{¯1⌽' '=⍵}' ',⍵}'my excellent heading'
+ My Excellent Heading
 ```
 
 ### Strand Assignment
@@ -291,9 +289,7 @@ We can assign items in `nest` to the three variables `s←'A'` `v←1 2 3` and `
 	6
 	```
 
-## Problem set
-
-### Part 1: Text processing
+## Problem set 6
 
 1. Write a function test if there are any vowels `'aeiou'` in text vector `⍵`
 
@@ -312,8 +308,14 @@ We can assign items in `nest` to the three variables `s←'A'` `v←1 2 3` and `
 	```
 
 	???+Example "Answer"
-		We can use membership to see which elements of our argument belong to the set `'aeiou'`. Then we can use membership to check whether `1` exists in the resulting Boolean array.
+		We can use membership to see which elements of our argument belong to the set `'aeiou'`. Then we can then ask if there are any `1`s in the Boolean vector:
 	
+		```APL
+		AnyVowels ← {∨/⍵∊'aeiou'}
+		```
+
+		An easy eay to check for any ones in a high rank Boolean array is to use membership:
+
 		```APL
 		AnyVowels ← {1∊⍵∊'aeiou'}
 		```
@@ -351,24 +353,37 @@ We can assign items in `nest` to the three variables `s←'A'` `v←1 2 3` and `
 	```
 
 	???Example "Answer"
-		We bind `⍺` to the membership function (`∊∘⍺`) to form a monadic function "contains alpha" which can be applied on each vector in our nested argument.
+		One solution is to bind `⍺` to the membership function (`∊∘⍺`) to form a monadic function "contains alpha" which can be applied on each vector in our nested argument.
 
 		```APL
 		FoundIn ← {∨/¨∊∘⍺¨⍵}
 		```
 
 1. Write a function `Clean` that changes all non-digits into stars.
+
 	```APL
 	      Clean 'Easy as 1, 2 and 3'
+	```
+	```
 	********1**2*****3
+	```
+	---
+	```APL
 	      Clean '1000'
+	```
+	```
 	1000
+	```
+	---
+	```APL
 	      Clean 'APL works!'
+	```
+	```
 	**********
 	```
 
 	???+Example "Answer"
-		We cannot assign to `⍵` in a dfn, so we must create an intermediate variable name.
+		We cannot assign to `⍵` in a dfn, so we must create an intermediate variable name:
 		
 		```APL
 		 Clean ← {
@@ -378,35 +393,65 @@ We can assign items in `nest` to the three variables `s←'A'` `v←1 2 3` and `
 		 }
 		```
 
-1. Write a function to convert a character vector into upper case. Assume text consists of only lowercase alphabetic characters `a-z` and spaces.
-	```APL
-		  ToUpper 'sale on now'
-	SALE ON NOW
-	```
-
-	???+Example "Answer"
-		```APL
-		alph ← 'abcdefghijklmnopqrstuvwxyz'
-		ToUpper ← {(⎕A,' ')[⍺⍳⍵]}
-		```
-
-		This is a useful technique to know, but there is a [system function]() `⎕C` for case folding and mapping. The case conversion system function `⎕C` is covered in the webinar [Language Features of Dyalog version 18.0 in Depth - Part 1](https://dyalog.tv/Webinar/?v=Hln3zryunsw).
-
-1. Now try a version which includes any characters. Convert only lowercase alphabetic characters `a-z` into uppercase, and leave all others alone.
-	```APL
-	      text←'What? Ignore these $#!?# characters!?'
-	      ToUpper text
-	```
-	```
-	WHAT? IGNORE THESE $#!?# CHARACTERS!?
-	```
-
-	???+Example "Answer"
-		There are other valid approaches, but here is one way to use selective assignment:
+		We can provide a function right operand to the **at** operator which checks for non-digits:
 
 		```APL
-		((text∊alph)/text) ← (⎕A,' ')[(text∊alph)/alph⍳text]
+		Clean ← '*'@(~∊∘⎕D)
 		```
+
+1. The following expression contains an error:  
+
+	```APL
+	      ('∆⍥'@1)2 3⍴'DYALOG'
+	```
+	```
+	LENGTH ERROR
+	      ('∆⍥'@1)2 3⍴'DYALOG'
+	      ∧
+	```
+
+	Change the parenthesised function containing `@` so that it gives the following results:  
+
+	1. 
+
+		```
+		∆∆∆
+		LOG
+		```
+
+	1. 
+
+		```
+		∆∆∆
+		⍥⍥⍥
+		```
+
+	???+Example "Answers"
+
+		<ol type="a">
+		<li>
+
+		```APL
+		      ('∆'@1)2 3⍴'DYALOG'
+		```
+		```
+		∆∆∆
+		LOG
+		```
+
+		</li>
+		<li>
+
+		```APL
+		      ((2 3⍴3/'∆⍥')@1 2)2 3⍴'DYALOG'
+		```
+		```
+		∆∆∆
+		⍥⍥⍥
+		```
+
+		</li>
+		</ol>
 
 1. Create a function `ReplaceHead` which returns its left argument vector `⍺`, but with the first `⍴⍵` elements replaced with the contents of `⍵`.
 
@@ -438,6 +483,12 @@ We can assign items in `nest` to the three variables `s←'A'` `v←1 2 3` and `
 		ReplaceHead ← {r←⍺ ⋄ s←(≢⍺)⌊≢⍵ ⋄ r[⍳s]←s↑⍵ ⋄ r}
 		```
 
+		This solution uses the **over** operator `F⍥G` to express the minimum length of `⍺` and `⍵`. It then uses the **at** operator to do the substitution.
+
+		```APL
+		ReplaceHead ← {s←⍺⌊⍥≢⍵ ⋄ (s↑⍵)@(⍳s)⊢⍺}
+		```
+
 1. Bus stops in a town are labelled **A** to **E**. Define a function RouteMatrix which returns a Boolean matrix where `1`s indicate that buses go from one bus stop to the next.
 
 	```APL
@@ -466,70 +517,4 @@ We can assign items in `nest` to the three variables `s←'A'` `v←1 2 3` and `
 	???Example "Answer"
 		```APL
 		RouteMatrix ← {'ABCDE'∘.∊⍵}
-		```
-
-### Part 2: Word problems
-We are going to do some text processing on a dictionary of words. 
-
-If you have access to the internet, paste the following into your session to download a text file dictionary (917kB in size) and store it as a nested vector of character vectors named `words`.
-
-```APL
-]Get bit.ly/unixwords
-words ← (⎕UCS 10)(≠⊆⊢)unixwords
-```
-
-If you have the file on your computer (maybe it was given to you on a USB drive, for example) then you can load it into your workspace from disk using the following expressions.
-
-```APL
-(content encoding newline) ← ⎕NGET'/path/to/words.txt'
-words ← (⎕UCS newline) (≠⊆⊢) content
-```
-
-Now answer the following questions about `words`.
-
-1. How many words have at least 3 `'e'`s in them?
-
-1. How many words have exactly two consecutive `'e'`s in them? 
-    The first three such words are `Aberdeen` `Abderdeen's` and `Aileen`.
-
-1. What is the shortest word with two consecutive `'a'`s?
-
-1. What words have three consecutive double letters? For example, `mississippi` does not but `misseetto` does. Misseetto is not a real word.
-
-	A palindrome is the same when reversed. For example, **racecar** is a palindrome but **racecat** is not.
-
-1. How many palindromes are there in `words`?
-
-1. Which palindrome in `words` is the longest?
-
-1. How many words are in alphabetical order?
-
-### Part 3: Broken keyboard problems
-1. Write the **unique** function `∪⍵` without using the **downshoe** `∪` glyph.
-
-	???+Example "Answers"
-		Index-of returns the index of the first occurance of an element. For `⍵⍳⍵`, this becomes a list of integer ID numbers which correspond to major cells as they appear.
-
-		```APL
-		{((⍳≢⍵)=⍵⍳⍵)/⍵}
-		```
-
-		This is a good opportunity to mention the **swap** `⍺ F⍨ ⍵` and **selfie** `F⍨⍵` operators.
-
-		```APL
-		{⍵/⍨(⍳≢⍵)=⍳⍨⍵}
-		```
-
-1. Write the **without** function `⍺~⍵` without using the **tilde** `~` glyph.
-
-	???+Example "Answer"
-		```APL
-		{(~⍺∊⍵)/⍺}
-		```
-
-1. Write the **intersection** function `⍺∩⍵` without using the **upshoe** `∩` glyph.
-
-	???+Example "Answer"
-		```APL
-		{(⍺∊⍵)/⍺}
 		```
