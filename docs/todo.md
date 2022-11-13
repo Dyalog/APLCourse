@@ -101,3 +101,59 @@ Now, instead of several 2-dimensional games, we will use a 3-dimensional array t
 	1. Find the name of the tallest student
 	1. Find the class which class has the tallest average height
 	1. Find the class with the narrowest range of heights
+
+## Making scalars
+1. Turn the 1-element vector `v` into a scalar.
+1. Write an expression using `⍴` which returns an empty numeric vector.
+1. Write an expression using `⍳` which returns an empty numeric vector.
+
+
+	???+Example "Answer"
+		<ol type="a">
+		<li>
+		The shape of a scalar is an empty numeric vector. We can therefore use an empty numeric vector as the left argument to the reshape function:
+		```APL
+		⍬⍴v
+		```
+		</li>
+		<li>
+		The shape of any scalar is an empty numeric vector.
+		```APL
+		      ⍴0
+		```
+		```
+		 
+		```
+		---
+		```APL
+		      ⍴35
+		```
+		```
+		 
+		```
+		---
+		```APL
+		      ⍴'Q'
+		```
+		```
+		 
+		```
+		---
+		```APL
+		      ⍬≡⍴42
+		```
+		```
+		1
+		```
+		</li>
+		<li>
+		If we can generate a length `n` vector with `⍳n`, what happens when `n=0`?
+
+		```APL
+		      ⍳0
+		```
+		```
+		 
+		```
+		</li>
+		</ol>
