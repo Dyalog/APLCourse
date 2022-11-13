@@ -1,4 +1,4 @@
-# Broken keyboard problems
+# Broken Keyboard Problems
 APL is a language which evolves over time. Some of the primitives available today exist because they represent patterns which are very common. Not only this, but in APL there are usually several equally good ways of expressing the same idea. As you develop competency in APL, this versatility in expression becomes an advantage.
 
 Imagine that your keyboard is broken such that it is impossible to type a particular glyph. It is a useful exercise in array thinking and use of APL to try and recreate the behaviour without using the primitive itself.

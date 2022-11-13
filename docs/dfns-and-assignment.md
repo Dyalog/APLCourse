@@ -1,4 +1,4 @@
-# Dfns and assignment
+# Dfns and Assignment
 
 ## Dfns
 A <dfn>dfn</dfn> (pronounced "*dee-fun*" with a very short "u" sound) is a way of writing functions in APL. It starts and ends with curly braces `{}`, has a right argument `⍵` (omega) and an optional left argument `⍺` (alpha).

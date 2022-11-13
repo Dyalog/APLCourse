@@ -1,4 +1,4 @@
-# Finding and replacing values
+# Finding and Replacing Values
 
 ## Searching and finding
 It is common to make multiple equality comparisons. Doing this one at a time becomes tedious.

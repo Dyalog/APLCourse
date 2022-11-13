@@ -1,4 +1,4 @@
-# Cells and axes
+# Cells and Axes
 
 ## Fundamentals of high rank arrays
 From the APL Wiki: 
