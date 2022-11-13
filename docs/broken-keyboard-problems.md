@@ -80,6 +80,80 @@ For each of the following problems:
 		{0=≢⍴⍵: ⍵ ⋄ (⊂1+(≢⍵)-⍳≢⍵)⌷⍵}
 		```
 
+1. Write a function to convert a character vector into upper case without using `⎕C`. Assume text consists of only lowercase alphabetic characters `a-z` and spaces.
+	```APL
+		  ToUpper 'sale on now'
+	SALE ON NOW
+	```
+
+	???+Example "Answer"
+		```APL
+		alph ← 'abcdefghijklmnopqrstuvwxyz'
+		ToUpper ← {(⎕A,' ')[⍺⍳⍵]}
+		```
+
+		This is a useful technique to know, but there is a [system function]() `⎕C` for case folding and mapping. The case conversion system function `⎕C` is covered in the webinar [Language Features of Dyalog version 18.0 in Depth - Part 1](https://dyalog.tv/Webinar/?v=Hln3zryunsw).
+
+1. Write a function to convert only lowercase alphabetic characters `a-z` into uppercase, and leave all others alone.
+	```APL
+	      text←'What? Ignore these $#!?# characters!?'
+	      ToUpper text
+	```
+	```
+	WHAT? IGNORE THESE $#!?# CHARACTERS!?
+	```
+
+	???+Example "Answer"
+		There are other valid approaches, but here is one way to use selective assignment:
+
+		```APL
+		((text∊alph)/text) ← (⎕A,' ')[(text∊alph)/alph⍳text]
+		```
+
+1. Write the **unique** function `∪⍵` without using the **downshoe** `∪` glyph.
+
+	???+Example "Answers"
+		Index-of returns the index of the first occurance of an element. For `⍵⍳⍵`, this becomes a list of integer ID numbers which correspond to major cells as they appear.
+
+		```APL
+		{((⍳≢⍵)=⍵⍳⍵)/⍵}
+		```
+
+		This is a good opportunity to mention the **swap** `⍺ F⍨ ⍵` and **selfie** `F⍨⍵` operators.
+
+		```APL
+		{⍵/⍨(⍳≢⍵)=⍳⍨⍵}
+		```
+
+1. Write the **without** function `⍺~⍵` without using the **tilde** `~` glyph.
+
+	???+Example "Answer"
+		```APL
+		{(~⍺∊⍵)/⍺}
+		```
+
+1. Write the **intersection** function `⍺∩⍵` without using the **upshoe** `∩` glyph.
+
+	???+Example "Answer"
+		```APL
+		{(⍺∊⍵)/⍺}
+		```
+
+1. <dfn>Interval index</dfn> is a function for classifying data by boundaries.
+
+	You already wrote Interval Index [in problem set N](./array-logic-data-driven-conditionals.md#TODO) using the outer product `∘.F`. See if you can rewrite that `Grade` function using **interval index** `⍺⍸⍵`.
+
+	???Example "Answer"
+		```APL
+		Grade ← {'FDCBA'[0 65 70 80 90⍸⍵]}
+		```
+
+1. Write the interval index function `⍺⍸⍵` for two vectors without using the `⍸` glyph
+
+	???Example "Answer"
+		```APL
+		IntervalIndex ← {+⌿⍺∘.≤⍵}
+		```
 
 1. Write a function which:
 	- takes a numeric left argument vector `⍺`, sorted ascending
