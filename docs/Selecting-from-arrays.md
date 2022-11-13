@@ -165,7 +165,7 @@ Over time you will learn from experience what is the most appropriate thing to u
 
 		Setting the <dfn>Random Link</dfn> [system variable](./Quad%20names.md#system-variables) `⎕RL` lets us generate the same random numbers repeatedly.
 
-	1. Compute the names of the people who ate the most fruits 
+	1. Compute the names of the people who ate the most fruit on Tuesday and Sunday.
 	1. Compute the name of the person who ate the most apples and oranges combined.
 	1. What is the name of the person who ate the most fruit overall?
 
@@ -179,6 +179,15 @@ Over time you will learn from experience what is the most appropriate thing to u
 	      n⌿names
 	Anna
 	```
+
+???+Example "Answer"
+	There are many different ways to find these answers. The following are just one set of solutions.
+
+<ol type="a">
+<li>
+
+</li>
+</ol>
 
 1. Write a function `FindWord` which accepts a character matrix left argument `⍺` and a character vector right argument `⍵` and returns a Boolean vector where a `1` indicates a row in `⍺` which matches the word `⍵`.
 	```APL
@@ -255,6 +264,34 @@ Over time you will learn from experience what is the most appropriate thing to u
 1. What type of indexing is used in the expression `grid[⍸grille=' ']` ?
 
 1. What indexing array can be used to select a simple scalar from itself?
+
+1. Define `n←5 5⍴⍳25` in your workspace.
+	
+	Using selections, find at least four different ways to set the bottom-right 3 by 3 submatrix in `n` to `0`.
+	For example, `(2 2↓n)←0`.
+
+	??? Hint
+		See which primitives may be used in a <a href='http://help.dyalog.com/latest/#Language/Primitive%20Functions/Assignment%20Selective.htm?Highlight=selective%20assignment'>selective assignment</a>
+
+	???+Example "Answers"
+		Compute the indices:
+		
+		```APL
+		n[2+⍳3;2+⍳3]←0
+		```
+
+		Use negative take:
+
+		```APL
+		(¯3 ¯3↑n)←0
+		```
+
+		Use two compressions:
+
+		```APL
+		b←2 3/0 1
+		(b/b⌿n)←0
+		```
 
 ### Visit to the museum
 Here are some data and questions about visits to a museum.  
