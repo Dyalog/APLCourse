@@ -1,22 +1,24 @@
 # Selecting from Arrays
 
-In an array-oriented language, perhaps it's no surprise that there are umpteen ways to select values from arrays. There are also many ways to [modify or assign values](#TODO) within arrays.
+In an array-oriented language, perhaps it's no surprise that there are umpteen ways to select values from arrays. There are also many ways to [modify or assign values](./finding-and-replacing-values.md) within arrays.
 
-The exact terminology can vary between array languages, but here we will refer to two types of fundamental array pieces:
+The exact terminology can vary between array languages, and even within the context of APL. However, on this page we will say that:
 
 - **Scalars** (0-cells) are the things returned by indexing expressions
-- **Elements** (or **items**) are the arrays inside of scalars. For a simple scalar *this is the same thing*! [Remember enclosing and diclosing scalars before?](#TODO).
+- **Elements** (or **items**) are the arrays inside of scalars. For a simple scalar *this is the same thing*! [Remember enclosing and diclosing scalars before?](./multidimensional-and-nested-arrays.md#arrays-are-made-of-scalars).
 
 These notes summarise the different constructs available. There is also a [Dyalog webinar dedicated to selecting from arrays](https://dyalog.tv/Webinar/?v=AgYDvSF2FfU).
 
 ## Square bracket indexing
 This is the type of indexing we have been using so far. For vectors, it is very intuitive:
+
 ```APL
       'LE CHAT'[6 4 1 2 3 5 6]
 THE CAT
 ```
 
 For higher rank arrays, we can return rectangular sub-arrays by separating the indices into each axis by semicolons:
+
 ```APL
       (2 3 4⍴⎕A)[1 2;1 3;1 4]   ⍝ The corner elements of the cuboid
 AD
@@ -104,7 +106,16 @@ An interesting relationship appears between indices into an array and indices in
 ```APL
       ⎕IO←0
       (2 3 4⍴⎕A)[↓[0]2 3 4⊤0 15 11]
+```
+```
+APL
+```
+---
+```APL
       ⎕A⌷⍨⊂2 3 4⊥↑[0](0 0 0)(1 0 3)(0 2 3)
+```
+```
+APL
 ```
 
 ## Reach indexing
@@ -148,7 +159,7 @@ Over time you will learn from experience what is the most appropriate thing to u
 |Nested arrays|Reach|
 |Arbitrary collections of cells|Select|
 
-## Problem set
+## Problem set 7
 
 ### Search, sort, slice and select
 1. Anna, Ben and Charlie are having a competition. They want to see who can eat the most fruit in a week.
@@ -165,29 +176,71 @@ Over time you will learn from experience what is the most appropriate thing to u
 
 		Setting the <dfn>Random Link</dfn> [system variable](./Quad%20names.md#system-variables) `⎕RL` lets us generate the same random numbers repeatedly.
 
-	1. Compute the names of the people who ate the most fruit on Tuesday and Sunday.
-	1. Compute the name of the person who ate the most apples and oranges combined.
+	1. Compute the names of the people who ate the most fruit on Tuesday and Sunday combined.
+	1. Compute the name of the person who ate the most mangoes and bananas combined.
 	1. What is the name of the person who ate the most fruit overall?
 
+	???+Example "Answer"
+		There are many different ways to find these answers. The following are just one set of solutions.
 
-	`names[{⍵⍳⌈/⍵}+/+/ate[;fruits⍳2 7⍴'Apples Oranges';];]`
+		<ol type="a">
+		<li>
 
-	```APL
-	      f←fruits⍳2 7⍴'Apples Oranges'
-	      t←+/+/ate[;f;]
-	      n←t=⌈/t
-	      n⌿names
-	Anna
-	```
+		Anna and Charlie both ate 10 fruits total on Tuesday and Sunday combined. Ben only ate 8 fruits.
 
-???+Example "Answer"
-	There are many different ways to find these answers. The following are just one set of solutions.
+		```APL
+		      d←days⍳2 3⍴'Tue' 'Sun'
+		      total ← +/+/ate[;;days⍳d]
+		      (total=⌈/total)⌿names
+		```
+		```
+		Anna   
+		Charlie
+		```
 
-<ol type="a">
-<li>
+		</li>
+		<li>
 
-</li>
-</ol>
+		Charlie ate the most mangoes and bananas across the whole week.
+
+		```APL
+		      f←fruits⍳2 7⍴'MangoesBananas'
+		      total ← +/+/ate[;fruits⍳f;]
+		      (total=⌈/total)⌿names
+		```
+		```
+		Charlie
+		```
+
+		</li>
+		<li>
+
+		Anna ate the most fruit overall.
+
+		```APL
+		      total ← +/+/ate
+		      (total=⌈/total)⌿names
+		```
+		```
+		Anna
+		```
+
+		Any of these totals could have been expressed as a single sum. Either by ravelling submatrices for each person:
+
+		```APL
+		total ← +/(,⍤2)ate
+		```
+
+		Or by merging the last two axes:
+
+		```APL
+		total ← +/,[2 3]ate
+		```
+
+		A discussion comparing these expressions will be added later.
+
+		</li>
+		</ol>
 
 1. Write a function `FindWord` which accepts a character matrix left argument `⍺` and a character vector right argument `⍵` and returns a Boolean vector where a `1` indicates a row in `⍺` which matches the word `⍵`.
 	```APL
@@ -210,26 +263,13 @@ Over time you will learn from experience what is the most appropriate thing to u
 		```
 
 	???+Example "Answer"
-		An outer product or reshape can be used for the comparison, but we need to make sure our character vector has the right shape.
+
+		There are many ways to solve this problem. A comparison of different approaches is worthy of a fuller discussion, which will be added later. For now we will simply show a couple of alternatives:
+
 		```APL
 		FindWord ← {∧/∨/⍺∘.=⍵↑⍨2⌷⍴⍺}
-		```
-
-		This outer product generates a 3-dimensional array. It is more efficient to reshape the vector to match the matrix:
-
-		```APL
-		FindWord ← {∧/⍺=(⍴⍺)⍴⍵↑⍨2⌷⍴⍺}
-		```
-		
-		We can compare one row with several using [the rank operator](./cells-and-axes.md#the-rank-operator).
-
-		```APL
-		FindWord ← {∧/⍺(=⍤1)⍵↑⍨(⍴⍺)[2]}
-		```
-
-		The comparison followed by a reduction is also expressed neatly using [the inner product operator](./Operators.md#the-inner-product).
-
-		```APL
+		FindWord ← {∨/(⍵↑⍨⊢/⍴⍺)⍷⍺}
+		FindWord ← {(⍵↑⍨⊢/⍴⍺)(≡⍤1)⍺}
 		FindWord ← {⍺∧.=⍵↑⍨2⌷⍴⍺}
 		```
 
@@ -263,7 +303,45 @@ Over time you will learn from experience what is the most appropriate thing to u
 
 1. What type of indexing is used in the expression `grid[⍸grille=' ']` ?
 
+	???+Example "Answer"
+		Because `grille` is a matrix, the equality with the space character is also a matrix. The **where** function `⍸⍵` returns a nested vector of indices, which when used with square brackets forms a **choose indexing** expression.
+
 1. What indexing array can be used to select a simple scalar from itself?
+
+	???+Example "Answer"
+		For choose indexing, an enclosed empty numeric vector:
+
+		```APL
+		      'a'[⊂⍬]
+		```
+		```
+		a
+		```
+
+		For squad indexing, an empty numeric vector:
+
+		```APL
+		      ⍬⌷'a'
+		```
+		```
+		a
+		```
+
+		For reach indexing, either:
+
+		```APL
+		      ⍬⊃'a'
+		```
+		```
+		a
+		```
+		---
+		```APL
+		      (⊂⍬)⊃'a'
+		```
+		```
+		a
+		```
 
 1. Define `n←5 5⍴⍳25` in your workspace.
 	
@@ -291,6 +369,12 @@ Over time you will learn from experience what is the most appropriate thing to u
 		```APL
 		b←2 3/0 1
 		(b/b⌿n)←0
+		```
+
+		Positive take after reversals:
+
+		```APL
+		(3 3↑⌽⊖n)←0
 		```
 
 ### Visit to the museum
@@ -323,70 +407,3 @@ In the boolean matrix `display`, each row corresponds to a museum piece and each
 1. What was the most popular section by visit duration?
 1. Estimate the opening and closing times of each of the sections.
 1. Which animal being on display corresponded with the highest increase in visit duration for its section?
-
-### Rain facts
-The 3D array `rain` gives the monthly rainfall in millimeters over 7 years in 5 countries.
-
-```APL
-⎕RL←42 ⋄ rain←?7 5 12⍴250
-```
-
-1. Which month in each year in each country had the highest rainfall?
-1. In the data, the countries are in order 1 to 5. Sort the countries in descending order of average monthly rainfall
-1. Sort the countries in ascending order of total yearly rainfall
-
-1. Making scalars
-
-	1. Turn the 1-element vector `v` into a scalar.
-	1. Write an expression using `⍴` which returns an empty numeric vector.
-	1. Write an expression using `⍳` which returns an empty numeric vector.
-
-	???+Example "Answer"
-		<ol type="a">
-		<li>
-		The shape of a scalar is an empty numeric vector. We can therefore use an empty numeric vector as the left argument to the reshape function:
-		```APL
-		⍬⍴v
-		```
-		</li>
-		<li>
-		The shape of any scalar is an empty numeric vector.
-		```APL
-		      ⍴0
-		```
-		```
-		 
-		```
-		---
-		```APL
-		      ⍴35
-		```
-		```
-		 
-		```
-		---
-		```APL
-		      ⍴'Q'
-		```
-		```
-		 
-		```
-		---
-		```APL
-		      ⍬≡⍴42
-		```
-		```
-		1
-		```
-		</li>
-		<li>
-		If we can generate a length `n` vector with `⍳n`, what happens when `n=0`?
-
-		```APL
-		      ⍳0
-		```
-		```
-		 
-		```
-		</li>
-		</ol>
