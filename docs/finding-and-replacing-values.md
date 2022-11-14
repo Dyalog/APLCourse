@@ -147,6 +147,16 @@ mississippi
 └─┴────┘
 ```
 
+<dfn>Interval index</dfn> is a function for classifying data by boundaries.
+
+See if you can write the `Grade` function from [problem set 3, problem 6](./array-logic-data-driven-conditionals.md#problem-set-3) using **interval index** `⍺⍸⍵`.
+
+???Example "Answer"
+	
+	```APL
+	Grade ← {'FDCBA'[0 65 70 80 90⍸⍵]}
+	```
+
 ## Set functions
 Those familiar with set theory from traditional mathematics will recognise the following symbols. The APL functions are closely related to their set theory counterparts.
 
