@@ -2,7 +2,7 @@
 
 In an array-oriented language, perhaps it's no surprise that there are umpteen ways to select values from arrays. There are also many ways to [modify or assign values](./finding-and-replacing-values.md) within arrays.
 
-The exact terminology can vary between array languages, and even within the context of APL. However, on this page we will say that:
+The exact terminology can vary between array languages, and even APLers use these words interchangeably sometimes. However, on this page we will say that:
 
 - **Scalars** (0-cells) are the things returned by indexing expressions
 - **Elements** (or **items**) are the arrays inside of scalars. For a simple scalar *this is the same thing*! [Remember enclosing and diclosing scalars before?](./multidimensional-and-nested-arrays.md#arrays-are-made-of-scalars).
