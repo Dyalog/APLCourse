@@ -114,10 +114,10 @@ For each of the following problems:
 
 1. This function returns unique major cells of `⍵`.
 
-	???+Hint "What primitive function is this?"
+	???Hint "What primitive function is this?"
 		We want to model the **unique** function `∪⍵` without using the **downshoe** `∪` glyph.
 
-	???+Example "Answers"
+	???Example "Answers"
 		Index-of returns the index of the first occurance of an element. For `⍵⍳⍵`, this becomes a list of integer ID numbers which correspond to major cells as they appear.
 
 		```APL
@@ -132,20 +132,20 @@ For each of the following problems:
 
 1. This primitive removes scalars in `⍵` from the vector `⍺`.
 
-	???+Hint "What primitive function is this?"
+	???Hint "What primitive function is this?"
 		We want to Write the **without** function `⍺~⍵` without using the **tilde** `~` glyph.
 
-	???+Example "Answer"
+	???Example "Answer"
 		```APL
 		{(1-⍺∊⍵)/⍺}
 		```
 
 1. This primitive function returns elements in the vector `⍺` which are also found in the vector `⍵`.
 
-	???+Hint "What primitive function is this?"
+	???Hint "What primitive function is this?"
 		We want to write the **intersection** function `⍺∩⍵` without using the **upshoe** `∩` glyph.
 
-	???+Example "Answer"
+	???Example "Answer"
 		```APL
 		{(⍺∊⍵)/⍺}
 		```
@@ -160,17 +160,10 @@ For each of the following problems:
 	0 1 2 2 3
 	```
 
-	- **BONUS:** write a version which also works with characters arrays
-
-		```APL
-		      'ADG' Function 'ABCDEFG'
-		1 1 1 2 2 2 3
-		```
-
-	???+Hint "What primitive function is this?"
+	???Hint "What primitive function is this?"
 		Write a model of the **interval index** function `⍺⍸⍵` without using the **iota-underbar** `⍸` glyph.
 
-	???+Example "Answer"
+	???Example "Answer"
 		For numeric arguments:
 		
 		```APL
@@ -178,15 +171,9 @@ For each of the following problems:
 		{+/⍵∘.≥⍺}
 		```
 
-		For all arguments:
-
-		```APL
-		{+⌿(⍳≢⍵)∘.≤⍵⍳⍺}
-		```
-
 1. This primitive function returns `¯1` for negative numbers, `0` for `0` and `1` for positive numbers in its numeric argument array.
 
-	???+Hint "What primitive function is this?"
+	???Hint "What primitive function is this?"
 		Write the **sign** or **signum** function `×⍵` without using the **multiplication** `×` glyph.
 	
 	???Example "Answer"

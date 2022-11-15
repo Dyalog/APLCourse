@@ -75,7 +75,7 @@ In Dyalog APL, if a name already has a function assigned, that same name cannot 
 ## Multiline functions and the editor
 You can do quite a lot in a single line of APL. However, it is not long before you want to keep sequences of multiple statements available for re-use. Of course we can write functions which consist of multiple statements.
 
-The <dfn>statement separator</dfn>, `⋄` (diamond), allows us to write multiple APL statements in a single line. It is considered more readable to spread multiple statements across multiple lines of a function. However, it is worth being aware that APL diamonds `⋄` are equivalent to newline characters in terms of execution. The following two definitions of the `Mean` function are equivalent.
+The <dfn>statement separator</dfn>, `⋄` (diamond), allows us to write multiple APL statements in a single line. Some people think that it is more readable to spread multiple statements across multiple lines of a function. However, it is worth being aware that APL diamonds `⋄` are equivalent to newline characters in terms of execution. The following two definitions of the `Mean` function are equivalent.
 
 ```APL
  Mean ← {
@@ -99,6 +99,8 @@ Separate statements are executed from left to right and top to bottom.
 4. The function `Sum` is now defined in your workspace. Try the expression `3 Sum 4`.
 
 ## Problem set 2
+The following problems can be solved with single-line dfns.
+
 1. Eggs
 
 	A recipe serving 4 people uses 3 eggs. Write the function `Eggs` which computes the number of eggs which need cracking to serve `⍵` people. Using a fraction of an egg requires that a whole egg be cracked.
@@ -157,7 +159,7 @@ Separate statements are executed from left to right and top to bottom.
 		```APL
 		To ← {⍺+¯1+⍳1+⍵-⍺}
 		```
-		In the general we take into account whether the difference is positive or negative:  
+		In general we take into account whether the difference is positive or negative:  
 		```APL
 		To ← {⍺+(×d)×¯1+⍳1+|d←⍵-⍺}
 		```

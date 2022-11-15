@@ -307,7 +307,7 @@ HT
 LX
 ```
 
-Inspecting the shape before and after transposing.
+Inspecting the shape before and after transposing shows the reversal of axis lengths.
 
 ```APL
       ⍴2 3 4⍴⎕A
@@ -543,7 +543,7 @@ The [section about older features](./Quirks.md) has some more examples of bracke
 	edcba
 	```
 
-	???+Example "Answer"
+	???Example "Answer"
 
 		```APL
 		FlipBlock ← {⍺(⊖⍤2)⍵}
@@ -586,7 +586,7 @@ The [section about older features](./Quirks.md) has some more examples of bracke
 	1 0
 	```
 
-	???+Example "Answer"
+	???Example "Answer"
 
 		Are all characters in a row equal?
 
@@ -606,7 +606,7 @@ The [section about older features](./Quirks.md) has some more examples of bracke
 		MatchWord ← (≡⍤1)
 		```
 
-1. Extend the `Grille` function from the problem set about [array logic](./array-logic-data-driven-conditionals.md#TODO) to reveal multiple messages in a 3-dimensional array.
+1. Extend the `Grille` function from the problem set about [array logic](./array-logic-data-driven-conditionals.md#problem-set-3) to reveal multiple messages in a 3-dimensional array.
 
 	```APL
 	grille  ← 4 4⍴'⌺ ⌺⌺ ⌺ ⌺⌺ ⌺  ⌺⌺⌺'
@@ -636,7 +636,7 @@ The [section about older features](./Quirks.md) has some more examples of bracke
 	APL
 	```
 
-	???+Example "Answer"
+	???Example "Answer"
 
 		In the individual case, using rank-2 `F⍤2` pairs the single grille with each grid in `grids`:
 
@@ -763,7 +763,7 @@ The [section about older features](./Quirks.md) has some more examples of bracke
 		7 5
 		```
 	 
-	???+Example "Answers"
+	???Example "Answers"
 		<ol type="a">
 		<li>
 
@@ -793,7 +793,7 @@ The [section about older features](./Quirks.md) has some more examples of bracke
 	+⌿   ⍝ Plus reduce-first
 	```
 
-	???+Example "Answer"
+	???Example "Answer"
 		**Reverse** `⌽⍵` and **reduce** `F/⍵` work along the last axis of an array. The rank operator makes a function act on subarrays defined in terms of trailing axes of an array. These trailing axes always contains the last axis, so there is no change in behaviour for last-axis reverse `⌽⍵` and reduce `F/⍵`. For example, `F⍤2` forces `F` to work on matrices, and matrices have rows.
 
 		As their names suggest, reverse-first and reduce-first act along the first axis of an array. For a cuboid, this is *between the planes* or *across sub-matrices*. For a matrix, this is *between the rows* or *along the columns*. A vector only has one axis, so both forms act in the same way.
@@ -818,7 +818,7 @@ The [section about older features](./Quirks.md) has some more examples of bracke
 	│matrices of ⍺   │ │vectors of ⍵    │
 	└────────────────┘ └────────────────┘</code></pre>
 
-	???+Example "Answer"
+	???Example "Answer"
 
 		```
 		a:     vectors of ⍺ (⍤1 3)   3D arrays of ⍵
@@ -848,7 +848,7 @@ The [section about older features](./Quirks.md) has some more examples of bracke
 	│2D array│                    │
 	└────────┴────────────────────┘</code></pre>
 
-	???+Example "Answer"
+	???Example "Answer"
 
 		```
 		┌────────┬────────────────────┐
@@ -898,7 +898,7 @@ The [section about older features](./Quirks.md) has some more examples of bracke
 		18 14
 		16 17</code></pre>
 
-	???+Example "Answers"
+	???Example "Answers"
 
 		<ol type="a">
 		<li>
@@ -932,7 +932,7 @@ The [section about older features](./Quirks.md) has some more examples of bracke
 	??? Hint
 		You can apply rank multiple times for a single function e.g. `F⍤j⍤k`.
 
-	???+Example "Answer"
+	???Example "Answer"
 
 		```APL
 		R1 ← ,⍤0⍤1
@@ -1002,7 +1002,7 @@ The [section about older features](./Quirks.md) has some more examples of bracke
 	│1 2 3│4 5 6│7 8 9│
 	└─────┴─────┴─────┘</code></pre>
 
-	???+Example "Answer"
+	???Example "Answer"
 
 		```APL
 		Split ← ⊂⍤¯1

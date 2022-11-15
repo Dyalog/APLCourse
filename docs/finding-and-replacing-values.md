@@ -75,6 +75,7 @@ The <dfn>membership</dfn> function returns a Boolean array (`1`s and `0`s) of th
 ```APL
       'LESS'⍷text
 ```
+```
 0 0 0 0
 0 0 0 0
 1 0 0 0
@@ -317,7 +318,7 @@ We can assign items in `nest` to the three variables `s←'A'` `v←1 2 3` and `
 	0
 	```
 
-	???+Example "Answer"
+	???Example "Answer"
 		We can use membership to see which elements of our argument belong to the set `'aeiou'`. Then we can then ask if there are any `1`s in the Boolean vector:
 	
 		```APL
@@ -346,8 +347,8 @@ We can assign items in `nest` to the three variables `s←'A'` `v←1 2 3` and `
 	12
 	```
 
-	???+Example "Answer"
-		Counting the `1`s in the Boolean result of the first membership function counts the vowels.
+	???Example "Answer"
+		Counting the `1`s in the Boolean result of membership `⍺∊⍵` counts the vowels.
 
 		```APL
 		CountVowels ← {+/⍵∊'aeiou'}
@@ -392,7 +393,7 @@ We can assign items in `nest` to the three variables `s←'A'` `v←1 2 3` and `
 	**********
 	```
 
-	???+Example "Answer"
+	???Example "Answer"
 		We cannot assign to `⍵` in a dfn, so we must create an intermediate variable name:
 		
 		```APL
@@ -436,7 +437,7 @@ We can assign items in `nest` to the three variables `s←'A'` `v←1 2 3` and `
 		⍥⍥⍥
 		```
 
-	???+Example "Answers"
+	???Example "Answers"
 
 		<ol type="a">
 		<li>
@@ -486,7 +487,7 @@ We can assign items in `nest` to the three variables `s←'A'` `v←1 2 3` and `
 	ENTER
 	```
 
-	???+Example "Answers"
+	???Example "Answers"
 		This solution uses indexed assignment:
 
 		```APL

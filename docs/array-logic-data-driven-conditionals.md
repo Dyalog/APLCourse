@@ -203,7 +203,7 @@ joined uptext vectors
 ```
 
 !!!Question "What are those boxes around the output?"
-	We have just created a <dfn>nested array</dfn>. These are arrays in which each element contains another array more complex than a single number or character. The next section on [selecting from arrays](./selecting-from-arrays.md) introduces them in more detail.
+	We have just created a <dfn>nested array</dfn>. These are arrays in which each element contains another array more complex than a single number or character. The next section on [multidimensional and nested arrays](./multidimensional-and-nested-arrays.md) introduces them in more detail.
 
 	If you do not see lines around the output of the last expression above in your interpreter session, turn boxing on:
 	```APL
@@ -675,7 +675,7 @@ APL
 		AddRows ← {s←(⍴⍺)⌈⍴⍵ ⋄ (s⍴⍺)+s⍴⍵}
 		```
 
-		This way of applying functions between arrays of different shapes is very common. As with many things in this course, eventually we will discover more elegant ways to do these things. Here is an example of using [the rank operator](#TODO):
+		This way of applying functions between arrays of different shapes is very common. As with many things in this course, eventually we will discover more elegant ways to do these things. Here is an example of using [the rank operator](./cells-and-axes.md#the-rank-operator):
 
 		```APL
 		AddRows ← +⍤1

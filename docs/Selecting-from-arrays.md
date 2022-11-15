@@ -180,7 +180,7 @@ Over time you will learn from experience what is the most appropriate thing to u
 	1. Compute the name of the person who ate the most mangoes and bananas combined.
 	1. What is the name of the person who ate the most fruit overall?
 
-	???+Example "Answer"
+	???Example "Answer"
 		There are many different ways to find these answers. The following are just one set of solutions.
 
 		<ol type="a">
@@ -251,7 +251,7 @@ Over time you will learn from experience what is the most appropriate thing to u
 	0 0 1 0
 	```
 
-	???+Question "What is `↑`?"
+	!!!Question "What is `↑`?"
 		We created a nested vector of different length character vectors using [strand notation](#arrays-are-made-of-arrays). The mix function `↑⍵` is used to turn this from a nested vector of vectors into a flat matrix made of simple character scalars. In order to make the matrix rectangular, shorter vectors are padded with spaces.
 
 		```APL
@@ -262,9 +262,9 @@ Over time you will learn from experience what is the most appropriate thing to u
 		0 0 0 0 0 0 0
 		```
 
-	???+Example "Answer"
+	???Example "Answer"
 
-		There are many ways to solve this problem. A comparison of different approaches is worthy of a fuller discussion, which will be added later. For now we will simply show a couple of alternatives:
+		There are many ways to solve this problem. A comparison of different approaches is worthy of a fuller discussion, which will be added later. For now we will simply show a few alternatives:
 
 		```APL
 		FindWord ← {∧/∨/⍺∘.=⍵↑⍨2⌷⍴⍺}
@@ -284,7 +284,7 @@ Over time you will learn from experience what is the most appropriate thing to u
 	1. The character scalar `'y'`
 	1. The numeric scalar `6`
 
-	???+Example "Answers"
+	???Example "Answers"
 		It can be tricky to simplify these to a single use of pick `⍺⊃⍵`. Although understanding these selections can help with understanding complicated nested array structures, it is not very common to need to do this in real code.
 		<ol type="a">
 		<li>
@@ -303,12 +303,12 @@ Over time you will learn from experience what is the most appropriate thing to u
 
 1. What type of indexing is used in the expression `grid[⍸grille=' ']` ?
 
-	???+Example "Answer"
+	???Example "Answer"
 		Because `grille` is a matrix, the equality with the space character is also a matrix. The **where** function `⍸⍵` returns a nested vector of indices, which when used with square brackets forms a **choose indexing** expression.
 
 1. What indexing array can be used to select a simple scalar from itself?
 
-	???+Example "Answer"
+	???Example "Answer"
 		For choose indexing, an enclosed empty numeric vector:
 
 		```APL
@@ -351,7 +351,7 @@ Over time you will learn from experience what is the most appropriate thing to u
 	??? Hint
 		See which primitives may be used in a <a href='http://help.dyalog.com/latest/#Language/Primitive%20Functions/Assignment%20Selective.htm?Highlight=selective%20assignment'>selective assignment</a>
 
-	???+Example "Answers"
+	???Example "Answers"
 		Compute the indices:
 		
 		```APL
