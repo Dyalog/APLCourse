@@ -38,7 +38,7 @@ Variables are **pass-by-value**. This means that if one name is used to assign a
       var1←1 2 3
       var2←var1     ⍝ The value of var1 is assigned to var2
       var1←var1+6   ⍝ The value of var2 is changed
-      ⎕←var2          ⍝ var2 retains the previous value
+      ⎕←var2        ⍝ var2 retains the previous value
 1 2 3
 ```
 
@@ -53,8 +53,6 @@ Namespaces are objects and are **pass-by-reference**. All names which are assign
       ⎕←ns1.name
 Steve
 ```
-
-It is possible to 
 
 !!! Note "Discussion"
 	1. Should there be a difference between `(⎕NS⍬)(⎕NS⍬)` and `(2⍴⎕NS⍬)`?

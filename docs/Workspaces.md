@@ -53,7 +53,7 @@ Finally, you can see how much workspace is available with `⎕WA`.
 ## System commands
 A [table of system commands](https://help.dyalog.com/latest/index.htm#Language/System%20Commands/Introduction.htm) is provided in the online documentation.
 
-The *session* is sometimes used to refer to the interactive mode of operation (also known as *calculator mode* also known as *immediate execution mode*), in contrast to *under program control*, which is when something happens as the result of a line in a program/function. 
+The *session* is sometimes used to refer to the interactive mode of operation (also known as *calculator mode* also known as *immediate execution mode*), in contrast to *under program control*, which is when something happens due to a line of code in a program/function. 
 
 For example:
 

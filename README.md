@@ -7,7 +7,9 @@ This course consists of a series of short instructional notes interleaved with p
 The course is undergoing changes in structure and content. We do not currently recommend linking to specific pages or sections at the current time, as those links are likely to break in future updates.
 
 ## Getting Started
-If you're just starting out, you can use the [TryAPL](https://tryapl.org) online interpreter. Put TryAPL on one half of your screen, and [view the course](https://course.dyalog.com) on the other half. 
+If you're just starting out, you can use the [TryAPL](https://tryapl.org) online interpreter. Put TryAPL on one half of your screen, and [view the course](https://course.dyalog.com) on the other half.
+
+You can type APL using a prefix key (backtick `\`` at the top-left of most US and UK keyboard layouts) followed by another key. For example, `\`apl` give `⍺*⎕`.
 
 If you need help typing APL glyphs (e.g. `×⌿⍳`) then see [the APL Wiki](https://aplwiki.com/wiki/Typing_glyphs).
 
