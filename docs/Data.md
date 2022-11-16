@@ -384,7 +384,7 @@ For more information, see [the HttpCommand document](https://github.com/Dyalog/l
 
 ### Indian Summer
 
-[IndiaRainfall.csv](../assets/IndiaRainfall.csv) is a file of [comma separated values](https://simple.wikipedia.org/wiki/Comma-separated_values). It is adapted from [IndiaRainfallSource.csv](../assets/IndiaRainfallSource.csv) to remove incomplete records.
+[IndiaRainfall.csv](./assets/IndiaRainfall.csv) is a file of [comma separated values](https://simple.wikipedia.org/wiki/Comma-separated_values). It is adapted from [IndiaRainfallSource.csv](./assets/IndiaRainfallSource.csv) to remove incomplete records.
 
 The [India Meteorological Department(IMD)](http://www.imd.gov.in/) has shared this dataset under [Govt. Open Data License - India](https://data.gov.in/government-open-data-license-india). It can be downloaded from the links above or from [the Kaggle data science website](https://www.kaggle.com/rajanand/rainfall-in-india).
 

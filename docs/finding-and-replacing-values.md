@@ -112,7 +112,7 @@ To <dfn>sort</dfn>, index by the <dfn>grade</dfn>.
 
 Grouping is an incredibly common operation when handling data. The python "dataframe" framework Pandas [has a groupby function](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html) and anybody who has used SQL [is likely to be familiar with this idea](https://www.w3schools.com/sql/sql_groupby.asp).
 
-The <dfn>key</dfn> operator applies its operand function to groups of [major cells](./array-model.md#cells-and-axes) corresponding to the unique major cells in `⍵`. For a vector, this is the unique list of elements.
+The <dfn>key</dfn> operator applies its operand function to groups of [major cells](./cells-and-axes.md) corresponding to the unique major cells in `⍵`. For a vector, this is the unique list of elements.
 
 In the monadic case, `⍵` is a list of indices.
 
@@ -225,7 +225,7 @@ Monadic functions take a single right argument array as input. Dyadic functions 
 
 Monadic operators take a single left operand which can be a function or an array (as in `+/` where plus `+` is the function operand and reduce `/` is the operator). 
 
-Dyadic operators take two operands which could be functions or arrays depending on the operator's definition. For example, the [rank operator](./array-model.md#matching-dimensions) `F⍤k` takes a function left operand `F` and array right operand vector `k` of up to 3 elements.
+Dyadic operators take two operands which could be functions or arrays depending on the operator's definition. For example, the [rank operator](./cells-and-axes.md#the-rank-operator) `F⍤k` takes a function left operand `F` and array right operand vector `k` of up to 3 elements.
 
 Selective and indexed assignment methods will change the values of variables. The "at" operator `@` merges two arrays at specified indices and returns a new array.
 
