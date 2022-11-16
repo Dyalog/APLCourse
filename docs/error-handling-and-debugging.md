@@ -71,6 +71,7 @@ When an error occurs in a [multi-line function](../Ufns), the interpreter will p
      ∇   
 ```
 ```
+
 ```
 ---
 ```APL
@@ -342,6 +343,7 @@ To get the same diagnostic error messages printed to the session without buildin
      ∇  
 ```
 ```
+
 ```
 ---
 ```APL

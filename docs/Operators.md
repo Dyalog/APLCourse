@@ -68,6 +68,7 @@ Just like [their function counterparts](Ufns/#traditional-functions), traditiona
      ∇  
 ```
 ```
+      
 ```
 ---
 ```APL
@@ -75,6 +76,7 @@ Just like [their function counterparts](Ufns/#traditional-functions), traditiona
       ⎕←3 (÷ TradOp +) 5   ⍝ The result
 ```
 ```
+0.125
 ```
 
 ## Dop

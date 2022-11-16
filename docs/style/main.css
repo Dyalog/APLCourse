@@ -8,6 +8,11 @@
 }
 code {
 	font-family: APL;
+	font-size: 1.03em!important;
+}
+.glyph {
+	font-size: 1.5em;
+	cursor: help;
 }
 .md-logo > img{
 	width: 7rem!important;
@@ -25,6 +30,17 @@ code {
 	--md-primary-fg-color--dark: #563336;
 	--md-default-bg-color: #F8F8F8;
 }
+
+/* Centering content */
+.centerText { text-align: center; }
+.center { display:inline-flex; justify-content: space-evenly; width: 100%; }
+
+.displayBox { 
+	border: solid 2px var(--md-primary-fg-color); 
+	padding: 0.3em 1em;
+	border-radius: 0.3em;
+}
+
 /* Code copy only input (see CONTRIBUTING.md) */
 pre + pre > button, pre + p + hr {
 	display: none!important;
@@ -32,6 +48,7 @@ pre + pre > button, pre + p + hr {
 pre > code {
 	padding-bottom: 1em!important;   /* Space below allows low hanging characters to be visible */
 	line-height: 1.2em;
+	font-size: 0.95em!important;
 }
 hr + p + pre > button {
 	top: -0.2em !important;          /* Move copy buttons in line with input */
@@ -43,3 +60,4 @@ pre + pre > code, hr + p + pre > code {
 	box-sizing: border-box;
 	padding-top: 0!important;       /* Bring output lines closer to input lines */
 }
+dfn { font-weight: bold; }

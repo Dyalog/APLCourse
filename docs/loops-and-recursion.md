@@ -1,4 +1,4 @@
-# Loops and recursion
+# Loops and Recursion
 Looping is an incredibly basic and fundamental programming construct which you will notice we have barely used at all so far. Or at least, we haven't used many explicit loops.
 
 !!! Note "Terminology"
@@ -218,6 +218,42 @@ The syntax is mentioned in the [section on user-defined functions](../Ufns/#mark
 	:AndIf OnlyComputableIfPreCondition</code></pre>
 
 ## Problem set 8
+
+### Word Problems
+We are going to do some text processing on a dictionary of words. 
+
+If you have access to the internet, paste the following into your session to download a text file dictionary (917kB in size) and store it as a nested vector of character vectors named `words`.
+
+```APL
+]Get bit.ly/unixwords
+words ← (⎕UCS 10)(≠⊆⊢)unixwords
+```
+
+If you have the file on your computer (maybe it was given to you on a USB drive, for example) then you can load it into your workspace from disk using the following expressions.
+
+```APL
+(content encoding newline) ← ⎕NGET'/path/to/words.txt'
+words ← (⎕UCS newline) (≠⊆⊢) content
+```
+
+Now answer the following questions about `words`.
+
+1. How many words have at least 3 `'e'`s in them?
+
+1. How many words have exactly two consecutive `'e'`s in them? 
+    The first three such words are `Aberdeen` `Abderdeen's` and `Aileen`.
+
+1. What is the shortest word with two consecutive `'a'`s?
+
+1. What words have three consecutive double letters? For example, `mississippi` does not but `misseetto` does. Misseetto is not a real word.
+
+	A palindrome is the same when reversed. For example, **racecar** is a palindrome but **racecat** is not.
+
+1. How many palindromes are there in `words`?
+
+1. Which palindrome in `words` is the longest?
+
+1. How many words are in alphabetical order?
 
 ### Bell Numbers
 A [Bell number](https://en.wikipedia.org/wiki/Bell_number) counts the possible partitions of a set. The n<sup>th</sup> Bell number $B_n$ counts the ways you can partition a set of $n$ elements.

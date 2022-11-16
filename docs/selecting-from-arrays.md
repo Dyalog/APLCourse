@@ -1,23 +1,24 @@
-# Search, Sort and Select
+# Selecting from Arrays
 
-## Selecting from arrays
-In an array-oriented language, perhaps it's no surprise that there are umpteen ways to select values from arrays. There are also many ways to [modify or assign values](../Assignment) within arrays.
+In an array-oriented language, perhaps it's no surprise that there are umpteen ways to select values from arrays. There are also many ways to [modify or assign values](./finding-and-replacing-values.md) within arrays.
 
-The exact terminology can vary between array languages, but here we will refer to two types of fundamental array pieces:
+The exact terminology can vary between array languages, and even APLers use these words interchangeably sometimes. However, on this page we will say that:
 
 - **Scalars** (0-cells) are the things returned by indexing expressions
-- **Elements** (or **items**) are the arrays inside of scalars. For a simple scalar *this is the same thing*! [Remember enclosing and diclosing scalars before?](../Array model/#nested-arrays).
+- **Elements** (or **items**) are the arrays inside of scalars. For a simple scalar *this is the same thing*! [Remember enclosing and diclosing scalars before?](./multidimensional-and-nested-arrays.md#arrays-are-made-of-scalars).
 
 These notes summarise the different constructs available. There is also a [Dyalog webinar dedicated to selecting from arrays](https://dyalog.tv/Webinar/?v=AgYDvSF2FfU).
 
-### Square bracket indexing
-This is the type of indexing we have used exclusively up to now. For vectors, it is very intuitive:
+## Square bracket indexing
+This is the type of indexing we have been using so far. For vectors, it is very intuitive:
+
 ```APL
       'LE CHAT'[6 4 1 2 3 5 6]
 THE CAT
 ```
 
-For higher rank arrays, we can return rectangular sub-arrays by separating the indices into each axis by a semicolon:
+For higher rank arrays, we can return rectangular sub-arrays by separating the indices into each axis by semicolons:
+
 ```APL
       (2 3 4⍴⎕A)[1 2;1 3;1 4]   ⍝ The corner elements of the cuboid
 AD
@@ -30,7 +31,7 @@ UX
 1. What happens if you omit an axis? For example, `array[3;4 5;;]`?
 1. What happens if you use too many or too few semicolons?
 
-### Squad (A.K.A. "Functional") indexing
+## Squad (A.K.A. "Functional") indexing
 Square-bracket indexing requires you to know the exact rank of the array and have the correct number of semicolons in your indexing expression. You might also notice that it is a special or [anomalous syntax](https://aplwiki.com/wiki/APL_syntax#Syntactic_elements).
 
 There is also an **index** function `⍺⌷⍵` which has two distinctions:
@@ -40,17 +41,41 @@ There is also an **index** function `⍺⌷⍵` which has two distinctions:
 
 ```APL
       (1 2)(2 3)⌷(2 3 4⍴⎕A)
+```
+```
+EFGH
+IJKL
+
+QRST
+UVWX
+```
+---
+```APL
       (2 3 4⍴⎕A)[1 2;2 3;]
 ```
+```
+EFGH
+IJKL
 
-### Take and drop
+QRST
+UVWX
+```
+
+## Take and drop
 We can chop off the edges of an array using **take** `⍺↑⍵` and **drop** `⍺↓⍵`.
 ```APL 
-      ¯1 3 2↑2 3 4⍴⎕A 
+      ¯1 3 2↑2 3 4⍴⎕A
+```
+```
 MN
 QR
 UV
+```
+---
+```APL
       1 0 ¯2↓2 3 4⍴⎕A 
+```
+```
 MN
 QR
 UV
@@ -63,14 +88,17 @@ UV
 	      ≢⍴1 1⌷2 3 4⍴⎕A 
 	1</code></pre>
 
-### Simple indexing
+## Simple indexing
 The selection of rectangular sub-arrays as demonstrated above using square brackets `[]` and squad `⌷` is also known as **simple indexing**.
 
-### Choose indexing
-Square brackets have a magic trick up their sleeve. Simple indexing with square brackets uses scalars or vectors separated by semicolons. If you index using square brackets and a nested vector of numeric vectors, you can select any collection of scalars.
+## Choose indexing
+Simple indexing with square brackets uses scalars or vectors separated by semicolons. Index using square brackets and a nested array of numeric vectors and we can select any collection of scalars:
 
 ```APL
       (2 3 4⍴⎕A)[(1 1 1)(2 1 4)(1 3 4)]
+```
+```
+APL
 ```
 
 An interesting relationship appears between indices into an array and indices into its ravel when `⎕IO←0`:
@@ -78,10 +106,19 @@ An interesting relationship appears between indices into an array and indices in
 ```APL
       ⎕IO←0
       (2 3 4⍴⎕A)[↓[0]2 3 4⊤0 15 11]
+```
+```
+APL
+```
+---
+```APL
       ⎕A⌷⍨⊂2 3 4⊥↑[0](0 0 0)(1 0 3)(0 2 3)
 ```
+```
+APL
+```
 
-### Reach indexing
+## Reach indexing
 Indexing into an array will retrieve some cell of an array. If it is a nested array, then selecting a scalar will return an enclosed array. Sometimes what you actually want is the item inside of that scalar.
 
 While it is common and perfectly valid to simply use *first* `⊃⍵` to disclose the contents of a scalar, the *pick* function `⍺⊃⍵` can be used to retrieve the element directly:
@@ -100,7 +137,7 @@ Reach indexing allows you to pull items from deep within a nested array:
 IJ
 ```
 
-### Select / From
+## Select / From
 Some APLers find squad-index semantics awkward, and have proposed yet another mechanism, called **select** or [**from**](https://aplwiki.com/wiki/From). It can be defined as:
 ```APL
       I←(⊃⍤⊣⌷⊢)⍤0 99
@@ -116,87 +153,229 @@ Over time you will learn from experience what is the most appropriate thing to u
 
 |Selection type|Selection construct|
 |---|---|
-|Arbitrary scalars from a vector|Square bracket simple or [compress](Selecting from lists/#replicatecompress)|
+|Arbitrary scalars from a vector|Square bracket simple or [compress](./array-logic-data-driven-conditionals.md#replicatecompress)|
 |Rectangular subarrays|Simple|
 |Arbitrary scalars from an array of rank ≥2|Choose|
 |Nested arrays|Reach|
 |Arbitrary collections of cells|Select|
 
-## Searching and finding
-**Membership** `⍺∊⍵` will return a boolean array indicating the elements in `⍺` which are present in `⍵`.
-
-**Find** `⍺⍷⍵` will give a `1` indicating the location of the first element of `⍺` when the entire array `⍺` is found as a subarray in `⍵`.
-
-**Index of** `⍺⍳⍵` will return the index in `⍵` where `⍺` is found as a major cell.
-
-```APL
-      text ← 2 3 4⍴'SOME APPLES'
-      text∊'LESS'
-      'LESS'⍷text
-      (1⌷text)⍳'LESS'
-```
-
-## Total Array Ordering
-To sort, index by the **grade**:
-
-```APL
-      Sort←{(⊂⍋⍵)⌷⍵}
-      Sort 'the alphabet'
-```
-
-Grouping is an incredibly common operation when handling data. The python "dataframe" framework Pandas [has a groupby function](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html) and anybody who has used SQL [is likely to be familiar with this idea](https://www.w3schools.com/sql/sql_groupby.asp).
-
-The **key** operator was introduced in Dyalog version 14.0. Begin to familiarise yourself by experimenting with the following examples:
-```APL
-      'mississippi'{≢⍵}⌸'mississippi'
-      {≢⍵}⌸'mississippi'
-      'interpreter'{⍺⍵}⌸'mississippi'
-```
-
-**Interval index** is a function for classifying data by boundaries.
-
-At this point it is worth familiarising yourself with older APL constructs which perform similar functionality to key, and are likely to exist in code bases written before Dyalog version 14.0. 
-
-1. You already wrote Interval Index [in problem set 4](/Outer product/#problem-set-4) using the outer product `∘.F`. See if you can rewrite that `Grade` function using **interval index** `⍺⍸⍵`.
-
-1. Try to write the interval index function `⍺⍸⍵` without using the `⍸` glyph
-
-Iverson's [dictionary of APL](https://www.jsoftware.com/papers/APLDictionary1.htm) defines monadic equals `=⍵` as "nub in":
-
-```APL
-      NubIn ← (∪≡⍤99 ¯1⍤¯1 99⊢)
-      NubIn 'abbcab'
-1 0 0 0 1 0
-0 1 1 0 0 1
-0 0 0 1 0 0
-      NubIn 3 3⍴6↑⎕A
-1 0 1
-0 1 0
-```
-
 ## Problem set 7
 
 ### Search, sort, slice and select
-1. Write two indexing expressions which apply to a scalar and return that scalar
+1. Anna, Ben and Charlie are having a competition. They want to see who can eat the most fruit in a week.
 
-1. Write a function `IRep` which is equivalent to `⍺/⍵` but uses indexing instead of replicate.
+	```APL
+	fruits ← 4 7⍴'Apples MangoesOrangesBananas'
+	days ← 7 3⍴'SunMonTueWedThuFriSat'
+	names ← 3 7⍴'Anna   Ben    Charlie'
+	⎕RL ← 42 1 ⋄ ate ← ?3 4 7⍴3
+	```
 
-1. `NVec ← '' '34' 'donut' ⍬` is a four-element nested vector. Use a single pick `⍺⊃⍵` to obtain the sub-item `'o'`.
+	???+Question "What is `⎕RL`?"
+		The <dfn>roll</dfn> function `?⍵` generates random numbers for each simple scalar number in `⍵`.
 
-1.  From the nested 3D array `Nest←2 3 4⍴(⍳17),(⊂2 3⍴'ab'(2 3⍴'dyalog'),'defg'),⎕A[⍳6]` , use a single selection to obtain:
+		Setting the <dfn>Random Link</dfn> [system variable](./Quad%20names.md#system-variables) `⎕RL` lets us generate the same random numbers repeatedly.
+
+	1. Compute the names of the people who ate the most fruit on Tuesday and Sunday combined.
+	1. Compute the name of the person who ate the most mangoes and bananas combined.
+	1. What is the name of the person who ate the most fruit overall?
+
+	???Example "Answer"
+		There are many different ways to find these answers. The following are just one set of solutions.
+
+		<ol type="a">
+		<li>
+
+		Anna and Charlie both ate 10 fruits total on Tuesday and Sunday combined. Ben only ate 8 fruits.
+
+		```APL
+		      d←days⍳2 3⍴'Tue' 'Sun'
+		      total ← +/+/ate[;;days⍳d]
+		      (total=⌈/total)⌿names
+		```
+		```
+		Anna   
+		Charlie
+		```
+
+		</li>
+		<li>
+
+		Charlie ate the most mangoes and bananas across the whole week.
+
+		```APL
+		      f←fruits⍳2 7⍴'MangoesBananas'
+		      total ← +/+/ate[;fruits⍳f;]
+		      (total=⌈/total)⌿names
+		```
+		```
+		Charlie
+		```
+
+		</li>
+		<li>
+
+		Anna ate the most fruit overall.
+
+		```APL
+		      total ← +/+/ate
+		      (total=⌈/total)⌿names
+		```
+		```
+		Anna
+		```
+
+		Any of these totals could have been expressed as a single sum. Either by ravelling submatrices for each person:
+
+		```APL
+		total ← +/(,⍤2)ate
+		```
+
+		Or by merging the last two axes:
+
+		```APL
+		total ← +/,[2 3]ate
+		```
+
+		A discussion comparing these expressions will be added later.
+
+		</li>
+		</ol>
+
+1. Write a function `FindWord` which accepts a character matrix left argument `⍺` and a character vector right argument `⍵` and returns a Boolean vector where a `1` indicates a row in `⍺` which matches the word `⍵`.
+	```APL
+	      fruits←↑'apples' 'mangoes' 'oranges' 'bananas'
+	      fruits FindWord 'apples'
+	1 0 0 0
+	      fruits FindWord 'oranges'
+	0 0 1 0
+	```
+
+	!!!Question "What is `↑`?"
+		We created a nested vector of different length character vectors using [strand notation](#arrays-are-made-of-arrays). The mix function `↑⍵` is used to turn this from a nested vector of vectors into a flat matrix made of simple character scalars. In order to make the matrix rectangular, shorter vectors are padded with spaces.
+
+		```APL
+		      ' '=↑'apples' 'mangoes' 'oranges' 'bananas'
+		0 0 0 0 0 0 1
+		0 0 0 0 0 0 0
+		0 0 0 0 0 0 0
+		0 0 0 0 0 0 0
+		```
+
+	???Example "Answer"
+
+		There are many ways to solve this problem. A comparison of different approaches is worthy of a fuller discussion, which will be added later. For now we will simply show a few alternatives:
+
+		```APL
+		FindWord ← {∧/∨/⍺∘.=⍵↑⍨2⌷⍴⍺}
+		FindWord ← {∨/(⍵↑⍨⊢/⍴⍺)⍷⍺}
+		FindWord ← {(⍵↑⍨⊢/⍴⍺)(≡⍤1)⍺}
+		FindWord ← {⍺∧.=⍵↑⍨2⌷⍴⍺}
+		```
+
+1.  From the nested 3D array
+	
+	```APL
+	nest←2 3 4⍴(⍳17),(⊂2 3⍴'ab'(2 3⍴'dyalog'),'defg'),6↑⎕A
+	```
+	
+	use a single selection to obtain:
+
 	1. The character scalar `'y'`
 	1. The numeric scalar `6`
 
-1. Two sorting expressions are `{(⊂⍋⍵)⌷⍵}` and `{⍵[⍋⍵]}`?  
+	???Example "Answers"
+		It can be tricky to simplify these to a single use of pick `⍺⊃⍵`. Although understanding these selections can help with understanding complicated nested array structures, it is not very common to need to do this in real code.
+		<ol type="a">
+		<li>
+		```APL
+		      (2 2 2)(1 2)(1 2)⊃nest
+		y
+		```
+		</li>
+		<li>
+		```APL
+		      (⊂1 2 2)⊃nest
+		6
+		```
+		</li>
+		</ol>
+
+1. What type of indexing is used in the expression `grid[⍸grille=' ']` ?
+
+	???Example "Answer"
+		Because `grille` is a matrix, the equality with the space character is also a matrix. The **where** function `⍸⍵` returns a nested vector of indices, which when used with square brackets forms a **choose indexing** expression.
+
+1. What indexing array can be used to select a simple scalar from itself?
+
+	???Example "Answer"
+		For choose indexing, an enclosed empty numeric vector:
+
+		```APL
+		      'a'[⊂⍬]
+		```
+		```
+		a
+		```
+
+		For squad indexing, an empty numeric vector:
+
+		```APL
+		      ⍬⌷'a'
+		```
+		```
+		a
+		```
+
+		For reach indexing, either:
+
+		```APL
+		      ⍬⊃'a'
+		```
+		```
+		a
+		```
+		---
+		```APL
+		      (⊂⍬)⊃'a'
+		```
+		```
+		a
+		```
+
+1. Define `n←5 5⍴⍳25` in your workspace.
 	
-	When might you use one over the other?
+	Using selections, find at least four different ways to set the bottom-right 3 by 3 submatrix in `n` to `0`.
+	For example, `(2 2↓n)←0`.
 
-1. When does `{(⍸∨/⍺⍷⍵) ≡ ⍸∧/⍵∊⍺}`?
+	??? Hint
+		See which primitives may be used in a <a href='http://help.dyalog.com/latest/#Language/Primitive%20Functions/Assignment%20Selective.htm?Highlight=selective%20assignment'>selective assignment</a>
 
-1. The membership function `⍺∊⍵` checks whether elements of `⍺` appear in `⍵`. Write a function `E` which checks whether major cells of `⍺` appear as major cells of `⍵`.
-	<pre><code>      text E ↑' APP' 'LESS' 
-0 1 1
-0 0 0</code></pre>
+	???Example "Answers"
+		Compute the indices:
+		
+		```APL
+		n[2+⍳3;2+⍳3]←0
+		```
+
+		Use negative take:
+
+		```APL
+		(¯3 ¯3↑n)←0
+		```
+
+		Use two compressions:
+
+		```APL
+		b←2 3/0 1
+		(b/b⌿n)←0
+		```
+
+		Positive take after reversals:
+
+		```APL
+		(3 3↑⌽⊖n)←0
+		```
 
 ### Visit to the museum
 Here are some data and questions about visits to a museum.  
@@ -228,51 +407,3 @@ In the boolean matrix `display`, each row corresponds to a museum piece and each
 1. What was the most popular section by visit duration?
 1. Estimate the opening and closing times of each of the sections.
 1. Which animal being on display corresponded with the highest increase in visit duration for its section?
-
-### Word Problems
-
-We are going to do some text processing on a dictionary of words. 
-
-If you have access to the internet, the following expressions will download a text file dictionary (917kB in size) and store it as a nested vector of character vectors named `words`.
-
-```APL
-      ]Load HttpCommand
-      words ← (⎕UCS 10) {(⍺≠⍵)⊆⍵} (HttpCommand.Get'https://tinyurl.com/y7asendy').Data
-```
-
-If you have the file on your computer (maybe you were given it on a USB drive, for example) then you can load it into your workspace from disk using the following expressions.
-
-```APL
-      (content encoding newline) ← ⎕NGET'/path/to/words.txt'
-      words ← (⎕UCS newline) (≠⊆⊢) content
-```
-
-Now answer the following questions about `words`.
-
-1. How many words have at least 3 `'e'`s in them?
-
-1. How many words have exactly two consecutive `'e'`s in them? 
-    The first three such words are `Aberdeen` `Abderdeen's` and `Aileen`.
-
-1. What is the shortest word with two consecutive `'a'`s?
-
-1. What words have three consecutive double letters? For example, `mississippi` does not but `misseetto` does. Misseetto is not a real word.
-
-	A palindrome is the same when reversed. For example, **racecar** is a palindrome but **racecat** is not.
-
-1. How many palindromes are there in `words`?
-
-1. Which palindrome in `words` is the longest?
-
-1. How many words are in alphabetical order?
-
-### Rain facts
-The 3D array `rain` gives the monthly rainfall in millimeters over 7 years in 5 countries.
-
-```APL
-      ⎕RL←42 ⋄ rain←?7 5 12⍴250
-```
-
-1. Which month in each year in each country had the highest rainfall?
-1. In the data, the countries are in order 1 to 5. Sort the countries in descending order of average monthly rainfall
-1. Sort the countries in ascending order of total yearly rainfall

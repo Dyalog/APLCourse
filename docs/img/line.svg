@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="151.5625"
+   height="138.28125"
+   overflow="hidden"
+   version="1.1"
+   id="svg17"
+   sodipodi:docname="line.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
+  <metadata
+     id="metadata21">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     id="namedview19"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     lock-margins="false"
+     inkscape:zoom="3.6203867"
+     inkscape:cx="116.62974"
+     inkscape:cy="61.532736"
+     inkscape:window-x="1912"
+     inkscape:window-y="376"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg17"
+     inkscape:document-rotation="0" />
+  <defs
+     id="defs5">
+    <clipPath
+       id="clip0">
+      <rect
+         x="0"
+         y="0"
+         width="1280"
+         height="720"
+         id="rect2" />
+    </clipPath>
+  </defs>
+  <g
+     clip-path="url(#clip0)"
+     id="g15"
+     transform="translate(-484.1876,-13.0625)" />
+  <path
+     d="m 15.38445,131.7745 1e-4,-116.462 h -4 l -1e-4,116.462 z M 19.38454,17.3125 13.384555,5.3125002 7.3845502,17.3125 Z"
+     id="path9" />
+  <path
+     d="m 11.38445,127.7745 h 119.231 v 4 h -119.231 z m 117.231,-4 12,6 -12,6 z"
+     id="path11" />
+  <rect
+     style="fill:#000000;stroke-width:1.0241"
+     id="rect869"
+     width="96.12233"
+     height="4.0555701"
+     x="28.965479"
+     y="67.507652" />
+</svg>

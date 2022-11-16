@@ -59,17 +59,45 @@ To ameliorate this, we can **verify and fix input** with `⎕VFI`. Also note the
       Test2 3
 ```
 
+In this case, "fix" means to define as an APL value in the workspace, as if it had been typed into the session.
+
+Verify and Fix Input `⎕VFI` is used when you need to process numeric data from an external source, but it has arrived in a text format. This is very common when working with data from the internet or from files.
+
+You might be tempted to use the **Execute** function `⍎⍵` but this is very dangerous because it will execute any text as APL code.
+
+??? "More about `⎕VFI`"
+	`(valid numbers) ← ⎕VFI text`
+
+	The Boolean vector `valid` indicates the locations of elements in `numbers` which were converted from `text`.
+
+	By default, any valid number representation - including engineering exponential notation `XeY` and complex numbers of the form `xJy` - surrounded by spaces is considered valid input. You may provide a list of separator characters as left argument.
+	```APL
+		⎕VFI'7 4.3 1e3 3j4 5,300 ok'
+	┌───────────┬──────────────────┐
+	│1 1 1 1 0 0│7 4.3 1000 3J4 0 0│
+	└───────────┴──────────────────┘
+		' ,'⎕VFI'7 4.3 1e3 3j4 5,300 ok'
+	┌─────────────┬──────────────────────┐
+	│1 1 1 1 1 1 0│7 4.3 1000 3J4 5 300 0│
+	└─────────────┴──────────────────────┘
+	```
+
 ### Convenient text input
 Single quotes `'` in APL character arrays must be escaped by doubling. It can be sometimes easier to paste input by assigning `⍞`:
 ```APL
       text←⍞
 My great string 'which has some quoted text' 
-      ⎕SE.Dyalog.Utils.repObj text
+```
+---
+```APL
+      ]Repr text
+```
+```
 'My great string ''which has some quoted text'' '
 ```
 
 !!! Note
-	The utility function `⎕SE.Dyalog.Utils.repObj` can generate APL expressions which produce most arrays. In some sense, it is like an inverse to **execute** `⍎`. We do not recommend using it programmatically; use the primitives to test the properties of arrays, as explained in [the sections on error handling](../Errors/#who-needs-to-know).
+	The user command `]Repr` can generate APL expressions which produce most arrays. In some sense, it is like an inverse to **execute** `⍎`. There is also a utility function The utility function `⎕SE.Dyalog.Utils.repObj` which can be used in code, but we do not recommend using it in applications; use the primitives to test the properties of arrays, as explained in [the sections on error handling](../Errors/#who-needs-to-know).
 
 ### Convenient text output
 Once upon a time, APL was considered an incredible, revolutionary tool for scientists, artists and business people alike to be able to get work done using computers. In a time before spreadsheet software was so ubiquitous, APL terminals offered a way to quickly and easily process data, produce reports and format them for printing.
@@ -78,15 +106,15 @@ Take a look at the [Chapter F of Mastering Dyalog APL](https://www.dyalog.com/up
 
 1.  
 	
-	It is easy to round numbers to a specific precision with **dyadic format** `⍕`:
+	It is easy (but inefficient) to round numbers to a specific precision with **dyadic format** `⍕`:
 	
 	<pre><code class="language-APL">      ⎕←rand←?5⍴0
 	0.2225024074 0.3282243862 0.314984696 0.9533625773 0.757200184
 	      ⍎2⍕rand
 	0.22 0.33 0.31 0.95 0.76</code></pre>
 	
-	1. Write a function equivalent to `(⍎⍕)` (for small scalar numeric `⍺` only) without using `⍎` or `⍕`.
-	1. Why does `(⍎⍕)` fail for large values of `⍺`?
+	1. Write a function equivalent to `{⍎⍺⍕⍵}` without using `⍎` or `⍕`.
+	1. Why does `{⍎⍺⍕⍵}` fail for large values of `⍺`?
 
 1.  
 	
@@ -118,17 +146,63 @@ Take a look at the [Chapter F of Mastering Dyalog APL](https://www.dyalog.com/up
 ## Native Files
 The term "Native Files" refers to any type of file on a hard disk. These can be text or media files, or even executable files. Usually we are interested in various kinds of text files.
 
-!!! Warning "Version Warning"
-	`⎕CSV`, `⎕JSON` and some of the `⎕N...` functions are not available in Dyalog version 12.1. Files must be tied and interpreted using `⎕NREAD` and APL.
-
 ### ⎕CSV
 Comma separated values are a very common and convenient . While we encourage you to [read the documentation](https://help.dyalog.com/latest/#Language/System Functions/csv.htm) for a full description, here is an overview of features of `⎕CSV`:
 
-- Read data from and write data to files directly
-- Separate the header (first row) from the rest of the data
-- Treat specific columns of input as numeric or text, depending on the options provided
-- Use a separator other than commas, using the "Separator" variant option, for example using tabs (`⎕UCS 9`) for Tab Separated Values (.tsv).
-- Read data chunks at a time so as to not fill the workspace, using the "Records" variant option.
+- Read data from and write data to files directly  
+	```APL
+	data ← ⎕CSV '/path/to/file.csv'
+	```
+- Separate the header (first row) from the rest of the data  
+	```APL
+	(data header) ← ⎕CSV '/path/to/file.csv' ⍬ ⍬ 1
+	```
+- Treat specific columns of input as numeric or text, depending on the options provided.  
+	The `4` here indicates to convert numeric values if possible, else keep the value as text.
+	```APL
+    numeric_if_possible ← ⎕CSV '/path/to/file.csv' ⍬ 4
+	```
+- Use a separator other than commas, using the "Separator" variant option, for example using tabs (`⎕UCS 9`) for Tab Separated Values (.tsv).  
+	```APL
+	tsv ← ⎕CSV⍠'Separator' (⎕UCS 9)⊢'/path/to/file.csv'
+	```
+- Read data chunks at a time so as to not fill the workspace, using the "Records" variant option.  
+	```APL
+	      path ← '/path/to/file.csv'    ⍝ The file path as simple character vector
+	      ReadCSV10←⎕CSV⍠'Records' 10   ⍝ A function to read CSV 10 records at a time
+	      tn←path ⎕NTIE 0               ⍝ Tie the file - this locks it from use by other applications
+	      first10 ← ReadCSV10 tn        ⍝ Read the first 10 records (rows)
+	      second10 ← ReadCSV10 tn       ⍝ Read the next 10
+	      ≢¨first10 second10
+	10 10
+	      first10 second10
+	┌──────────┬──────────┐
+	│┌──┬─────┐│┌──┬─────┐│
+	││1 │JQZUK│││11│DECJM││
+	│├──┼─────┤│├──┼─────┤│
+	││2 │ANPYW│││12│PXPGL││
+	│├──┼─────┤│├──┼─────┤│
+	││3 │WYVSR│││13│SYSCN││
+	│├──┼─────┤│├──┼─────┤│
+	││4 │ZOGOX│││14│EKDPS││
+	│├──┼─────┤│├──┼─────┤│
+	││5 │CXKRS│││15│XCOHA││
+	│├──┼─────┤│├──┼─────┤│
+	││6 │BFTYO│││16│RDAHR││
+	│├──┼─────┤│├──┼─────┤│
+	││7 │VFLAS│││17│KPUTW││
+	│├──┼─────┤│├──┼─────┤│
+	││8 │BAFYD│││18│TPDOD││
+	│├──┼─────┤│├──┼─────┤│
+	││9 │XPEBP│││19│BGIVA││
+	│├──┼─────┤│├──┼─────┤│
+	││10│UVBFG│││20│IITSO││
+	│└──┴─────┘│└──┴─────┘│
+	└──────────┴──────────┘
+	      ⎕NUNTIE tn                    ⍝ Don't forget to untie the file after use!
+	```
+
+*[CSV]: Comma Separated Values
 
 ### ⎕JSON
 JSON is not only a convenient way to represent nested data structures, but also a convenient data representation for the modern web since it is natively handled by JavaScript. `⎕JSON` converts between APL arrays, including namespaces and text vector representations of JSON.
@@ -310,7 +384,7 @@ For more information, see [the HttpCommand document](https://github.com/Dyalog/l
 
 ### Indian Summer
 
-[IndiaRainfall.csv](../assets/IndiaRainfall.csv) is a file of [comma separated values](https://simple.wikipedia.org/wiki/Comma-separated_values). It is adapted from [IndiaRainfallSource.csv](../assets/IndiaRainfallSource.csv) to remove incomplete records.
+[IndiaRainfall.csv](./assets/IndiaRainfall.csv) is a file of [comma separated values](https://simple.wikipedia.org/wiki/Comma-separated_values). It is adapted from [IndiaRainfallSource.csv](./assets/IndiaRainfallSource.csv) to remove incomplete records.
 
 The [India Meteorological Department(IMD)](http://www.imd.gov.in/) has shared this dataset under [Govt. Open Data License - India](https://data.gov.in/government-open-data-license-india). It can be downloaded from the links above or from [the Kaggle data science website](https://www.kaggle.com/rajanand/rainfall-in-india).
 

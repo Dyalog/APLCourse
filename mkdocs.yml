@@ -7,7 +7,12 @@ markdown_extensions:
       generic: true
   - pymdownx.highlight:
       use_pygments: false
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
   - admonition
+  - pymdownx.extra
   - pymdownx.details
   - pymdownx.superfences
   - abbr
@@ -26,14 +31,15 @@ extra_css:
   - style/main.css
 nav:
   - About: index.md
-  - First Steps: First-steps.md
-  - Dfns and Assignment: Dfns.md
-  - Selecting from Lists: Selecting-from-lists.md
-  - The Outer Product: Outer-product.md
-  - Shape Reshape: Shape-Reshape.md
-  - The Array Model: Array-model.md
-  - Search, Sort and Select: Selecting-from-arrays.md
-  - Loops and Recursion: Loops.md
+  - basic-syntax-and-arithmetic.md
+  - dfns-and-assignment.md
+  - array-logic-data-driven-conditionals.md
+  - multidimensional-and-nested-arrays.md
+  - cells-and-axes.md
+  - finding-and-replacing-values.md
+  - selecting-from-arrays.md
+  - broken-keyboard-problems.md
+  - loops-and-recursion.md
   - Extra Assignment: Assignment.md
   - Workspace Basics: Workspaces.md
   - Namespaces and Other Objects: Namespaces.md
@@ -41,7 +47,7 @@ nav:
   - User-defined Functions: Ufns.md
   - Operators: Operators.md
   - Quad Names: Quad names.md
-  - Error Handling and Debugging: Errors.md
+  - error-handling-and-debugging.md
   - Data IO: Data.md
   - Code IO: Code.md
   - External Interfaces: Interfaces.md
