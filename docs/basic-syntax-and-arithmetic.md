@@ -149,13 +149,13 @@ Of course, we can change the order of execution using different parentheses.
       (10×⍳2)+5
 ```
 ```
-16 17
+15 25
 ```
 
 ??? Info "Show me step-by-step"
 	Beginning from the right, there is a literal number 5:
 	```APL
-	      (10+⍳2)+5
+	      (10×⍳2)+5
 	              5
 	```
 	
@@ -168,15 +168,15 @@ Of course, we can change the order of execution using different parentheses.
 	A right parenthesis. We must evaluate the contents of the parentheses to see if it is a function or a value.
 	
 	```APL
-	      (10+⍳2)
+	      (10×⍳2)
 	```
 	
-	This expression evaluates to the list `11 12`. Since it is a value, it is used as the left argument to our plus function.
+	This expression evaluates to the list `10 20`. Since it is a value, it is used as the left argument to our plus function.
 	
 	```APL
-	      (10+⍳2)+5
-	      (11 12)+5
-	16 17
+	      (10×⍳2)+5
+	      (10 20)+5
+	15 25
 	```
 
 Infix (dyadic) functions have a **short** *left* scope and **long** *right* scope. This means that they take the result of everything to their right hand side as their right argument. 
