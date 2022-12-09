@@ -36,7 +36,7 @@ V1=`cat overrides/partials/footer.html | grep -oE "([0-9]+)(nd|st) Edition, Revi
 function version { echo "$@" | awk -F. '{ printf("%d%03d%03d%03d\n", $1,$2,$3,$4); }'; }
 
 if [ $(version $V1) -le $(version $V0) ]; then
-    printf "Please increment version number\nPrevious: $V0\nCurrent: $V1\n"
+    printf "Please increment version number in $VERSION_SOURCE\nPrevious: $V0\nCurrent: $V1\n"
     exit 1
 fi
 
