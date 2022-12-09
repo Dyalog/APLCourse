@@ -19,7 +19,7 @@ APL has logical and comparison functions as in-built primitives. Much like the a
 </div>
 </div>
 
-Some of these are more general mathematical functions which happen to be the same as logical functions when used with Booeleans (`1`s and `0`s):
+Some of these are more general mathematical functions which happen to be the same as logical functions when used with Booleans (`1`s and `0`s):
 
 ```APL
       3 ∧ 4               ⍝ Lowest common multiple
@@ -64,7 +64,7 @@ Some of these are more general mathematical functions which happen to be the sam
 ```
 
 !!!Info
-	The [16 possible logic functions for two binary variables](https://en.wikipedia.org/wiki/Truth_table#Binary_operations) can all be expressed succinctly in APL, as shown in the [notebook](https://nbviewer.org/github/Dyalog/dyalog-jupyter-notebooks/blob/master/Boolean%20Scans%20and%20Reductions.ipynb) and [webinar](https://dyalog.tv/Webinar/?v=erv_1LxEByk) on Boolean scans and reductions.
+	The [16 possible logic functions for two binary variables](https://en.wikipedia.org/wiki/Truth_table#Binary_operations) can all be expressed succinctly in APL, as shown in the [notebook](https://nbviewer.org/github/Dyalog/dyalog-jupyter-notebooks/blob/master/Boolean%20Scans%20and%20Reductions.ipynb#Sixteen-logical-functions) and [webinar](https://dyalog.tv/Webinar/?v=erv_1LxEByk) on Boolean scans and reductions.
 
 ## The shape of data
 One of the distinguishing features of APL is the multidimensional array. Single elements, lists and tables are quite familiar constructs.
@@ -638,12 +638,12 @@ APL
 		2 109
 		2 109
 		2 109
-		      1 2 3 AddRows 5 3⍴1 10 100 1000
-		   2   12  103
-		1001    3   13
-		 101 1002    4
-		  11  102 1003
-		   2   12  103
+		      (5 3⍴1 10 100 1000) AddRows 5 10 15
+		6   20  115
+		1005   11   25
+		105 1010   16
+		15  110 1015
+		6   20  115
 		```
 
 	1. Write a function to add a vector to each row of a matrix, regardless of the order in which they are supplied:
@@ -653,12 +653,9 @@ APL
 		2 109
 		2 109
 		2 109
-		      1 2 3 AddRows 5 3⍴1 10 100 1000
-		   2   12  103
-		1001    3   13
-		 101 1002    4
-		  11  102 1003
-		   2   12  103
+		      (2 2⍴1 9 11 18) AddRows 9 1
+		10 10
+		20 19
 		```
 
 	???Example "Answers"
@@ -675,7 +672,7 @@ APL
 		AddRows ← {s←(⍴⍺)⌈⍴⍵ ⋄ (s⍴⍺)+s⍴⍵}
 		```
 
-		This way of applying functions between arrays of different shapes is very common. As with many things in this course, eventually we will discover more elegant ways to do these things. Here is an example of using [the rank operator](./cells-and-axes.md#the-rank-operator):
+		This way of applying functions between arrays of different shapes is very common. As with many things in this course, eventually we will discover more elegant methods. Here is an example of using [the rank operator](./cells-and-axes.md#the-rank-operator):
 
 		```APL
 		AddRows ← +⍤1
