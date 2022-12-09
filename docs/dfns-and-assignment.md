@@ -164,7 +164,7 @@ The following problems can be solved with single-line dfns.
 		To ← {⍺+(×d)×¯1+⍳1+|d←⍵-⍺}
 		```
 
-1. The forumla to convert temperature from Celcius ($T_C$) to Farenheit ($T_F$) in traditional mathematical notation is as follows:
+1. The formula to convert temperature from Celcius ($T_C$) to Farenheit ($T_F$) in traditional mathematical notation is as follows:
 
 	$$T_F = {32 + {{9}\over{5}}\times {T_C}}$$  
 
