@@ -61,3 +61,11 @@ pre + pre > code, hr + p + pre > code {
 	padding-top: 0!important;       /* Bring output lines closer to input lines */
 }
 dfn { font-weight: bold; }
+
+/* Footer */
+.aplcourse-version {
+    width: auto;
+    color: var(--md-footer-fg-color);
+    font-size: .64rem;
+    margin: auto 0.6rem;
+}

@@ -27,8 +27,17 @@ theme:
   logo: 'img/dyalog-white.svg'
   features:
     - navigation.instant
+  custom_dir: overrides
 extra_css:
   - style/main.css
+extra:
+  social:
+    - icon: fontawesome/brands/dyalog
+      link: https://dyalog.com
+    - icon: material/elephant
+      link: https://mastodon.social/@dyalog
+    - icon: fontawesome/brands/twitter 
+      link: https://twitter.com/dyalogapl
 nav:
   - About: index.md
   - basic-syntax-and-arithmetic.md
