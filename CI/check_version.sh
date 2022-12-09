@@ -28,11 +28,10 @@ do
 done
 
 # Previous version
-V0=``
-git show HEAD~1:overrides/partials/footer.html | grep -oE "([0-9]+)(nd|st) Edition, Revision ([0-9]+)" | grep -oE "([0-9]+)"
+V0=`git show HEAD~1:overrides/partials/footer.html | grep -oE "([0-9]+)(nd|st) Edition, Revision ([0-9]+)" | grep -oE "([0-9]+)" | tr '\n' '.' | sed '$s/.$/\n/'`
 
 # New version
-V1=`cat overrides/partials/footer.html | grep -oE "([0-9]+)(nd|st) Edition, Revision ([0-9]+)" | grep -oE "([0-9]+)")`
+V1=`cat overrides/partials/footer.html | grep -oE "([0-9]+)(nd|st) Edition, Revision ([0-9]+)" | grep -oE "([0-9]+)" | tr '\n' '.' | sed '$s/.$/\n/'`
 
 function version { echo "$@" | awk -F. '{ printf("%d%03d%03d%03d\n", $1,$2,$3,$4); }'; }
 
