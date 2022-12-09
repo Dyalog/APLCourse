@@ -19,7 +19,7 @@ APL has logical and comparison functions as in-built primitives. Much like the a
 </div>
 </div>
 
-Some of these are more general mathematical functions which happen to be the same as logical functions when used with Booeleans (`1`s and `0`s):
+Some of these are more general mathematical functions which happen to be the same as logical functions when used with Booleans (`1`s and `0`s):
 
 ```APL
       3 ∧ 4               ⍝ Lowest common multiple
