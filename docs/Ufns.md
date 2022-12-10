@@ -408,7 +408,7 @@ Control Structures in Dyalog are keywords beginning with a `:` colon.
       :Repeat :Until :Return
 ```
 
-1. Translate the pseudocode above into a **tradfn** called `Grade2` using control stuctures.
+1. Translate the pseudocode above into a **tradfn** called `Grade2` using control structures.
 
 1. Rewrite the `Grade` function again as either a dfn or a tradfn called `Grade3` which uses `⍺⍸⍵` interval index.
 

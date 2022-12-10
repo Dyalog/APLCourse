@@ -8,7 +8,7 @@ Dyalog APL is not a functional programming language, but those familiar with fun
 
 but they cannot be ambivalent. However, the functions derived from operators can be monadic, dyadic or ambivalent in terms of arguments. 
 
-Abmivalent dfns usually have a default left argument (`⍺←default`) and ambivalent tradfns test if their left argument exists (`0=⎕NC'left_arg'`).
+Ambivalent dfns usually have a default left argument (`⍺←default`) and ambivalent tradfns test if their left argument exists (`0=⎕NC'left_arg'`).
 
 ## Primitive
 We have already used a few primitive operators, but there is [a complete summary of primitive operators](http://help.dyalog.com/latest/#Language/Primitive%20Operators/Operators%20Summarised.htm) in the online documentation.

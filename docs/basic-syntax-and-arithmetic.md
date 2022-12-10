@@ -135,7 +135,7 @@ Expressions are executed from right to left.
 	10 20 30 40 50 60 70
 	```
 
-The expresssion above is "ten *times* the indices from 1 to *two plus five*, or in short: "ten times iota two plus five". We can make it clearer using (superfluous) **parentheses** `()`.
+The expression above is "ten *times* the indices from 1 to *two plus five*, or in short: "ten times iota two plus five". We can make it clearer using (superfluous) **parentheses** `()`.
 ```APL
       10×(⍳(2+5))
 ```
