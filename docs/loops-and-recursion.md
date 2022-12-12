@@ -186,7 +186,7 @@ take the first four
 take the first four
 ```
 
-Despite both having types of function composition, Haskell and other functional programming languages tend to focus on the composition of those functions as the fundamental process to finding and refining solutions. In APL, we are usually most interested in the fundamental data transformation that is occuring, and using APL's inherently parallel, array-at-a-time primitives to achieve that transformation in a way that can tend towards simple and fast code.
+Despite both having types of function composition, Haskell and other functional programming languages tend to focus on the composition of those functions as the fundamental process to finding and refining solutions. In APL, we are usually most interested in the fundamental data transformation that is occurring, and using APL's inherently parallel, array-at-a-time primitives to achieve that transformation in a way that can tend towards simple and fast code.
 
 Between integer and boolean arguments alone there are more interesting constructs than can be covered well here. You can find more on this topic by going to the following links:  
 
@@ -200,7 +200,7 @@ The traditional control structures such as *for loops*, *while loops* and *if st
 
 The syntax is mentioned in the [section on user-defined functions](../Ufns/#marking-tests).
 
-!!! Hint "Peformance note"
+!!! Hint "Performance note"
 	When constructing loops, think about whether unnecessary computation is being performed.
 	
 	For example,
@@ -271,7 +271,7 @@ Here we will investigate 3 ways of computing Bell numbers.
 	
 	Implement the [triangle scheme](https://en.wikipedia.org/wiki/Bell_number#Triangle_scheme_for_calculations) for calculations.
 
-1. Recurrance relation of binomial coefficients
+1. Recurrence relation of binomial coefficients
 	The Bell numbers satisfy a recurrence relation involving binomial coefficients:
 	
 	$B_{n+1} = \sum_{k=0}^{n}\binom{n}{k}B_k$

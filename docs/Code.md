@@ -104,7 +104,7 @@ If changes are made to the text file outside of Dyalog, using a standard text ed
 Using [HttpCommand](../Data/#downloading-data-from-the-internet) together with `⎕FIX` is a way to import code from the internet.
 
 ### Link
-For newer applications, we encourage you to try using the [Link](https://github.com/dyalog/link) system which supercedes [SALT](#salt) and associates namespaces in the active workspace with folders in the file system. Using Link, you do not have to remember to `)SAVE` your workspace, changes in the workspace are automatically reflected on the file system.
+For newer applications, we encourage you to try using the [Link](https://github.com/dyalog/link) system which supersedes [SALT](#salt) and associates namespaces in the active workspace with folders in the file system. Using Link, you do not have to remember to `)SAVE` your workspace, changes in the workspace are automatically reflected on the file system.
 
 ## ⎕CMD ⎕SH
 These two functions are used to run command prompt commands (Microsoft Windows) and shell commands (Linux/macOS). For example, try `⎕CMD'whoami'`.
@@ -121,7 +121,7 @@ These two functions are used to run command prompt commands (Microsoft Windows) 
 	      ∧</code></pre>
 	See the [documentation for ⎕SH](http://help.dyalog.com/latest/#UNIX_IUG/Calling UNIX commands.htm) for more information.
 
-While these are quick-and-easy functions to use for those familar with the command lines on particular operating systems, on some systems they can be slower than the more integrated alternatives. For example, reading a file using `⎕SH` can be significantly slower than using `⎕N...` system functions on some machines.
+While these are quick-and-easy functions to use for those familiar with the command lines on particular operating systems, on some systems they can be slower than the more integrated alternatives. For example, reading a file using `⎕SH` can be significantly slower than using `⎕N...` system functions on some machines.
 
 Checking if a file exists:
 ```
