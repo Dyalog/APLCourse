@@ -475,10 +475,10 @@ APL
 		MulTable ← {(⍳⍵)∘.×⍳⍵}
 		```
 
-		Avoid repeating yourself by assigning values to a name:
+		Avoid repeating yourself by assigning values to a name (`nums` in this example):
 
 		```APL
-		MulTable ← {i∘.×i←⍳⍵}
+		MulTable ← {nums ∘.× nums ← ⍳⍵}
 		```
 
 		Or, if left and right arguments to a dyadic function are the same, use a <dfn>selfie</dfn> `F⍨⍵`:
@@ -490,9 +490,11 @@ APL
 		</li>
 		<li>
 
+		Using the same three styles as described in part **(a)** above:
+
 		```APL
 		AddTable ← {(¯1+⍳1+⍵)∘.+¯1+⍳1+⍵}
-		AddTable ← {i∘.+i←¯1+⍳1+⍵}
+		AddTable ← {nums∘.+nums←¯1+⍳1+⍵}
 		AddTable ← {∘.+⍨¯1+⍳1+⍵}
 		```
 
