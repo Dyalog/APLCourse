@@ -427,7 +427,7 @@ APL
 		  grille Grille grid
 	```
 	```
-	THISISFUN
+	ILIKEAPL
 	```
 
 	???Example "Answer"
