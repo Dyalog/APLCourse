@@ -1,7 +1,11 @@
 # Namespaces and other objects
 If you are familiar with **Object Oriented Programming** (**OOP**) concepts and have experience using them from another language, then Dyalog's classes and namespaces should hopefully feel quite straightforward to you.
 
-Two documents are worth looking at, whether or not you are familiar with OOP:
+*[OOP]: Object-oriented programming
+
+There is a video [:simple-youtube: Namespaces in Dyalog APL](https://youtu.be/eBEwBSO5mBA) with a basic introduction to the concepts and usage of namespaces.
+
+Two documents are also worth looking at, whether or not you are familiar with OOP:
 
 - [Object Oriented Programming for APL Programmers](http://docs.dyalog.com/latest/Object%20Oriented%20Programming%20for%20APL%20Programmers.pdf)
 - [A Quick Introduction to Object Oriented Programming for Impatient APL Programmers](http://docs.dyalog.com/latest/Object%20Oriented%20Programming%20for%20Impatient%20APL%20Programmers.pdf)
