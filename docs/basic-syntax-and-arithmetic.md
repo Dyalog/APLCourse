@@ -394,7 +394,7 @@ A `VALUE ERROR` means that there is nothing associated with the name provided. W
 
 	1. $\sum_{n=1}^{100}2n-1$ (add together the first one hundred odd integers)
 
-	1. In TMN, the following equation equals `0`, why does the following return `70`?
+	1. In TMN, the following expression is equal to `0`, why does the following return `70` in APL?
 		```APL
 		      84 - 12 - 1 - 13 - 28 - 9 - 6 - 15  
 		```
