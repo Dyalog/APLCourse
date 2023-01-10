@@ -11,10 +11,10 @@
 - key
 - negative index generator link to problem: http://localhost:8000/basic-syntax-and-arithmetic/#what-do-these-errors-mean
 - http://localhost:8000/array-logic-data-driven-conditionals/#problem-set link to membership version in the solutions
-- [in problem set N](./array-logic-data-driven-conditionals.md#problem-set (finding replacing)
+- [in problem set N](./array-logic-data-driven-conditionals.md#problem-set) (finding replacing)
 - proper treatment of scalar functions
 - put back info about the language bar and finding out what unfamiliar primitives do
-- Mean {+⌿⍵÷≢⍵} vs {(+⌿⍵)÷≢⍵}
+- Mean `{+⌿⍵÷≢⍵}` vs `{(+⌿⍵)÷≢⍵}`
 - find-replace-vals AnyVowels use Any idiom `∨/`
 - The idiom for joining a nested list into a simple list is `⊃,/`
 - outer product
