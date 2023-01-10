@@ -181,7 +181,7 @@ The following problems can be solved with single-line dfns.
 
 1. Prime Time
 
-	A prime number is divisible only by itself and `1`.
+	A prime number is a positive whole number greater than $1$ which can be divided only by itself and $1$ with no remainder.
 
 	Write a dfn which returns `1` if its argument is prime and `0` otherwise.
 
