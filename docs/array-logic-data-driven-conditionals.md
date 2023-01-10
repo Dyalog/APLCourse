@@ -741,7 +741,7 @@ APL
 
 1. Optimus Prime
 
-	A prime number is divisible by only itself and `1`.
+	A prime number is a positive whole number greater than $1$ which can be divided only by itself and $1$ with no remainder.
 
 	Write a dfn which returns all of the prime numbers between `1` and `⍵`.
 
