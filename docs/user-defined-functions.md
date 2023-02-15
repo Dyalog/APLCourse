@@ -138,6 +138,12 @@ For most intents and purposes, you just need to know about the difference betwee
 
 By default, names assigned in tradfns are global. This is mostly for historical reasons. Names declared in the header - the arguments, results, and names preceded by semicolons - are localised.
 
+!!!Note "Traditional function header example"
+	```APL
+	result ← left FunctionName right;var1;var2
+	```
+	The header for a function called `FunctionName`. The names `result`, `left`, `right`, `var1` and `var2` are local.
+
 By default, names in a dfn are local to that dfn. This is the preferred default in most modern programming languages.
 
 If we define a name in the current namespace, that name is visible only within that namespace unless referred to by its full namespace path (e.g. `#.nsref.var`).
@@ -146,12 +152,18 @@ If we define a name in the current namespace, that name is visible only within t
       'ns1'⎕ns⍬ ⋄ ns1.var←1 2 3
       'ns2'⎕ns⍬ ⋄ ⎕cs ns2
       ⎕←var
+VALUE ERROR: Undefined name: var
+      ⎕←var
+        ∧
       ⎕←#.ns1.var
+1 2 3
 ```
 
-Let us now define a dfn and a tradfn:
+Let us now define a dfn and a tradfn in `#.ns1`:
 
 ```APL
+      ⎕cs #.ns1
+
      ∇ Dfn←{             
 [1]        var←'lexical'⍵
 [2]    }                 
@@ -165,7 +177,7 @@ Let us now define a dfn and a tradfn:
 !!! Note
 	While the `∇` *del* representation of dfns can be used to define dfns in the session, dfns in scripted namespaces must be defined without `∇` dels.
 
-If we call each of these functions, `Tradfn` will modify `var` in the workspace, but `Dfn` will not:
+If we call each of these functions, `Tradfn` will modify `var` in the current namespace, but `Dfn` will not:
 
 ```APL
       Dfn var
@@ -185,25 +197,13 @@ If we call each of these functions, `Tradfn` will modify `var` in the workspace,
 └───────┴─────┘
 ```
 
-Experiment with these altered definitions:
+In the following definition, `var⊢←` will update `var` in the closest scope where it is localised - in this case `#.ns1`.
 
 ```APL
      ∇ Dfn←{              
-[1]        var∘←'lexical'⍵
+[1]        var⊢←'lexical'⍵
 [2]    }                  
-     ∇                    
-```
-```
- 
-```
----
-```
-     ∇ Tradfn arg;var  
-[1]    var←'dynamic'arg
-     ∇   
-```
-```
- 
+     ∇
 ```
 
 In Tradfns, references to local names within a function are said to "*shadow*" the same names from outer scopes. Notice how the following definition of `Tradfn` fails.
@@ -214,7 +214,7 @@ In Tradfns, references to local names within a function are said to "*shadow*" t
      ∇   
 ```
 
-A similar dfn succeeds because, in dfns, modification will search namespaces in the local scope and then any parent scopes.
+A similar dfn succeeds because, in dfns, [modified assignment](./Assignment.md#modified-assignment) will search the local scope and then any parent scopes.
 
 ```APL
      ∇ Dfn←{              
@@ -228,8 +228,6 @@ For completeness, here we will also mention `⎕SHADOW`. It is used when names a
 The technical distinction between dfns and tradfns is that tradfns have **dynamic scope** whereas dfns have **lexical scope**.
 
 For further explanation of how this affects the use of dfns, see [section 5.5.3 of Mastering Dyalog APL](https://mastering.dyalog.com/User-Defined-Functions.html#lexical-scoping).
-
-For another excellent introduction to lexical scoping, I can recommend the [page on lexical scoping in the BQN documentation](https://mlochbaum.github.io/BQN/doc/lexical.html#closures) (BQN is another language inspired by APL). 
 
 ### Avoid globals
 When possible, avoid using global variables.

@@ -97,7 +97,7 @@ My great string 'which has some quoted text'
 ```
 
 !!! Note
-	The user command `]Repr` can generate APL expressions which produce most arrays. In some sense, it is like an inverse to **execute** `⍎`. There is also a utility function The utility function `⎕SE.Dyalog.Utils.repObj` which can be used in code, but we do not recommend using it in applications; use the primitives to test the properties of arrays, as explained in [the sections on error handling](../Errors/#who-needs-to-know).
+	The user command `]Repr` can generate APL expressions which produce most arrays. In some sense, it is like an inverse to **execute** `⍎`. There is also a utility function `⎕SE.Dyalog.Utils.repObj` which can be used in code, but we do not recommend using it in applications; use the primitives to test the properties of arrays, as explained in [the sections on error handling](../Errors/#who-needs-to-know).
 
 ### Convenient text output
 Once upon a time, APL was considered an incredible, revolutionary tool for scientists, artists and business people alike to be able to get work done using computers. In a time before spreadsheet software was so ubiquitous, APL terminals offered a way to quickly and easily process data, produce reports and format them for printing.
@@ -370,7 +370,7 @@ Multi-user access can mean manual access by actual human users, or automated acc
 The **HttpCommand** class is built on top of the [**Conga**](https://docs.dyalog.com/latest/Conga%20User%20Guide.pdf) framework for TCP/IP communications. At the most basic level, it can be used to perform HTTP requests to retrieve data from servers. 
 
 ```APL
-      ]load HttpCommand
+      ]Get HttpCommand
 #.HttpCommand
       ⍴(#.HttpCommand.Get 'https://google.com').Data
 14107
@@ -378,7 +378,7 @@ The **HttpCommand** class is built on top of the [**Conga**](https://docs.dyalog
 
 Using `HttpCommand` with [`⎕FIX`](../Code/#fix) is a way to download APL code from the internet.
 
-For more information, see [the HttpCommand document](https://github.com/Dyalog/library-conga/blob/master/Documentation/HttpCommand.md). Alternatively, there is documentation within the comments of the code for the HttpCommand class; simply use `)ed HttpCommand` or press <kbd>Shift+Enter</kbd> with the text cursor on the name in the session.
+For more information, see [the online documentation for HttpCommand](https://dyalog.github.io/HttpCommand). Alternatively, there is documentation within the comments of the code for the HttpCommand class; simply use `)ed HttpCommand` or press <kbd>Shift+Enter</kbd> with the text cursor on the name in the session.
 
 ## Problem set 13
 

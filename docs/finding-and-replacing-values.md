@@ -177,7 +177,7 @@ SH
 
 The function <dfn>without</dfn> removes elements from `⍺` which are found in `⍵`.
 
-The set difference is then neatly expressed as [a fork](./Ufns.md#the-three-function-styles) of the union without the intersection.
+The set difference is then neatly expressed as [a fork](./user-defined-functions.md#the-three-function-styles) of the union without the intersection.
 
 ```APL
       'WASH' (∪~∩) 'SHOUT'

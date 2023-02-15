@@ -60,7 +60,7 @@ If you are trapping specific errors, you might find it useful to assign error nu
 	Technically, `⎕EM` and `⎕EN` are **event message** and **event number** respectively. Most of the time you will be concerned about error events, but other types of events exist as well.
 
 ## Suspend your disbelief
-When an error occurs in a [multi-line function](../Ufns), the interpreter will pause execution and show the tracer.
+When an error occurs in a [multi-line function](./user-defined-functions.md), the interpreter will pause execution and show the tracer.
 
 ```APL
      ∇ r←x Interlace y

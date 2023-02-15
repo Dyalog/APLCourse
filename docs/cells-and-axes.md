@@ -557,7 +557,7 @@ The [section about older features](./Quirks.md) has some more examples of bracke
 		FlipBlock ← {⍺⊖⍤2⊢⍵}
 		```
 
-		Alternatively, we can write this as a [tacit function](./Ufns.md#the-three-function-styles). This form is also known as a <dfn>derived</dfn> function because a new function is derived from functions and operators.
+		Alternatively, we can write this as a [tacit function](./user-defined-functions.md#the-three-function-styles). This form is also known as a <dfn>derived</dfn> function because a new function is derived from functions and operators.
 
 		Parentheses are not required, but this author thinks they make derived functions more distinced from array values when viewed together in source code.
 

@@ -198,7 +198,7 @@ Between integer and boolean arguments alone there are more interesting construct
 ## For and While
 The traditional control structures such as *for loops*, *while loops* and *if statements* weren't introduced in Dyalog [until version 8.0 in 1996](https://aplwiki.com/wiki/Dyalog_APL#Versions). Usually, they are only used for program control on the outer levels, or if an algorithm explicitly requires that type of [scalar looping](#).
 
-The syntax is mentioned in the [section on user-defined functions](../Ufns/#marking-tests).
+The syntax is mentioned in the [section on user-defined functions](./user-defined-functions.md#marking-tests).
 
 !!! Hint "Performance note"
 	When constructing loops, think about whether unnecessary computation is being performed.
