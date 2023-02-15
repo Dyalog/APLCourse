@@ -97,7 +97,7 @@ My great string 'which has some quoted text'
 ```
 
 !!! Note
-	The user command `]Repr` can generate APL expressions which produce most arrays. In some sense, it is like an inverse to **execute** `⍎`. There is also a utility function The utility function `⎕SE.Dyalog.Utils.repObj` which can be used in code, but we do not recommend using it in applications; use the primitives to test the properties of arrays, as explained in [the sections on error handling](../Errors/#who-needs-to-know).
+	The user command `]Repr` can generate APL expressions which produce most arrays. In some sense, it is like an inverse to **execute** `⍎`. There is also a utility function `⎕SE.Dyalog.Utils.repObj` which can be used in code, but we do not recommend using it in applications; use the primitives to test the properties of arrays, as explained in [the sections on error handling](../Errors/#who-needs-to-know).
 
 ### Convenient text output
 Once upon a time, APL was considered an incredible, revolutionary tool for scientists, artists and business people alike to be able to get work done using computers. In a time before spreadsheet software was so ubiquitous, APL terminals offered a way to quickly and easily process data, produce reports and format them for printing.
