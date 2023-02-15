@@ -378,7 +378,7 @@ The **HttpCommand** class is built on top of the [**Conga**](https://docs.dyalog
 
 Using `HttpCommand` with [`⎕FIX`](../Code/#fix) is a way to download APL code from the internet.
 
-For more information, see [the HttpCommand document](https://github.com/Dyalog/library-conga/blob/master/Documentation/HttpCommand.md). Alternatively, there is documentation within the comments of the code for the HttpCommand class; simply use `)ed HttpCommand` or press <kbd>Shift+Enter</kbd> with the text cursor on the name in the session.
+For more information, see [the online documentation for HttpCommand](https://dyalog.github.io/HttpCommand). Alternatively, there is documentation within the comments of the code for the HttpCommand class; simply use `)ed HttpCommand` or press <kbd>Shift+Enter</kbd> with the text cursor on the name in the session.
 
 ## Problem set 13
 
