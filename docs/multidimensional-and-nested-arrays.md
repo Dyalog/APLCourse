@@ -430,7 +430,7 @@ Clearly, selecting subarrays in this way can become tedious, laborious and even 
 		join,these,words
 		```
 
-		Writing functions in this way is called [tacit definition](./Ufns.md#the-three-function-styles). It usually looks better without raw dfn definitions inside in this author's opinion.
+		Writing functions in this way is called [tacit definition](./user-defined-functions.md#the-three-function-styles). It usually looks better without raw dfn definitions inside in this author's opinion.
 
 		```APL
 		Join ← ⊃(⊣,',',⊢)/

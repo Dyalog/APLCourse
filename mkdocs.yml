@@ -53,7 +53,7 @@ nav:
   - Workspace Basics: Workspaces.md
   - Namespaces and Other Objects: Namespaces.md
   - Getting Help: Help.md
-  - User-defined Functions: Ufns.md
+  - User-defined Functions: user-defined-functions.md
   - Operators: Operators.md
   - Quad Names: Quad names.md
   - error-handling-and-debugging.md
