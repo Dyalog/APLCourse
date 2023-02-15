@@ -370,7 +370,7 @@ Multi-user access can mean manual access by actual human users, or automated acc
 The **HttpCommand** class is built on top of the [**Conga**](https://docs.dyalog.com/latest/Conga%20User%20Guide.pdf) framework for TCP/IP communications. At the most basic level, it can be used to perform HTTP requests to retrieve data from servers. 
 
 ```APL
-      ]load HttpCommand
+      ]Get HttpCommand
 #.HttpCommand
       ⍴(#.HttpCommand.Get 'https://google.com').Data
 14107
