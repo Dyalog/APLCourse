@@ -54,7 +54,7 @@ As a particularly interesting example, the **transitive closure** of a [**connec
 ```
 
 ## Traditional
-Just like [their function counterparts](Ufns/#traditional-functions), traditional operators or [**tradops**](https://aplwiki.com/wiki/Defined_function_(traditional)#Operators) have a definition syntax which reflects their calling syntax:
+Just like [their function counterparts](./user-defined-functions.md#traditional-functions), traditional operators or [**tradops**](https://aplwiki.com/wiki/Defined_function_(traditional)#Operators) have a definition syntax which reflects their calling syntax:
 
 ```APL
       ⎕VR'TradOp'
