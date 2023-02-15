@@ -18,7 +18,7 @@ SYNTAX ERROR: Missing right argument
        ∧
 ```
 
-From here, when functions are first introduced, `F⍵` ("eff omega") denotes a monadic function `f` and `⍺F⍵` ("alpha eff omega") denotes a dyadic function.
+From here, when functions are first introduced, `F⍵` ("eff omega") denotes a monadic function `F` and `⍺F⍵` ("alpha eff omega") denotes a dyadic function.
 
 ## Assignment
 Names are assigned with the left arrow `name ← expression`. We say "name gets [function or array]".
