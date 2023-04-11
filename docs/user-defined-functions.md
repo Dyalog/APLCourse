@@ -369,7 +369,7 @@ Best used as program control and for dealing with system interactions. The use o
         1. `(1∧⊢,÷)`
 
 ### Marking Tests
-Way back in [problem set 4](/Outer-product/#problem-set-4) you wrote a dfn to convert test scores into letter values.
+Way back in [problem set 3](./array-logic-data-driven-conditionals.md#problem-set-3) you wrote a dfn to convert test scores into letter values.
 
 You were led to produce some function or expression similar to the following:
 
