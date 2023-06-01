@@ -536,7 +536,7 @@ A `VALUE ERROR` means that there is nothing associated with the name provided. W
 
 	???Example "Answers"
 		<ol type="a">
-		<li>Multiplication is commutative, so we can write `b×÷a`</li>
+		<li>Multiplication is commutative, which means that the order of arguments does not matter, so we can write `b×÷a`. Even more simply, it is `b÷a` because multiplication by a reciprocal is the same as division.</li>
 		<li>${{{1}\over{a}}\div{b}} = {{1}\over{a\times{b}}}$ so we can write `÷a×b`</li>
 		<li>Use a literal negative five:`¯5+a+b`</li>
 		<li>No parentheses needed: `a+b+5`</li>
