@@ -1,0 +1,821 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A guided introduction to Dyalog APL">
+      
+      
+      
+        <link rel="canonical" href="https://dyalog.com/broken-keyboard-problems/">
+      
+      
+        <link rel="prev" href="../selecting-from-arrays/">
+      
+      
+        <link rel="next" href="../loops-and-recursion/">
+      
+      <link rel="icon" href="../img/favicon-32.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.3">
+    
+    
+      
+        <title>Broken Keyboard Problems - APL Course</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6b71719e.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../style/main.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#broken-keyboard-problems" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="APL Course" class="md-header__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APL Course
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Broken Keyboard Problems
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="APL Course" class="md-nav__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    APL Course
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basic-syntax-and-arithmetic/" class="md-nav__link">
+        Basic syntax
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dfns-and-assignment/" class="md-nav__link">
+        Dfns and Assignment
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../array-logic-data-driven-conditionals/" class="md-nav__link">
+        Array Logic and Data-driven Conditionals
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multidimensional-and-nested-arrays/" class="md-nav__link">
+        Multidimensional and Nested Arrays
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cells-and-axes/" class="md-nav__link">
+        Cells and Axes
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../finding-and-replacing-values/" class="md-nav__link">
+        Finding and Replacing Values
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../selecting-from-arrays/" class="md-nav__link">
+        Selecting from Arrays
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Broken Keyboard Problems
+      </a>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loops-and-recursion/" class="md-nav__link">
+        Loops and Recursion
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Assignment/" class="md-nav__link">
+        Extra Assignment
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Workspaces/" class="md-nav__link">
+        Workspace Basics
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Namespaces/" class="md-nav__link">
+        Namespaces and Other Objects
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Help/" class="md-nav__link">
+        Getting Help
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-defined-functions/" class="md-nav__link">
+        User-defined Functions
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Operators/" class="md-nav__link">
+        Operators
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quad%20names/" class="md-nav__link">
+        Quad Names
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../error-handling-and-debugging/" class="md-nav__link">
+        Error Handling and Debugging
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Data/" class="md-nav__link">
+        Data IO
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Code/" class="md-nav__link">
+        Code IO
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interfaces/" class="md-nav__link">
+        External Interfaces
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quirks/" class="md-nav__link">
+        Historical Quirks
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interpreter-internals/" class="md-nav__link">
+        Interpreter Internals
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Reading/" class="md-nav__link">
+        Further Reading
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="broken-keyboard-problems">Broken Keyboard Problems</h1>
+<p>APL is a language which evolves over time. Some of the primitives available today exist because they represent patterns which are very common. Not only this, but in APL there are usually several equally good ways of expressing the same idea. As you develop competency in APL, this versatility in expression becomes an advantage.</p>
+<p>Imagine that your keyboard is broken such that it is impossible to type a particular glyph. It is a useful exercise in array thinking and use of APL to try and recreate the behaviour without using the primitive itself.</p>
+<p>For each of the following problems:</p>
+<ul>
+<li>Read the prompt and think about which primitive function behaves in the way described.</li>
+<li>Write a function which matches the description but does not use that primitive function.</li>
+</ul>
+<hr />
+<ol>
+<li>
+<p>This primitive function is used to find the indices of a Boolean array.</p>
+<details class="hint">
+<summary>What primitive function is this?</summary>
+<p>We want to model the <strong>where</strong> function <code>⍸⍵</code> without using the <strong>iota-underbar</strong> glyph <code>⍸</code>.</p>
+</details>
+<details class="example">
+<summary>Answers</summary>
+<p>For Boolean vectors:</p>
+<pre class="highlight"><code class="language-APL">{⍵/⍳≢⍵}
+{⍵/⍳⍴⍵}</code></pre>
+<p>For Boolean arrays in general:</p>
+<pre class="highlight"><code class="language-APL">{(,⍵)/,⍳⍴⍵}
+{⍵/⍥,⍳⍴⍵}</code></pre>
+</details>
+</li>
+<li>
+<p>This primitive function counts the number of elements in a vector.</p>
+<details class="hint">
+<summary>What primitive function is this?</summary>
+<p>We want to model the <strong>shape</strong> <code>⍴⍵</code> or <strong>tally</strong> function <code>≢⍵</code> without using the <strong>rho</strong> <code>⍴</code> or <strong>not-identical-to</strong> <code>≢</code> glyphs. We might need to use different approaches depending on the type and structure of our argument.</p>
+</details>
+<details class="example">
+<summary>Answers</summary>
+<p>For simple numeric vectors, we can use any mathemtical function which always returns <code>1</code> and add up the ones.</p>
+<pre class="highlight"><code class="language-APL">{+/⍵÷⍵}
+{+/⍵*0}
+{+/1+0×⍵}
+{+/×1+|⍵}</code></pre>
+<p>For any simple vector, we can ask equality with the argument itself:</p>
+<pre class="highlight"><code class="language-APL">{+/⍵=⍵}</code></pre>
+<p>For any vector, we can use each <code>⍺ F¨ ⍵</code> to map the match function <code>⍺≡⍵</code> between each element of <code>⍵</code> and itself.</p>
+<pre class="highlight"><code class="language-APL">{+/⍵≡¨⍵}</code></pre>
+</details>
+</li>
+<li>
+<p>This primitive function reverses the order of the elements in a vector.</p>
+<details class="hint">
+<summary>What primitive function is this?</summary>
+<p>We want to model the reverse function <code>⌽⍵</code> without using the circle-stile <code>⌽</code> glyph.</p>
+</details>
+<details class="example">
+<summary>Answer</summary>
+<pre class="highlight"><code class="language-APL">{⍵[(≢⍵)-⍳≢⍵]}
+{⍵[(⍴⍵)-⍳⍴⍵]}</code></pre>
+<p>To model the reverse-first function <code>⊖⍵</code>, we should use <strong>squad</strong> <code>⍺⌷⍵</code> - the indexing function - to select major cells from our argument regardless of rank.</p>
+<pre class="highlight"><code class="language-APL">{(⊂1+(≢⍵)-⍳≢⍵)⌷⍵}</code></pre>
+<p>This solution still does not handle scalars. There may be several ways to account for this, but it easy to work around it with a guard:</p>
+<pre class="highlight"><code class="language-APL">{0=≢⍴⍵: ⍵ ⋄ (⊂1+(≢⍵)-⍳≢⍵)⌷⍵}</code></pre>
+</details>
+</li>
+<li>
+<p>Write a function to convert a character vector into upper case without using <code>⎕C</code>. Assume text consists of only lowercase alphabetic characters <code>a-z</code> and spaces.</p>
+<pre class="highlight"><code class="language-APL">      ToUpper 'sale on now'
+SALE ON NOW</code></pre>
+<details class="example">
+<summary>Answer</summary>
+<pre class="highlight"><code class="language-APL">alph ← 'abcdefghijklmnopqrstuvwxyz'
+ToUpper ← {(⎕A,' ')[⍺⍳⍵]}</code></pre>
+<p>To learn about case folding and mapping using the case conversion system function <code>⎕C</code>, watch the webinar <a href="https://dyalog.tv/Webinar/?v=Hln3zryunsw">Language Features of Dyalog version 18.0 in Depth - Part 1</a>.</p>
+</details>
+</li>
+<li>
+<p>Write a function to convert only lowercase alphabetic characters <code>a-z</code> into uppercase, and leave all others alone.</p>
+<p><pre class="highlight"><code class="language-APL">      text←'What? Ignore these $#!?# characters!?'
+      ToUpper text</code></pre>
+<pre class="highlight"><code>WHAT? IGNORE THESE $#!?# CHARACTERS!?</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<p>There are other valid approaches, but here is one solution using selective assignment:</p>
+<pre class="highlight"><code class="language-APL">((text∊alph)/text) ← (⎕A,' ')[(text∊alph)/alph⍳text]</code></pre>
+</details>
+</li>
+<li>
+<p>This function returns unique major cells of <code>⍵</code>.</p>
+<details class="hint">
+<summary>What primitive function is this?</summary>
+<p>We want to model the <strong>unique</strong> function <code>∪⍵</code> without using the <strong>downshoe</strong> <code>∪</code> glyph.</p>
+</details>
+<details class="example">
+<summary>Answers</summary>
+<p>Index-of returns the index of the first occurance of an element. For <code>⍵⍳⍵</code>, this becomes a list of integer ID numbers which correspond to major cells as they appear.</p>
+<pre class="highlight"><code class="language-APL">{((⍳≢⍵)=⍵⍳⍵)⌿⍵}</code></pre>
+<p>This is a good opportunity to mention the <strong>swap</strong> <code>⍺ F⍨ ⍵</code> and <strong>selfie</strong> <code>F⍨⍵</code> operators.</p>
+<pre class="highlight"><code class="language-APL">{⍵⌿⍨(⍳≢⍵)=⍳⍨⍵}</code></pre>
+</details>
+</li>
+<li>
+<p>This primitive removes scalars in <code>⍵</code> from the vector <code>⍺</code>.</p>
+<details class="hint">
+<summary>What primitive function is this?</summary>
+<p>We want to Write the <strong>without</strong> function <code>⍺~⍵</code> without using the <strong>tilde</strong> <code>~</code> glyph.</p>
+</details>
+<details class="example">
+<summary>Answer</summary>
+<pre class="highlight"><code class="language-APL">{(1-⍺∊⍵)/⍺}</code></pre>
+</details>
+</li>
+<li>
+<p>This primitive function returns elements in the vector <code>⍺</code> which are also found in the vector <code>⍵</code>.</p>
+<details class="hint">
+<summary>What primitive function is this?</summary>
+<p>We want to write the <strong>intersection</strong> function <code>⍺∩⍵</code> without using the <strong>upshoe</strong> <code>∩</code> glyph.</p>
+</details>
+<details class="example">
+<summary>Answer</summary>
+<pre class="highlight"><code class="language-APL">{(⍺∊⍵)/⍺}</code></pre>
+</details>
+</li>
+<li>
+<p>Write a function which:</p>
+<ul>
+<li>takes a numeric left argument vector <code>⍺</code>, sorted ascending</li>
+<li>takes a numeric right argument vector <code>⍵</code></li>
+<li>returns an integer vector of the same length as <code>⍵</code>, indicating the intervals in <code>⍺</code> in which elements in <code>⍵</code> belong</li>
+</ul>
+<pre class="highlight"><code class="language-APL">      1 3 7 Function 0 2 3 5 8
+0 1 2 2 3</code></pre>
+<details class="hint">
+<summary>What primitive function is this?</summary>
+<p>Write a model of the <strong>interval index</strong> function <code>⍺⍸⍵</code> without using the <strong>iota-underbar</strong> <code>⍸</code> glyph.</p>
+</details>
+<details class="example">
+<summary>Answer</summary>
+<p>For numeric arguments:</p>
+<pre class="highlight"><code class="language-APL">{+⌿⍺∘.≤⍵}
+{+/⍵∘.≥⍺}</code></pre>
+</details>
+</li>
+<li>
+<p>This primitive function returns <code>¯1</code> for negative numbers, <code>0</code> for <code>0</code> and <code>1</code> for positive numbers in its numeric argument array.</p>
+<details class="hint">
+<summary>What primitive function is this?</summary>
+<p>Write the <strong>sign</strong> or <strong>signum</strong> function <code>×⍵</code> without using the <strong>multiplication</strong> <code>×</code> glyph.</p>
+</details>
+<details class="example">
+<summary>Answer</summary>
+<pre class="highlight"><code class="language-APL">{(0&lt;⍵)-(0&gt;⍵)}</code></pre>
+</details>
+</li>
+</ol>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://dyalog.com" target="_blank" rel="noopener" title="dyalog.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 416 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M0 32v119.2h64V96h107.2C284.6 96 352 176.2 352 255.9 352 332 293.4 416 171.2 416H0v64h171.2C331.9 480 416 367.3 416 255.9c0-58.7-22.1-113.4-62.3-154.3C308.9 56 245.7 32 171.2 32H0z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://mastodon.social/@dyalog" target="_blank" rel="noopener" title="mastodon.social" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 15.5a.5.5 0 0 1-.5.5.5.5 0 0 1-.5-.5v-7c0-1.93-2.07-3.5-4-3.5H6a4 4 0 0 0-4 4v10h4v-4h5v4h4v-4.5a.5.5 0 0 1 .5-.5.5.5 0 0 1 .5.5V16a3 3 0 0 0 3 3 3 3 0 0 0 3-3v-2h-2.5v1.5Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/dyalogapl" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant"], "search": "../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ba449ae6.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
