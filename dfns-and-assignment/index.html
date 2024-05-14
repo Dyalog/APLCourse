@@ -1,0 +1,909 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A guided introduction to Dyalog APL">
+      
+      
+      
+        <link rel="canonical" href="https://dyalog.com/dfns-and-assignment/">
+      
+      
+        <link rel="prev" href="../basic-syntax-and-arithmetic/">
+      
+      
+        <link rel="next" href="../array-logic-data-driven-conditionals/">
+      
+      <link rel="icon" href="../img/favicon-32.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.3">
+    
+    
+      
+        <title>Dfns and Assignment - APL Course</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6b71719e.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../style/main.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dfns-and-assignment" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="APL Course" class="md-header__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APL Course
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Dfns and Assignment
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="APL Course" class="md-nav__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    APL Course
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basic-syntax-and-arithmetic/" class="md-nav__link">
+        Basic syntax
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Dfns and Assignment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Dfns and Assignment
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dfns" class="md-nav__link">
+    Dfns
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assignment" class="md-nav__link">
+    Assignment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syntactic-name-class" class="md-nav__link">
+    Syntactic name class
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiline-functions-and-the-editor" class="md-nav__link">
+    Multiline functions and the editor
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-set-2" class="md-nav__link">
+    Problem set 2
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../array-logic-data-driven-conditionals/" class="md-nav__link">
+        Array Logic and Data-driven Conditionals
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multidimensional-and-nested-arrays/" class="md-nav__link">
+        Multidimensional and Nested Arrays
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cells-and-axes/" class="md-nav__link">
+        Cells and Axes
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../finding-and-replacing-values/" class="md-nav__link">
+        Finding and Replacing Values
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../selecting-from-arrays/" class="md-nav__link">
+        Selecting from Arrays
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../broken-keyboard-problems/" class="md-nav__link">
+        Broken Keyboard Problems
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loops-and-recursion/" class="md-nav__link">
+        Loops and Recursion
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Assignment/" class="md-nav__link">
+        Extra Assignment
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Workspaces/" class="md-nav__link">
+        Workspace Basics
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Namespaces/" class="md-nav__link">
+        Namespaces and Other Objects
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Help/" class="md-nav__link">
+        Getting Help
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-defined-functions/" class="md-nav__link">
+        User-defined Functions
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Operators/" class="md-nav__link">
+        Operators
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quad%20names/" class="md-nav__link">
+        Quad Names
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../error-handling-and-debugging/" class="md-nav__link">
+        Error Handling and Debugging
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Data/" class="md-nav__link">
+        Data IO
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Code/" class="md-nav__link">
+        Code IO
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interfaces/" class="md-nav__link">
+        External Interfaces
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quirks/" class="md-nav__link">
+        Historical Quirks
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interpreter-internals/" class="md-nav__link">
+        Interpreter Internals
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Reading/" class="md-nav__link">
+        Further Reading
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dfns" class="md-nav__link">
+    Dfns
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assignment" class="md-nav__link">
+    Assignment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syntactic-name-class" class="md-nav__link">
+    Syntactic name class
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiline-functions-and-the-editor" class="md-nav__link">
+    Multiline functions and the editor
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-set-2" class="md-nav__link">
+    Problem set 2
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dfns-and-assignment">Dfns and Assignment</h1>
+<h2 id="dfns">Dfns</h2>
+<p>A <dfn>dfn</dfn> (pronounced "<em>dee-fun</em>" with a very short "u" sound) is a way of writing functions in APL. It starts and ends with curly braces <code>{}</code>, has a right argument <code>⍵</code> (omega) and an optional left argument <code>⍺</code> (alpha).</p>
+<pre class="highlight"><code class="language-APL">      3{⍺}5      ⍝ ⍺ is the (optional) left argument
+3
+      {⍵}'apl'   ⍝ ⍵ is the right argument
+apl
+      {⍺}5       ⍝ Calling a dyadic function monadically results in an error
+VALUE ERROR
+      {⍺}5
+      ∧
+      3{⍵}       ⍝ Calling a function without a right argument results in an error
+SYNTAX ERROR: Missing right argument
+      3{⍵}
+       ∧</code></pre>
+<p>From here, when functions are first introduced, <code>F⍵</code> ("eff omega") denotes a monadic function <code>F</code> and <code>⍺F⍵</code> ("alpha eff omega") denotes a dyadic function.</p>
+<h2 id="assignment">Assignment</h2>
+<p>Names are assigned with the left arrow <code>name ← expression</code>. We say "name gets [function or array]".</p>
+<p><pre class="highlight"><code class="language-APL">      one←1
+      three←3
+      equals←=
+      plus←+
+      four←4
+      four equals one plus three   ⍝ 1 means true, 0 means false</code></pre>
+<pre class="highlight"><code>1</code></pre></p>
+<p>We can use a name in the same line in which it is defined. In production code it is best to avoid this unless an expression is very short.</p>
+<p>Read the following as "squared numbers divided by the sum of squares":
+<pre class="highlight"><code class="language-APL">      squared÷+/squared←¯1 0 1 2*2</code></pre>
+<pre class="highlight"><code>0.1666666667 0 0.1666666667 0.6666666667`</code></pre></p>
+<h2 id="syntactic-name-class">Syntactic name class</h2>
+<p>You may come across the following error:</p>
+<p><pre class="highlight"><code class="language-APL">      count ← {+/⍵}
+      count ← {+/⍵} 1 0 0 1 0 1 0</code></pre>
+<pre class="highlight"><code>SYNTAX ERROR: Invalid modified assignment, or an attempt was made to change nameclass on assignment
+      count←{+/⍵}1 0 0 1 0 1 0
+      ∧</code></pre></p>
+<p>Things in APL have both a word and a number which identifies what type of thing it is. This is called its <a href="http://help.dyalog.com/latest/#Language/System%20Functions/nc.htm"><strong>name class</strong></a>. So far we have met <strong>variables</strong> (nameclass 2) and <strong>functions</strong> (nameclass 3). There are more than these, but they will be introduced in relevant chapters.</p>
+<p>In Dyalog APL, if a name already has a function assigned, that same name cannot then be assigned an array value. Nor vice versa. If this happens, erase the name and try again.</p>
+<pre class="highlight"><code class="language-APL">      )ERASE count
+      count←{+/⍵}1 0 0 1 0 1 0
+      count
+3</code></pre>
+<div class="admonition question">
+<p class="admonition-title">What is this <code>)ERASE</code> thing?</p>
+<p>We have just used a <dfn>system command</dfn>. They are available while using the Dyalog interpreter or TryAPL interactively. However, they cannot be used inside functions and they are not standard APL syntax. In the section on <a href="../Workspaces/#system-commands">system functions and system commands</a> we will learn about things like showing a list of the currently defined names and how to erase names programmatically (there is a <dfn>system function</dfn> <code>⎕EX</code>). In the meantime, we will introduce system functions and commands as needed.</p>
+</div>
+<h2 id="multiline-functions-and-the-editor">Multiline functions and the editor</h2>
+<p>You can do quite a lot in a single line of APL. However, it is not long before you want to keep sequences of multiple statements available for re-use. Of course we can write functions which consist of multiple statements.</p>
+<p>The <dfn>statement separator</dfn>, <code>⋄</code> (diamond), allows us to write multiple APL statements in a single line. Some people think that it is more readable to spread multiple statements across multiple lines of a function. However, it is worth being aware that APL diamonds <code>⋄</code> are equivalent to newline characters in terms of execution. The following two definitions of the <code>Mean</code> function are equivalent.</p>
+<pre class="highlight"><code class="language-APL"> Mean ← {
+    sum ← +/⍵
+    count ← ≢⍵
+    sum ÷ count
+ }
+
+ Mean ← { sum ← +/⍵ ⋄ count ← ≢⍵ ⋄ sum÷count }</code></pre>
+<p>Separate statements are executed from left to right and top to bottom.</p>
+<p><strong>To edit multiline functions</strong> in the IDE for Microsoft Windows and the RIDE, invoke the editor with the system command <code>)ED</code>. You can find a step-by-step example of creating a multiline function in the Dyalog editor in <a href="https://mastering.dyalog.com/User-Defined-Functions.html?highlight=editor#a-working-example">chapter 5 of Mastering Dyalog APL</a>.</p>
+<p><strong>On TryAPL</strong>, the current execution block can be continued on to a new line using <kbd>Alt+Enter</kbd>. The continuation line begins with a tab character. To execute the block, simply press <kbd>Enter</kbd> after your final line is typed. Here is an example defining a multiline dfn:</p>
+<ol>
+<li>Type <code>Sum ← {</code> and press <kbd>Alt+Enter</kbd></li>
+<li>Type <code>⍺+⍵</code> and press <kbd>Alt+Enter</kbd></li>
+<li>Type <code>}</code> and press just <kbd>Enter</kbd></li>
+<li>The function <code>Sum</code> is now defined in your workspace. Try the expression <code>3 Sum 4</code>.</li>
+</ol>
+<h2 id="problem-set-2">Problem set 2</h2>
+<p>The following problems can be solved with single-line dfns.</p>
+<ol>
+<li>
+<p>Eggs</p>
+<p>A recipe serving 4 people uses 3 eggs. Write the function <code>Eggs</code> which computes the number of eggs which need cracking to serve <code>⍵</code> people. Using a fraction of an egg requires that a whole egg be cracked.</p>
+<p><pre class="highlight"><code class="language-APL">      Eggs 4</code></pre>
+<pre class="highlight"><code>3</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      Eggs 100</code></pre>
+<pre class="highlight"><code>75</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      Eggs ⍳12</code></pre>
+<pre class="highlight"><code>1 2 3 3 4 5 6 6 7 8 9 9</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<pre class="highlight"><code class="language-APL">Eggs ← {⌈⍵×3÷4}</code></pre>
+</details>
+</li>
+<li>
+<p>Write a function <code>To</code> which returns integers from <code>⍺</code> to <code>⍵</code> inclusive.</p>
+<pre class="highlight"><code class="language-APL">      3 To 3
+3
+      3 To 4
+3 4
+      1 To 7
+1 2 3 4 5 6 7
+      ¯3 To 5
+¯3 ¯2 ¯1 0 1 2 3 4 5</code></pre>
+<p><strong>BONUS:</strong> What if <code>⍺&gt;⍵</code>?<br />
+<pre class="highlight"><code class="language-APL">      3 To 5
+3 4 5
+      5 To 3
+5 4 3
+      5 To ¯2
+5 4 3 2 1 0 ¯1 ¯2</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<p>In the simple case, make sure to generate enough numbers and use <code>⍺</code> as an offset:<br />
+<pre class="highlight"><code class="language-APL">To ← {⍺+¯1+⍳1+⍵-⍺}</code></pre>
+In general we take into account whether the difference is positive or negative:<br />
+<pre class="highlight"><code class="language-APL">To ← {⍺+(×d)×¯1+⍳1+|d←⍵-⍺}</code></pre></p>
+</details>
+</li>
+<li>
+<p>The formula to convert temperature from Celsius (<span class="arithmatex">\(T_C\)</span>) to Fahrenheit (<span class="arithmatex">\(T_F\)</span>) in traditional mathematical notation is as follows:</p>
+<div class="arithmatex">\[T_F = {32 + {{9}\over{5}}\times {T_C}}\]</div>
+<p>Write the function <code>CtoF</code> to convert temperatures from Celcius to Farenheit.<br />
+<pre class="highlight"><code class="language-APL">      CtoF 11.3 23 0 16 ¯10 38
+52.34 73.4 32 60.8 14 100.4</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<pre class="highlight"><code class="language-APL">CtoF ← {32+⍵×9÷5}</code></pre>
+</details>
+</li>
+<li>
+<p>Prime Time</p>
+<p>A prime number is a positive whole number greater than <span class="arithmatex">\(1\)</span> which can be divided only by itself and <span class="arithmatex">\(1\)</span> with no remainder.</p>
+<p>Write a dfn which returns <code>1</code> if its argument is prime and <code>0</code> otherwise.</p>
+<pre class="highlight"><code>          IsPrime 21
+0
+          IsPrime 17
+1
+</code></pre>
+<details class="example">
+<summary>Answer</summary>
+<p>There are several ways to code this, but the basic method is to count the number of divisors.
+<pre class="highlight"><code class="language-APL">IsPrime ← {2=+/d=⌊d←⍵÷⍳⍵}
+IsPrime ← {2=+/0=(⍳⍵)|⍵}</code></pre></p>
+</details>
+</li>
+</ol>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://dyalog.com" target="_blank" rel="noopener" title="dyalog.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 416 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M0 32v119.2h64V96h107.2C284.6 96 352 176.2 352 255.9 352 332 293.4 416 171.2 416H0v64h171.2C331.9 480 416 367.3 416 255.9c0-58.7-22.1-113.4-62.3-154.3C308.9 56 245.7 32 171.2 32H0z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://mastodon.social/@dyalog" target="_blank" rel="noopener" title="mastodon.social" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 15.5a.5.5 0 0 1-.5.5.5.5 0 0 1-.5-.5v-7c0-1.93-2.07-3.5-4-3.5H6a4 4 0 0 0-4 4v10h4v-4h5v4h4v-4.5a.5.5 0 0 1 .5-.5.5.5 0 0 1 .5.5V16a3 3 0 0 0 3 3 3 3 0 0 0 3-3v-2h-2.5v1.5Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/dyalogapl" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant"], "search": "../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ba449ae6.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
