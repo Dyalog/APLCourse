@@ -294,8 +294,8 @@ The **over** operator `⍺⍺⍥⍵⍵` was introduced in Dyalog in version 18.0
 **Example:**
 
 ```APL
-      1 3 2 +_O_× 5 0 ¯5                    ⍝ Sum of signs
-      'some text'≡_O_ 0∘(819⌶)'SOME TEXT'   ⍝ Case-insensitive match
+      1 3 2 +⍥× 5 0 ¯5                    ⍝ Sum of signs
+      'some text'≡⍥⎕C'SOME TEXT'   ⍝ Case-insensitive match
 ```
 
 The **under** (or *dual*) operator `⍺⍺⍢⍵⍵` has not been implemented in Dyalog. However, it can be partially modelled. It is the same as over `⍥`, except that the inverse of `⍵⍵` is applied to the result.
