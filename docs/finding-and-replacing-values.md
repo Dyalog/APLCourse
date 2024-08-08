@@ -214,10 +214,11 @@ Experiment with the following expressions, paying particular attention to the `n
 salaries←18250 42500 56000 57250 48640
 codes←'ACDDC'
 salaries×←1.1
-salaries[⍸codes='C']×←1.0
+salaries[⍸codes='C']×←1.1
 
 a←⎕A
-(3↑a),←'abcd'
+(3↑a),←'abc'
+(¯4↑a),←'xyz'  ⍝ this one will error — think about why!
 ```
 
 ### The At operator
