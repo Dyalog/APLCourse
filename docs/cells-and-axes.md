@@ -546,7 +546,7 @@ The [section about older features](./Quirks.md) has some more examples of bracke
 	???Example "Answer"
 
 		```APL
-		FlipBlock ← {⍺(⊖⍤2)⍵}
+		FlipBlock ← {(⊖⍤2)⍵}
 		```
 
 		We can also use the **right/identity** function `⊢⍵` to separate the array *operand* of the rank **operator** from the array *argument* of the derived **function** reverse-first-rank-two `⊖⍤2`. Otherwise, stranding would bind `2 ⍵` into a vector, causing unexpected behaviour.
@@ -554,7 +554,7 @@ The [section about older features](./Quirks.md) has some more examples of bracke
 		This author prefers to isolate operands using parentheses most of the time.
 
 		```APL
-		FlipBlock ← {⍺⊖⍤2⊢⍵}
+		FlipBlock ← {⊖⍤2⊢⍵}
 		```
 
 		Alternatively, we can write this as a [tacit function](./user-defined-functions.md#the-three-function-styles). This form is also known as a <dfn>derived</dfn> function because a new function is derived from functions and operators.
