@@ -27,7 +27,8 @@ Experiment with the following expressions, paying particular attention to the `n
       salaries[⍸codes='C']×←1.05
 
       a←⎕A
-      (3↑a),←'abcd'
+      (3↑a),←'abc'
+      (¯4↑a),←'xyz'  ⍝ this one will error — think about why!
 ```
 
 ## At
