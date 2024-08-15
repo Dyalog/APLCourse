@@ -64,8 +64,8 @@ For each of the following problems:
 	
 	???Example "Answer"
 		```APL
-		{⍵[(≢⍵)-⍳≢⍵]}
-		{⍵[(⍴⍵)-⍳⍴⍵]}
+		{⍵[1+(≢⍵)-⍳≢⍵]}
+		{⍵[1+(⍴⍵)-⍳⍴⍵]}
 		```
 
 		To model the reverse-first function `⊖⍵`, we should use **squad** `⍺⌷⍵` - the indexing function - to select major cells from our argument regardless of rank.
@@ -89,8 +89,7 @@ For each of the following problems:
 
 	???Example "Answer"
 		```APL
-		alph ← 'abcdefghijklmnopqrstuvwxyz'
-		ToUpper ← {(⎕A,' ')[⍺⍳⍵]}
+		ToUpper ← {(⎕A,' ')['abcdefghijklmnopqrstuvwxyz'⍳⍵]}
 		```
 
 		To learn about case folding and mapping using the case conversion system function `⎕C`, watch the webinar [Language Features of Dyalog version 18.0 in Depth - Part 1](https://dyalog.tv/Webinar/?v=Hln3zryunsw).
