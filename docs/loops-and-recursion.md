@@ -253,7 +253,7 @@ Now answer the following questions about `words`.
 
 1. Which palindrome in `words` is the longest?
 
-1. How many words are in alphabetical order?
+1. How many words have their letters arranged in alphabetical order?
 
 ### Bell Numbers
 A [Bell number](https://en.wikipedia.org/wiki/Bell_number) counts the possible partitions of a set. The n<sup>th</sup> Bell number $B_n$ counts the ways you can partition a set of $n$ elements.
