@@ -189,7 +189,7 @@ Over time you will learn from experience what is the most appropriate thing to u
 		Anna and Charlie both ate 10 fruits total on Tuesday and Sunday combined. Ben only ate 8 fruits.
 
 		```APL
-		      d←days⍳2 3⍴'Tue' 'Sun'
+		      d←2 3⍴'TueSun'
 		      total ← +/+/ate[;;days⍳d]
 		      (total=⌈/total)⌿names
 		```
@@ -204,7 +204,7 @@ Over time you will learn from experience what is the most appropriate thing to u
 		Charlie ate the most mangoes and bananas across the whole week.
 
 		```APL
-		      f←fruits⍳2 7⍴'MangoesBananas'
+		      f←2 7⍴'MangoesBananas'
 		      total ← +/+/ate[;fruits⍳f;]
 		      (total=⌈/total)⌿names
 		```
@@ -388,7 +388,7 @@ The variable `sections` is a nested list of text matrices. Each matrix lists the
 
 <pre><code class="language-APL">sections ← ↑¨('Grasshopper' 'Giant Cicada' 'Earth-boring Dung Beetle' 'Scarab Beetle' 'Miyama Stag' 'Giant Stag' 'Brown Cicada' 'Giraffe Stag' 'Horned Dynastid' 'Walking Stick' 'Walking Leaf') ('The Blue Boy by Thomas Gainsborough' ('Rooster and Hen with Hydrangeas by It',(⎕ucs 333),' Jakuch',(⎕ucs 363)) 'The Great Wave off Kanagawa by Hokusai' 'Mona Lisa by Leonardo da Vinci' 'Sunflowers by Vincent van Gogh' 'Still Life with Apples and Oranges by Paul Cézanne' 'Girl with a Pearl Earring by Johannes Vermeer' ('Shak',(⎕ucs 333),'ki dog',(⎕ucs 363),' by Unknown') 'David by Michelangelo di Lodovico Buonarroti Simoni' 'Rosetta Stone by Unknown') ('Amber' 'Ammonite' 'Diplodocus' 'Stegosaur' 'Tyrannosaurus Rex' 'Triceratops') ('Puffer Fish' 'Blue Marlin' 'Ocean Sunfish' 'Acorn Barnacle' 'Mantis Shrimp' 'Octopus' 'Pearl Oyster' 'Scallop' 'Sea Anemone' 'Sea Slug' 'Sea Star' 'Whelk' 'Horseshoe Crab')</code></pre>
 
-The `visits` table represents 1000 visits to museum sections over a two week period. The four columns represent:  
+The `visits` table represents 1000 visits to museum sections over a four week period. The four columns represent:  
 
 - The section that was visited as an index into the `section_names`
 - The day of the visit in [Dyalog Date Number](http://help.dyalog.com/latest/#Language/System%20Functions/dt.htm) format.
