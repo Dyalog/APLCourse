@@ -119,7 +119,7 @@ Take a look at the [Chapter F of Mastering Dyalog APL](https://www.dyalog.com/up
 1.  
 	
 	The following expression formats the current date as **YY/MM/DD**. 
-	<pre><code class="language-APL">'I2,2(</>,ZI2)'⎕FMT 1 3⍴100|3↑⎕TS</code></pre>
+	<pre><code class="language-APL">'I2,2(&lt;/&gt;,ZI2)'⎕FMT 1 3⍴100|3↑⎕TS</code></pre>
 	Change the expression to produce **YYYY-MM-DD**.
 
 1.  
