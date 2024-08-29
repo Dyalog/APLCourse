@@ -665,7 +665,7 @@ APL
 		<li>
 		Reshape recycles elements. We can use this to duplicate rows until we have the correct shape to allow `+` to map between elements for us:
 		```APL
-		AddRows ← {⍵+(⍴⍵)⍴⍺}
+		AddRows ← {⍺+(⍴⍺)⍴⍵}
 		```
 		</li>
 		<li>
