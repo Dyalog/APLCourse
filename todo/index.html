@@ -1,0 +1,789 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A guided introduction to Dyalog APL">
+      
+      
+      
+        <link rel="canonical" href="https://dyalog.com/todo/">
+      
+      
+      
+      <link rel="icon" href="../img/favicon-32.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.3">
+    
+    
+      
+        <title>TODO - APL Course</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6b71719e.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../style/main.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#todo" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="APL Course" class="md-header__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APL Course
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              TODO
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="APL Course" class="md-nav__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    APL Course
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basic-syntax-and-arithmetic/" class="md-nav__link">
+        Basic syntax
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dfns-and-assignment/" class="md-nav__link">
+        Dfns and Assignment
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../array-logic-data-driven-conditionals/" class="md-nav__link">
+        Array Logic and Data-driven Conditionals
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multidimensional-and-nested-arrays/" class="md-nav__link">
+        Multidimensional and Nested Arrays
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cells-and-axes/" class="md-nav__link">
+        Cells and Axes
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../finding-and-replacing-values/" class="md-nav__link">
+        Finding and Replacing Values
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../selecting-from-arrays/" class="md-nav__link">
+        Selecting from Arrays
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../broken-keyboard-problems/" class="md-nav__link">
+        Broken Keyboard Problems
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loops-and-recursion/" class="md-nav__link">
+        Loops and Recursion
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Assignment/" class="md-nav__link">
+        Extra Assignment
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Workspaces/" class="md-nav__link">
+        Workspace Basics
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Namespaces/" class="md-nav__link">
+        Namespaces and Other Objects
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Help/" class="md-nav__link">
+        Getting Help
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-defined-functions/" class="md-nav__link">
+        User-defined Functions
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Operators/" class="md-nav__link">
+        Operators
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quad%20names/" class="md-nav__link">
+        Quad Names
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../error-handling-and-debugging/" class="md-nav__link">
+        Error Handling and Debugging
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Data/" class="md-nav__link">
+        Data IO
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Code/" class="md-nav__link">
+        Code IO
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interfaces/" class="md-nav__link">
+        External Interfaces
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quirks/" class="md-nav__link">
+        Historical Quirks
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interpreter-internals/" class="md-nav__link">
+        Interpreter Internals
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Reading/" class="md-nav__link">
+        Further Reading
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="todo">TODO</h1>
+<ul>
+<li>
+<p>bracket axis versions of rank problems?</p>
+</li>
+<li>
+<p>horizontal scroll on narrow partial code blocks</p>
+</li>
+<li>more description in <a href="../array-logic-data-driven-conditionals/#problem-set">array logic problem 1</a></li>
+<li>move finding and replacing problems interval index broken keyboard problems</li>
+<li>link to section: http://localhost:8000/array-logic-data-driven-conditionals/#the-outer-product</li>
+<li>outer product link: http://localhost:8000/basic-syntax-and-arithmetic/#singleton-extension</li>
+<li>
+<h1 id="todo-links">TODO links</h1>
+</li>
+<li>windows <code>2f/</code></li>
+<li>key</li>
+<li>negative index generator link to problem: http://localhost:8000/basic-syntax-and-arithmetic/#what-do-these-errors-mean</li>
+<li>http://localhost:8000/array-logic-data-driven-conditionals/#problem-set link to membership version in the solutions</li>
+<li><a href="../array-logic-data-driven-conditionals/#problem-set">in problem set N</a> (finding replacing)</li>
+<li>proper treatment of scalar functions</li>
+<li>put back info about the language bar and finding out what unfamiliar primitives do</li>
+<li>Mean <code>{+⌿⍵÷≢⍵}</code> vs <code>{(+⌿⍵)÷≢⍵}</code></li>
+<li>find-replace-vals AnyVowels use Any idiom <code>∨/</code></li>
+<li>The idiom for joining a nested list into a simple list is <code>⊃,/</code></li>
+<li>outer product<ul>
+<li>identity matrix</li>
+<li>countful membership</li>
+</ul>
+</li>
+<li>shape, reshape<ul>
+<li>look-and-say</li>
+</ul>
+</li>
+<li>take, drop</li>
+<li>replicate/compress</li>
+</ul>
+<p>Perhaps many more of the functions should be introduced well before the rank operator.</p>
+<h2 id="notes">NOTES</h2>
+<p>Bind essentially fills one of the “slots” of a dyadic function with an array value. 2⍴3 4 5 gives 3 4. The ⍵ is reshaped by the ⍺. If we fill the ⍵ slot, then we get a monadic function where the only argument must take the place of the ⍺ slot.</p>
+<p>⍴∘3 4 5  ⍝ A monadic function which reshapes 3 4 5 according to ⍵
+      (⍴∘3 4 5)2
+3 4
+      (⍴∘3 4 5)5
+3 4 5 3 4
+      (⍴∘3 4 5)¨2 5
+┌───┬─────────┐
+│3 4│3 4 5 3 4│
+└───┴─────────┘
+Reshape (3 4 5) using each of 2 and 5</p>
+<hr />
+<ol>
+<li>A company owns 5 stores which each sell the same 3 items.</li>
+</ol>
+<p>The quantity sold of each product in each store over a 7-day week are given in the array <code>qty</code>:</p>
+<pre class="highlight"><code class="language-APL">⎕RL←42 ⋄ qty←¯1+?5 3 7⍴10</code></pre>
+<p>The prices of the three products are £4.99, £24.99 and £99.99.</p>
+<pre class="highlight"><code class="language-APL">price ← .99 + 4 24 99</code></pre>
+<p>The total costs each day to run each store are given in the matrix <code>cost</code>:</p>
+<pre class="highlight"><code class="language-APL">⎕RL←42 ⋄ costs ← 94+?5 7⍴11</code></pre>
+<p>Each store has its own weekly profit target:</p>
+<pre class="highlight"><code class="language-APL">target ← 3000 1250 800 6000 3200</code></pre>
+<ul>
+<li>
+<p>what is the price of each item?
+£4.99 £24.99 £99.99</p>
+</li>
+<li>
+<p>which day had the most?</p>
+</li>
+<li>which stores made at least their target profit?</li>
+</ul>
+<p>target←400</p>
+<hr />
+<ol>
+<li>The game naughts and cross, also known as tic-tac-toe, is played on a 3 by 3 grid. Two players take turns placing their tokens on the grid until one player has made a complete line either horizontally, vertically or diagonally which consists of just that player's tokens.</li>
+</ol>
+<p>We can represent a game using a character matrix. </p>
+<ol>
+<li></li>
+</ol>
+<p>Now, instead of several 2-dimensional games, we will use a 3-dimensional array to represent a single 3-dimensional game.</p>
+<hr />
+<ol>
+<li>
+<p>These are the heights of some students in 3 classes. Students have numeric identifiers <code>id</code>.
+    <pre class="highlight"><code class="language-APL">student ← 10 7⍴'Kane   Jonah  JessicaPadma  Katie  CharlieAmil   David  Zara   Filipa '
+class ← 'CBACCCBBAB'
+height ← 167 177 171 176 178 164 177 177 173 160</code></pre></p>
+<p>Use APL to:</p>
+<ol>
+<li>Find the name of the tallest student</li>
+<li>Find the class which class has the tallest average height</li>
+<li>Find the class with the narrowest range of heights</li>
+</ol>
+</li>
+</ol>
+<h2 id="making-scalars">Making scalars</h2>
+<ol>
+<li>Turn the 1-element vector <code>v</code> into a scalar.</li>
+<li>Write an expression using <code>⍴</code> which returns an empty numeric vector.</li>
+<li>
+<p>Write an expression using <code>⍳</code> which returns an empty numeric vector.</p>
+<details class="example" open="open">
+<summary>Answer</summary>
+<p><ol type="a">
+<li>
+The shape of a scalar is an empty numeric vector. We can therefore use an empty numeric vector as the left argument to the reshape function:
+<pre class="highlight"><code class="language-APL">⍬⍴v</code></pre>
+</li>
+<li>
+The shape of any scalar is an empty numeric vector.
+<pre class="highlight"><code class="language-APL">      ⍴0</code></pre>
+<pre class="highlight"><code> </code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍴35</code></pre>
+<pre class="highlight"><code> </code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍴'Q'</code></pre>
+<pre class="highlight"><code> </code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍬≡⍴42</code></pre>
+<pre class="highlight"><code>1</code></pre>
+</li>
+<li>
+If we can generate a length <code>n</code> vector with <code>⍳n</code>, what happens when <code>n=0</code>?</p>
+<p><pre class="highlight"><code class="language-APL">      ⍳0</code></pre>
+<pre class="highlight"><code> </code></pre>
+</li>
+</ol></p>
+</details>
+</li>
+</ol>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://dyalog.com" target="_blank" rel="noopener" title="dyalog.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 416 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M0 32v119.2h64V96h107.2C284.6 96 352 176.2 352 255.9 352 332 293.4 416 171.2 416H0v64h171.2C331.9 480 416 367.3 416 255.9c0-58.7-22.1-113.4-62.3-154.3C308.9 56 245.7 32 171.2 32H0z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://mastodon.social/@dyalog" target="_blank" rel="noopener" title="mastodon.social" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 15.5a.5.5 0 0 1-.5.5.5.5 0 0 1-.5-.5v-7c0-1.93-2.07-3.5-4-3.5H6a4 4 0 0 0-4 4v10h4v-4h5v4h4v-4.5a.5.5 0 0 1 .5-.5.5.5 0 0 1 .5.5V16a3 3 0 0 0 3 3 3 3 0 0 0 3-3v-2h-2.5v1.5Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/dyalogapl" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant"], "search": "../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ba449ae6.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
