@@ -235,9 +235,9 @@ converted (⎕IO=1)
       ∧
 ```
 
-Recall [the expression for an empty JSON object](../Shape Reshape/#the-shape-of-a-scalar).
+Recall [the expression for an empty JSON object](../multidimensional-and-nested-arrays/#the-shape-of-a-scalar).
 
-Using `⎕JSON`, we can also [display error information in a human-readable format](../Errors/#pass-it-on).
+Using `⎕JSON`, we can also [display error information in a human-readable format](../error-handling-and-debugging/#pass-it-on).
 
 *[JSON]: JavaScript Object Notation
 
@@ -258,7 +258,7 @@ Generally the `⎕N...` family of system functions are for reading and writing *
 ### ⎕N...
 This is a quick summary. For more details see [the Native Files cheat sheet](https://docs.dyalog.com/latest/CheatSheet%20-%20Native%20Files.pdf) and [system functions and variables A-Z](https://help.dyalog.com/latest/index.htm#Language/System%20Functions/Summary%20Tables/System%20Functions%20and%20Variables%20ColWise.htm) in the online documentation.
 
-In the chapter on selecting from arrays there was [an example of reading a text file](../Selecting-from-arrays/#word-problems) using `⎕NGET`. Before Dyalog version 15.0, reading text files required a couple of extra steps. Some `⎕N...` native file functions are general and can be used to read and write any type of file. As a simple example, here we tie the file **words.txt**, read the data and store it in a variable, and finally untie the file.
+In the chapter on selecting from arrays there was [an example of reading a text file](../loops-and-recursion/#word-problems) using `⎕NGET`. Before Dyalog version 15.0, reading text files required a couple of extra steps. Some `⎕N...` native file functions are general and can be used to read and write any type of file. As a simple example, here we tie the file **words.txt**, read the data and store it in a variable, and finally untie the file.
 
 !!! Note
 	For multi-user systems, take care to set appropriate file access permissions when using `⎕NCREATE`, `⎕NTIE` and `⎕NLOCK`.
