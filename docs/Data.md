@@ -1,6 +1,8 @@
 # Data Input/Output
 Although we have [`⎕IO`](http://help.dyalog.com/latest/#Language/System Functions/io.htm), "IO" in APL can still refer to input/output.
 
+This page refers to APL tools for reading and writing data to and from files, databases, and the internet. If you are already familiar with Python, R or .NET then you can use one of the [external language bridges](./Interfaces.md) to bring data into APL from files via one of these languages. However, it can be simpler and faster in many cases to use one of the following tools.
+
 ## Hello, World!
 If you have seen any kind of computer programming before, you are probably aware of a famous program called ["Hello, World!"](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program).
 
@@ -97,7 +99,7 @@ My great string 'which has some quoted text'
 ```
 
 !!! Note
-	The user command `]Repr` can generate APL expressions which produce most arrays. In some sense, it is like an inverse to **execute** `⍎`. There is also a utility function `⎕SE.Dyalog.Utils.repObj` which can be used in code, but we do not recommend using it in applications; use the primitives to test the properties of arrays, as explained in [the sections on error handling](../Errors/#who-needs-to-know).
+	The user command `]Repr` can generate APL expressions which produce most arrays. In some sense, it is like an inverse to **execute** `⍎`. There is also a utility function `⎕SE.Dyalog.Utils.repObj` which can be used in code, but we do not recommend using it in applications; use the primitives to test the properties of arrays, as explained in [the sections on error handling](./error-handling-and-debugging.md#who-needs-to-know).
 
 ### Convenient text output
 Once upon a time, APL was considered an incredible, revolutionary tool for scientists, artists and business people alike to be able to get work done using computers. In a time before spreadsheet software was so ubiquitous, APL terminals offered a way to quickly and easily process data, produce reports and format them for printing.
@@ -124,9 +126,9 @@ Take a look at the [Chapter F of Mastering Dyalog APL](https://www.dyalog.com/up
 
 1.  
 	
-	In Dyalog version 18.0, `1200⌶` (*twelve hundred eye beam*) can convert date times into human readable formats according to some specification. For example:
+	In Dyalog version 18.0, the experimental [`1200⌶`](https://help.dyalog.com/latest/#Language/I%20Beam%20Functions/Format%20Datetime.htm) (*twelve hundred eye beam*) function can convert date times into human readable formats according to some specification. For example:
 	
-	<pre><code class="language-APL">      'Dddd Mmmm Doo YYYY'(1200⌶)1⎕dt⊂3↑⎕ts
+	<pre><code class="language-APL">      'Dddd Mmmm Doo YYYY'(1200⌶)1⎕DT⊂3↑⎕TS
 	┌──────────────────────────┐
 	│Wednesday August 12th 2020│
 	└──────────────────────────┘</code></pre>
@@ -143,25 +145,93 @@ Take a look at the [Chapter F of Mastering Dyalog APL](https://www.dyalog.com/up
 	│Wednesday August 12th 2020│
 	└──────────────────────────┘</code></pre>
 
-## Native Files
+## Importing code and data while developing
+The experimental `]Get` user command can be used in the interactive IDE to obtain code and data from the internet or local file system in various formats. For example:
+
+- APL code from files, folders and online repositories like GitHub
+- Workspaces and text source shipped with the interpreter, for example dfns and HttpCommand
+- Text data including plain text, CSV, XML and JSON
+
+`]Get` is a development tool intended as a one-stop utility for quickly bringing resources into the workspace while programming. Do not use it at run time, as exact results can vary. Instead, use precisely documented features like [`⎕JSON`](#json), [`⎕CSV`](#csv), [`⎕XML`](#xml), and [`⎕FIX`](./Code.md#fix) in combination with loading tools like [`⎕NGET`](#text-files), [`HttpCommand`](#downloading-data-from-the-internet), [`⎕SE.Link.Import`](./Code.md#link), etc.
+
+Enter `]Get -?` into the interactive session to see more information.
+
+## Downloading data from the internet
+[:fontawesome-brands-dyalog: HttpCommand User Guide](https://dyalog.github.io/HttpCommand/)
+
+**HttpCommand** is a utility for making requests to interact with web services. The HttpCommand class is built on top of the [**Conga**](https://docs.dyalog.com/latest/Conga%20User%20Guide.pdf) framework for TCP/IP communications.
+
+Load HttpCommand into the active workspace.
+
+```APL
+      ]Get HttpCommand
+#.HttpCommand
+```
+
+Make an HTTP GET request to receive plain text data.
+
+```APL
+      (HttpCommand.Get 'https://catfact.ninja/fact').Data
+{"fact":"Cats have about 130,000 hairs per square inch (20,155 hairs per square centimeter).","length":83}
+```
+
+The GetJSON method automatically converts JSON payloads to APL namespaces. Remember to specify the HTTP method (`'GET'` in the following example).
+
+```APL
+      (HttpCommand.GetJSON 'GET' 'https://catfact.ninja/fact').Data.fact
+There are approximately 60,000 hairs per square inch on the back of a cat and about 120,000 per square inch on its underside.
+```
+
+The result of a call to an HttpCommand method is a namespace including information about the request and its response.
+
+```APL
+      r←HttpCommand.Get 'https://catfact.ninja/fact'
+      r.(HttpStatus HttpMessage)
+┌───┬──┐
+│200│OK│
+└───┴──┘
+```
+
+Using `HttpCommand` with [`⎕FIX`](../Code/#fix) is a way to download APL code from the internet.
+
+## Native files
 The term "Native Files" refers to any type of file on a hard disk. These can be text or media files, or even executable files. Usually we are interested in various kinds of text files.
 
+### Text files
+[:material-web: Read Text File `⎕NGET` documentation](https://help.dyalog.com/latest/#Language/System%20Functions/nget.htm)  
+[:material-web: Write Text File `⎕NPUT` documentation](https://help.dyalog.com/latest/#Language/System%20Functions/nput.htm)
+
+Generally, the [`⎕N...`](#binary-files-and-other-arbitrary-file-types) family of system functions are for reading and writing *native files* as described in the documentation. `⎕NGET` and `⎕NPUT` are useful for reading and writing text files without having to tie and untie them.
+
+```APL
+(⊂words)⎕NPUT'data/words.txt'                      ⍝ Write words to a unicode text file
+(content encoding newline)←⎕NGET'data/words.txt'   ⍝ Read words from a unicode text file
+words←⊃⎕NGET'data/words.txt' 1                     ⍝ Split words on each new line 
+```
+
 ### ⎕CSV
-Comma separated values are a very common and convenient . While we encourage you to [read the documentation](https://help.dyalog.com/latest/#Language/System Functions/csv.htm) for a full description, here is an overview of features of `⎕CSV`:
+[:material-web: Comma Separated Values documentation](https://help.dyalog.com/latest/#Language/System%20Functions/csv.htm)  
+[:material-video: Parsing content from text files using `⎕CSV`](https://www.youtube.com/watch?v=AHoiROI15BA)
+
+The Comma Separator Values system function `⎕CSV` can read tabular data from .csv files as APL matrices. Here are some features of `⎕CSV`: 
 
 - Read data from and write data to files directly  
 	```APL
-	data ← ⎕CSV '/path/to/file.csv'
+	data ← ⎕CSV '/path/to/file.csv'   ⍝ Read from file.csv
+	data ⎕CSV '/path/to/file.csv'     ⍝ Write to file.csv
 	```
 - Separate the header (first row) from the rest of the data  
 	```APL
 	(data header) ← ⎕CSV '/path/to/file.csv' ⍬ ⍬ 1
 	```
-- Treat specific columns of input as numeric or text, depending on the options provided.  
-	The `4` here indicates to convert numeric values if possible, else keep the value as text.
+- Import specific columns as numbers or characters, depending on the options provided.  
+	
 	```APL
     numeric_if_possible ← ⎕CSV '/path/to/file.csv' ⍬ 4
 	```
+
+	The `4` in this example indicates to convert numeric values if possible, else keep the value as text.
+
 - Use a separator other than commas, using the "Separator" variant option, for example using tabs (`⎕UCS 9`) for Tab Separated Values (.tsv).  
 	```APL
 	tsv ← ⎕CSV⍠'Separator' (⎕UCS 9)⊢'/path/to/file.csv'
@@ -205,15 +275,47 @@ Comma separated values are a very common and convenient . While we encourage you
 *[CSV]: Comma Separated Values
 
 ### ⎕JSON
-JSON is not only a convenient way to represent nested data structures, but also a convenient data representation for the modern web since it is natively handled by JavaScript. `⎕JSON` converts between APL arrays, including namespaces and text vector representations of JSON.
+[:material-web: JSON Convert `⎕JSON` documentation](https://help.dyalog.com/latest/#Language/System%20Functions/json.htm)  
+[:material-video: `⎕JSON` Table Support](https://dyalogprod.gos.dyalog.com/video-library/watch/?v=UHJHqCdUs8w)
 
-```APL
-      'ns'⎕NS⍬
-      ns.var←1 2 3
-      ns.char←'abc'
-      ⎕JSON ns
-{"char":"abc","var":[1,2,3]}
-```
+JavaScript Object Notation (JSON) can be translated to and from APL.
+
+- Lists can be represented as APL vectors
+
+	```APL
+	      1⎕JSON (1 2 3)'ABCD'
+	[[1,2,3],"ABCD"]
+	```
+
+- Objects can be represented as APL namespaces. 
+
+	```APL
+	      0⎕JSON '{"name":"David", "age": 42}'
+	#.[JSON object]
+	```
+
+- Both can be represented as a matrix of depth, name, value and type columns somewhat similar to that used by [`⎕XML`](#xml). 
+
+	```APL
+	      0 (⎕JSON ⎕OPT'Format' 'M')'[{"name":"David", "age": 42}, {"name": "Sandra", "age": 42}]'
+	┌─┬────┬──────┬─┐
+	│0│    │      │2│
+	├─┼────┼──────┼─┤
+	│1│    │      │1│
+	├─┼────┼──────┼─┤
+	│2│name│David │4│
+	├─┼────┼──────┼─┤
+	│2│age │42    │3│
+	├─┼────┼──────┼─┤
+	│1│    │      │1│
+	├─┼────┼──────┼─┤
+	│2│name│Sandra│4│
+	├─┼────┼──────┼─┤
+	│2│age │42    │3│
+	└─┴────┴──────┴─┘
+	```
+
+JSON is not only a convenient way to represent nested data structures, but also a convenient data representation for the modern web since it is natively handled by JavaScript. 
 
 A JSON object in Dyalog uses dot-syntax to access members. Some JSON object keys are invalid APL names, so Dyalog works around this using special characters:
 ```APL
@@ -242,21 +344,28 @@ Using `⎕JSON`, we can also [display error information in a human-readable form
 *[JSON]: JavaScript Object Notation
 
 ### ⎕XML
-XML is a format that has fallen out of favour in recent years, but is still useful to be able to import and export it easily when you need to.
+[:material-web: XML Convert `⎕XML` documentation](https://help.dyalog.com/latest/#Language/System%20Functions/xml.htm)
+
+`⎕XML` converts between XML character vectors and a nested matrices of node depth, tag name, value, attribute key/value pairs and markup description columns.
+
+```APL
+      ⎕XML'<name born="1920">Ken</name><name born="1925">Jean</name>'
+┌─┬────┬────┬───────────┬─┐
+│0│name│Ken │┌────┬────┐│5│
+│ │    │    ││born│1920││ │
+│ │    │    │└────┴────┘│ │
+├─┼────┼────┼───────────┼─┤
+│0│name│Jean│┌────┬────┐│5│
+│ │    │    ││born│1925││ │
+│ │    │    │└────┴────┘│ │
+└─┴────┴────┴───────────┴─┘
+```
 
 *[XML]: Extensible Markup Language
 
-### Text Files
-Generally the `⎕N...` family of system functions are for reading and writing *native files* as described in the documentation. `⎕NGET` and `⎕NPUT` are useful for reading and writing text files without having to tie and untie them.
-
-```APL
-      (⊂words)⎕NPUT'data/words.txt'                      ⍝ Write words to a unicode text file
-      (content encoding newline)←⎕NGET'data/words.txt'   ⍝ Read words from a unicode text file
-      words←(⎕UCS newline)((~∊⍨)⊆⊢)content               ⍝ Split words on each new line 
-```
-
-### ⎕N...
-This is a quick summary. For more details see [the Native Files cheat sheet](https://docs.dyalog.com/latest/CheatSheet%20-%20Native%20Files.pdf) and [system functions and variables A-Z](https://help.dyalog.com/latest/index.htm#Language/System%20Functions/Summary%20Tables/System%20Functions%20and%20Variables%20ColWise.htm) in the online documentation.
+### Binary files and other arbitrary file types
+[:fontawesome-solid-file-pdf: Native Files Cheat Sheet](https://docs.dyalog.com/latest/CheatSheet%20-%20Native%20Files.pdf)  
+[:material-web: System Functions Categorised](https://help.dyalog.com/latest/#Language/System%20Functions/Summary%20Tables/System%20Functions%20Categorised.htm)
 
 In the chapter on selecting from arrays there was [an example of reading a text file](../loops-and-recursion/#word-problems) using `⎕NGET`. Before Dyalog version 15.0, reading text files required a couple of extra steps. Some `⎕N...` native file functions are general and can be used to read and write any type of file. As a simple example, here we tie the file **words.txt**, read the data and store it in a variable, and finally untie the file.
 
@@ -273,12 +382,21 @@ In the chapter on selecting from arrays there was [an example of reading a text 
 ```
 
 ### ⎕MAP
-The memory mapping function `⎕MAP` associates a file on disk with an APL array in the workspace. This is useful if you are working with data that cannot fit inside the available workspace memory. One approach might be to read the data in chunks and process one chunk at a time (for example, see the "Records" variant option for `⎕CSV`). Another approach is to use `⎕MAP`.
+[:material-web: Map File `⎕MAP` documentation](https://help.dyalog.com/latest/index.htm#Language/System%20Functions/map.htm)
 
-## Component files
+The memory mapping function `⎕MAP` allows you to treat a file on disk as if it were a variable in the workspace. This is useful if you are working with data that cannot fit inside the available workspace memory. One approach might be to read the data in chunks and process one chunk at a time (for example, see the "Records" variant option for [`⎕CSV`](#csv)). Another approach is to use `⎕MAP`.
+
+```APL
+text ← 80 ¯1 ⎕MAP '/path/to/file.txt'
+```
+
+You must specify the type according to the [Data Representation `⎕DR`](http://help.dyalog.com/latest/#Language/System%20Functions/Data%20Representation%20Monadic.htm) of the data to be read.
+
+## APL Component files
+[:fontawesome-solid-file-pdf: Chapter N of Mastering Dyalog APL](https://www.dyalog.com/uploads/documents/MasteringDyalogAPL.pdf#page=557)  
+[:material-web: Component File documentation](https://help.dyalog.com/latest/#Language/APL%20Component%20Files/Component%20Files.htm)
+
 If it is only APL systems that need to store data, the most convenient and efficient way to store that data is in APL **component files**.
-
-Here we will briefly look at the basic usage of component files. A full treatment of component files is provided in [Chapter N of Mastering Dyalog APL](https://www.dyalog.com/uploads/documents/MasteringDyalogAPL.pdf#page=557) and more information can be found in the [component file documentation](http://help.dyalog.com/latest/#Language/APL Component Files/Component Files.htm).
 
 System functions that deal with component files begin `⎕F...`.
 
@@ -288,23 +406,23 @@ In Dyalog, component files have the extension **.dcf** (Dyalog Component File) a
 A component file may be exclusively tied (`⎕FTIE`) or have a shared tie (`⎕FSTIE`). With an exclusive tie, no other process may access the file.
 
 ```APL
-      tn←'cfile'⎕FCREATE 0   ⍝ The file is exclusively tied
-      ⎕FUNTIE tn             ⍝ The file is untied, it can now be used by other applications and processes
+tn←'cfile'⎕FCREATE 0   ⍝ The file is exclusively tied
+⎕FUNTIE tn             ⍝ The file is untied, it can now be used by other applications and processes
 ```
 
 The next time we want to use this file, we can use `⎕FTIE` instead of `⎕FCREATE`. The right argument to these functions specifies a tie number (which can be different each time the file is tied), but with a right argument of `0` the next available tie number is used (component file tie numbers start at 1).
 
 ```APL
-      tn←'cfile'⎕FTIE 0   ⍝ The file on disk is cfile.dcf, but this extension is assumed if not specified 
+tn←'cfile'⎕FTIE 0   ⍝ The file on disk is cfile.dcf, but this extension is assumed if not specified 
 ```
 
 The structure of a component file is analogous to a nested vector of arrays. We add new values by appending them to the end of a file.
 
 ```APL
-      (3 3⍴⍳9)⎕FAPPEND tn
-      (↑'Dave' 'Sam' 'Ellie' 'Saif')⎕FAPPEND tn
-      nested←2 2⍴'this' 0 'that' (1 2 3)
-      nested ⎕FAPPEND tn
+(3 3⍴⍳9)⎕FAPPEND tn
+(↑'Dave' 'Sam' 'Ellie' 'Saif')⎕FAPPEND tn
+nested←2 2⍴'this' 0 'that' (1 2 3)
+nested ⎕FAPPEND tn
 ```
 
 Each array stored in a component file (a *component*) is referred to by its index in the file (its *component number*), starting from 1 (not affected by `⎕IO`).
@@ -366,19 +484,19 @@ If you are working on a system through which multiple users need to access the s
 
 Multi-user access can mean manual access by actual human users, or automated access by separate computers or processes.
 
-## Downloading data from the internet
-The **HttpCommand** class is built on top of the [**Conga**](https://docs.dyalog.com/latest/Conga%20User%20Guide.pdf) framework for TCP/IP communications. At the most basic level, it can be used to perform HTTP requests to retrieve data from servers. 
+## SQL Databases
+[:fontawesome-solid-file-pdf: SQL Interface Guide](https://docs.dyalog.com/latest/SQL%20Interface%20Guide.pdf)
+
+**SQAPL** ships with Dyalog and can be used out-of-the-box provided that a database is installed and a corresponding ODBC data source has been set up. 
 
 ```APL
-      ]Get HttpCommand
-#.HttpCommand
-      ⍴(#.HttpCommand.Get 'https://google.com').Data
-14107
+'SQA'⎕CY'sqapl'
+SQA.Connect cid odbc_datasource_name sql_password sql_user
+SQA.Do cid 'USE my_database'
+SQA.Do cid 'SELECT * FROM my_table'
 ```
 
-Using `HttpCommand` with [`⎕FIX`](../Code/#fix) is a way to download APL code from the internet.
-
-For more information, see [the online documentation for HttpCommand](https://dyalog.github.io/HttpCommand). Alternatively, there is documentation within the comments of the code for the HttpCommand class; simply use `)ed HttpCommand` or press <kbd>Shift+Enter</kbd> with the text cursor on the name in the session.
+Some freely available ODBC drivers allow you to connect to databases and are sufficient for most use cases, such as the [MySQL ODBC Connector](https://dev.mysql.com/downloads/connector/odbc/) or the [MariaDB ODBC Connector](https://mariadb.com/kb/en/mariadb-connector-odbc/). If you cannot find one which works for your particular hardware and software, Dyalog resells [Progress DataDirect ODBC drivers](http://www.datadirect.com/products/datadirect-connect/odbc-drivers), but these require a different version of SQAPL which is licensed separately. Contact Dyalog sales if you require the use of Progress DataDirect ODBC drivers.
 
 ## Problem set 13
 
