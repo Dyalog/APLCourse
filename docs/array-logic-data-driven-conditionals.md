@@ -5,17 +5,17 @@ APL has logical and comparison functions as in-built primitives. Much like the a
 
 <div class="center language-APL" markdown="span">
 <div class="displayBox" markdown="span">
-<a class="glyph" title="Less than">`<`</a>
-<a class="glyph" title="Less than or equal to">`≤`</a>
-<a class="glyph" title="Equals">`=`</a>
-<a class="glyph" title="Not equals">`≠`</a>
-<a class="glyph" title="Greater than or equal to">`≥`</a>
-<a class="glyph" title="Greater than">`>`</a>
-<a class="glyph" title="Logical AND">`∧`</a>
-<a class="glyph" title="Logical OR">`∨`</a>
-<a class="glyph" title="Logical NAND">`⍲`</a>
-<a class="glyph" title="Logical NOR">`⍱`</a>
-<a class="glyph" title="Logical NOT">`~`</a>
+[`<`](# "Less than"){ .glyph}
+[`≤`](# "Less than or equal to"){ .glyph}
+[`=`](# "Equals"){ .glyph}
+[`≠`](# "Not equals"){ .glyph}
+[`≥`](# "Greater than or equal to"){ .glyph}
+[`>`](# "Greater than"){ .glyph}
+[`∧`](# "Logical AND"){ .glyph}
+[`∨`](# "Logical OR"){ .glyph}
+[`⍲`](# "Logical NAND"){ .glyph}
+[`⍱`](# "Logical NOR"){ .glyph}
+[`~`](# "Logical NOT"){ .glyph}
 </div>
 </div>
 

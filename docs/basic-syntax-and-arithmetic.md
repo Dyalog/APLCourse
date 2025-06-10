@@ -54,15 +54,15 @@ Some symbols represent both a monadic and a dyadic function, but these are often
 
 <div class="center language-APL" markdown="span">
 <div class="displayBox" markdown="span">
-<a class="glyph" title="Plus">`+`</a>
-<a class="glyph" title="Minus/Negate">`-`</a>
-<a class="glyph" title="Times/Sign">`×`</a>
-<a class="glyph" title="Divide/Inverse">`÷`</a>
-<a class="glyph" title="Residue/Magnitude">`|`</a>
-<a class="glyph" title="Power">`*`</a>
-<a class="glyph" title="Logarithm">`⍟`</a>
-<a class="glyph" title="Max/Ceiling">`⌈`</a>
-<a class="glyph" title="Min/Floor">`⌊`</a>
+[`+`](# "Plus"){ .glyph}
+[`-`](# "Minus/Negate"){ .glyph}
+[`×`](# "Times/Sign"){ .glyph}
+[`÷`](# "Divide/Inverse"){ .glyph}
+[`|`](# "Residue/Magnitude"){ .glyph}
+[`*`](# "Power"){ .glyph}
+[`⍟`](# "Logarithm"){ .glyph}
+[`⌈`](# "Max/Ceiling"){ .glyph}
+[`⌊`](# "Min/Floor"){ .glyph}
 </div>
 </div>
 
@@ -83,9 +83,9 @@ Dyadic functions can map between a single value and an array of values.
 ```
 
 **:bulb: Try this**: Replace the functions in the previous two expressions with:
-<a class="glyph" title="Max">`⌈`</a>
-		<a class="glyph" title="Min">`⌊`</a>
-		<a class="glyph" title="Less than">`<`</a>
+[`⌈`](# "Max"){ .glyph}
+[`⌊`](# "Min"){ .glyph}
+[`<`](# "Less than"){ .glyph}
 
 While experimenting, you may cause a `LENGTH ERROR`:
 

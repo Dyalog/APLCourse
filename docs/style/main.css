@@ -13,6 +13,7 @@ code {
 .glyph {
 	font-size: 1.5em;
 	cursor: help;
+	padding: 0 3px;
 }
 .md-logo > img{
 	width: 7rem!important;
@@ -39,6 +40,9 @@ code {
 	border: solid 2px var(--md-primary-fg-color); 
 	padding: 0.3em 1em;
 	border-radius: 0.3em;
+	display: flex;
+	justify-content: space-evenly;
+	width: 80%;
 }
 
 /* Code copy only input (see CONTRIBUTING.md) */
