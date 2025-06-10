@@ -384,36 +384,13 @@ In the chapter on selecting from arrays there was [an example of reading a text 
 ### ⎕MAP
 [:material-web: Map File `⎕MAP` documentation](https://help.dyalog.com/latest/index.htm#Language/System%20Functions/map.htm)
 
-The memory mapping function `⎕MAP` associates a file on disk with an APL array in the workspace. This is useful if you are working with data that cannot fit inside the available workspace memory. One approach might be to read the data in chunks and process one chunk at a time (for example, see the "Records" variant option for `⎕CSV`). Another approach is to use `⎕MAP`.
-
-⎕MAP allows you to treat a file on disk as if it were a variable in the workspace. This is useful if you are working with data that cannot fit inside the available workspace memory. One approach might be to read the data in chunks and process one chunk at a time (for example, see the “Records” variant option for ⎕CSV). Another approach is to use ⎕MAP. 
+The memory mapping function `⎕MAP` allows you to treat a file on disk as if it were a variable in the workspace. This is useful if you are working with data that cannot fit inside the available workspace memory. One approach might be to read the data in chunks and process one chunk at a time (for example, see the "Records" variant option for [`⎕CSV`](#csv)). Another approach is to use `⎕MAP`.
 
 ```APL
 text ← 80 ¯1 ⎕MAP '/path/to/file.txt'
 ```
 
 You must specify the type according to the [Data Representation `⎕DR`](http://help.dyalog.com/latest/#Language/System%20Functions/Data%20Representation%20Monadic.htm) of the data to be read.
-
-## Other stuff?
-
-### Dates and Times
-[:material-web: Date-time `⎕DT` documentation](https://help.dyalog.com/latest/#Language/System%20Functions/dt.htm)  
-[:Format Date-time `1200⌶` documentation](https://help.dyalog.com/latest/#Language/I%20Beam%20Functions/Format%20Datetime.htm)
-
-Convert between every computer datetime format (that we could think of) with the `⎕DT` system function. 
-
-```APL
-      now ← 1613552859          ⍝ Unix Timestamp
-                                ⍝ 1200⌶ is experimental
-      'Dddd Doo Mmmm YYYY hh:mm' (1200⌶) 20 1 ⎕DT now
-┌──────────────────────────────────┐
-│Wednesday 17th February 2021 09:07│
-└──────────────────────────────────┘
-```
-
-The experimental `1200⌶` function converts between numeric date numbers and human-readable datetimes. 
-
-### Binary files and other arbitrary file types
 
 ## APL Component files
 [:fontawesome-solid-file-pdf: Chapter N of Mastering Dyalog APL](https://www.dyalog.com/uploads/documents/MasteringDyalogAPL.pdf#page=557)  
