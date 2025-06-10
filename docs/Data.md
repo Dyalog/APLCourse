@@ -126,7 +126,7 @@ Take a look at the [Chapter F of Mastering Dyalog APL](https://www.dyalog.com/up
 
 1.  
 	
-	In Dyalog version 18.0, `1200⌶` (*twelve hundred eye beam*) can convert date times into human readable formats according to some specification. For example:
+	In Dyalog version 18.0, the experimental [`1200⌶`](https://help.dyalog.com/latest/#Language/I%20Beam%20Functions/Format%20Datetime.htm) (*twelve hundred eye beam*) function can convert date times into human readable formats according to some specification. For example:
 	
 	<pre><code class="language-APL">      'Dddd Mmmm Doo YYYY'(1200⌶)1⎕dt⊂3↑⎕ts
 	┌──────────────────────────┐
