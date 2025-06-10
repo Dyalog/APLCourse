@@ -15,11 +15,9 @@ Examples of usage and links to documentation are available on [github.com/Dyalog
 Start instances of Python from Dyalog, and start instances of Dyalog from Python. Leverage the convenience of Python's vast collection of libraries and combine it with the expressive power of APL. See [github.com/Dyalog/pynapl](https://github.com/Dyalog/pynapl) for more information.
 
 ## RSConnect and RConnect
-R is a very popular language with a large collection of statistical libraries. Two R interfaces exist for Dyalog:
+R is a very popular language with a large collection of statistical libraries. Kimmo Linna provides an open source interface to R using Rserve.
 
-[RSconnect R interface for Dyalog](https://github.com/kimmolinna/rsconnect) using Rserve
-
-[RConnect R interface for Dyalog](https://docs.dyalog.com/latest/R%20Interface%20Guide.pdf) using rscproxy
+[RSconnect R interface for Dyalog](https://github.com/kimmolinna/rsconnect).
 
 ## .NET
 Microsoft's .NET Framework contains a plethora of useful libraries for business applications. 
