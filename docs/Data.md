@@ -201,7 +201,7 @@ The term "Native Files" refers to any type of file on a hard disk. These can be 
 [:material-web: Read Text File `⎕NGET` documentation](https://help.dyalog.com/latest/#Language/System%20Functions/nget.htm)  
 [:material-web: Write Text File `⎕NPUT` documentation](https://help.dyalog.com/latest/#Language/System%20Functions/nput.htm)
 
-Generally, the [`⎕N...`](#n) family of system functions are for reading and writing *native files* as described in the documentation. `⎕NGET` and `⎕NPUT` are useful for reading and writing text files without having to tie and untie them.
+Generally, the [`⎕N...`](#binary-files-and-other-arbitrary-file-types) family of system functions are for reading and writing *native files* as described in the documentation. `⎕NGET` and `⎕NPUT` are useful for reading and writing text files without having to tie and untie them.
 
 ```APL
 (⊂words)⎕NPUT'data/words.txt'                      ⍝ Write words to a unicode text file
