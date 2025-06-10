@@ -2,7 +2,7 @@
 Looping is an incredibly basic and fundamental programming construct which you will notice we have barely used at all so far. Or at least, we haven't used many explicit loops.
 
 !!! Note "Terminology"
-	The type of looping over items in a collection as provided by *for* and *while* loops is sometimes referred to as **scalar looping**. Other types of looping in APL might, for example, process each row of a matrix in turn but process whole rows at a time. In contrast, [each `¨`](/Nested/#each-a-primitive-for-explicit-loops) is a mechanism for looping over every item of an array (the [scalars](/Array model/#cells-and-axes)); its operand function can see arrays nested within the scalars.
+	The type of looping over items in a collection as provided by *for* and *while* loops is sometimes referred to as **scalar looping**. Other types of looping in APL might, for example, process each row of a matrix in turn but process whole rows at a time. In contrast, [each `¨`](./multidimensional-and-nested-arrays.md#arrays-have-rank-and-depth) is a mechanism for looping over every item of an array (the [scalars](./multidimensional-and-nested-arrays.md#arrays-are-made-of-scalars)); its operand function can see arrays nested within the scalars.
 
 ## An introduction to an introduction to an introduction to an introduction to an int...
 
