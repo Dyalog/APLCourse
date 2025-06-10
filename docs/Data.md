@@ -429,23 +429,23 @@ In Dyalog, component files have the extension **.dcf** (Dyalog Component File) a
 A component file may be exclusively tied (`⎕FTIE`) or have a shared tie (`⎕FSTIE`). With an exclusive tie, no other process may access the file.
 
 ```APL
-      tn←'cfile'⎕FCREATE 0   ⍝ The file is exclusively tied
-      ⎕FUNTIE tn             ⍝ The file is untied, it can now be used by other applications and processes
+tn←'cfile'⎕FCREATE 0   ⍝ The file is exclusively tied
+⎕FUNTIE tn             ⍝ The file is untied, it can now be used by other applications and processes
 ```
 
 The next time we want to use this file, we can use `⎕FTIE` instead of `⎕FCREATE`. The right argument to these functions specifies a tie number (which can be different each time the file is tied), but with a right argument of `0` the next available tie number is used (component file tie numbers start at 1).
 
 ```APL
-      tn←'cfile'⎕FTIE 0   ⍝ The file on disk is cfile.dcf, but this extension is assumed if not specified 
+tn←'cfile'⎕FTIE 0   ⍝ The file on disk is cfile.dcf, but this extension is assumed if not specified 
 ```
 
 The structure of a component file is analogous to a nested vector of arrays. We add new values by appending them to the end of a file.
 
 ```APL
-      (3 3⍴⍳9)⎕FAPPEND tn
-      (↑'Dave' 'Sam' 'Ellie' 'Saif')⎕FAPPEND tn
-      nested←2 2⍴'this' 0 'that' (1 2 3)
-      nested ⎕FAPPEND tn
+(3 3⍴⍳9)⎕FAPPEND tn
+(↑'Dave' 'Sam' 'Ellie' 'Saif')⎕FAPPEND tn
+nested←2 2⍴'this' 0 'that' (1 2 3)
+nested ⎕FAPPEND tn
 ```
 
 Each array stored in a component file (a *component*) is referred to by its index in the file (its *component number*), starting from 1 (not affected by `⎕IO`).
