@@ -27,6 +27,7 @@ theme:
   logo: 'img/dyalog-white.svg'
   features:
     - navigation.instant
+    - content.tooltips
 extra_css:
   - style/main.css
 extra:
