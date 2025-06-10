@@ -62,7 +62,7 @@ If a function right operand returns a boolean array when applied to `⍵` (e.g. 
 Generally, the left operand to `@` is a function applied to scalars in `⍵` which are specified by a right operand that is either an array of scalar (simple or enclosed vector) indices or a boolean array returned by a right operand function. An array left operand is shorthand for a [constant function](https://aplwiki.com/wiki/Constant) that returns the array.
 
 ```APL
-      {1↓(1∘(819⌶)@{¯1⌽' '=⍵})' ',⍵}'my excellent heading'
+      {1↓1∘⎕C@(¯1⌽' '∘=)' ',⍵}'my excellent heading'
 ```
 
 ## Strand Assignment
