@@ -1,0 +1,285 @@
+@font-face {
+    font-family: APL;
+    src: local("APL385 Unicode"), url("../fonts/APL385/apl385.ttf");
+}
+
+/* Custom colors */
+:root {
+    --md-primary-fg-color: #FF6A13;
+    --md-primary-fg-color--dark: #563336;
+    --md-default-bg-color: white;
+    --md-code-hl-number-color: #797979;
+    --dyalog-body-text-color: #232222;
+}
+
+body {
+  color: var(--dyalog-body-text-color);
+}
+
+.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 {
+  color: var(--dyalog-body-text-color);
+}
+
+.example {
+    font-variant-caps: all-small-caps;
+    font-size: 1em!important;
+    font-weight: 500!important;
+}
+
+.language-APL, .language-apl, .language-APL pre code, .language-apl pre code {
+    font-family: APL !important;
+    line-height: 1.2em !important;
+}
+
+code, .command, .Dyalog {
+    font-family: APL;
+}
+.md-typeset code { 
+    font-size: 0.9rem;
+    line-height: 1.2rem;
+    background: none!important;
+ }
+
+.md-preset pre {
+    background: none!important;
+}
+
+.md-logo>img {
+    width: 7rem !important;
+    height: 1.2rem !important;
+}
+
+@media screen and (max-width: 76.1875em) {
+    .md-logo>img {
+        width: 10rem !important;
+        height: 1.8rem !important;
+    }
+}
+
+/* Reduce vertical table spacing, and put in a faint cell border */
+table {
+    border: none;
+    border-collapse: collapse;
+    font-size: 1em;
+}
+caption {
+    text-wrap: none;
+}
+
+th, td {
+    border: 1px solid #eee;
+    padding: 4px !important;
+    text-align: left;
+}
+
+/* Style the heading container for the Language Reference */
+.heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FF6A13;
+    padding: 5px 10px; /* Adjusted padding for less vertical whitespace */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 0.9em;
+}
+
+/* Style the left-aligned name */
+.name {
+    flex-grow: 1;
+    /* Take up available space */
+    color: white;
+}
+
+/* Style the right-aligned command */
+.command {
+    text-align: right;
+    color: white;
+    font-family: APL;
+}
+
+/* List styles */
+.md-typeset li ul li {
+  list-style: circle;
+}
+.md-typeset li ul li ul li {
+  list-style: square;
+}
+
+/* Compress lists a bit vertcially */
+li {
+    margin-bottom: 0px !important; 
+}
+
+/* Code copy only input (see CONTRIBUTING.md) */
+pre+pre>button,
+pre+hr {
+    display: none !important;
+}
+
+pre>code {
+    padding-bottom: 1em !important;
+}
+
+hr+pre>button {
+    top: -0.2em !important;
+}
+
+pre+pre,
+hr+pre {
+    margin-top: -1.8em !important;
+}
+
+pre+pre>code,
+hr+pre>code {
+    padding-top: 0.2em !important;
+}
+
+/* Admonition styles */
+  /* Admonition icon SVGs */
+:root {
+    --md-admonition-icon--note: url('../images/admonitions/admonition_note-01_floating_gunmetal-2A3244_128.svg');
+    /* ↑ temporary generic note until notes have been replaced by specific note types below */
+    --md-admonition-icon--hint: url('../images/admonitions/admonition_hint-01_floating_peel-FFA300_128.svg');
+    --md-admonition-icon--info: url('../images/admonitions/admonition_information-01_midnight-003B5C_128.svg');
+    --md-admonition-icon--warning: url('../images/admonitions/admonition_warning-01_floating_rose-CA2E51_128.svg');
+    --md-admonition-icon--legacy: url('../images/admonitions/admonition_legacy-01_floating_grey-505050_128.svg');
+    --md-admonition-icon--linux: url('../images/admonitions/admonition_os-01_floating_dark-lavender-7370A9_128.svg');
+    --md-admonition-icon--unix: url('../images/admonitions/admonition_os-01_floating_dark-lavender-7370A9_128.svg');
+    --md-admonition-icon--macos: url('../images/admonitions/admonition_os-01_floating_dark-lavender-7370A9_128.svg');
+    --md-admonition-icon--windows: url('../images/admonitions/admonition_os-01_floating_dark-lavender-7370A9_128.svg');
+}
+  /* Colours */ 
+:root {
+    --md-admonition-color-note: #2A3244;
+    --md-admonition-color-hint: #FFA300;
+    --md-admonition-color-info: #003B5C;
+    --md-admonition-color-warning: #CA2E51;
+    --md-admonition-color-legacy: #505050;
+    --md-admonition-color-linux: #7370A9;
+    --md-admonition-color-unix: #7370A9;
+    --md-admonition-color-macos: #7370A9;
+    --md-admonition-color-windows: #7370A9;
+}
+
+  /* Generic */
+.md-typeset .admonition {
+	border-width: 0 0 0 4px;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: inherit;
+}
+.md-typeset .admonition .admonition-title:before {
+    mask-size: 180%;
+}
+.md-typeset .admonition .admonition-title {
+	background: none;
+}
+  /* NOTE */
+  .md-typeset .admonition.note .admonition-title::before {    
+    background-color: var(--md-admonition-color-note);
+    -webkit-mask-image: var(--md-admonition-icon--note);
+            mask-image: var(--md-admonition-icon--note);
+}
+.md-typeset .admonition.note .admonition-title {
+    color: var(--md-admonition-color-note);
+}
+.md-typeset .admonition.note {
+	border-color: var(--md-admonition-color-note);
+}
+  /* HINT */
+.md-typeset .admonition.hint .admonition-title::before {    
+    background-color: var(--md-admonition-color-hint);
+    -webkit-mask-image: var(--md-admonition-icon--hint);
+            mask-image: var(--md-admonition-icon--hint);
+}
+.md-typeset .admonition.hint .admonition-title {
+    color: var(--md-admonition-color-hint);
+}
+.md-typeset .admonition.hint {
+	border-color: var(--md-admonition-color-hint);
+}
+  /* INFO */
+  .md-typeset .admonition.info .admonition-title::before {    
+    background-color: var(--md-admonition-color-info);
+    -webkit-mask-image: var(--md-admonition-icon--info);
+            mask-image: var(--md-admonition-icon--info);
+}
+.md-typeset .admonition.info .admonition-title {
+    color: var(--md-admonition-color-info);
+}
+.md-typeset .admonition.info {
+	border-color: var(--md-admonition-color-info);
+}
+  /* WARNING */
+  .md-typeset .admonition.warning .admonition-title::before {    
+    background-color: var(--md-admonition-color-warning);
+    -webkit-mask-image: var(--md-admonition-icon--warning);
+            mask-image: var(--md-admonition-icon--warning);
+}
+.md-typeset .admonition.warning .admonition-title {
+    color: var(--md-admonition-color-warning);
+}
+.md-typeset .admonition.warning {
+	border-color: var(--md-admonition-color-warning);
+}
+  /* LEGACY */
+  .md-typeset .admonition.legacy .admonition-title::before {    
+    background-color: var(--md-admonition-color-legacy);
+    -webkit-mask-image: var(--md-admonition-icon--legacy);
+            mask-image: var(--md-admonition-icon--legacy);
+}
+.md-typeset .admonition.legacy .admonition-title {
+    color: var(--md-admonition-color-legacy);
+}
+.md-typeset .admonition.legacy {
+	border-color: var(--md-admonition-color-legacy);
+}
+  /* LINUX */
+  .md-typeset .admonition.linux .admonition-title::before {    
+    background-color: var(--md-admonition-color-linux);
+    -webkit-mask-image: var(--md-admonition-icon--linux);
+            mask-image: var(--md-admonition-icon--linux);
+}
+.md-typeset .admonition.linux .admonition-title {
+    color: var(--md-admonition-color-linux);
+}
+.md-typeset .admonition.linux {
+	border-color: var(--md-admonition-color-linux);
+}
+  /* UNIX */
+  .md-typeset .admonition.unix .admonition-title::before {    
+    background-color: var(--md-admonition-color-unix);
+    -webkit-mask-image: var(--md-admonition-icon--unix);
+            mask-image: var(--md-admonition-icon--unix);
+}
+.md-typeset .admonition.unix .admonition-title {
+    color: var(--md-admonition-color-unix);
+}
+.md-typeset .admonition.unix {
+	border-color: var(--md-admonition-color-unix);
+}
+  /* MACOS */
+  .md-typeset .admonition.macos .admonition-title::before {    
+    background-color: var(--md-admonition-color-macos);
+    -webkit-mask-image: var(--md-admonition-icon--macos);
+            mask-image: var(--md-admonition-icon--macos);
+}
+.md-typeset .admonition.macos .admonition-title {
+    color: var(--md-admonition-color-macos);
+}
+.md-typeset .admonition.macos {
+	border-color: var(--md-admonition-color-macos);
+}
+
+  /* WINDOWS */
+.md-typeset .admonition.windows .admonition-title::before {    
+    background-color: var(--md-admonition-color-windows);
+    -webkit-mask-image: var(--md-admonition-icon--windows);
+            mask-image: var(--md-admonition-icon--windows);
+}
+.md-typeset .admonition.windows .admonition-title {
+    color: var(--md-admonition-color-windows);
+}
+.md-typeset .admonition.windows {
+	border-color: var(--md-admonition-color-windows);
+}

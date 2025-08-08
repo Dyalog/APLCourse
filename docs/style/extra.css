@@ -1,0 +1,196 @@
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: local("Be Vietnam Pro Thin"), url("../fonts/BeVietnamPro/BeVietnamPro-Thin.ttf");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: local("Be Vietnam Pro Thin Italic"), url("../fonts/BeVietnamPro/BeVietnamPro-ThinItalic.ttf");
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: local("Be Vietnam Pro Extra Light"), url("../fonts/BeVietnamPro/BeVietnamPro-ExtraLight.ttf");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: local("Be Vietnam Pro Extra Light Italic"), url("../fonts/BeVietnamPro/BeVietnamPro-ExtraLightItalic.ttf");
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: local("Be Vietnam Pro Light"), url("../fonts/BeVietnamPro/BeVietnamPro-Light.ttf");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: local("Be Vietnam Pro Light Italic"), url("../fonts/BeVietnamPro/BeVietnamPro-LightItalic.ttf");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: local("Be Vietnam Pro"), url("../fonts/BeVietnamPro/BeVietnamPro-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: local("Be Vietnam Pro Italic"), url("../fonts/BeVietnamPro/BeVietnamPro-Italic.ttf");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: local("Be Vietnam Pro Medium"), url("../fonts/BeVietnamPro/BeVietnamPro-Medium.ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: local("Be Vietnam Pro Medium Italic"), url("../fonts/BeVietnamPro/BeVietnamPro-MediumItalic.ttf");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: local("Be Vietnam Pro Semi Bold"), url("../fonts/BeVietnamPro/BeVietnamPro-SemiBold.ttf");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: local("Be Vietnam Pro Semi Bold Italic"), url("../fonts/BeVietnamPro/BeVietnamPro-SemiBoldItalic.ttf");
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: local("Be Vietnam Pro Bold"), url("../fonts/BeVietnamPro/BeVietnamPro-Bold.ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: local("Be Vietnam Pro Bold Italic"), url("../fonts/BeVietnamPro/BeVietnamPro-BoldItalic.ttf");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: local("Be Vietnam Pro Extra Bold"), url("../fonts/BeVietnamPro/BeVietnamPro-ExtraBold.ttf");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: local("Be Vietnam Pro Extra Bold Italic"), url("../fonts/BeVietnamPro/BeVietnamPro-ExtraBoldItalic.ttf");
+  font-weight: 800;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: local("Be Vietnam Pro Black"), url("../fonts/BeVietnamPro/BeVietnamPro-Black.ttf");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: local("Be Vietnam Pro Black Italic"), url("../fonts/BeVietnamPro/BeVietnamPro-BlackItalic.ttf");
+  font-weight: 900;
+  font-style: italic;
+}
+
+:root {
+  --md-text-font: "Be Vietnam Pro"; 
+}
+
+.table-bordered {
+    border-collapse: collapse;
+    width: 85%; 
+    margin: auto;
+    /* font-size: .64rem; */
+}
+.table-bordered th,
+.table-bordered td {
+    border: 1px light gray;
+    padding: 5px;
+}
+.table-bordered th.no-border,
+.table-bordered td.no-border {
+    border: none;
+}
+.table-bordered th {
+    text-align: center;
+}
+.table-bordered td.rowspan,
+.table-bordered th.rowspan {
+    vertical-align: middle;
+}
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+}
+.flex-between span {
+    flex: 1;
+}
+.text-left {
+    text-align: left;
+}
+.text-right {
+    text-align: right;
+}
+
+.shaded {
+  background-color: rgb(220, 220, 220); /* Light grey background */
+}
+
+.md-typeset code {
+	word-break: normal !important;
+  overflow-wrap: break-word !important;
+}
+
+.md-content code {
+  padding: 0;
+}
+
+/* Reduce spacing before lists after paragraphs */
+.md-typeset p + ul, p + ol {
+  margin-top: -0.8em !important;
+}
+/* Reduce vertical spacing between nested list items */
+.md-typeset li ul, .md-typeset li ol {
+  margin-top: 0!important;
+  margin-bottom: 0!important;
+}
+
+kbd {
+  box-shadow: none!important;
+  border: solid 1px #CCCCCC;
+  vertical-align: unset!important;
+  font-family: inherit;
+  font-size: 80%;
+}

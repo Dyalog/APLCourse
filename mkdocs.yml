@@ -1,0 +1,30 @@
+site_name: APL Bootcamp Materials
+repo_url: https://github.com/rikedyp/APLBootcamp
+
+copyright: Copyright &copy; 2025 <strong><a href="https://dyalog.com" target="_blank" rel="noopener">Dyalog, LTD</a></strong>
+theme:
+  name: material
+  favicon: style/favicon-32.png
+  language: en
+  logo: styles/dyalog-logo_white.svg
+markdown_extensions:
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.superfences
+  - abbr
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - markdown_tables_extended
+  - toc:
+      title: On this page
+extra_css:
+  - style/main.css
+  - styles/extra.css
+extra_javascript:
+  - js/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
