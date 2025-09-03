@@ -579,13 +579,13 @@ APL
 	???Example "Answers"
 		<ol type="a">
 		<li>
-		With two *or-reductions*, we ask "are there any `1`s in each row?" Then, "are there any `1`s in any of the rows?"
+		Using what we've learned so far, a good way to compare all vowels with all characters in our argument `⍵` is with an outer product. Then, using two *or-reductions*, we ask "are there any `1`s in each row?" Then, "are there any `1`s in any of the rows?"
 		
 		```APL
 		AnyVowels ← {∨/∨/'aeiou'∘.=⍵}
 		```
 
-		Or we can ravel the contents of the array into a vector to perform one big or-reduction across all elements:
+		Or, we can ravel the contents of the array into a vector to perform one big or-reduction across all elements:
 
 		```APL
 		AnyVowels ← {∨/,'aeiou'∘.=⍵}
