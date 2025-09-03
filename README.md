@@ -14,7 +14,7 @@ If you need help typing APL glyphs (e.g. `×⌿⍳`) then see [the APL Wiki](htt
 This course assumes high-school / secondary level mathematics knowledge, and some familiarity with basic programming terminology (e.g. *function*, *variable*, *recursion*). It is not intended as a general introduction to programming, but more of a fast-track to getting up and running with modern APL.
 
 ## Feedback
-If you have any suggestions, critcisms or praise, please [create an issue :fontawesome-brands-github:](https://github.com/Dyalog/APLCourse/issues/new).
+If you have any suggestions, critcisms or praise, please [create an issue](https://github.com/Dyalog/APLCourse/issues/new).
 
 ## Technology
 This site is created using [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
