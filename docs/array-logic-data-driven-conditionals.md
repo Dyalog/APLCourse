@@ -619,14 +619,14 @@ APL
 		Or rows if the arguments to our outer product are swapped:
 
 		```APL
-		RemoveVowels ← {⍵/⍨~∨/'aeiou'∘.=⍵}
+		RemoveVowels ← {⍵/⍨~∨/⍵∘.='aeiou'}
 		```
 
 		Since we are compressing elements out of a vector, we can use either replicate `⍺/⍵` or replicate-first `⍺⌿⍵`. This is because a vector only has a single dimension, or axis, and that axis is both the first and the last.
 
 		```APL
-		RemoveVowels ← {⍵/⍨∨⌿'aeiou'∘.=⍵}
-		RemoveVowels ← {⍵⌿⍨∨⌿'aeiou'∘.=⍵}
+		RemoveVowels ← {⍵/⍨~∨⌿'aeiou'∘.=⍵}
+		RemoveVowels ← {⍵⌿⍨~∨⌿'aeiou'∘.=⍵}
 		```
 
 		</li>
