@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "mathjax": "^4.0.0"
+  },
+  "scripts": {
+    "postinstall": "run-script-os",
+    "postinstall:linux:macos": "mv node_modules/mathjax docs/javascripts/",
+    "postinstall:windows": "move node_modules\\mathjax docs\\javascripts\\"
+  },
+  "devDependencies": {
+    "run-script-os": "^1.1.6"
+  }
+}
