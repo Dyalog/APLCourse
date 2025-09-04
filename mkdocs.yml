@@ -18,7 +18,7 @@ markdown_extensions:
   - abbr
 extra_javascript:
   - javascripts/config.js
-  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+  - javascripts/mathjax/tex-mml-chtml.js
 theme:
   name: material
   favicon: 'img/favicon-32.png'
@@ -37,6 +37,8 @@ extra:
       link: https://mastodon.social/@dyalog
     - icon: fontawesome/brands/twitter 
       link: https://twitter.com/dyalogapl
+plugins:
+  - privacy
 nav:
   - About: index.md
   - basic-syntax-and-arithmetic.md
