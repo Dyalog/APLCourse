@@ -16,7 +16,7 @@ jobs:
       
       - name: Install dependencies
         uses: actions/setup-node@v5
-        run: npm install
+      - run: npm install
 
 
       - name: Deploy docs
