@@ -1,0 +1,1725 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A guided introduction to Dyalog APL">
+      
+      
+      
+        <link rel="canonical" href="https://dyalog.com/cells-and-axes/">
+      
+      
+        <link rel="prev" href="../multidimensional-and-nested-arrays/">
+      
+      
+        <link rel="next" href="../finding-and-replacing-values/">
+      
+      
+      <link rel="icon" href="../img/favicon-32.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>Cells and Axes - APL Course</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css.49ea35f2.css">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../style/main.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cells-and-axes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="APL Course" class="md-header__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APL Course
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cells and Axes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="APL Course" class="md-nav__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    APL Course
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basic-syntax-and-arithmetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic syntax
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dfns-and-assignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dfns and Assignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../array-logic-data-driven-conditionals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Array Logic and Data-driven Conditionals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multidimensional-and-nested-arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multidimensional and Nested Arrays
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Cells and Axes
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cells and Axes
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fundamentals-of-high-rank-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fundamentals of high rank arrays
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-rank-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      The rank operator
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transpose
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-bracket-axis-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      The bracket axis operator
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rank-vs-axis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rank vs Axis
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-set-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem set 5
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reduce-on-an-empty-vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reduce on an empty vector?
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../finding-and-replacing-values/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Finding and Replacing Values
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../selecting-from-arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Selecting from Arrays
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../broken-keyboard-problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Broken Keyboard Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loops-and-recursion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Loops and Recursion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Assignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Extra Assignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Workspaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Workspace Basics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Namespaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Namespaces and Other Objects
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Help
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-defined-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    User-defined Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quad%20names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quad Names
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../error-handling-and-debugging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Handling and Debugging
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data IO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code IO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    External Interfaces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quirks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Historical Quirks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interpreter-internals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interpreter Internals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Reading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Further Reading
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fundamentals-of-high-rank-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fundamentals of high rank arrays
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-rank-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      The rank operator
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transpose
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-bracket-axis-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      The bracket axis operator
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rank-vs-axis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rank vs Axis
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-set-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem set 5
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reduce-on-an-empty-vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reduce on an empty vector?
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="cells-and-axes">Cells and Axes</h1>
+<h2 id="fundamentals-of-high-rank-arrays">Fundamentals of high rank arrays</h2>
+<p>From the APL Wiki: </p>
+<blockquote>
+      A <a target="_blank" href="https://aplwiki.com/wiki/Cell">cell</a> is a subarray which is formed by selecting a single index along some number of leading axes and the whole of each trailing axis. Cells are classified by their rank, which may be between 0 (scalars) and the array's rank (in which case the cell must be the entire array). Cells with rank k are called k-cells of an array. A major cell is a cell whose rank is one less than the entire array, or a 0-cell of a scalar. 
+</blockquote>
+<p>If the text above feels confusing, don't worry. Maybe after this chapter, or even after the next section on selecting from arrays, you can read it again and say to yourself "oh yeah, that makes sense". For now just know that that arrays are arranged like rectangles in many dimensions. The three simplest cases should feel a bit familiar to you.</p>
+<pre class="highlight"><code class="language-APL">      0            ⍝ A scalar
+0
+      'APL'        ⍝ A vector
+APL
+      0 1 2∘.*⍳5   ⍝ A matrix
+0 0 0  0  0
+1 1 1  1  1
+2 4 8 16 32</code></pre>
+<p>Now let us look at an array with 3 dimensions. We will call it a <strong>cuboid</strong>:</p>
+<pre class="highlight"><code class="language-APL">      ⍴cuboid←2 3∘.+3 4 5∘.×4 5 6 7
+2 3 4 ← trailing (last) axis
+↑
+leading (first) axis</code></pre>
+<p>In the array <code>cuboid</code> defined above, there are <code>2</code> <strong>major cells</strong>, which are those of rank <code>¯1+≢⍴cuboid</code>.</p>
+<p>Here is another 3D array containing letters of the alphabet:</p>
+<pre class="highlight"><code class="language-APL">      2 3 4⍴⎕A
+ABCD
+EFGH
+IJKL
+
+MNOP
+QRST
+UVWX
+      ≢2 3 4⍴⎕A      ⍝ Tally counts the major cells
+2</code></pre>
+<p>The display may look like 2 separate matrices, but the array <code>2 3 4⍴⎕A</code> is a single, 3 dimensional array.</p>
+<p>The dimensions of an array are also known as <strong>axes</strong>. The most major cells, the rank <code>k-1</code> cells for an array of rank <code>k</code>, lie along the <em>first</em> axis. The least major cells are columns which lie along the <em>last</em> axis.</p>
+<p><center>
+    <figure>
+        <img src="../img/3DAxes.png" alt="Axes of a 3D array"/>
+        <figcaption>
+            Axes of a 3D array
+        </figcaption>
+    </figure>
+</center></p>
+<p>In Dyalog, arrays can have up to 15 dimensions.</p>
+<p>For more details on the APL array model in Dyalog and other array languages, see <a href="https://aplwiki.com/wiki/Array_model">the APL Wiki article on the array model</a>.</p>
+<p>Now that we have the words to describe the structure of an array in terms of its sub-arrays, let us look at how to apply functions to those sub-arrays.</p>
+<h2 id="the-rank-operator">The rank operator</h2>
+<p>A lot of the time you might want to take a subset of the data and do stuff to it. Sometimes you want to think of the data as a collection of similar parts and apply the same processing to each part. In fact, this idea is built in to the "array-at-a-time" nature of some primitive functions and operators, but the rank operator lets us do this for all functions.</p>
+<p>Let us take a 3D array representing the cost of 3 products each day over 2 weeks.</p>
+<pre class="highlight"><code class="language-APL">cost ← ?3 2 7⍴9</code></pre>
+<p>The total cost over all 3 products each day of each week is the <em>sum</em> between the <em>layers</em> (rank 2, matrices):</p>
+<p><pre class="highlight"><code class="language-APL">      +⌿cost</code></pre>
+<pre class="highlight"><code>12 21 13 14 17 20 17
+12 25 18 10  9 26 14</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍴+⌿cost       ⍝ 2 weeks, 7 days per week</code></pre>
+<pre class="highlight"><code>2 7</code></pre></p>
+<p>To get the total spent on each week day over the two weeks, we can tell the function <code>+⌿</code> to only <em>see</em> the tables for each product — the rank-2 subarrays. The first axes of each rank-2 subarray are the columns of each product table:</p>
+<p><pre class="highlight"><code class="language-APL">      (+⌿⍤2)cost</code></pre>
+<pre class="highlight"><code> 4 18 12  7 9 13  6
+17 14  9  7 9 17 13
+ 3 14 10 10 8 16 12</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍴(+⌿⍤2)cost   ⍝ 3 products, 7 days per week</code></pre>
+<pre class="highlight"><code>3 7</code></pre></p>
+<p>The total spent on each product each week is the row-wise sum.</p>
+<p><pre class="highlight"><code class="language-APL">      (+⌿⍤1)cost</code></pre>
+<pre class="highlight"><code>28 41
+51 35
+35 38</code></pre></p>
+<p>This is the same as <code>+/</code>:</p>
+<p><pre class="highlight"><code class="language-APL">      +/cost</code></pre>
+<pre class="highlight"><code>28 41
+51 35
+35 38</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍴(+⌿⍤1)cost   ⍝ 3 products, 2 weeks</code></pre>
+<pre class="highlight"><code>3 2</code></pre></p>
+<div class="admonition note">
+<p class="admonition-title">A helpful tip for operators</p>
+<p>Many operators accept one or more function <dfn>operands</dfn> and apply them to their arguments in some particular way. The enclose function <code>⊂⍵</code> can be used to get a view of the arguments <em>as the operand function sees them</em>.</p>
+<p>Apply our function to rank-2 subarrays of the <code>cost</code> array.</p>
+<p><pre class="highlight"><code class="language-APL">      (⊂⍤2)cost</code></pre>
+<pre class="highlight"><code>┌─────────────┬─────────────┬─────────────┐
+│2 9 4 1 5 5 2│9 6 8 5 7 8 8│1 6 1 8 5 7 7│
+│2 9 8 6 4 8 4│8 8 1 2 2 9 5│2 8 9 2 3 9 5│
+└─────────────┴─────────────┴─────────────┘</code></pre></p>
+<p>The result of <code>(+⌿⍤2)⍵</code> is like doing <code>+⌿⍵</code> to each of these matrices.</p>
+<p><pre class="highlight"><code class="language-APL">      (+⌿⍤2)cost</code></pre>
+<pre class="highlight"><code> 4 18 12  7 9 13  6
+17 14  9  7 9 17 13
+ 3 14 10 10 8 16 12</code></pre></p>
+</div>
+<p>In the dyadic case, the rank operator is a powerful way to pair up subarrays of <code>⍺</code> with a conforming collection of subarrays from <code>⍵</code>.</p>
+<p>Let us say that we want to add each of the numbers <span class="arithmatex">\(1\)</span> to <span class="arithmatex">\(5\)</span> to corresponding rows in a matrix. We cannot simply add a vector to a matrix because these arrays have different ranks.</p>
+<p><pre class="highlight"><code class="language-APL">      1 2 3 4 5 + 5 3⍴0 10 100</code></pre>
+<pre class="highlight"><code>RANK ERROR: Mismatched left and right argument ranks
+      1 2 3 4 5+5 3⍴0 10 100
+               ∧</code></pre></p>
+<p>The <dfn>rank operator</dfn> (<code>F⍤k</code>) allows us to pair up <em>scalars</em> (rank 0) from <code>⍺</code> and <em>vectors</em> (rank 1) from <code>⍵</code> and apply our function <code>+</code> between these.</p>
+<p><pre class="highlight"><code class="language-APL">      1 2 3 4 5 (+⍤0 1) 5 3⍴0 10 100</code></pre>
+<pre class="highlight"><code>1 11 101
+2 12 102
+3 13 103
+4 14 104
+5 15 105</code></pre></p>
+<p>In the same way that some functions can apply between a single value and an array of values, we can apply between an array of rank <span class="arithmatex">\(n\)</span> and an array of rank <span class="arithmatex">\(n\)</span> subarrays. For example, a single vector (rank 1) and a matrix (rank 2) as a collection of vectors.</p>
+<p><pre class="highlight"><code class="language-APL">      1 0 ¯1 (×⍤1 1) 5 3⍴⍳15</code></pre>
+<pre class="highlight"><code> 1 0  ¯3
+ 4 0  ¯6
+ 7 0  ¯9
+10 0 ¯12
+13 0 ¯15</code></pre></p>
+<div class="admonition note">
+<p class="admonition-title">Another helpful tip for operators</p>
+<p>If we derive a <em>dyadic</em> function using an operator, the dfn <code>{⍺⍵}</code> can be used to get a view of the arguments <em>as the operand function sees them</em>.</p>
+<p><pre class="highlight"><code class="language-APL">      1 0 ¯1 ({⍺⍵}⍤1 1) 5 3⍴⍳15</code></pre>
+<pre class="highlight"><code>┌──────┬────────┐
+│1 0 ¯1│1 2 3   │
+├──────┼────────┤
+│1 0 ¯1│4 5 6   │
+├──────┼────────┤
+│1 0 ¯1│7 8 9   │
+├──────┼────────┤
+│1 0 ¯1│10 11 12│
+├──────┼────────┤
+│1 0 ¯1│13 14 15│
+└──────┴────────┘</code></pre></p>
+</div>
+<p>In the case where we apply to sub-arrays of the same rank in both <code>⍺</code> and <code>⍵</code>, we only need specify that rank once:</p>
+<p><pre class="highlight"><code class="language-APL">      1 0 ¯1 (×⍤1) 5 3⍴⍳15</code></pre>
+<pre class="highlight"><code> 1 0  ¯3
+ 4 0  ¯6
+ 7 0  ¯9
+10 0 ¯12
+13 0 ¯15</code></pre></p>
+<p>When applying a function <code>F⍤j k</code>, we must ensure that there are the same number of rank-<code>j</code> subarrays in <code>⍺</code> as rank-<code>k</code> subarrays in <code>⍵</code> - or that one of them has just 1.</p>
+<p><pre class="highlight"><code class="language-APL">      1 0 ¯1 (×⍤0 1) 5 3⍴⍳15</code></pre>
+<pre class="highlight"><code>LENGTH ERROR: It must be that either the left and right frames match or one of them has length 0
+      1 0 ¯1(×⍤0 1)5 3⍴⍳15
+            ∧</code></pre></p>
+<div class="admonition note conforming arrays have either same shape or one is a unit">
+<p class="admonition-title">Note</p>
+<p>With functions like <code>+ × ÷</code>, arrays must either have the same shape, or one of them be a scalar.  The result of the function application has the same shape as the largest of the input arrays.  The rank operator generalises this to the concept of <dfn>frames</dfn>.  For a particular cell rank, the leading axes form the frame and the trailing k axes form the cell shape.  For frames to "match" means that there is the same shape of rank <strong>j</strong> subarrays in <code>⍺</code> as there is for rank <strong>k</strong> subarrays in <code>⍵</code> when a function <code>⍺ F ⍵</code> is applied as <code>⍺ (F⍤j k) ⍵</code>.</p>
+</div>
+<h2 id="transpose">Transpose</h2>
+<p>To <dfn>transpose</dfn> array is to rearrange its axes. Or rather, to rearrange along which axes its data lies.</p>
+<p>Transposing a matrix is to flip along its leading diagonal (top-left to bottom-right):</p>
+<p><pre class="highlight"><code class="language-APL">      3 3⍴⍳9</code></pre>
+<pre class="highlight"><code>1 2 3
+4 5 6
+7 8 9</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍉3 3⍴⍳9</code></pre>
+<pre class="highlight"><code>1 4 7
+2 5 8
+3 6 9</code></pre></p>
+<p>In the monadic case, we reverse the order of the axes:</p>
+<p><pre class="highlight"><code class="language-APL">      2 3 4⍴⎕A</code></pre>
+<pre class="highlight"><code>ABCD
+EFGH
+IJKL
+
+MNOP
+QRST
+UVWX</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍉2 3 4⍴⎕A</code></pre>
+<pre class="highlight"><code>AM
+EQ
+IU
+
+BN
+FR
+JV
+
+CO
+GS
+KW
+
+DP
+HT
+LX</code></pre></p>
+<p>Inspecting the shape before and after transposing shows the reversal of axis lengths.</p>
+<p><pre class="highlight"><code class="language-APL">      ⍴2 3 4⍴⎕A</code></pre>
+<pre class="highlight"><code>2 3 4</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍴⍉2 3 4⍴⎕A   ⍝ 4 3 2 ≡ ⌽2 3 4</code></pre>
+<pre class="highlight"><code>4 3 2</code></pre></p>
+<p>In the dyadic case, the left argument says where each corresponding axis in <code>⍴⍵</code> should end up in the result.</p>
+<p>For example:</p>
+<ul>
+<li>move the 1st axis to become the 2nd</li>
+<li>move the 2nd axis to become the 1st</li>
+<li>leave the 3rd axis as the 3rd</li>
+</ul>
+<p><pre class="highlight"><code class="language-APL">      2 1 3⍉2 3 4⍴⎕A</code></pre>
+<pre class="highlight"><code>ABCD
+MNOP
+
+EFGH
+QRST
+
+IJKL
+UVWX</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍴2 1 3⍉2 3 4⍴⎕A</code></pre>
+<pre class="highlight"><code>3 2 4</code></pre></p>
+<h2 id="the-bracket-axis-operator">The bracket axis operator</h2>
+<p>Here are two pairs of <em>first-</em> and <em>last-axis</em> primitives.</p>
+<pre class="highlight"><code class="language-APL">      n←2 3⍴1 2 3 1 0 ¯1
+      n
+1 2  3
+1 0 ¯1
+      +/n                ⍝ Sum along the last axis
+6 0
+      +⌿n                ⍝ Sum along the first axis
+2 2 2
+      '-'⍪2 3⍴'DYALOG'   ⍝ Catenate first
+---
+DYA
+LOG
+      '|',2 3⍴'DYALOG'   ⍝ Catenate last
+|DYA
+|LOG</code></pre>
+<p>Some functions and operators can be used along specified axes using the <strong>bracket-axis operator</strong> <code>[]</code> (more <a target="_blank" href="https://aplwiki.com/wiki/Function-operator_overloading">duplicitous</a> symbols).</p>
+<p>Compare the behaviour of the monadic function <code>⊂</code> <em>enclose</em> when applied with the rank operator <code>⍤</code> versus when it is applied using bracket-axis (also called the <em>function axis operator</em> or <em>axis specification</em>).</p>
+<p><pre class="highlight"><code class="language-APL">      (⊂⍤1)2 2 5⍴'RIGHTHELLOTHERE'</code></pre>
+<pre class="highlight"><code>┌─────┬─────┐
+│RIGHT│HELLO│
+├─────┼─────┤
+│THERE│RIGHT│
+└─────┴─────┘</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      (⊂⍤2)2 2 5⍴'RIGHTHELLOTHERE'</code></pre>
+<pre class="highlight"><code>┌─────┬─────┐
+│RIGHT│THERE│
+│HELLO│RIGHT│
+└─────┴─────┘</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      (⊂⍤3)2 2 5⍴'RIGHTHELLOTHERE'</code></pre>
+<pre class="highlight"><code>┌─────┐
+│RIGHT│
+│HELLO│
+│     │
+│THERE│
+│RIGHT│
+└─────┘</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⊂[1]2 2 5⍴'RIGHTHELLOTHERE'</code></pre>
+<pre class="highlight"><code>┌──┬──┬──┬──┬──┐
+│RT│IH│GE│HR│TE│
+├──┼──┼──┼──┼──┤
+│HR│EI│LG│LH│OT│
+└──┴──┴──┴──┴──┘</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⊂[2]2 2 5⍴'RIGHTHELLOTHERE'</code></pre>
+<pre class="highlight"><code>┌──┬──┬──┬──┬──┐
+│RH│IE│GL│HL│TO│
+├──┼──┼──┼──┼──┤
+│TR│HI│EG│RH│ET│
+└──┴──┴──┴──┴──┘</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⊂[3]2 2 5⍴'RIGHTHELLOTHERE'</code></pre>
+<pre class="highlight"><code>┌─────┬─────┐
+│RIGHT│HELLO│
+├─────┼─────┤
+│THERE│RIGHT│
+└─────┴─────┘</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⊂[1 2]2 2 5⍴'RIGHTHELLOTHERE'</code></pre>
+<pre class="highlight"><code>┌──┬──┬──┬──┬──┐
+│RH│IE│GL│HL│TO│
+│TR│HI│EG│RH│ET│
+└──┴──┴──┴──┴──┘</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⊂[2 3]2 2 5⍴'RIGHTHELLOTHERE'</code></pre>
+<pre class="highlight"><code>┌─────┬─────┐
+│RIGHT│THERE│
+│HELLO│RIGHT│
+└─────┴─────┘</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⊂[1 2 3]2 2 5⍴'RIGHTHELLOTHERE'</code></pre>
+<pre class="highlight"><code>┌─────┐
+│RIGHT│
+│HELLO│
+│     │
+│THERE│
+│RIGHT│
+└─────┘</code></pre></p>
+<p>Only the following primitive constructs can be used with the axis operator:</p>
+<table>
+<thead>
+<tr>
+<th>Monadic Functions</th>
+<th>Function Names</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>↑⍵</code> and <code>↓⍵</code></td>
+<td>Mix and Split</td>
+</tr>
+<tr>
+<td><code>⌽⍵</code> or <code>⊖⍵</code></td>
+<td>Reverse</td>
+</tr>
+<tr>
+<td><code>,⍵</code></td>
+<td>Ravel with axis</td>
+</tr>
+<tr>
+<td><code>⊂⍵</code></td>
+<td>Enclose with axis</td>
+</tr>
+<tr>
+<td><code>F/⍵</code> or <code>F⌿⍵</code></td>
+<td>Reductions</td>
+</tr>
+<tr>
+<td><code>F\⍵</code> or <code>F⍀⍵</code></td>
+<td>Scans</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Dyadic Functions</th>
+<th>Function Names</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+ × ⌈ ∧ ≤</code> etc...</td>
+<td>All <em>scalar dyadic functions</em></td>
+</tr>
+<tr>
+<td><code>⍺↑⍵</code> and <code>⍺↓⍵</code></td>
+<td>Take and Drop</td>
+</tr>
+<tr>
+<td><code>⍺/⍵</code> or <code>⍺⌿⍵</code></td>
+<td>Replicate/compress</td>
+</tr>
+<tr>
+<td><code>⍺\⍵</code> or <code>⍺⍀⍵</code></td>
+<td>Expand</td>
+</tr>
+<tr>
+<td><code>⍺,⍵</code> or <code>⍺⍪⍵</code></td>
+<td>Catenate</td>
+</tr>
+<tr>
+<td><code>⍺⊂⍵</code></td>
+<td>Partitioned-enclose</td>
+</tr>
+<tr>
+<td><code>⍺⊆⍵</code></td>
+<td>Partition</td>
+</tr>
+<tr>
+<td><code>⍺F/⍵</code> or <code>⍺F⌿⍵</code></td>
+<td>Windowed-reduction</td>
+</tr>
+</tbody>
+</table>
+<h2 id="rank-vs-axis">Rank vs Axis</h2>
+<p>The bracket-axis operator has always been in Dyalog APL. The rank operator was introduced in version 14.0. They both offer similar functionality, however:</p>
+<ul>
+<li>some uses of bracket-axis are shorter than their equivalent expression using rank and transpose, and vice versa</li>
+<li>sometimes it makes sense to think in terms of axes using bracket-axis, other times in terms of cells using the rank operator</li>
+<li>bracket-axis can only be used with a few particular primitives, whereas the rank operator can be used with any function including those defined by the user</li>
+<li>bracket-axis works slightly differently depending on the function to which it is applied, whereas the rank operator has consistent behaviour for all functions</li>
+<li>bracket-axis is special syntax unlike most other operators</li>
+</ul>
+<p>In some ways, bracket-axis can be thought of as <a href="https://www.quora.com/What-is-syntactic-sugar-in-programming-languages">syntactic sugar</a> for the behaviour of the rank operator in conjunction with dyadic transpose.</p>
+<p>For a more in-depth look at the relationship between function rank and function axis, watch the Dyalog webinars on <a href="https://dyalog.tv/Webinar/?v=AgYDvSF2FfU">Selecting from Arrays</a> and <a href="https://dyalog.tv/Webinar/?v=zBqdeDJPPRc">The Rank Operator and Dyadic Transpose</a>.</p>
+<p>The <a href="../Quirks/">section about older features</a> has some more examples of bracket axis.</p>
+<h2 id="problem-set-5">Problem set 5</h2>
+<ol>
+<li>
+<p>Write a function <code>FlipBlock</code> which reverses the order of rows in each sub-matrix of its argument array.</p>
+<pre class="highlight"><code class="language-APL">      FlipBlock 2 2 3⍴0 0 0 1 1 1
+1 1 1
+0 0 0
+
+1 1 1
+0 0 0</code></pre>
+<p>If there is only 1 row in each sub-matrix, reversing does nothing:
+<pre class="highlight"><code class="language-APL">      FlipBlock 1 5⍴'abcde'</code></pre>
+<pre class="highlight"><code>abcde</code></pre></p>
+<p>If there is only one dimension, the array will be reversed:</p>
+<p><pre class="highlight"><code class="language-APL">      FlipBlock 'abcde'</code></pre>
+<pre class="highlight"><code>edcba</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<pre class="highlight"><code class="language-APL">FlipBlock ← {(⊖⍤2)⍵}</code></pre>
+<p>We can also use the <strong>right/identity</strong> function <code>⊢⍵</code> to separate the array <em>operand</em> of the rank <strong>operator</strong> from the array <em>argument</em> of the derived <strong>function</strong> reverse-first-rank-two <code>⊖⍤2</code>. Otherwise, stranding would bind <code>2 ⍵</code> into a vector, causing unexpected behaviour.</p>
+<p>This author prefers to isolate operands using parentheses most of the time.</p>
+<pre class="highlight"><code class="language-APL">FlipBlock ← {⊖⍤2⊢⍵}</code></pre>
+<p>Alternatively, we can write this as a <a href="../user-defined-functions/#the-three-function-styles">tacit function</a>. This form is also known as a <dfn>derived</dfn> function because a new function is derived from functions and operators.</p>
+<p>Parentheses are not required, but this author thinks they make derived functions more distinced from array values when viewed together in source code.</p>
+<pre class="highlight"><code class="language-APL">FlipBlock ←  ⊖⍤2
+FlipBlock ← (⊖⍤2)</code></pre>
+<p>These four spellings of <code>FlipBlock</code> are all equivalent. Whichever you choose to write is a matter of taste.</p>
+</details>
+</li>
+<li>
+<p>Write a function <code>MatchWord</code> which takes a character vector left argument <code>⍺</code> and a character array <code>⍵</code> with the same number of columns as <code>⍺</code> and returns a Boolean array of rank <code>¯1+≢⍺</code> in which a <code>1</code> indicates rows in <code>⍵</code> that match <code>⍺</code>.</p>
+<p><pre class="highlight"><code class="language-APL">      'has' MatchWord 5 3⍴'hasnotnot'</code></pre>
+<pre class="highlight"><code>1 0 0 1 0</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      'simon' MatchWord 3 2 5⍴'maybesimonspoke'</code></pre>
+<pre class="highlight"><code>0 1
+0 0
+1 0</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<p>Are all characters in a row equal?</p>
+<pre class="highlight"><code class="language-APL">MatchWord ← {∧/⍺(=⍤1)⍵}</code></pre>
+<p>Or using the <strong>match</strong> function <code>⍺≡⍵</code>:</p>
+<pre class="highlight"><code class="language-APL">MatchWord ← {⍺(≡⍤1)⍵}</code></pre>
+<p>As a tacit definition:</p>
+<pre class="highlight"><code class="language-APL">MatchWord ← (≡⍤1)</code></pre>
+</details>
+</li>
+<li>
+<p>Extend the <code>Grille</code> function from the problem set about <a href="../array-logic-data-driven-conditionals/#problem-set-3">array logic</a> to reveal multiple messages in a 3-dimensional array.</p>
+<pre class="highlight"><code class="language-APL">grille  ← 4 4⍴'⌺ ⌺⌺ ⌺ ⌺⌺ ⌺  ⌺⌺⌺'
+grilles ← 3 4 4⍴'⌺⌺ ⌺⌺⌺⌺ ⌺⌺⌺⌺⌺ ⌺⌺⌺⌺⌺ ⌺⌺⌺⌺ ⌺⌺⌺⌺⌺ ⌺⌺⌺⌺⌺⌺ ⌺ ⌺⌺ ⌺⌺⌺⌺⌺'
+grids   ← 3 4 4⍴'AREQEEVASEQALTOFBSMBESCTIRMETOGPGHIAAACPSKLERVRG'</code></pre>
+<p>The single <code>grille</code> reveals 3 messages.</p>
+<p><pre class="highlight"><code class="language-APL">      grille Grille grids</code></pre>
+<pre class="highlight"><code>REVEAL
+SECRET
+HACKER</code></pre></p>
+<p>The array <code>grilles</code> reveals 3 different messages when applied to the same grid.</p>
+<p><pre class="highlight"><code class="language-APL">      grilles Grille grids</code></pre>
+<pre class="highlight"><code>EAT
+BIG
+APL</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<p>In the individual case, using rank-2 <code>F⍤2</code> pairs the single grille with each grid in <code>grids</code>:</p>
+<p><pre class="highlight"><code class="language-APL">      grille ({⍺⍵}⍤2) grid</code></pre>
+<pre class="highlight"><code>┌────┬────┐
+│⌺ ⌺⌺│AREQ│
+│ ⌺ ⌺│EEVA│
+│⌺ ⌺ │SEQA│
+│ ⌺⌺⌺│LTOF│
+├────┼────┤
+│⌺ ⌺⌺│BSMB│
+│ ⌺ ⌺│ESCT│
+│⌺ ⌺ │IRME│
+│ ⌺⌺⌺│TOGP│
+├────┼────┤
+│⌺ ⌺⌺│GHIA│
+│ ⌺ ⌺│AACP│
+│⌺ ⌺ │SKLE│
+│ ⌺⌺⌺│RVRG│
+└────┴────┘</code></pre></p>
+<p>We can also use a different grille for each grid, provided that we have one grille per grid:</p>
+<p><pre class="highlight"><code class="language-APL">      grilles ({⍺⍵}⍤2) grid</code></pre>
+<pre class="highlight"><code>┌────┬────┐
+│⌺⌺ ⌺│AREQ│
+│⌺⌺⌺ │EEVA│
+│⌺⌺⌺⌺│SEQA│
+│⌺ ⌺⌺│LTOF│
+├────┼────┤
+│⌺⌺⌺ │BSMB│
+│⌺⌺⌺⌺│ESCT│
+│ ⌺⌺⌺│IRME│
+│⌺⌺ ⌺│TOGP│
+├────┼────┤
+│⌺⌺⌺⌺│GHIA│
+│⌺ ⌺ │AACP│
+│⌺⌺ ⌺│SKLE│
+│⌺⌺⌺⌺│RVRG│
+└────┴────┘</code></pre></p>
+<p>Using the definitions of <code>Grille</code> given previously:</p>
+<pre class="highlight"><code class="language-APL">Grille ← {⍵[⍸⍺=' ']}⍤2
+Grille ← {(,⍺=' ')/,⍵}⍤2</code></pre>
+</details>
+</li>
+<li>
+<p>The 3D array <code>rain</code> gives the monthly rainfall in millimeters over 7 years in 5 countries.  </p>
+<pre class="highlight"><code class="language-APL">rain←?7 5 12⍴250</code></pre>
+<p>There are 12 columns in each row; the rows represent the months. The sum along the rows...</p>
+<p><pre class="highlight"><code class="language-APL">      (+⌿⍤1)rain</code></pre>
+<pre class="highlight"><code>1476 1764 1733 1320 1678
+1698 1943  798 2226 1813
+2050 1821 1209 1763 1625
+2006 1218 1615 1516 1536
+1372 1584 1946 1604 1623
+1831 1705 1998 1312 1224
+1499 1369 1437 1597 1279</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍴(+⌿⍤1)rain</code></pre>
+<pre class="highlight"><code>7 5</code></pre></p>
+<p>...gives the total rainfall in each year in each country over 12 months. Put another way, it is the total annual rainfall each year in each country.</p>
+<ol>
+<li>
+<p>For each expression below, write a brief description of the resulting statistic.</p>
+<p><pre class="highlight"><code class="language-APL">⌈⌿rain
+(+⌿⍤2)rain
+(⌈⌿⍤1)rain
+(⌈⌿⍤3)rain
+⌊/rain</code></pre>
+<pre class="highlight"><code></code></pre></p>
+<details class="hint">
+<summary>Hint</summary>
+<p>Look at the shapes of the arguments and the results, <code class='language-apl'>⍴rain</code> and <code class='language-apl'>⍴+⌿rain</code> etc.</p>
+</details>
+</li>
+<li>
+<p>Assign scalar numeric values (single numbers) to the variables <code>years</code> <code>countries</code> <code>months</code> such that the <code>rain</code> data can be summarised as follows:</p>
+<p><pre class="highlight"><code class="language-APL">      ⍴(+⌿⍤years)rain       ⍝ Sum over years</code></pre>
+<pre class="highlight"><code>5 12</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍴(+⌿⍤countries)rain   ⍝ Sum over countries</code></pre>
+<pre class="highlight"><code>7 12</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍴(+⌿⍤months)rain      ⍝ Sum over months</code></pre>
+<pre class="highlight"><code>7 5</code></pre></p>
+</li>
+</ol>
+<details class="example">
+<summary>Answers</summary>
+<p><ol type="a">
+<li></p>
+<ul>
+<li><code>⌈⌿rain</code> is the maximum rainfall each month in each country over all 7 years.</li>
+<li><code>(+⌿⍤2)rain</code> is the total rainfall each year in each month across all 5 countries.</li>
+<li><code>(⌈⌿⍤1)rain</code> is the maximum monthly rainfall for any month in each year in each country.</li>
+<li><code>(⌈⌿⍤3)rain</code> is the same as <code>⌈⌿rain</code> because <code>rain</code> is a rank-3 array.</li>
+<li><code>⌊/rain</code> is the minimum rainfall in any month in each year in each country.</li>
+</ul>
+<p></li>
+<li></p>
+<pre class="highlight"><code class="language-APL">(years countries months) ← 3 2 1</code></pre>
+<p></li>
+</ol></p>
+</details>
+</li>
+<li>
+<pre class="highlight"><code>Which of the following functions are affected by the rank operator `⍤` and why are the other functions not affected?</code></pre>
+<pre class="highlight"><code class="language-APL">⌽    ⍝ Reverse
+⊖    ⍝ Reverse first
++/   ⍝ Plus reduce
++⌿   ⍝ Plus reduce-first</code></pre>
+<details class="example">
+<summary>Answer</summary>
+<p><strong>Reverse</strong> <code>⌽⍵</code> and <strong>reduce</strong> <code>F/⍵</code> work along the last axis of an array. The rank operator makes a function act on subarrays defined in terms of trailing axes of an array. These trailing axes always contains the last axis, so there is no change in behaviour for last-axis reverse <code>⌽⍵</code> and reduce <code>F/⍵</code>. For example, <code>F⍤2</code> forces <code>F</code> to work on matrices, and matrices have rows.</p>
+<p>As their names suggest, reverse-first and reduce-first act along the first axis of an array. For a cuboid, this is <em>between the planes</em> or <em>across sub-matrices</em>. For a matrix, this is <em>between the rows</em> or <em>along the columns</em>. A vector only has one axis, so both forms act in the same way.</p>
+</details>
+</li>
+<li>
+<p>Match the following rank operands with their descriptions. Each use of rank (<strong>a</strong> to <strong>e</strong>) pairs with two of the 10 description boxes below.</p>
+<p><pre><code class="language-APL">   a    b    c    d     e
+┌────┬────┬───┬─────┬──────┐
+│⍤1 3│⍤2 1│⍤¯1│⍤0 99│⍤99 ¯1│
+└────┴────┴───┴─────┴──────┘
+<code>-----------------------------------------</code>
+┌─┐ ┌────────────────┐ ┌────────────┐
+│⍵│ │major cells of ⍺│ │vectors of ⍺│
+└─┘ └────────────────┘ └────────────┘
+┌────────────────┐ ┌─┐ ┌──────────────┐
+│major cells of ⍵│ │⍺│ │3D arrays of ⍵│
+└────────────────┘ └─┘ └──────────────┘
+┌────────────────┐ ┌────────────┐
+│major cells of ⍵│ │scalars of ⍺│
+└────────────────┘ └────────────┘
+┌────────────────┐ ┌────────────────┐
+│matrices of ⍺   │ │vectors of ⍵    │
+└────────────────┘ └────────────────┘</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<pre class="highlight"><code>a:     vectors of ⍺ (⍤1 3)   3D arrays of ⍵
+b:    matrices of ⍺ (⍤2 1)   vectors of ⍵
+c: major cells of ⍺ (⍤¯1)    major cells of ⍵
+d:     scalars of ⍺ (⍤0 99)  ⍵
+e:                ⍺ (⍤99 ¯1) major cells of ⍵</code></pre>
+</details>
+</li>
+<li>
+<p>For each name below, suggest the rank for arrays with that name.</p>
+<p><pre><code class="language-APL">┌────────┬────────────────────┐
+│Scalar  │                    │
+├────────┼────────────────────┤
+│Vector  │rank-1              │
+├────────┼────────────────────┤
+│Matrix  │                    │
+├────────┼────────────────────┤
+│Table   │                    │
+├────────┼────────────────────┤
+│List    │                    │
+├────────┼────────────────────┤
+│Cube    │                    │
+├────────┼────────────────────┤
+│4D array│                    │
+├────────┼────────────────────┤
+│2D array│                    │
+└────────┴────────────────────┘</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<pre class="highlight"><code>┌────────┬────────────────────┐
+│Scalar  │rank-0              │
+├────────┼────────────────────┤
+│Vector  │rank-1              │
+├────────┼────────────────────┤
+│Matrix  │rank-2              │
+├────────┼────────────────────┤
+│Table   │rank-2              │
+├────────┼────────────────────┤
+│List    │rank-1              │
+├────────┼────────────────────┤
+│Cube    │rank-3              │
+├────────┼────────────────────┤
+│4D array│rank-4              │
+├────────┼────────────────────┤
+│2D array│rank-2              │
+└────────┴────────────────────┘</code></pre>
+</details>
+</li>
+<li>
+<p>Find the values of <code>j</code> and <code>k</code> in each of the two expressions below.</p>
+<pre class="highlight"><code class="language-APL">m ← 7 2⍴1 1 2 4 3 7 4 3 5 3 6 2 2 3</code></pre>
+<ol>
+<li>
+<p><pre><code class="language-APL">      0 10(×⍤j k)m</code></pre>
+<pre><code>0 10
+0 40
+0 70
+0 30
+0 30
+0 20
+0 30</code></pre></p>
+</li>
+<li>
+<p><pre><code class="language-APL">      (2×⍳7)(+⍤j k)m</code></pre>
+<pre><code> 3  3
+ 6  8
+ 9 13
+12 11
+15 13
+18 14
+16 17</code></pre></p>
+</li>
+</ol>
+<details class="example">
+<summary>Answers</summary>
+<p><ol type="a">
+<li></p>
+<pre class="highlight"><code class="language-APL">(j k) ← 1</code></pre>
+<p></li>
+<li></p>
+<pre class="highlight"><code class="language-APL">(j k) ← 0 1</code></pre>
+<p></li>
+</ol></p>
+</details>
+</li>
+<li>
+<p>Rank Matching<br />
+    Write a function <code>R1</code> which uses catenate <code>,</code> with the rank operator <code>⍤</code> to merge a vector and matrix into a single 3D array.</p>
+<p><pre><code class="language-APL">      'ABC' R1 2 3⍴⍳6</code></pre>
+    <pre><code>A 1
+B 2
+C 3
+&nbsp;
+A 4
+B 5
+C 6</code></pre></p>
+<details class="hint">
+<summary>Hint</summary>
+<p>You can apply rank multiple times for a single function e.g. <code>F⍤j⍤k</code>.</p>
+</details>
+<details class="example">
+<summary>Answer</summary>
+<pre class="highlight"><code class="language-APL">R1 ← ,⍤0⍤1</code></pre>
+<p>When chaining multiple uses of the rank operator, think of doing multiple pairings — from the outside inwards. We have a vector of scalars <code>ABC</code>, and a matrix of rows of scalars <code>2 3⍴⍳6</code>. The result wants to pair scalars from <code>⍺</code> with scalars from <code>⍵</code>. However, we cannot do this simply <code>F⍤0</code> because of our rank mismatch. What we can do is use rank once to pair up equivalent shapes, and then use rank 0. Therefore we have to pair rows (vectors, rank 1) first (outside) and then within each of those pairings, pair up our scalars (rank 0) inside.</p>
+<p><pre class="highlight"><code class="language-APL">      'ABC' ({⍺⍵}⍤0) 2 3⍴⍳6</code></pre>
+<pre class="highlight"><code>RANK ERROR
+      'ABC'({⍺ ⍵}⍤0)2 3⍴⍳6
+           ∧</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      'ABC'({⍺ ⍵}⍤1)2 3⍴⍳6</code></pre>
+<pre class="highlight"><code>┌───┬─────┐
+│ABC│1 2 3│
+├───┼─────┤
+│ABC│4 5 6│
+└───┴─────┘</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      'ABC'({⍺ ⍵}⍤0⍤1)2 3⍴⍳6</code></pre>
+<pre class="highlight"><code>A 1
+B 2
+C 3
+
+A 4
+B 5
+C 6</code></pre></p>
+<p>It just so happens that stranding two scalars <code>{⍺⍵}</code> is the same as concatenating them <code>{⍺,⍵}</code>. For more complex arrays these will not be the same.</p>
+<p><pre class="highlight"><code class="language-APL">      'ABC'(,⍤0⍤1)2 3⍴⍳6</code></pre>
+<pre class="highlight"><code>A 1
+B 2
+C 3
+
+A 4
+B 5
+C 6</code></pre></p>
+<p>Chaining multiple uses of rank goes from right-to-left, outer most pairing to innermost. That is, in <code>(,⍤0⍤1)</code>, we pair rows (<code>1</code>) outside and scalars (<code>0</code>) within our row pairings.</p>
+</details>
+</li>
+<li>
+<p><strong>Split k-cells</strong><br />
+    The <em>split</em> function <code>↓⍵</code> splits an array of rank ≥2 by rows, returning an array of shape <code>¯1↓⍴⍵</code>. Use <em>enclose</em> <code>⊂⍵</code> with the rank operator <code>⍤</code> to create a function <code>Split</code> which always splits an array into a nested vector of the major cells of <code>⍵</code>.</p>
+<p><pre><code class="language-APL">      Split 3 2 2 3⍴⍳9
+┌─────┬─────┬─────┐
+│1 2 3│4 5 6│7 8 9│
+│4 5 6│7 8 9│1 2 3│
+│     │     │     │
+│7 8 9│1 2 3│4 5 6│
+│1 2 3│4 5 6│7 8 9│
+└─────┴─────┴─────┘</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<pre class="highlight"><code class="language-APL">Split ← ⊂⍤¯1</code></pre>
+</details>
+</li>
+</ol>
+<h2 id="reduce-on-an-empty-vector">Reduce on an empty vector?</h2>
+<p>For your interest, here are some reductions of note. Try to ask yourself why they give the results they do. Could they have been given different definitions?</p>
+<pre class="highlight"><code class="language-APL">      +/⍬
+      ×/⍬
+      ⌊/⍬
+      ,/'APPLE' 'DOG' 'BISCUIT'</code></pre>
+<p>As mentioned previously, more detailed treatments of the rank operator can be found in the <a href="https://www.youtube.com/playlist?list=PLA9gQgjzcpKFW0-KldlJW6FSwHGQ1WMAJ">Dyalog webinars on function rank</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://dyalog.com" target="_blank" rel="noopener" title="dyalog.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M16 32v119.2h64V96h107.2C300.6 96 368 176.2 368 255.9 368 332 309.4 416 187.2 416H16v64h171.2C347.9 480 432 367.3 432 255.9c0-58.7-22.1-113.4-62.3-154.3C324.9 56 261.7 32 187.2 32z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mastodon.social/@dyalog" target="_blank" rel="noopener" title="mastodon.social" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 15.5a.5.5 0 0 1-.5.5.5.5 0 0 1-.5-.5v-7c0-1.93-2.07-3.5-4-3.5H6a4 4 0 0 0-4 4v10h4v-4h5v4h4v-4.5a.5.5 0 0 1 .5-.5.5.5 0 0 1 .5.5V16a3 3 0 0 0 3 3 3 3 0 0 0 3-3v-2h-2.5z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/dyalogapl" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "content.tooltips"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="../javascripts/mathjax/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

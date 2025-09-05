@@ -1,0 +1,1163 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A guided introduction to Dyalog APL">
+      
+      
+      
+        <link rel="canonical" href="https://dyalog.com/Quirks/">
+      
+      
+        <link rel="prev" href="../Interfaces/">
+      
+      
+        <link rel="next" href="../Interpreter-internals/">
+      
+      
+      <link rel="icon" href="../img/favicon-32.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>Historical Quirks - APL Course</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css.49ea35f2.css">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../style/main.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#out-in-the-wild" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="APL Course" class="md-header__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APL Course
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Historical Quirks
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="APL Course" class="md-nav__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    APL Course
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basic-syntax-and-arithmetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic syntax
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dfns-and-assignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dfns and Assignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../array-logic-data-driven-conditionals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Array Logic and Data-driven Conditionals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multidimensional-and-nested-arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multidimensional and Nested Arrays
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cells-and-axes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cells and Axes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../finding-and-replacing-values/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Finding and Replacing Values
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../selecting-from-arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Selecting from Arrays
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../broken-keyboard-problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Broken Keyboard Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loops-and-recursion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Loops and Recursion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Assignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Extra Assignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Workspaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Workspace Basics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Namespaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Namespaces and Other Objects
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Help
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-defined-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    User-defined Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quad%20names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quad Names
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../error-handling-and-debugging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Handling and Debugging
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data IO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code IO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    External Interfaces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Historical Quirks
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Historical Quirks
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branch
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-axis-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      The axis operator
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#portable-defaults" class="md-nav__link">
+    <span class="md-ellipsis">
+      Portable defaults
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Portable defaults">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#migration-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration level
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#index-origin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index origin
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caution-with-namespace-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Caution with namespace references
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auxiliary-processors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auxiliary processors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#underscored-alphabet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Underscored alphabet
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#refactoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Refactoring
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interpreter-internals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interpreter Internals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Reading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Further Reading
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branch
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-axis-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      The axis operator
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#portable-defaults" class="md-nav__link">
+    <span class="md-ellipsis">
+      Portable defaults
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Portable defaults">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#migration-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration level
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#index-origin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index origin
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caution-with-namespace-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Caution with namespace references
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auxiliary-processors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auxiliary processors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#underscored-alphabet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Underscored alphabet
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#refactoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Refactoring
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="out-in-the-wild">Out in the wild</h1>
+<p>Much of what is presented in this course is what is called <em>modern APL</em> in that it contains extensions to the <a href="https://aplwiki.com/wiki/Timeline_of_influential_array_languages">original mathematical notation</a>. The term "modern APL" generally means APL implementations with some form of general nested arrays.  </p>
+<p>Dyalog maintains long-term backwards compatibility, meaning that code which ran on Dyalog version 1 can be run on the latest version with little or no modification. Therefore it is good to be aware of all of the language constructs, even if some of them have fallen out of fashion in newly-written code.</p>
+<h2 id="branch">Branch</h2>
+<p>Despite long and widespread use in many programming languages, <code>:If :Else</code>-style control structures are a relatively recent introduction to some APLs. Early on, the only way to control the flow of execution in APL was to using the branching arrow <code>→</code>.</p>
+<p><pre class="highlight"><code class="language-APL">   →ln             ⍝ Go to integer line number ln or label ln:
+   →0              ⍝ Exit current function and resume calling line
+   →⎕LC            ⍝ Resume suspended execution
+   →               ⍝ Clear one stack suspension
+   →condition/ln   ⍝ If condition is true (1), go to line ln, otherwise go to next line</code></pre>
+<pre class="highlight"><code></code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">    ∇  r←BFac n   ⍝ Branching Factorial
+[1]   ⍝ {⍵=1:⍵ ⋄ ⍵×∇ ⍵-1}              
+[2]    →(n=1)/4                        
+[3]    r←n×BFac n-1 ⋄ →0               
+[4]    r←n                             
+    ∇   </code></pre>
+<pre class="highlight"><code></code></pre></p>
+<p>Keeping track of line numbers in this way would be a hassle for large programs. The introduction of <em>labels</em> makes understanding code easier.</p>
+<pre class="highlight"><code class="language-APL">    ∇  r←BFacL n   ⍝ Branching Factorial
+[1]                ⍝ with Label         
+[2]   ⍝ {⍵=1:⍵ ⋄ ⍵×∇ ⍵-1}               
+[3]    →(n=1)/end                       
+[4]    r←n×BFac n-1 ⋄ →0                
+[5]   end:r←n                           
+    ∇    </code></pre>
+<p>The use of <code>:GoTo</code> might be more suggestive to those unfamiliar with <code>→</code>.</p>
+<pre class="highlight"><code class="language-APL">    ∇  r←BFacG n   ⍝ Branching Factorial
+[1]                ⍝ with GoTo          
+[2]   ⍝ {⍵=1:⍵ ⋄ ⍵×∇ ⍵-1}               
+[3]    :If n=1                          
+[4]        :GoTo end                    
+[5]    :EndIf                           
+[6]    r←n×BFac n-1                     
+[7]    :Return                          
+[8]   end:r←n                           
+    ∇   </code></pre>
+<p>You might prefer to use conditional keywords to keep blocks of statements together in a predictable way.</p>
+<pre class="highlight"><code class="language-APL">    ∇  r←BFacI n   ⍝ Branching Factorial
+[1]                ⍝ with If            
+[2]   ⍝ {⍵=1:⍵ ⋄ ⍵×∇ ⍵-1}               
+[3]    :If n=1                          
+[4]        r←n                          
+[5]    :Else                            
+[6]        r←n×BFac n-1                 
+[7]    :EndIf                           
+    ∇  </code></pre>
+<h2 id="the-axis-operator">The axis operator</h2>
+<p>Before the rank operator was invented<sup><a href="#hopl4">1</a></sup>, certain functions had comparable behaviour when used in conjunction with <em>the axis operator</em>. However, the axis operator is not a true operator: it is not general, does not fit the standard function-operator syntax and does not work with user-defined functions.</p>
+<p>However, there are some useful applications of the axis operator which are handy to know. Some can be replicated with combinations of both <code>⍤</code> rank and <code>⍉</code> transpose, for example.</p>
+<pre class="highlight"><code class="language-APL">      A←2 3 4⍴⎕A
+      ,[1 2]A   ⍝ Merge first two axes      
+      ,[2 3]A   ⍝ Merge last two axes      
+
+      (2 3⍴⍳6),[1]2 3⍴⎕A   ⍝ Catenate first axis
+      (2 3⍴⍳6),2 3⍴⎕A      ⍝ Catenate last axis
+
+      (2 3⍴⍳6),[0.5]2 3⍴⎕A   ⍝ Laminate before 1st axis
+      (2 3⍴⍳6),[2.5]2 3⍴⎕A   ⍝ Laminate after 2nd axis
+
+      ⊂[1 3]A   ⍝ Enclose matrices along the first and third axes</code></pre>
+<p>As an exercise, try to reformulate the expressions above using only combinations of the operand functions enclose (<code>⊂⍵</code>), ravel (<code>,⍵</code>) or catenate-first (<code>⍪⍵</code>); the rank operator (<code>F⍤k</code>); and dyadic transpose (<code>⍺⍉⍵</code>).</p>
+<details class="example">
+<summary>Answers</summary>
+<pre class="highlight"><code>  A←2 3 4⍴⎕A
+  ⍉,⍤2⊢2 3 1⍉A   ⍝ Transpose and ravel matrices
+  ,⍤2⊢A          ⍝ Ravel matrices
+
+  (2 3⍴⍳6)⍪2 3⍴⎕A       ⍝ Catenate first axis
+  (2 3⍴⍳6)(⍪⍤1)2 3⍴⎕A   ⍝ Catenate vectors
+
+  (2 3⍴⍳6)(2 3 1⍉,⍤0⍤1)2 3⍴⎕A   ⍝ Laminate scalars within each pair of rows and transpose the result
+  (2 3⍴⍳6)(,⍤0⍤1)2 3⍴⎕A         ⍝ Laminate scalars within each pair of rows
+
+  ⊂⍤2⊢3 1 2⍉A   ⍝ Enclose matrices after transpose</code></pre>
+</details>
+<p>Knowledge of the axis operator is required for anyone maintaining code which uses it, and it should be used to retain style unless all uses are to be replaced systematically with the rank operator. In any case, some people feel it provides pleasant <a href="https://www.quora.com/What-is-syntactic-sugar-in-programming-languages">syntactic sugar</a> over the equivalent expressions which use rank and transpose.</p>
+<h2 id="portable-defaults">Portable defaults</h2>
+<p>All <a href="../Quad names/">system functions and variables</a> have default values. However, to guarantee that your code will run correctly when copied into other users' code bases, it is a good idea to set some of these values at the top level of the namespaces or functions which constitute the entry points of your application.</p>
+<p>It is common to see <code>(⎕ML ⎕IO)←1</code> or similar at the top of production functions and scripted namespaces.</p>
+<h3 id="migration-level">Migration level</h3>
+<p>The system variable <code>⎕ML</code> ("<em>quad-em-ell</em>") specifies a "migration level" in order to allow code bases from other APL systems to work unmodified in Dyalog. In particular, some primitive symbols (like <code>⊃</code> and <code>↑</code>) have different definitions depending on the migration level.</p>
+<p>By default, this is set to 1. </p>
+<h3 id="index-origin">Index origin</h3>
+<p>Due to its origin as a notational tool for teaching, arrays are indexed starting from 1 by default. However, some users are accustomed or find it convenient for indexing to start from 0 instead. In this way, it can be considered an "offset from the beginning of the array" rather than an <a href="https://en.wikipedia.org/wiki/Ordinal_numeral">ordinal</a> index.</p>
+<p>Dyalog provides a way to choose whether arrays are indexed starting from zero or one:</p>
+<pre class="highlight"><code class="language-APL">      'ABCD'[1]
+A
+      ⎕IO←0      ⍝ Quad eye-oh gets zero
+      'ABCD'[1]
+B</code></pre>
+<p>APLers all agree that it would be better if there was only one option for <code>⎕IO</code>, but none of them can agree on what it should be.</p>
+<p>The author is sure that saying "the zero-th element" is incorrect. The <em>first</em> element may be labelled 0, but it is still the first element.</p>
+<h2 id="caution-with-namespace-references">Caution with namespace references</h2>
+<p>It is a good idea to organise code bases into namespaces which each serve a particular purpose. In this case, you will likely want to somehow access names in one namespace from calling functions in a different namespace. There are ways to do this, but they should all be used with caution. </p>
+<p><code>⎕CS</code> is a system function to change the current namespace.</p>
+<p>You can set the local search path for names using <code>⎕PATH</code>. For example, if you have a collection of utilities in <code>#.utils</code>, you do not need to keep referring to those functions by their full paths <code>#.utils.Foo</code> <code>#.utils.Goo</code> if you set <code>⎕PATH←'#.utils'</code>.</p>
+<p><code>:With</code> was really designed when working with GUI objects:</p>
+<pre class="highlight"><code class="language-APL">  ∇ make caption
+[1]    :With 'MyForm' ⎕WC 'Form'
+[2]        Caption←caption
+[3]        Coord←'Pixel'
+[4]        Size←400 800 ⋄ Posn←20 30
+[5]        onClose←'HandleClose'
+...</code></pre>
+<p>However, some users think that <code>⎕PATH</code>, <code>:With</code> and <code>⎕CS</code> simply make applications more difficult to debug when something goes wrong. In large functions, debugging can become difficult if namespaces and search paths are altered far from where an error occurs. This is especially problematic in tradfns with dynamic scope, if you forget to localise <code>⎕PATH</code> within a function.</p>
+<p>One recommendation is to assign a reference to a long namespace path at the top of a function or namespace:</p>
+<pre class="highlight"><code class="language-APL">      str←#.utils.strings
+      str.(nl split) char_vec_with_embedded_newlines</code></pre>
+<h2 id="auxiliary-processors">Auxiliary processors</h2>
+<p><strong>Auxiliary Processors</strong> AKA <a href="https://help.dyalog.com/17.1/index.htm#UserGuide/Installation and Configuration/Auxiliary Processors.htm"><strong>APs</strong></a> are a legacy mechanism akin to <a href="../Interfaces/#name-association">using compiled shared native libraries with ⎕NA</a>. We do not recommended using them in new projects, but they remain for the support of existing systems.</p>
+<p>They were generally used when equivalent functionality written in APL was not performant, or not possible at the time. For example, in the past, set functions such as <em>Index-Of</em> <code>⍺⍳⍵</code> and <em>Membership</em> <code>⍺∊⍵</code> were slow. For some time, APs had the general advantage that the interpreter would not crash due to an error in an AP, but these days their performance is relatively poor due to having to copy data in and out of the active workspace. The performance of primitive functions is much better now than in the past and APs are a deprecated feature.</p>
+<p>For some applications, you might want to see the documentation archive for <a href="http://docs.dyalog.com/15.0/Code%20Libraries%20Reference%20Guide.pdf#%5B%7B%22num%22%3A43%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C87%2C707%2C0%5D"><strong>information about the XUtils AP</strong></a>.</p>
+<h2 id="underscored-alphabet">Underscored alphabet</h2>
+<p><a href="https://help.dyalog.com/17.1/#Language/System%20Functions/Underscored%20Alphabetic%20Characters.htm"><strong>See the online documentation for the underscored alphabet</strong></a></p>
+<p>Before Unicode... before personal computers... before <a href="https://en.wikipedia.org/wiki/Computer_font">software fonts</a>... before <a href="https://en.wikipedia.org/wiki/Mullard_SAA5050">electronic hardware fonts</a>... was... the typewriter! Due to its age, the history of APL is enough to appreciate many of the modern features that we take for granted in computing.</p>
+<p>The first APL (<a href="https://aplwiki.com/wiki/Iverson_notation">Iverson Notation</a>) was written by hand. Some of the earliest APLs on computers were on mainframe computers and accessed via teletype terminals such as the <a href="https://en.wikipedia.org/wiki/IBM_Selectric_typewriter">IBM Selectric typewriter</a>. These typewriters had type balls (colloquially referred to as "golf balls") which could be swapped out to enable different fonts - including an APL font.</p>
+<p>It is quite interesting to see such a system in action, for example in this <a href="https://youtu.be/_DTpQ4Kk2wA">demonstration of APL from 1975</a>, you can hear the typewriter aggressively rattling off keystrokes as the result of computation is relayed back to the terminal. </p>
+<p>While all of this is now historical curiosity, one hangover might be relevant if you are working on older code bases. Older APL systems did not have lower case letters. Instead, there was the alphabet (<code>⎕A</code>), and an underscored alphabet (<code>⎕Ⓐ</code> - although in some fonts this is rendered as a circled-A Ⓐ). In recent versions of Dyalog, some accented characters have been co-opted for compatibility with older applications.</p>
+<h2 id="refactoring">Refactoring</h2>
+<p>It is usually best to continue code in the style in which you find it. This can include continuing to use many of the constructs which are here presented as "historical quirks". However, if an important part of the code base has become very difficult to reason about and debug, it might be worth your time to refactor it using more modern constructs and practices. This is referred to as "paying down technical debt", as the debt is accrued when the original author wrote code which makes it difficult, and therefore takes more time and money, to maintain. After paying the technical debt, it is hoped that future maintenance is far less resource intensive - so it is always a tradeoff between spending time now to make code nicer for the future, or spending time later wondering how the thing even works.</p>
+<hr />
+<ol>
+<li><a id="hopl4" href="https://dl.acm.org/doi/pdf/10.1145/3386319#%5B%7B%22num%22%3A1037%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22Fit%22%7D%5D">Hui, R.K. and Kromberg, M.J., 2020. APL Since 1978. Proceedings of the ACM on Programming Languages. <strong>Section 3.1</strong></a></li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://dyalog.com" target="_blank" rel="noopener" title="dyalog.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M16 32v119.2h64V96h107.2C300.6 96 368 176.2 368 255.9 368 332 309.4 416 187.2 416H16v64h171.2C347.9 480 432 367.3 432 255.9c0-58.7-22.1-113.4-62.3-154.3C324.9 56 261.7 32 187.2 32z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mastodon.social/@dyalog" target="_blank" rel="noopener" title="mastodon.social" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 15.5a.5.5 0 0 1-.5.5.5.5 0 0 1-.5-.5v-7c0-1.93-2.07-3.5-4-3.5H6a4 4 0 0 0-4 4v10h4v-4h5v4h4v-4.5a.5.5 0 0 1 .5-.5.5.5 0 0 1 .5.5V16a3 3 0 0 0 3 3 3 3 0 0 0 3-3v-2h-2.5z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/dyalogapl" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "content.tooltips"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="../javascripts/mathjax/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

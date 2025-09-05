@@ -1,0 +1,1503 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A guided introduction to Dyalog APL">
+      
+      
+      
+        <link rel="canonical" href="https://dyalog.com/array-logic-data-driven-conditionals/">
+      
+      
+        <link rel="prev" href="../dfns-and-assignment/">
+      
+      
+        <link rel="next" href="../multidimensional-and-nested-arrays/">
+      
+      
+      <link rel="icon" href="../img/favicon-32.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>Array Logic and Data-driven Conditionals - APL Course</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css.49ea35f2.css">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../style/main.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#array-logic-and-data-driven-conditionals" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="APL Course" class="md-header__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APL Course
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Array Logic and Data-driven Conditionals
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="APL Course" class="md-nav__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    APL Course
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basic-syntax-and-arithmetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic syntax
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dfns-and-assignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dfns and Assignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Array Logic and Data-driven Conditionals
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Array Logic and Data-driven Conditionals
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#logic-and-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logic and conditions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-shape-of-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      The shape of data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ravel-means-unravel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ravel means unravel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-outer-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      The outer product
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#replicatecompress" class="md-nav__link">
+    <span class="md-ellipsis">
+      Replicate/Compress
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indexing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Indexing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-set-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem set 3
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multidimensional-and-nested-arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multidimensional and Nested Arrays
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cells-and-axes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cells and Axes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../finding-and-replacing-values/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Finding and Replacing Values
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../selecting-from-arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Selecting from Arrays
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../broken-keyboard-problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Broken Keyboard Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loops-and-recursion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Loops and Recursion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Assignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Extra Assignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Workspaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Workspace Basics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Namespaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Namespaces and Other Objects
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Help
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-defined-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    User-defined Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quad%20names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quad Names
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../error-handling-and-debugging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Handling and Debugging
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data IO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code IO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    External Interfaces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quirks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Historical Quirks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interpreter-internals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interpreter Internals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Reading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Further Reading
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#logic-and-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logic and conditions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-shape-of-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      The shape of data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ravel-means-unravel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ravel means unravel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-outer-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      The outer product
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#replicatecompress" class="md-nav__link">
+    <span class="md-ellipsis">
+      Replicate/Compress
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indexing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Indexing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-set-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem set 3
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="array-logic-and-data-driven-conditionals">Array Logic and Data-driven Conditionals</h1>
+<h2 id="logic-and-conditions">Logic and conditions</h2>
+<p>APL has logical and comparison functions as in-built primitives. Much like the arithmetic, these symbols are like those used in conventional notation.</p>
+<div class="center language-APL">
+<div class="displayBox">
+<a class="glyph" href="#" title="Less than"><code>&lt;</code></a>
+<a class="glyph" href="#" title="Less than or equal to"><code>≤</code></a>
+<a class="glyph" href="#" title="Equals"><code>=</code></a>
+<a class="glyph" href="#" title="Not equals"><code>≠</code></a>
+<a class="glyph" href="#" title="Greater than or equal to"><code>≥</code></a>
+<a class="glyph" href="#" title="Greater than"><code>&gt;</code></a>
+<a class="glyph" href="#" title="Logical AND"><code>∧</code></a>
+<a class="glyph" href="#" title="Logical OR"><code>∨</code></a>
+<a class="glyph" href="#" title="Logical NAND"><code>⍲</code></a>
+<a class="glyph" href="#" title="Logical NOR"><code>⍱</code></a>
+<a class="glyph" href="#" title="Logical NOT"><code>~</code></a>
+</div>
+</div>
+<p>Some of these are more general mathematical functions which happen to be the same as logical functions when used with Booleans (<code>1</code>s and <code>0</code>s):</p>
+<p><pre class="highlight"><code class="language-APL">      3 ∧ 4               ⍝ Lowest common multiple</code></pre>
+<pre class="highlight"><code>12</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      0 1 0 1 ∧ 0 0 1 1   ⍝ Logical AND</code></pre>
+<pre class="highlight"><code>0 0 0 1</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      12 ∨ 16             ⍝ Greatest common divisor</code></pre>
+<pre class="highlight"><code>4</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      0 1 0 1 ∨ 0 0 1 1   ⍝ Logical OR</code></pre>
+<pre class="highlight"><code>0 1 1 1</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      'P' ≠ 'Q'           ⍝ Not equal to</code></pre>
+<pre class="highlight"><code>1</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      0 1 0 1 ≠ 0 0 1 1   ⍝ Logical XOR </code></pre>
+<pre class="highlight"><code>0 1 1 0</code></pre></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Truth_table#Binary_operations">16 possible logic functions for two binary variables</a> can all be expressed succinctly in APL, as shown in the <a href="https://nbviewer.org/github/Dyalog/dyalog-jupyter-notebooks/blob/master/Boolean%20Scans%20and%20Reductions.ipynb#Sixteen-logical-functions">notebook</a> and <a href="https://dyalog.tv/Webinar/?v=erv_1LxEByk">webinar</a> on Boolean scans and reductions.</p>
+</div>
+<h2 id="the-shape-of-data">The shape of data</h2>
+<p>One of the distinguishing features of APL is the multidimensional array. Single elements, lists and tables are quite familiar constructs.</p>
+<p>Tables are very useful for representing data which is related in some way. For example, let's say that the price of oranges changes daily. We can represent a week of prices as a 7-element numeric list.</p>
+<pre class="highlight"><code class="language-APL">0.35 0.3 0.33 0.32 0.39 0.33 0.36</code></pre>
+<p>How about the amount spent on 3 items? We could store this in 3 separate lists, but it is convenient to keep it in a table with 3 rows and 7 columns.</p>
+<p>The <dfn>reshape</dfn> function <code>⍺⍴⍵</code> takes data from <code>⍵</code> and uses it to fill out an array of shape <code>⍺</code>, one row at a time.</p>
+<p><pre class="highlight"><code class="language-APL">      cost ← 3 7⍴4.36 4.22 4.05 4.14 4.18 4.19 4.02 2.79 2.58 2.68 2.77 2.88 2.79 2.52 3.07 3 3.13 3 3.24 3.06 3.29
+      cost</code></pre>
+<pre class="highlight"><code>4.36 4.22 4.05 4.14 4.18 4.19 4.02
+2.79 2.58 2.68 2.77 2.88 2.79 2.52
+3.07 3    3.13 3    3.24 3.06 3.29</code></pre></p>
+<p>So what is this table that we have created? In other languages, there are lists, and there are lists of lists. In APL, a list of lists is not the same thing as a table (also known as a matrix). APL arrays contain two essential pieces of information: their shape and their list of elements.</p>
+<p>The <dfn>shape</dfn> function <code>⍴⍵</code> returns the shape of its argument.</p>
+<pre class="highlight"><code class="language-APL">      ⍴4 12 31
+3</code></pre>
+<p>The following table lists the <dfn>rank</dfn> (number of dimensions), some common names, and a geometric analogy for the three simplest types of multidimensional arrays.</p>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Name</th>
+<th>Geometric analogy</th>
+<th>diagram</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0\)</span></td>
+<td>scalar</td>
+<td>point</td>
+<td><img alt="point geometry diagram" src="../img/point.svg" /></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td>vector or list</td>
+<td>line</td>
+<td><img alt="line geometry diagram" src="../img/line.svg" /></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(2\)</span></td>
+<td>matrix or table</td>
+<td>rectangle</td>
+<td><img alt="rectangle geometry diagram" src="../img/rectangle.svg" /></td>
+</tr>
+</tbody>
+</table>
+<p>Arrays with <span class="arithmatex">\(3\)</span> or more dimensions are sometimes called <dfn>cube</dfn> or <dfn>cuboid</dfn>, but they are generally referred to as <dfn>N-dimensional arrays</dfn>, <dfn>rank-N arrays</dfn> or <dfn>high rank arrays</dfn>. Arrays of rank greater than <span class="arithmatex">\(3\)</span> are sometimes called <dfn>noble arrays</dfn>.</p>
+<p>For our <code>cost</code> matrix, the total spent on each item is a row-wise sum:
+<pre class="highlight"><code class="language-APL">      +/cost    ⍝ The total cost over the week</code></pre>
+<pre class="highlight"><code>29.16 19.01 21.79</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍴+/cost   ⍝ For 3 items</code></pre>
+<pre class="highlight"><code>3</code></pre></p>
+<p>The total for each day across all items is a column-wise sum:</p>
+<p><pre class="highlight"><code class="language-APL">      +⌿cost    ⍝ The total cost of 3 items</code></pre>
+<pre class="highlight"><code>10.22 9.8 9.86 9.91 10.3 10.04 9.83</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍴+⌿cost   ⍝ Over 7 days</code></pre>
+<pre class="highlight"><code>7</code></pre></p>
+<h2 id="ravel-means-unravel">Ravel means unravel <img alt="🧵" class="twemoji" src="../assets/external/cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f9f5.svg" title=":thread:"></h2>
+<p>Monadic comma is the function <dfn>ravel</dfn> <code>,⍵</code> and it lays out the elements of an array as a vector, one row at a time — a bit like pulling thread from a spool.</p>
+<p><pre class="highlight"><code class="language-APL">      mat ← 3 3⍴⎕A
+      mat</code></pre>
+<pre class="highlight"><code>ABC
+DEF
+GHI</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ,mat</code></pre>
+<pre class="highlight"><code>ABCDEFGHI</code></pre></p>
+<h2 id="the-outer-product">The outer product</h2>
+<p>The "outer product" <code>∘.F</code> operator applies its function operand <code>F</code> between all combinations of elements of its left and right argument arrays. </p>
+<p><pre class="highlight"><code class="language-APL">      F ← {⍺+⍵}
+      1 2 3 ∘.F 10 20 30</code></pre>
+<pre class="highlight"><code>11 21 31
+12 22 32
+13 23 33</code></pre></p>
+<p>For example, the catenate function <code>⍺,⍵</code> (comma) will join two lists together. We can use the outer product to join combinations of words from two lists. </p>
+<p><pre class="highlight"><code class="language-APL">      1 4 9 , 6 5 4</code></pre>
+<pre class="highlight"><code>1 4 9 6 5 4</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      'joined up' , 'text vectors'</code></pre>
+<pre class="highlight"><code>joined uptext vectors
+ </code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      'chicken' 'pork' 'vegetable' ∘., ' chow mein' ' with cashew nuts'</code></pre>
+<pre class="highlight"><code>┌───────────────────┬──────────────────────────┐
+│chicken chow mein  │chicken with cashew nuts  │
+├───────────────────┼──────────────────────────┤
+│pork chow mein     │pork with cashew nuts     │
+├───────────────────┼──────────────────────────┤
+│vegetable chow mein│vegetable with cashew nuts│
+└───────────────────┴──────────────────────────┘</code></pre></p>
+<div class="admonition question">
+<p class="admonition-title">What are those boxes around the output?</p>
+<p>We have just created a <dfn>nested array</dfn>. These are arrays in which each element contains another array more complex than a single number or character. The next section on <a href="../multidimensional-and-nested-arrays/">multidimensional and nested arrays</a> introduces them in more detail.</p>
+<p>If you do not see lines around the output of the last expression above in your interpreter session, turn boxing on:
+<pre class="highlight"><code class="language-APL">      ]box on</code></pre>
+<pre class="highlight"><code>Was OFF</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍳3 3</code></pre>
+<pre class="highlight"><code>┌───┬───┬───┐
+│1 1│1 2│1 3│
+├───┼───┼───┤
+│2 1│2 2│2 3│
+├───┼───┼───┤
+│3 1│3 2│3 3│
+└───┴───┴───┘</code></pre></p>
+</div>
+<h2 id="replicatecompress">Replicate/Compress</h2>
+<p>The <dfn>replicate</dfn> function <code>⍺/⍵</code> (yes, some symbols have <a target="_blank" href="https://aplwiki.com/wiki/Function-operator_overloading">multiple meanings</a>) repeats elements of an array along rows.</p>
+<p><pre class="highlight"><code class="language-APL">      1 2 3/'ABC'</code></pre>
+<pre class="highlight"><code>ABBCCC</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      1 2 3/2 3⍴'DYALOG'</code></pre>
+<pre class="highlight"><code>DYYAAA
+LOOGGG</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      1 ¯2 3/2 3⍴'DYALOG'</code></pre>
+<pre class="highlight"><code>D  AAA
+L  GGG</code></pre></p>
+<p>When used with a Boolean array, the function <code>⍺/⍵</code> is called <dfn>compress</dfn>.</p>
+<p><pre class="highlight"><code class="language-APL">      0 1 0/2 3⍴'DYALOG'</code></pre>
+<pre class="highlight"><code>Y
+O</code></pre></p>
+<p>Just like the forward-slash <code>F/</code> as the <em>reduction operator</em> acts along rows and forward-slash-bar <code>F⌿</code> reduces down columns*, the replicate <code>⍺/⍵</code> and <dfn>replicate-first</dfn> <code>⍺⌿⍵</code> functions work along different axes of high rank arrays.</p>
+<p>*we will see a fuller description <a href="../cells-and-axes/">when we discuss 3D and higher rank arrays</a>.</p>
+<h2 id="indexing">Indexing</h2>
+<p>In many other programming languages, "<a href="https://www.bbc.co.uk/bitesize/guides/zh66pbk/revision/3">selection</a>" is used to describe control structures such as "<a href="https://en.wikipedia.org/wiki/Conditional_(computer_programming)#If%E2%80%93then(%E2%80%93else)">if then else</a>" or "<a href="https://en.wikipedia.org/wiki/Conditional_(computer_programming)#Case_and_switch_statements">switch case</a>". In APL, we can get a similar effect by literally "selecting" elements from arrays. </p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Indexing starts from 1 by default. You can change the index origin by setting <code>⎕IO←0</code>, but this course assumes <code>⎕IO←1</code>.</p>
+</div>
+<p><pre class="highlight"><code class="language-APL">      'APPLE'[1 3 4]</code></pre>
+<pre class="highlight"><code>APL</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍸ 1 0 0 1 0 1</code></pre>
+<pre class="highlight"><code>1 4 6</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      IsDivisibleBy ← {0=⍵|⍺}
+      3 6 8 5 2 IsDivisibleBy 2</code></pre>
+<pre class="highlight"><code>0 1 1 0 1</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      3 6 8 5 2 {⍺[⍸⍺ IsDivisibleBy ⍵]} 2</code></pre>
+<pre class="highlight"><code>6 8 2</code></pre></p>
+<h2 id="problem-set-3">Problem set 3</h2>
+<ol>
+<li>
+<p>Define the numeric vector <code>nums</code></p>
+<pre class="highlight"><code class="language-APL">nums ← 3 5 8 2 1</code></pre>
+<ol>
+<li>Using <code>nums</code>, define <code>mat</code></li>
+</ol>
+<p><pre class="highlight"><code class="language-APL">      mat</code></pre>
+<pre class="highlight"><code>3 5 8
+2 1 3</code></pre></p>
+<ol>
+<li>Using <code>mat</code>, define <code>wide</code></li>
+</ol>
+<p><pre class="highlight"><code class="language-APL">      wide</code></pre>
+<pre class="highlight"><code>3 5 8 3 5 8
+2 1 3 2 1 3</code></pre></p>
+<ol>
+<li>Using <code>mat</code>, define <code>stack</code></li>
+</ol>
+<p><pre class="highlight"><code class="language-APL">      stack</code></pre>
+<pre class="highlight"><code>3 5 8
+3 5 8
+2 1 3
+2 1 3</code></pre></p>
+<details class="example">
+<summary>Answers</summary>
+<p><ol type="a">
+<li>
+<pre class="highlight"><code class="language-APL">mat ← 2 3⍴nums</code></pre>
+</li>
+<li>
+<pre class="highlight"><code class="language-APL">wide ← mat,mat</code></pre>
+</li>
+<li>
+<pre class="highlight"><code class="language-APL">stack ← 2⌿mat</code></pre>
+</li>
+</ol></p>
+</details>
+</li>
+<li>
+<p>Why does <code>101='101'</code> evaluate to a 3-element list?</p>
+<details class="example">
+<summary>Answer</summary>
+<p><code>101</code> is a literal single number (a scalar), whereas <code>'101'</code> is a literal 3-element character vector.</p>
+<p>Due to <a href="../basic-syntax-and-arithmetic/#singleton-extension">singleton extension</a>, <code>101='101'</code> compares the single number <code>101</code> to each of the 3 characters in the 3-element character vector <code>'101'</code>. The character vector <code>'101'</code> is equivalent to <code>'1' '0' '1'</code> but the number <code>101</code> is not the same as the 3-element numeric vector <code>1 0 1</code>.</p>
+</details>
+</li>
+<li>
+<p>Write a function <code>PassFail</code> which takes an array of scores and returns an array of the same shape in which <code>F</code> corresponds to a score less than 40 and <code>P</code> corresponds to a score of 40 or more.</p>
+<p><pre class="highlight"><code class="language-APL">      PassFail 35 40 45</code></pre>
+<pre class="highlight"><code>FPP</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      PassFail 2 5⍴89 77 15 49 72 54 25 18 57 53</code></pre>
+<pre class="highlight"><code>PPFPP
+PFFPP</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<pre class="highlight"><code class="language-APL">PassFail ← {'FP'[1+40≤⍵]}</code></pre>
+</details>
+</li>
+<li>
+<p>This problem is taken from the <a href="https://www.dyalog.com/student-competition.htm">2019 APL Problem Solving Competition</a>.</p>
+<p>A Grille is a square sheet with holes cut out of it which, when laid on top of a similarly-sized character matrix, reveals a hidden message.</p>
+<p><img alt="The application of a grille to a character grid" src="../img/Grille.png" /></p>
+<p>Write an APL function <code>Grille</code> which:</p>
+<ul>
+<li>takes a character matrix left argument where a hash <code>'#'</code> represents opaque material and a space <code>' '</code> represents a hole.</li>
+<li>takes a character matrix of the same shape as right argument</li>
+<li>returns the hidden message as a character vector</li>
+</ul>
+<p><pre class="highlight"><code class="language-APL">      (2 2⍴'# # ') Grille 2 2⍴'LHOI'</code></pre>
+<pre class="highlight"><code>HI</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      grid   ← 5 5⍴'VRYIALCLQIFKNEVPLARKMPLFF'
+      grille ← 5 5⍴'⌺⌺⌺ ⌺ ⌺⌺⌺ ⌺ ⌺ ⌺⌺⌺ ⌺⌺⌺  ⌺⌺'
+      grid grille</code></pre>
+<pre class="highlight"><code>┌─────┬─────┐
+│VRYIA│⌺⌺⌺ ⌺│
+│LCLQI│ ⌺⌺⌺ │
+│FKNEV│⌺ ⌺ ⌺│
+│PLARK│⌺⌺ ⌺⌺│
+│MPLFF│⌺  ⌺⌺│
+└─────┴─────┘</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      grille Grille grid</code></pre>
+<pre class="highlight"><code>ILIKEAPL</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<p>We can use the <strong>where</strong> function <code>⍸⍵</code> to compute indices of spaces:</p>
+<pre class="highlight"><code class="language-APL">Grille ← {⍵[⍸⍺=' ']}</code></pre>
+<p>Or, we can use <strong>compress</strong> <code>⍺/⍵</code> if we first ravel <code>,⍵</code> both arguments:</p>
+<pre class="highlight"><code class="language-APL">Grille ← {(,⍺=' ')/,⍵}</code></pre>
+</details>
+</li>
+<li>
+<p>Back to School</p>
+<ol>
+<li>
+<p>Write a function to produce the multiplication table from <code>1</code> to <code>⍵</code>. </p>
+<p><pre><code class="language-APL">      MulTable 7</code></pre>
+<pre><code class="language-APL">1  2  3  4  5  6  7
+2  4  6  8 10 12 14
+3  6  9 12 15 18 21
+4  8 12 16 20 24 28
+5 10 15 20 25 30 35
+6 12 18 24 30 36 42
+7 14 21 28 35 42 49</code></pre></p>
+</li>
+<li>
+<p>Write a function to produce the addition table from <code>0</code> to <code>⍵</code>.</p>
+<p><pre><code class="language-APL">      AddTable 6</code></pre>
+<pre><code class="language-APL">0 1 2 3  4  5  6
+1 2 3 4  5  6  7
+2 3 4 5  6  7  8
+3 4 5 6  7  8  9
+4 5 6 7  8  9 10
+5 6 7 8  9 10 11
+6 7 8 9 10 11 12</code></pre></p>
+</li>
+</ol>
+<details class="example">
+<summary>Answers</summary>
+<p><ol type="a">
+<li></p>
+<pre class="highlight"><code class="language-APL">MulTable ← {(⍳⍵)∘.×⍳⍵}</code></pre>
+<p>Avoid repeating yourself by assigning values to a name (<code>nums</code> in this example):</p>
+<pre class="highlight"><code class="language-APL">MulTable ← {nums ∘.× nums ← ⍳⍵}</code></pre>
+<p>Or, if left and right arguments to a dyadic function are the same, use a <dfn>selfie</dfn> <code>F⍨⍵</code>:</p>
+<pre class="highlight"><code class="language-APL">MulTable ← {∘.×⍨⍳⍵}</code></pre>
+<p></li>
+<li></p>
+<p>Using the same three styles as described in part <strong>(a)</strong> above:</p>
+<pre class="highlight"><code class="language-APL">AddTable ← {(¯1+⍳1+⍵)∘.+¯1+⍳1+⍵}
+AddTable ← {nums∘.+nums←¯1+⍳1+⍵}
+AddTable ← {∘.+⍨¯1+⍳1+⍵}</code></pre>
+<p></li>
+</ol></p>
+</details>
+</li>
+<li>
+<p>Making the Grade</p>
+<p><table id="gradeBoundaryTable" style="border-top: none;">
+<tbody>
+<tr>
+<td><strong>Score Range</strong></td>
+<td><code>0-64</code></td>
+<td><code>65-69</code></td>
+<td><code>70-79</code></td>
+<td><code>80-89</code></td>
+<td><code>90-100</code></td>
+</tr>
+<tr>
+<td><strong>Letter Grade</strong></td>
+<td>F</td>
+<td>D</td>
+<td>C</td>
+<td>B</td>
+<td>A</td>
+</tr>
+</tbody>
+</table></p>
+<p>Write a function that, given an array of integer test scores in the inclusive range 0 to 100, returns a list of letter grades according to the table above.</p>
+<p><pre><code class="language-APL">      Grade 0 10 75 78 85</code></pre>
+<pre><code class="language-APL">FFCCB</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<p>Use an outer product to compare between lower bounds and the scores. The column-wise sum then tells us which "bin" each score belongs to:</p>
+<pre class="highlight"><code class="language-APL">Grade ← {'FDCBA'[+⌿0 65 70 80 90∘.≤⍵]}</code></pre>
+<p>You can use a different comparison if you choose to use upper bounds:</p>
+<pre class="highlight"><code class="language-APL">{'ABCDF'[+⌿64 69 79 89 100∘.≥⍵]}</code></pre>
+</details>
+</li>
+<li>
+<p>Analysing text</p>
+<ol>
+<li>
+<p>Write a function test if there are any vowels <code>'aeiou'</code> in text vector <code>⍵</code></p>
+<pre class="highlight"><code class="language-APL">      AnyVowels 'this text is made of characters'
+1
+      AnyVowels 'bgxkz'
+0</code></pre>
+</li>
+<li>
+<p>Write a function to count the number of vowels in its character vector argument <code>⍵</code></p>
+<p><pre class="highlight"><code class="language-APL">      CountVowels 'this text is made of characters'</code></pre>
+<pre class="highlight"><code>9</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      CountVowels 'we have twelve vowels in this sentence'</code></pre>
+<pre class="highlight"><code>12</code></pre></p>
+</li>
+<li>
+<p>Write a function to remove the vowels from its argument</p>
+<pre class="highlight"><code class="language-APL">      RemoveVowels 'this text is made of characters'
+ths txt s md f chrctrs</code></pre>
+</li>
+</ol>
+<details class="example">
+<summary>Answers</summary>
+<p><ol type="a">
+<li>
+Using what we've learned so far, a good way to compare all vowels with all characters in our argument <code>⍵</code> is with an outer product. Then, using two <em>or-reductions</em>, we ask "are there any <code>1</code>s in each row?" Then, "are there any <code>1</code>s in any of the rows?"</p>
+<pre class="highlight"><code class="language-APL">AnyVowels ← {∨/∨/'aeiou'∘.=⍵}</code></pre>
+<p>Or, we can ravel the contents of the array into a vector to perform one big or-reduction across all elements:</p>
+<pre class="highlight"><code class="language-APL">AnyVowels ← {∨/,'aeiou'∘.=⍵}</code></pre>
+<p></li>
+<li></p>
+<p>Similar techniques can be used for counting the ones:</p>
+<pre class="highlight"><code class="language-APL">CountVowels ← {+/+/'aeiou'∘.=⍵}
+CountVowels ← {+/,'aeiou'∘.=⍵}</code></pre>
+<p>Because we are comparing a single vector, +⌿ and ∨⌿ both tell us if there is any vowel in that position:</p>
+<pre class="highlight"><code class="language-APL">CountVowels ← {+/+⌿'aeiou'∘.=⍵}
+CountVowels ← {+/∨⌿'aeiou'∘.=⍵}</code></pre>
+<p></li>
+<li>
+To remove vowels, we must consider the columns of our outer product equality. We then keep elements which are not <code>~⍵</code> vowels.</p>
+<pre class="highlight"><code class="language-APL">RemoveVowels ← {⍵/⍨~∨⌿'aeiou'∘.=⍵}</code></pre>
+<p>Or rows if the arguments to our outer product are swapped:</p>
+<pre class="highlight"><code class="language-APL">RemoveVowels ← {⍵/⍨~∨/⍵∘.='aeiou'}</code></pre>
+<p>Since we are compressing elements out of a vector, we can use either replicate <code>⍺/⍵</code> or replicate-first <code>⍺⌿⍵</code>. This is because a vector only has a single dimension, or axis, and that axis is both the first and the last.</p>
+<pre class="highlight"><code class="language-APL">RemoveVowels ← {⍵/⍨~∨⌿'aeiou'∘.=⍵}
+RemoveVowels ← {⍵⌿⍨~∨⌿'aeiou'∘.=⍵}</code></pre>
+</li>
+</details>
+</li>
+<li>
+<p>Matching shapes</p>
+<ol>
+<li>
+<p>Write a function to add a vector <code>⍵</code> to each row of a matrix <code>⍺</code>:</p>
+<pre class="highlight"><code class="language-APL">      (3 2⍴1 100) AddRows 1 9
+2 109
+2 109
+2 109
+      (5 3⍴1 10 100 1000) AddRows 5 10 15
+6   20  115
+1005   11   25
+105 1010   16
+15  110 1015
+6   20  115</code></pre>
+</li>
+<li>
+<p>Write a function to add a vector to each row of a matrix, regardless of the order in which they are supplied:</p>
+<pre class="highlight"><code class="language-APL">      1 9 AddRows 3 2⍴1 100
+2 109
+2 109
+2 109
+      (2 2⍴1 9 11 18) AddRows 9 1
+10 10
+20 19</code></pre>
+</li>
+</ol>
+<details class="example">
+<summary>Answers</summary>
+<p><ol type="a">
+<li>
+Reshape recycles elements. We can use this to duplicate rows until we have the correct shape to allow <code>+</code> to map between elements for us:
+<pre class="highlight"><code class="language-APL">AddRows ← {⍺+(⍴⍺)⍴⍵}</code></pre>
+</li>
+<li>
+Finding the maximum shape is a more general solution:
+<pre class="highlight"><code class="language-APL">AddRows ← {s←(⍴⍺)⌈⍴⍵ ⋄ (s⍴⍺)+s⍴⍵}</code></pre></p>
+<p>This way of applying functions between arrays of different shapes is very common. As with many things in this course, eventually we will discover more elegant methods. Here is an example of using <a href="../cells-and-axes/#the-rank-operator">the rank operator</a>:</p>
+<p><pre class="highlight"><code class="language-APL">AddRows ← +⍤1</code></pre>
+</li>
+</ol></p>
+</details>
+</li>
+<li>
+<p>These are the heights of some students in 3 classes.
+    <pre class="highlight"><code class="language-APL">student ← 10 7⍴'Kane   Jonah  JessicaPadma  Katie  CharlieAmil   David  Zara   Filipa '
+class ← 'CBACCCBBAB'
+height ← 167 177 171 176 178 164 177 177 173 160</code></pre></p>
+<p>Use APL to:</p>
+<ol>
+<li>Find the height of the tallest student</li>
+<li>Find the name of the tallest student</li>
+<li>Find the class to which the tallest student belongs  </li>
+<li>Find the average height of students in class <code>B</code></li>
+</ol>
+<details class="example">
+<summary>Answers</summary>
+<p><ol type="a">
+<li>
+<pre class="highlight"><code class="language-APL">      ⌈/height
+178</code></pre>
+</li>
+<li>
+<pre class="highlight"><code class="language-APL">      (height=⌈/height)⌿student
+Katie</code></pre>
+</li>
+<li>
+<pre class="highlight"><code class="language-APL">      (height=⌈/height)⌿class
+C</code></pre></p>
+<p>You might have tried to use indexing and gotten an error:</p>
+<pre class="highlight"><code class="language-APL">RANK ERROR
+        student[⍸height=⌈/height]
+                ∧</code></pre>
+<p>There is <a href="../selecting-from-arrays/#square-bracket-indexing">additional syntax</a> in order to select from matrices and higher rank arrays.</p>
+<p></li>
+<li>
+We can use either compress or indexing to select from the <code>height</code> vector:
+<pre class="highlight"><code class="language-APL">      Mean ← {(+/⍵)÷≢⍵}
+      Mean (class='B')/height
+172.75
+      Mean height[⍸class='B']
+172.75</code></pre>
+</li>
+</ol></p>
+</details>
+</li>
+<li>
+<p>Optimus Prime</p>
+<p>A prime number is a positive whole number greater than <span class="arithmatex">\(1\)</span> which can be divided only by itself and <span class="arithmatex">\(1\)</span> with no remainder.</p>
+<p>Write a dfn which returns all of the prime numbers between <code>1</code> and <code>⍵</code>.</p>
+<p><pre class="highlight"><code class="language-APL">      Primes 10</code></pre>
+<pre class="highlight"><code>2 3 5 7</code></pre></p>
+<hr />
+<p><pre class="highlight"><code>      Primes 30</code></pre>
+<pre class="highlight"><code>2 3 5 7 11 13 17 19 23 29</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<pre class="highlight"><code class="language-APL">Primes ← {⍸2=+⌿0=∘.|⍨⍳⍵}</code></pre>
+<p>An alternative coding uses the multiplication table:</p>
+<pre class="highlight"><code class="language-APL">Primes ← {i~∘.×⍨i←1↓⍳⍵}</code></pre>
+<p>Of course, the outer product <code>∘.F</code> indicates that the number of calculations to compute both of these solutions increases with the square of the input size. We say they have a computational complexity "<em>of order n squared</em>" or <span class="arithmatex">\(O(n^2)\)</span> in <a href="https://en.wikipedia.org/wiki/Big_O_notation">big-O notation</a>. This is a very inefficient way to find prime numbers.
+To see discussions around more efficient ways to compute prime numbers in APL, see <a href="https://dfns.dyalog.com/n_pco.htm">the dfns page on prime numbers</a>.</p>
+</details>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://dyalog.com" target="_blank" rel="noopener" title="dyalog.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M16 32v119.2h64V96h107.2C300.6 96 368 176.2 368 255.9 368 332 309.4 416 187.2 416H16v64h171.2C347.9 480 432 367.3 432 255.9c0-58.7-22.1-113.4-62.3-154.3C324.9 56 261.7 32 187.2 32z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mastodon.social/@dyalog" target="_blank" rel="noopener" title="mastodon.social" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 15.5a.5.5 0 0 1-.5.5.5.5 0 0 1-.5-.5v-7c0-1.93-2.07-3.5-4-3.5H6a4 4 0 0 0-4 4v10h4v-4h5v4h4v-4.5a.5.5 0 0 1 .5-.5.5.5 0 0 1 .5.5V16a3 3 0 0 0 3 3 3 3 0 0 0 3-3v-2h-2.5z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/dyalogapl" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "content.tooltips"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="../javascripts/mathjax/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

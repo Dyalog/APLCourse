@@ -1,0 +1,1242 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A guided introduction to Dyalog APL">
+      
+      
+      
+        <link rel="canonical" href="https://dyalog.com/javascripts/mathjax/CONTRIBUTING/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../img/favicon-32.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>Contributing to MathJax - APL Course</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../style/main.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#contributing-to-mathjax" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="APL Course" class="md-header__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../../../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APL Course
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Contributing to MathJax
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="APL Course" class="md-nav__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../../../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    APL Course
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../basic-syntax-and-arithmetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic syntax
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../dfns-and-assignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dfns and Assignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../array-logic-data-driven-conditionals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Array Logic and Data-driven Conditionals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../multidimensional-and-nested-arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multidimensional and Nested Arrays
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cells-and-axes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cells and Axes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../finding-and-replacing-values/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Finding and Replacing Values
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../selecting-from-arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Selecting from Arrays
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../broken-keyboard-problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Broken Keyboard Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../loops-and-recursion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Loops and Recursion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Assignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Extra Assignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Workspaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Workspace Basics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Namespaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Namespaces and Other Objects
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Help
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user-defined-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    User-defined Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Quad%20names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quad Names
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../error-handling-and-debugging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Handling and Debugging
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data IO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code IO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    External Interfaces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Quirks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Historical Quirks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Interpreter-internals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interpreter Internals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Reading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Further Reading
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#reporting-an-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reporting An Issue
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reporting An Issue">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bug-reports" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bug Reports
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feature-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Feature Requests
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#change-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Change Requests
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#working-on-mathjax-core" class="md-nav__link">
+    <span class="md-ellipsis">
+      Working on MathJax core
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Working on MathJax core">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-branches-tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Branches &amp; Tags
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submitting-pull-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submitting Pull Requests
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Submitting Pull Requests">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#need-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      Need Help?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-and-quality-assurance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing and Quality Assurance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#writing-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Writing documentation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#translation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Translation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conduct" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conduct
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="contributing-to-mathjax">Contributing to MathJax</h1>
+<p>You are interested in giving us a hand? That's awesome! We've put
+together some brief guidelines that should help you get started
+quickly and easily.</p>
+<p>There are lots and lots of ways to get involved, this document covers:</p>
+<ul>
+<li><a href="#reporting-an-issue">reporting an issue</a><ul>
+<li><a href="#bug-reports">bug reports</a></li>
+<li><a href="#feature-requests">feature requests</a></li>
+<li><a href="#change-requests">change requests</a></li>
+</ul>
+</li>
+<li><a href="#working-on-mathjax-core">working on MathJax core</a><ul>
+<li><a href="#key-branches--tags">key branches and tags</a></li>
+<li><a href="#submitting-pull-requests">submitting pull requests</a></li>
+<li><a href="#testing-and-quality-assurance">testing and quality assurance</a></li>
+<li><a href="#writing-documentation">writing documentation</a></li>
+<li><a href="#translation">translation</a></li>
+</ul>
+</li>
+<li><a href="#conduct">Conduct</a></li>
+</ul>
+<h2 id="reporting-an-issue">Reporting An Issue</h2>
+<p>If you're about to raise an issue because you think you've found a
+problem with MathJax, or you'd like to make a request for a new
+feature in the codebase, or any other reason, please read this first.</p>
+<p>The <a href="https://github.com/mathjax/MathJax/issues">MathJax issue
+tracker</a> is the
+preferred channel for <a href="#bug-reports">bug reports</a>, <a href="#feature-requests">feature
+requests</a>, <a href="#change-requests">change requests</a>, and
+<a href="#submitting-pull-requests">submitting pull requests</a>, but please
+respect the following restrictions:</p>
+<ul>
+<li>
+<p>Please <strong>search for existing issues</strong>. Help us keep duplicate issues
+  to a minimum by checking to see if someone has already reported your
+  problem or requested your idea.</p>
+</li>
+<li>
+<p>Please <strong>do not</strong> use the issue tracker for personal support
+  requests (use <a href="https://groups.google.com/forum/#!forum/mathjax-users">the MathJax User Group</a>).</p>
+</li>
+<li>
+<p>Please <strong>be civil</strong>. Keep the discussion on topic and respect the
+  opinions of others. See also our <a href="#conduct">Conduct Guidelines</a></p>
+</li>
+</ul>
+<h3 id="bug-reports">Bug Reports</h3>
+<p>A bug is a <em>demonstrable problem</em> that is caused by the code in the
+repository. Good bug reports are extremely helpful &mdash; thank you!</p>
+<p>Guidelines for bug reports:</p>
+<ol>
+<li>
+<p><strong>Use the GitHub issue search</strong> &mdash; check if the issue has already been
+   reported.</p>
+</li>
+<li>
+<p><strong>Check if the issue has been fixed</strong> &mdash; look for <a href="https://github.com/mathjax/MathJax/issues?q=is%3Aclosed">closed
+   issues in the current
+   milestone</a>
+   or try to reproduce it using the latest <code>develop</code> branch. Please
+   note that you will need to
+   <a href="https://docs.mathjax.org/en/latest/web/hosting.html#getting-mathjax-via-git">compile MathJax and make the components</a>
+   in order to test MathJax from the source repository.</p>
+</li>
+<li>
+<p><strong>Share a live sample of the problem</strong> &mdash; without a live page
+   it is usually impossible to debug problems; see also the <a href="#template">Bug Report
+   Template</a> below.</p>
+</li>
+<li>
+<p><strong>Isolate the problem</strong> &mdash; a live sample is a starting point
+   but if you want to speed things up, create a <a href="https://css-tricks.com/reduced-test-cases/">reduced test
+   case</a>. Be specific
+   about your setup (browser, OS versions, etc). Use services like
+   <a href="http://jsbin.com">jsbin</a>, <a href="http://codepen.io">CodePen</a>, or
+   <a href="http://jsfiddle.com">jsFiddle</a> to make collaboration on minimal
+   test cases easier for everyone.</p>
+</li>
+<li>
+<p><strong>Include a screenshot/cast as a last resort</strong> &mdash; Is your
+   issue about a layout or design feature or bug that is hard to reproduce
+   or isolate? Then please provide a screenshot or screencast. Tools
+   like <a href="http://www.cockos.com/licecap/">LICEcap</a> or
+   <a href="http://www.saucelabs.com">SauceLabs</a> allow you to quickly and
+   easily record a screencasts. If you make it an animated gif, you can
+   embed it directly into your GitHub issue.</p>
+</li>
+<li>
+<p>Use the <a href="#template">Bug Report Template</a> below or <a href="https://github.com/MathJax/MathJax/issues/new?title=Bug%3A&amp;body=%23%23%23%20Issue%20Summary%0A%0A%23%23%23%20Steps%20to%20Reproduce%0A%0A1.%20This%20is%20the%20first%20step%0A%0AThis%20is%20a%20bug%20because...%0A%0A%23%23%23%20Technical%20details%0A%0A*%20MathJax%20Version%3A%20master%20-%20latest%20commit%3A%20%20INSERT%20COMMIT%20REF%0A*%20Client%20OS%3A%20%0A*%20Browser%3A%20%0A*%20">click this
+   link</a>
+   to start creating a bug report with the template automatically.</p>
+</li>
+</ol>
+<p>A good bug report shouldn't leave others needing to request
+more information from you. Be sure to include the details of your environment.</p>
+<p><a id="template"></a></p>
+<p>Template Example (<a href="https://github.com/MathJax/MathJax/issues/new?title=Bug%3A&amp;body=%23%23%23%20Issue%20Summary%0A%0A%23%23%23%20Steps%20to%20Reproduce%0A%0A1.%20This%20is%20the%20first%20step%0A%0AThis%20is%20a%20bug%20because...%0A%0A%23%23%23%20Technical%20details%0A%0A*%20MathJax%20Version%3A%20master%20-%20latest%20commit%3A%20%20INSERT%20COMMIT%20REF%0A*%20Client%20OS%3A%20%0A*%20Browser%3A%20%0A*%20">click to use</a>):</p>
+<pre class="highlight"><code>Short and descriptive example bug report title
+
+### Issue Summary
+
+A summary of the issue and the browser/OS environment in which it occurs. If
+suitable, include the steps required to reproduce the bug.
+
+### Steps to Reproduce
+
+1. This is the first step
+2. This is the second step
+3. Further steps, etc.
+
+Any other information you want to share that is relevant to the issue
+being reported. Especially, why do you consider this to be a bug? What
+do you expect to happen instead?
+
+### Technical details:
+
+* MathJax Version: 2.3 (latest commit: f3aaf3a2a3e964df2770dc4aaaa9c87ce5f47e2c)
+* Client OS: Mac OS X 10.8.4
+* Browser: Chrome 29.0.1547.57</code></pre>
+<h3 id="feature-requests">Feature Requests</h3>
+<p>Feature requests are welcome. Before you submit one, be sure to have:</p>
+<ol>
+<li><strong>Used the GitHub search</strong> to check that the feature hasn't already
+   been requested.</li>
+<li>Take a moment to think about whether your idea fits with the scope
+   and aims of the project, or if it might better fit being a <a href="https://github.com/mathjax/MathJax-third-party-extensions">custom
+   extension</a>.</li>
+<li>Remember, it's up to <em>you</em> to make a strong case to convince the
+   project's leaders of the merits of this feature. Please provide as
+   much detail and context as possible, this means explaining the use
+   case and why it is likely to be common.</li>
+</ol>
+<h3 id="change-requests">Change Requests</h3>
+<p>Change requests cover both architectural and functional changes to how
+MathJax works. If you have an idea for a new or different dependency,
+a refactor, or an improvement to a feature, etc., please be sure to:</p>
+<ol>
+<li><strong>Use the GitHub search</strong> to check that someone else didn't get there first.</li>
+<li>Take a moment to think about the best way to make a case for, and
+   explain what you're thinking. Are you sure this shouldn't really be
+   a <a href="#bug-reports">bug report</a> or a <a href="#feature-requests">feature
+   request</a>?  Is it really one idea or is it many?
+   What's the context? What problem are you solving? Why is what you
+   are suggesting better than what's already there?</li>
+</ol>
+<h2 id="working-on-mathjax-core">Working on MathJax core</h2>
+<p>You want to contribute code? We describe how below.  First, note that
+the MathJax source code is in the
+<a href="https://github.com/mathjax/MathJax-src">https://github.com/mathjax/MathJax-src</a> repository, not the
+<a href="https://github.com/mathjax/MathJax">https://github.com/mathjax/MathJax</a> repository, which contains the
+packaged component files for distribution on CDNs and the <a href="https://www.npmjs.com/package/mathjax">mathjax npm
+package</a> (the source code is
+included in the <a href="https://www.npmjs.com/package/mathjax-full">mathjax-full npm
+package</a>).</p>
+<h3 id="key-branches-tags">Key Branches &amp; Tags</h3>
+<p>MathJax uses several permanent branches in the <a href="https://github.com/mathjax/MathJax-src">MathJax source repository</a>:</p>
+<ul>
+<li>
+<p><strong><a href="https://github.com/mathjax/MathJax-src/tree/develop">develop</a></strong>
+  is the development branch. All work on the next release happens here
+  so you should generally branch off <code>develop</code> if you are going to
+  submit a pull request. Do <strong>NOT</strong> use this branch for a production
+  site.</p>
+</li>
+<li>
+<p><strong><a href="https://github.com/mathjax/MathJax-src">master</a></strong> contains the latest
+  release of MathJax. This branch may be used in production. Do 
+  <strong>NOT</strong> use this branch to work on MathJax's source.</p>
+</li>
+</ul>
+<p>These branches reflect version 3 of MathJax, which is substantially
+different from the version 2 codebase.  Version 2 will continue to be
+maintained while web sites transition to version 3, with work being
+done using the following branches in the <a href="https://github.com/mathjax/MathJax">MathJax distribution
+repository</a>:</p>
+<ul>
+<li>
+<p><strong><a href="https://github.com/mathjax/MathJax/tree/legacy-v2-develop">legacy-v2-develop</a></strong>
+  is the development branch for changes to the legacy version 2 code.
+  Any pull requests for version 2 should be branched from here.  Do
+  <strong>NOT</strong> use this branch for a production site.</p>
+</li>
+<li>
+<p><strong><a href="https://github.com/mathjax/MathJax/tree/legacy-v2">legacy-v2</a></strong>
+  is the branch that contains any updates to version 2 following
+  the release of version 3.  Do <strong>NOT</strong> use this branch to work on
+  MathJax's source.</p>
+</li>
+</ul>
+<p>In addition to these branches, MathJax uses tags to identify the
+various versions.  These can be checked out to obtain the specified
+release; for example, <code>git checkout 2.7.5</code> would get you the files for
+version 2.7.5 of MathJax.</p>
+<p>Note that version 3 is written in Typescript, and so must be compiled
+to obtain usable javascript files, and that the components need to be
+built once that is done.  See the
+<a href="https://docs.mathjax.org/en/latest/web/hosting.html#getting-mathjax-via-git">documentation</a>
+for details. For version 2, the source javascript files are not
+compressed until a release is made, so you should use the copies in
+the <code>unpacked</code> directory during development.</p>
+<h3 id="submitting-pull-requests">Submitting Pull Requests</h3>
+<p>Pull requests are welcome. If you're looking to submit a PR for
+something that doesn't have an open issue, please consider <a href="#reporting-an-issue">raising an
+issue</a> that your PR can close, especially if
+you're fixing a bug. This makes it more likely that there will be
+enough information available for your PR to be properly tested and
+merged.</p>
+<h5 id="need-help">Need Help?</h5>
+<p>If you're not completely clear on how to submit/update/<em>do</em> Pull
+Requests, please check out our <a href="https://github.com/mathjax/MathJax/wiki/Source-control-policies">source control
+policies</a>. For
+more insights, check the excellent in depth <a href="https://github.com/TryGhost/Ghost/wiki/Git-Workflow">Git Workflow
+guide</a> from
+Ghost, in particular</p>
+<ul>
+<li><a href="https://github.com/TryGhost/Ghost/wiki/Git-workflow#commit-messages">Ghost Workflow guide: commit messages</a></li>
+</ul>
+<h3 id="testing-and-quality-assurance">Testing and Quality Assurance</h3>
+<p>If you're
+looking to get involved with the code base and don't know where to
+start, checking out and testing a pull request is one of the most
+useful things you could do.</p>
+<p>These are some <a href="https://gist.github.com/piscisaureus/3342247">excellent
+instructions</a> on
+configuring your GitHub repository to allow you to checkout pull
+requests in the same way as branches.</p>
+<h3 id="writing-documentation">Writing documentation</h3>
+<p>MathJax's main documentation can be found at <a href="http://docs.mathjax.org">docs.mathjax.org</a>.
+The source of the docs is hosted in the
+<a href="http://github.com/mathjax/MathJax-docs">mathjax/MathJax-docs</a> repo here on GitHub.</p>
+<p>The documentation is generated using
+<a href="http://sphinx-doc.org/">Sphinx-doc</a> and hosted on <a href="http://readthedocs.org">Read the
+docs</a>.  You can clone the repo and submit pull
+requests following the <a href="#submitting-pull-requests">pull-request</a>
+guidelines.</p>
+<h3 id="translation">Translation</h3>
+<p>If you wish to add or update translations of MathJax, please do it on
+<a href="https://translatewiki.net/w/i.php?title=Special:Translate&amp;group=out-mathjax-0-all">TranslateWiki.net</a>
+(and while you're there you can help other open source projects,
+too).</p>
+<p>For bug reports and other questions that don't fit on
+TranslateWiki.net, head over to the
+<a href="https://github.com/mathjax/MathJax-i18n">mathjax/mathjax-i18n</a>
+repository.</p>
+<p>The translation files currently are for version 2, as localization
+hasn't been added to version 3 yet.</p>
+<h2 id="conduct">Conduct</h2>
+<p>As a NumFOCUS fiscally sponsored project, MathJax is governed by the
+<a href="https://numfocus.org/code-of-conduct">NumFOCUS code of conduct</a>,
+which we summarize as follows:</p>
+<p>We are committed to providing a friendly, safe and welcoming
+environment for all, regardless of gender, sexual orientation,
+disability, ethnicity, religion, or similar personal characteristic.</p>
+<p>Please be kind and courteous. There's no need to be mean or rude.
+Respect that people have differences of opinion and that every design
+or implementation choice carries a trade-off and numerous costs. There
+is seldom a right answer, merely an optimal answer given a set of
+values and circumstances.</p>
+<p>Please keep unstructured critique to a minimum. If you have solid
+ideas you want to experiment with, make a fork and see how it works.</p>
+<p>We will exclude you from interaction if you insult, demean or harass
+anyone.  That is not welcome behaviour. We interpret the term
+"harassment" as including the definition in the <a href="https://numfocus.org/code-of-conduct#unacceptable-behavior">Unacceptable
+Behavior</a>
+section of the <a href="https://numfocus.org/code-of-conduct">NumFOCUS code of
+conduct</a>; if you have any lack
+of clarity about what might be included in that concept, please read
+that definition. In particular, we don't tolerate behavior that
+excludes people in socially marginalized groups.</p>
+<p>Private harassment is also unacceptable. No matter who you are, if you
+feel you have been or are being harassed or made uncomfortable by a
+community member, please contact one of the channel ops or any of the
+<a href="https://github.com/MathJax/MathJax">MathJax</a> core team
+immediately. Whether you're a regular contributor or a newcomer, we
+care about making this community a safe place for you and we've got
+your back.</p>
+<p>Likewise any spamming, trolling, flaming, baiting, or other
+attention-stealing behaviour is not welcome.</p>
+<p>We also recommend that you read <a href="http://blog.discourse.org/2013/03/the-universal-rules-of-civilized-discourse/">discourse's
+rules</a>
+for further suggestions on appropriate behavior.</p>
+<h2 id="references">References</h2>
+<ul>
+<li>We heavily borrowed from Mozilla and Ghost -- thank you!</li>
+<li><a href="https://github.com/TryGhost/Ghost/blob/master/CONTRIBUTING.md">https://github.com/TryGhost/Ghost/blob/master/CONTRIBUTING.md</a></li>
+<li><a href="https://github.com/mozilla/rust/wiki/Note-development-policy">https://github.com/mozilla/rust/wiki/Note-development-policy</a></li>
+<li><a href="https://github.com/jden/CONTRIBUTING.md/blob/master/CONTRIBUTING.md">https://github.com/jden/CONTRIBUTING.md/blob/master/CONTRIBUTING.md</a></li>
+<li><a href="http://blog.discourse.org/2013/03/the-universal-rules-of-civilized-discourse/">http://blog.discourse.org/2013/03/the-universal-rules-of-civilized-discourse/</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://dyalog.com" target="_blank" rel="noopener" title="dyalog.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M16 32v119.2h64V96h107.2C300.6 96 368 176.2 368 255.9 368 332 309.4 416 187.2 416H16v64h171.2C347.9 480 432 367.3 432 255.9c0-58.7-22.1-113.4-62.3-154.3C324.9 56 261.7 32 187.2 32z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mastodon.social/@dyalog" target="_blank" rel="noopener" title="mastodon.social" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 15.5a.5.5 0 0 1-.5.5.5.5 0 0 1-.5-.5v-7c0-1.93-2.07-3.5-4-3.5H6a4 4 0 0 0-4 4v10h4v-4h5v4h4v-4.5a.5.5 0 0 1 .5-.5.5.5 0 0 1 .5.5V16a3 3 0 0 0 3 3 3 3 0 0 0 3-3v-2h-2.5z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/dyalogapl" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+        <script src="../../config.js"></script>
+      
+        <script src="../tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

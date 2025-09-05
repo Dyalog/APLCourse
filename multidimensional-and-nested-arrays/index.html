@@ -1,0 +1,1298 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A guided introduction to Dyalog APL">
+      
+      
+      
+        <link rel="canonical" href="https://dyalog.com/multidimensional-and-nested-arrays/">
+      
+      
+        <link rel="prev" href="../array-logic-data-driven-conditionals/">
+      
+      
+        <link rel="next" href="../cells-and-axes/">
+      
+      
+      <link rel="icon" href="../img/favicon-32.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>Multidimensional and Nested Arrays - APL Course</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css.49ea35f2.css">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../style/main.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#multidimensional-and-nested-arrays" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="APL Course" class="md-header__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APL Course
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Multidimensional and Nested Arrays
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="APL Course" class="md-nav__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    APL Course
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basic-syntax-and-arithmetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic syntax
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dfns-and-assignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dfns and Assignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../array-logic-data-driven-conditionals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Array Logic and Data-driven Conditionals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Multidimensional and Nested Arrays
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multidimensional and Nested Arrays
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#arrays-are-made-of-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arrays are made of arrays
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arrays-have-rank-and-depth" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arrays have rank and depth
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arrays-are-made-of-scalars" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arrays are made of scalars
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-shape-of-a-scalar" class="md-nav__link">
+    <span class="md-ellipsis">
+      The shape of a scalar
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simple-array-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Simple array selection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-set-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem set 4
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cells-and-axes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cells and Axes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../finding-and-replacing-values/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Finding and Replacing Values
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../selecting-from-arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Selecting from Arrays
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../broken-keyboard-problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Broken Keyboard Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loops-and-recursion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Loops and Recursion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Assignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Extra Assignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Workspaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Workspace Basics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Namespaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Namespaces and Other Objects
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Help
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-defined-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    User-defined Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quad%20names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quad Names
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../error-handling-and-debugging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Handling and Debugging
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data IO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code IO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    External Interfaces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quirks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Historical Quirks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interpreter-internals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interpreter Internals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Reading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Further Reading
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#arrays-are-made-of-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arrays are made of arrays
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arrays-have-rank-and-depth" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arrays have rank and depth
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arrays-are-made-of-scalars" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arrays are made of scalars
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-shape-of-a-scalar" class="md-nav__link">
+    <span class="md-ellipsis">
+      The shape of a scalar
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simple-array-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Simple array selection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-set-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem set 4
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="multidimensional-and-nested-arrays">Multidimensional and Nested Arrays</h1>
+<h2 id="arrays-are-made-of-arrays">Arrays are made of arrays</h2>
+<p>You might have already noticed some awkwardness when we tried to represent a list of names as a character matrix. The main problem being that names do not usually have uniform length!</p>
+<p><pre class="highlight"><code class="language-APL">      student ← 4 7⍴'Kane   Jonah  JessicaPadma  '
+      student = ' '</code></pre>
+<pre class="highlight"><code>0 0 0 0 1 1 1
+0 0 0 0 0 1 1
+0 0 0 0 0 0 0
+0 0 0 0 0 1 1</code></pre></p>
+<p>Any code using this representation is going to have to be aware of the trailing space characters. This can be an efficient representation of this data, but it can sometimes be more convenient to have a real nested structure to deal with.</p>
+<p><pre class="highlight"><code class="language-APL">      2 3⍴(1 2)(3 4 5)('AB')(2 2⍴'CDEF')</code></pre>
+<pre class="highlight"><code>┌───┬─────┬─────┐
+│1 2│3 4 5│AB   │
+├───┼─────┼─────┤
+│CD │1 2  │3 4 5│
+│EF │     │     │
+└───┴─────┴─────┘</code></pre></p>
+<div class="admonition question">
+<p class="admonition-title">How do I get those boxes around my output?</p>
+<p>Turn boxing on with the user command
+<pre class="highlight"><code class="language-APL">    ]Box on
+Was OFF</code></pre>
+Boxing affects the display of output in the APL session, but does not affect the structure or values of arrays in any way.</p>
+</div>
+<p>In general, arrays are made of arrays. More specifically, the individual elements of any array are <dfn>scalar</dfn> - but they may lie along zero or more <a href="../cells-and-axes/">axes</a>.</p>
+<p>How can we fit an arbitrary array as a single element in another array? We have to somehow package it up as one of these scalars.</p>
+<p>The example above uses a special notation to implicitly wrap each sub-array in a scalar. We have actually used it many times already. <dfn>Stranding notation</dfn> is a convenient notation for writing vectors by having arrays separated by spaces or parentheses. Above we wrote parenthesised APL expressions which evaluate to arrays, but we could have written the names of some pre-defined arrays instead.</p>
+<p><pre class="highlight"><code class="language-APL">      a ← 1 2
+      b ← 3 4 5
+      c ← 'AB'
+      d ← 2 2⍴'CDEF'
+      2 3 ⍴ a b c d</code></pre>
+<pre class="highlight"><code>┌───┬─────┬─────┐
+│1 2│3 4 5│AB   │
+├───┼─────┼─────┤
+│CD │1 2  │3 4 5│
+│EF │     │     │
+└───┴─────┴─────┘</code></pre></p>
+<p>We can reshape the result of an expression, without naming it, by using the <dfn>enclose</dfn> function <code>⊂⍵</code>.</p>
+<p><pre class="highlight"><code class="language-APL">      3⍴⊂'Hello'</code></pre>
+<pre class="highlight"><code>┌─────┬─────┬─────┐
+│Hello│Hello│Hello│
+└─────┴─────┴─────┘</code></pre></p>
+<h2 id="arrays-have-rank-and-depth">Arrays have rank and depth</h2>
+<p>Nested arrays have depth, which is different to rank in APL. Rank is the number of dimensions an array has (scalar 0, vector 1, matrix 2 etc.) whereas depth is how many arrays are inside our arrays.</p>
+<p>The <dfn>depth</dfn> function <code>≡⍵</code> returns the depth of an array. The absolute value of depth <code>|≡⍵</code> is the level of nesting, starting at 0 for simple scalars.</p>
+<p><pre class="highlight"><code class="language-APL">      ≡'a'  ⍝ Simple scalar has depth 0</code></pre>
+<pre class="highlight"><code>0</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ≡x    ⍝ Simple matrix has depth 1</code></pre>
+<pre class="highlight"><code>1</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ≢⍴x   ⍝ Simple matrix has rank 2</code></pre>
+<pre class="highlight"><code>2</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ≡⊂x   ⍝ Enclosing increases the depth</code></pre>
+<pre class="highlight"><code>2</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ≡⊂⊂x</code></pre>
+<pre class="highlight"><code>3</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ≡⊂⊂⊂x</code></pre>
+<pre class="highlight"><code>4</code></pre></p>
+<p>Negative depth indicates uneven nesting:</p>
+<pre class="highlight"><code class="language-APL">      ≡(1 2)(3 4)         ⍝ Evenly nested arrays have positive depth
+2
+      ≡(1 2)(3 4 (4 5))   ⍝ Unevenly nested arrays have negative depth
+¯3</code></pre>
+<p>If you have a complex structure like this, you can use the <dfn>each</dfn> operator <code>F¨⍵</code> to keep drilling down until you feel you have a better understanding.</p>
+<pre class="highlight"><code class="language-APL">      nv ← (1 2)(3 4 (4 5))
+      nv
+┌───┬─────────┐
+│1 2│┌─┬─┬───┐│
+│   ││3│4│4 5││
+│   │└─┴─┴───┘│
+└───┴─────────┘
+
+      ⍴nv     ⍝ 2-element vector
+2
+      ≡nv     ⍝ Unevenly nested
+¯3
+
+      ⍴¨nv    ⍝ 2 vectors of lengths 2 and 3
+┌─┬─┐
+│2│3│
+└─┴─┘
+      ≡¨nv    ⍝ 1st element is simple, 2nd is unevenly nested
+1 ¯2
+
+      ⍴¨¨nv   ⍝ 2nd element appears to be made of 2 scalars followed by a vector
+┌───┬─────┐
+│┌┬┐│┌┬┬─┐│
+││││││││2││
+│└┴┘│└┴┴─┘│
+└───┴─────┘
+      ≡¨¨nv   ⍝ 2nd element is 2 simple scalars and a non-nested array
+┌───┬─────┐
+│0 0│0 0 1│
+└───┴─────┘</code></pre>
+<p>So we can tell we have a 2 element nested vector. The 1st element is a simple 2-element vector. The 2nd element contains 2 simple scalars and a simple vector of length 2.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The <code>]Repr</code> (represent) <a href="../Code/#user-commands">user command</a> can provide an APL expression which evaluates to almost any given array:</p>
+<p><pre class="highlight"><code class="language-APL">      mysterious_value ← 2 4∘.⍴⊂5 6 7
+      ]repr mysterious_value</code></pre>
+<pre class="highlight"><code>(5 6) (5 6 7 5)</code></pre></p>
+</div>
+<h2 id="arrays-are-made-of-scalars">Arrays are made of scalars</h2>
+<p>Arrays in APL are always made of scalars (rank-0 arrays) as their elements.</p>
+<p>So the vector <code>1 2 3</code> is made of three scalar numbers, and <code>2 3⍴⎕A</code> is made of 6 scalar characters arranged in a table with 2 rows with 3 columns.</p>
+<p>A simple scalar is a single character, a single number or a single <a href="../Namespaces/">namespace reference</a>. Enclosing simple scalars is a no-op (it does not do anything):</p>
+<pre class="highlight"><code class="language-APL">      3 ≡ ⊂⊂⊂⊂⊂⊂3
+1</code></pre>
+<p>But enclosing an array allows us to include it as part of another array:</p>
+<p><pre class="highlight"><code class="language-APL">      x ← 2 3⍴⎕A   ⍝ x is a simple matrix
+      3⍴x          ⍝ Reshape uses the elements within</code></pre>
+<pre class="highlight"><code>ABC</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      3⍴⊂x         ⍝ Enclosing turns the whole array into an element</code></pre>
+<pre class="highlight"><code>┌───┬───┬───┐
+│ABC│ABC│ABC│
+│DEF│DEF│DEF│
+└───┴───┴───┘</code></pre></p>
+<h2 id="the-shape-of-a-scalar">The shape of a scalar</h2>
+<p>What is the shape of <code>46.2</code>? Here are some common incorrect answers.</p>
+<p><code>4</code>?</p>
+<p>No, the shape of the character vector <code>'46.2'</code> is four, but that is not the same as the scalar number <code>46.2</code> - see <a href="../array-logic-data-driven-conditionals/#problem-set-3">problem set 3 - problem 2 from the previous section</a>.</p>
+<p><code>1</code>?</p>
+<p>Not quite. The tally <code>≢⍵</code> gives <code>1</code>, but the shape function <code>⍴⍵</code> only returns <code>1</code> for a 1-element vector. <code>46.2</code> is not a vector, it is a scalar.</p>
+<p><code>0</code>?</p>
+<p>This would be the shape of a 0-element vector.</p>
+<p>To get to the answer, it helps to think about the rank as well. The rank is simply the number of dimensions.</p>
+<p><pre class="highlight"><code class="language-APL">      ⍴⍴¯1 0 1∘.×⍳5     ⍝ A matrix has two dimensions</code></pre>
+<pre class="highlight"><code>2</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍴⍴'ABCDE'         ⍝ A vector has just one dimension</code></pre>
+<pre class="highlight"><code>1</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍴⍴'A'             ⍝ How many dimensions does a scalar have? </code></pre>
+<pre class="highlight"><code>0</code></pre></p>
+<p>If the result of <code>⍴'A'</code> is an array with shape <code>0</code> - that means that the shape of a scalar is an empty vector. To be specific, it is an <dfn>empty numeric vector</dfn>. This empty numeric vector can also be represented by the symbol <dfn>zilde</dfn> (<code>⍬</code>), which is a zero (<code>0</code>) combined with a tilde (<code>~</code>). When executed, it displays as a blank line.</p>
+<p><pre class="highlight"><code class="language-APL">      ⍬</code></pre>
+<pre class="highlight"><code>
+</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ]display ⍬</code></pre>
+<pre class="highlight"><code>┌⊖┐
+│0│
+└~┘</code></pre></p>
+<div class="admonition note">
+<p class="admonition-title">The tally is a scalar whereas the shape is a vector</p>
+<p>You might have noticed that the tally <code>≢⍵</code> always returns one number, whereas the shape <code>⍴⍵</code> may return several. The tally of an array is a <em>scalar</em> representing the length of the first (leading) axis. For a matrix, this is the number of rows.</p>
+<p>The shape returns a vector which describes the length of each axis. Whether there are five axes or no axes, the result of <code>⍴⍵</code> is always a vector.</p>
+</div>
+<h2 id="simple-array-selection">Simple array selection</h2>
+<p>When you have a collection of data represented as an array, you often want to use only some subset of the data. There are a few selection methods in APL, and <a href="../selecting-from-arrays/">there is a section</a> dedicated to them. Here we show two constructs which can be used to select any sub-array from any array.</p>
+<p><pre class="highlight"><code class="language-APL">      a ← 2 3 4⍴⎕A
+      a</code></pre>
+<pre class="highlight"><code>ABCD
+EFGH
+IJKL
+
+MNOP
+QRST
+UVWX</code></pre></p>
+<p>When we have an array of rank &gt; 1, selections along each axis are separated by semicolons:</p>
+<p><pre class="highlight"><code class="language-APL">      a[1 2;2 3;3 4]</code></pre>
+<pre class="highlight"><code>GH
+KL
+
+ST
+WX</code></pre></p>
+<p>Omitting a specification selects from that entire axis:</p>
+<p><pre class="highlight"><code class="language-APL">      a[;2 3;3 4]</code></pre>
+<pre class="highlight"><code>GH
+KL
+
+ST
+WX</code></pre></p>
+<p>Indexing expressions always return a collection of scalars. If we want to obtain the array nested inside of a scalar, we can use the <dfn>first</dfn> function <code>⊃⍵</code> to <em>disclose</em> the contents of that scalar.</p>
+<p><pre class="highlight"><code class="language-APL">      n ← 2 3⍴1 (2 3) 'abc' (2 2⍴(1 2)3 4 5) 'ghi' 'k'
+      n</code></pre>
+<pre class="highlight"><code>┌───────┬───┬───┐
+│1      │2 3│abc│
+├───────┼───┼───┤
+│┌───┬─┐│ghi│k  │
+││1 2│3││   │   │
+│├───┼─┤│   │   │
+││4  │5││   │   │
+│└───┴─┘│   │   │
+└───────┴───┴───┘</code></pre></p>
+<p>With <code>]Box on</code>, we can see that our selection of the element in the 2<sup>nd</sup> row and 2<sup>nd</sup> column is a nested array of some kind.</p>
+<p><pre class="highlight"><code class="language-APL">      n[2;2]</code></pre>
+<pre class="highlight"><code>┌───┐
+│ghi│
+└───┘</code></pre></p>
+<p>After disclosing, we are left with a simple character vector.</p>
+<p><pre class="highlight"><code class="language-APL">      ⊃n[2;2]</code></pre>
+<pre class="highlight"><code>ghi</code></pre></p>
+<p>Clearly, selecting subarrays in this way can become tedious, laborious and even onerous. One of the code smells in a line of APL is typically <em>too much code</em>, so of course there are other methods to select from arrays in various ways depending on your use case. These are covered in the section on <a href="../selecting-from-arrays/">selecting from arrays</a>. However, between these two techniques you will be able to obtain any piece of any array, even if it takes a few steps to get what you want.</p>
+<h2 id="problem-set-4">Problem set 4</h2>
+<ol>
+<li>
+<p>Write the function <code>Backwards</code> which accepts a nested vector of character vectors as its argument and reverses both the order of elements and the contents of each vector within.
+    <pre class="highlight"><code class="language-APL">      Backwards 'reverse' 'these' 'words'
+┌─────┬─────┬───────┐
+│sdrow│eseht│esrever│
+└─────┴─────┴───────┘</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<p>You can write reverse and reverse-each in either order.
+<pre class="highlight"><code class="language-APL">Backwards ← {⌽¨⌽⍵}
+Backwards ← {⌽⌽¨⍵}</code></pre></p>
+</details>
+</li>
+<li>
+<p>Write a monadic function <code>Join</code> which joins a nested vector of character vectors <code>⍵</code> into a single, non-nested character vector in which elements from <code>⍵</code> are separated by the character scalar <code>,</code> (comma).</p>
+<p><pre class="highlight"><code class="language-APL">      Join 'join' 'these' 'words'</code></pre>
+<pre class="highlight"><code>join,these,words</code></pre></p>
+<p><strong>BONUS</strong> Can you write <code>Join</code> as a <em>dyadic</em> function which accepts a separator scalar as <code>⍺</code>?</p>
+<p><pre class="highlight"><code class="language-APL">      ' ' Join 'join' 'these' 'words'</code></pre>
+<pre class="highlight"><code>join these words</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      '|' Join 'join' 'these' 'words'</code></pre>
+<pre class="highlight"><code>join|these|words</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<p>We can define a dyadic function which catenates two character vectors with a comma:</p>
+<pre class="highlight"><code class="language-APL">{⍺,',',⍵}</code></pre>
+<p>We can then apply this using the reduction operator on a list of character vectors:</p>
+<p><pre class="highlight"><code class="language-APL">      {⍺,',',⍵}/'join' 'these' 'words'</code></pre>
+<pre class="highlight"><code>┌────────────────┐
+│join,these,words│
+└────────────────┘</code></pre></p>
+<p>Because the rank of the result of a reduction is always one less than the rank of the argument, a vector argument (rank 1) must cause a scalar (rank 0) result. That is why our result is a nested scalar which contains a character vector. To get our desired simple character vector, we disclose this result.</p>
+<p><pre class="highlight"><code class="language-APL">      ⊃{⍺,',',⍵}/'join' 'these' 'words'</code></pre>
+<pre class="highlight"><code>join,these,words        </code></pre></p>
+<p>You might think to wrap this expression to make a dfn, and that is also valid, but you do not need to:</p>
+<p><pre class="highlight"><code class="language-APL">      Join ← {⊃{⍺,',',⍵}/⍵}
+      Join ← ⊃{⍺,',',⍵}/
+      Join 'join' 'these' 'words'</code></pre>
+<pre class="highlight"><code>join,these,words</code></pre></p>
+<p>Writing functions in this way is called <a href="../user-defined-functions/#the-three-function-styles">tacit definition</a>. It usually looks better without raw dfn definitions inside in this author's opinion.</p>
+<pre class="highlight"><code class="language-APL">Join ← ⊃(⊣,',',⊢)/</code></pre>
+<p>You might have found it difficult to define the dyadic version because dfns can only accept two arguments. The trick is to use assignment to make a temporary name for our joining character.   </p>
+<p><pre class="highlight"><code class="language-APL">      Join ← {s←⍺ ⋄ ⊃{⍺,s,⍵}/⍵}
+      '|' Join 'join' 'these' 'words'</code></pre>
+<pre class="highlight"><code>join|these|words</code></pre></p>
+<p>We can even make an ambivalent function by assigning to <code>⍺</code>. In the monadic case, we will join with a comma.</p>
+<p><pre class="highlight"><code class="language-APL">      Join ← {⍺←',' ⋄ s←⍺ ⋄ ⊃{⍺,s,⍵}/⍵}
+      Join 'join' 'these' 'words'</code></pre>
+<pre class="highlight"><code>join,these,words</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      '|' Join 'join' 'these' 'words'</code></pre>
+<pre class="highlight"><code>join|these|words</code></pre></p>
+</details>
+</li>
+<li>
+<p>Create a variable <code>nest</code> which has the following properties</p>
+<p><pre class="highlight"><code class="language-APL">      ⍴nest</code></pre>
+<pre class="highlight"><code>2 3</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ≡nest</code></pre>
+<pre class="highlight"><code>¯2</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍴¨nest</code></pre>
+<pre class="highlight"><code>┌─┬┬─┐
+│ ││2│
+├─┼┼─┤
+│3││6│
+└─┴┴─┘</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ]display ∊nest</code></pre>
+<pre class="highlight"><code>┌→───────────────────┐
+│I 3 am 1 5 8 amatrix│
+└+───────────────────┘</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍴∊nest</code></pre>
+<pre class="highlight"><code>14</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<p>We have a 2 row, 3 column matrix. It is unevenly nested with a maximum depth of 2. In ravel order there are: two scalars; a 2-element vector; a 3-element vector; a scalar; and a 6-element vector.</p>
+<p>We can lay out the simple scalar elements of the array in a simple vector using the <dfn>enlist</dfn> function.</p>
+<p>We can then see that there are 14 scalar elements in total. This makes sense given the description above.</p>
+<pre class="highlight"><code>14 = +/1 1 2 3 1 6</code></pre>
+<p>Therefore, our ravel of elements is <code>'I' 3 'am' (1 5 8) 'a' 'matrix'</code>. The definition of <code>nest</code> is:</p>
+<pre class="highlight"><code class="language-APL">nest ← 2 3⍴'I' 3 'am' (1 5 8) 'a' 'matrix'</code></pre>
+</details>
+</li>
+<li>
+<p>Try to work out the shapes of the results of the following expressions by hand, without executing them.</p>
+<ol>
+<li><code>'APL IS COOL'</code></li>
+<li><code>¯1 0 1 ∘.× 1 2 3 4 5</code> </li>
+<li><code>1 2 3 4∘.+¯1 0 1∘.×1 10</code></li>
+<li><code>+/⍳4</code></li>
+</ol>
+<details class="example">
+<summary>Answers</summary>
+<p><ol>
+<li>This is a simple character vector with <span class="arithmatex">\(11\)</span> characters, including space characters, so its shape is <code>11</code>.
+<pre class="highlight"><code class="language-APL">      ⍴'APL IS COOL'
+11</code></pre>
+</li>   </p>
+<p><li>This is a matrix. The result of multiplying all combinations of elements from a 3-element vector and a 5-element vector is a 3 by 5 matrix. It has 3 rows and 5 columns, so its shape is <code>3 5</code>.</p>
+<p><pre class="highlight"><code class="language-APL">      ¯1 0 1 ∘.× 1 2 3 4 5</code></pre>
+<pre class="highlight"><code>¯1 ¯2 ¯3 ¯4 ¯5
+0  0  0  0  0
+1  2  3  4  5</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⍴¯1 0 1 ∘.× 1 2 3 4 5</code></pre>
+<pre class="highlight"><code>3 5</code></pre></p>
+<p>If you swap the arguments around, you get a <span class="arithmatex">\(5\)</span> by <span class="arithmatex">\(3\)</span> matrix.</p>
+<p><pre class="highlight"><code class="language-APL">      1 2 3 4 5 ∘.× ¯1 0 1</code></pre>
+<pre class="highlight"><code>¯1 0 1
+¯2 0 2
+¯3 0 3
+¯4 0 4
+¯5 0 5</code></pre></p>
+</li>
+<p><li>This is a 3D array of shape <code>4 3 2</code>. The shape of the result of applying a function using the outer product operator is the concatenation of the shapes of the arguments.</p>
+<p>The first (rightmost) outer product takes a <span class="arithmatex">\(3\)</span>-element vector and a <span class="arithmatex">\(2\)</span>-element vector and returns a <span class="arithmatex">\(3\)</span> by <span class="arithmatex">\(2\)</span> matrix. This becomes the right argument to the next outer product which takes a <span class="arithmatex">\(4\)</span>-element vector on its left to result in a <span class="arithmatex">\(4\)</span>-plane, <span class="arithmatex">\(3\)</span>-column, <span class="arithmatex">\(2\)</span>-row multidimensional array.</li></p>
+<p><li>This is a scalar. The reduce operator <code>F/</code> has the effect of <em>reducing</em> the rank of its argument array by 1. Since we have a vector (rank 1) input, we must have a scalar (rank 0) output.</li></p>
+</ol>
+</details>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://dyalog.com" target="_blank" rel="noopener" title="dyalog.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M16 32v119.2h64V96h107.2C300.6 96 368 176.2 368 255.9 368 332 309.4 416 187.2 416H16v64h171.2C347.9 480 432 367.3 432 255.9c0-58.7-22.1-113.4-62.3-154.3C324.9 56 261.7 32 187.2 32z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mastodon.social/@dyalog" target="_blank" rel="noopener" title="mastodon.social" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 15.5a.5.5 0 0 1-.5.5.5.5 0 0 1-.5-.5v-7c0-1.93-2.07-3.5-4-3.5H6a4 4 0 0 0-4 4v10h4v-4h5v4h4v-4.5a.5.5 0 0 1 .5-.5.5.5 0 0 1 .5.5V16a3 3 0 0 0 3 3 3 3 0 0 0 3-3v-2h-2.5z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/dyalogapl" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "content.tooltips"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="../javascripts/mathjax/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

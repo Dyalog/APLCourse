@@ -1,0 +1,1359 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A guided introduction to Dyalog APL">
+      
+      
+      
+        <link rel="canonical" href="https://dyalog.com/finding-and-replacing-values/">
+      
+      
+        <link rel="prev" href="../cells-and-axes/">
+      
+      
+        <link rel="next" href="../selecting-from-arrays/">
+      
+      
+      <link rel="icon" href="../img/favicon-32.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>Finding and Replacing Values - APL Course</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css.49ea35f2.css">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../style/main.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#finding-and-replacing-values" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="APL Course" class="md-header__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APL Course
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Finding and Replacing Values
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="APL Course" class="md-nav__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    APL Course
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basic-syntax-and-arithmetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic syntax
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dfns-and-assignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dfns and Assignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../array-logic-data-driven-conditionals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Array Logic and Data-driven Conditionals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multidimensional-and-nested-arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multidimensional and Nested Arrays
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cells-and-axes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cells and Axes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Finding and Replacing Values
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Finding and Replacing Values
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#searching-and-finding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Searching and finding
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sorting-and-grouping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sorting and grouping
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set functions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assigning-to-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assigning to arrays
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Assigning to arrays">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#indexed-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Indexed Assignment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selective-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Selective Assignment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modified-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modified Assignment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-at-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      The At operator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strand-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strand Assignment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-set-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem set 6
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../selecting-from-arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Selecting from Arrays
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../broken-keyboard-problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Broken Keyboard Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loops-and-recursion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Loops and Recursion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Assignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Extra Assignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Workspaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Workspace Basics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Namespaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Namespaces and Other Objects
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Help
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-defined-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    User-defined Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quad%20names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quad Names
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../error-handling-and-debugging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Handling and Debugging
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data IO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code IO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    External Interfaces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quirks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Historical Quirks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interpreter-internals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interpreter Internals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Reading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Further Reading
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#searching-and-finding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Searching and finding
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sorting-and-grouping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sorting and grouping
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set functions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assigning-to-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assigning to arrays
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Assigning to arrays">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#indexed-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Indexed Assignment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selective-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Selective Assignment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modified-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modified Assignment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-at-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      The At operator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strand-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strand Assignment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-set-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem set 6
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="finding-and-replacing-values">Finding and Replacing Values</h1>
+<h2 id="searching-and-finding">Searching and finding</h2>
+<p>It is common to make multiple equality comparisons. Doing this one at a time becomes tedious.</p>
+<p><pre class="highlight"><code class="language-APL">      text ← 'This is my sentence'
+      (text='a')∨(text='e')∨(text='i')∨(text='o')∨(text='u')</code></pre>
+<pre class="highlight"><code>0 0 1 0 0 1 0 0 0 0 0 0 1 0 0 1 0 0 1</code></pre></p>
+<p>The <dfn>membership</dfn> function returns a Boolean array (<code>1</code>s and <code>0</code>s) of the same shape as <code>⍺</code> where <code>1</code> indicates the location of any of the elements in <code>⍵</code>.</p>
+<p><pre class="highlight"><code class="language-APL">      text∊'aeiou'</code></pre>
+<pre class="highlight"><code>0 0 1 0 0 1 0 0 0 0 0 0 1 0 0 1 0 0 1</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      text ← 2 6⍴'I LIKE APL  '
+      text∊'AEIOU'</code></pre>
+<pre class="highlight"><code>1 0 0 1 0 1
+0 1 0 0 0 0</code></pre></p>
+<p><dfn>Find</dfn> <code>⍺⍷⍵</code> will give a <code>1</code> indicating the location of the first element of <code>⍺</code> when the entire array <code>⍺</code> is found as a subarray in <code>⍵</code>.</p>
+<p><pre class="highlight"><code class="language-APL">      y ← 2 10⍴'APPLESLESSMOTIONSLOW'
+      'LESS'⍷y</code></pre>
+<pre class="highlight"><code>0 0 0 0 0 0 1 0 0 0
+0 0 0 0 0 0 0 0 0 0</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      'LESION'⍷y</code></pre>
+<pre class="highlight"><code>0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      (2 3⍴'LESION')⍷y</code></pre>
+<pre class="highlight"><code>0 0 0 1 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0</code></pre></p>
+<p><dfn>Index of</dfn> <code>⍺⍳⍵</code> will return the index in <code>⍺</code> where <code>⍵</code> is found as a major cell.</p>
+<p><pre class="highlight"><code class="language-APL">      text ← 2 3 4⍴'SOME APPLES'
+      text∊'LESS'</code></pre>
+<pre class="highlight"><code>1 0 0 1
+0 0 0 0
+1 1 1 1
+
+0 0 1 0
+0 0 0 1
+1 1 1 0</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      'LESS'⍷text</code></pre>
+<pre class="highlight"><code>0 0 0 0
+0 0 0 0
+1 0 0 0
+
+0 0 0 0
+0 0 0 0
+0 0 0 0</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      (1⌷text)⍳'LESS'</code></pre>
+<pre class="highlight"><code>3</code></pre></p>
+<p>For subarrays not found in <code>⍺</code>, index-of returns <code>1+≢⍺</code>.</p>
+<pre class="highlight"><code class="language-APL">      'keep'⍳'qwert'
+5 5 2 5 5</code></pre>
+<h2 id="sorting-and-grouping">Sorting and grouping</h2>
+<p>To <dfn>sort</dfn>, index by the <dfn>grade</dfn>.</p>
+<p><pre class="highlight"><code class="language-APL">      Sort←{(⊂⍋⍵)⌷⍵}
+      Sort 'the alphabet'</code></pre>
+<pre class="highlight"><code> aabeehhlptt</code></pre></p>
+<p>Grouping is an incredibly common operation when handling data. The python "dataframe" framework Pandas <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html">has a groupby function</a> and anybody who has used SQL <a href="https://www.w3schools.com/sql/sql_groupby.asp">is likely to be familiar with this idea</a>.</p>
+<p>The <dfn>key</dfn> operator applies its operand function to groups of <a href="../cells-and-axes/">major cells</a> corresponding to the unique major cells in <code>⍵</code>. For a vector, this is the unique list of elements.</p>
+<p>In the monadic case, <code>⍵</code> is a list of indices.</p>
+<pre class="highlight"><code class="language-APL">      {⍺,⊂⍵}⌸'mississippi'
+┌─┬────────┐
+│m│1       │
+├─┼────────┤
+│i│2 5 8 11│
+├─┼────────┤
+│s│3 4 6 7 │
+├─┼────────┤
+│p│9 10    │
+└─┴────────┘</code></pre>
+<p>In the dyadic case, it is a list of keys which are provided as <code>⍺</code>.</p>
+<pre class="highlight"><code class="language-APL">      ↑'ABBDDDCDBAA' 'mississippi'
+ABBDDDCDBAA
+mississippi
+
+      'ABBDDDCDBAA'{⍺,⊂⍵}⌸'mississippi'
+┌─┬────┐
+│A│mpi │
+├─┼────┤
+│B│isp │
+├─┼────┤
+│D│sisi│
+├─┼────┤
+│C│s   │
+└─┴────┘</code></pre>
+<p><dfn>Interval index</dfn> is a function for classifying data by boundaries.</p>
+<p>See if you can write the <code>Grade</code> function from <a href="../array-logic-data-driven-conditionals/#problem-set-3">problem set 3, problem 6</a> using <strong>interval index</strong> <code>⍺⍸⍵</code>.</p>
+<details class="example">
+<summary>Answer</summary>
+<pre class="highlight"><code class="language-APL">Grade ← {'FDCBA'[0 65 70 80 90⍸⍵]}</code></pre>
+</details>
+<h2 id="set-functions">Set functions</h2>
+<p>Those familiar with set theory from traditional mathematics will recognise the following symbols. The APL functions are closely related to their set theory counterparts.</p>
+<p>The <dfn>union</dfn> of two vectors contains elements from <code>⍺</code> catenated with elements in <code>⍵</code> not found in <code>⍺</code>.</p>
+<pre class="highlight"><code class="language-APL">      'WASH' ∪ 'SHOUT'
+WASHOUT</code></pre>
+<p>The <dfn>intersection</dfn> contains elements only found in both.</p>
+<pre class="highlight"><code class="language-APL">      'WASH' ∩ 'SHOUT'
+SH</code></pre>
+<p>The function <dfn>without</dfn> removes elements from <code>⍺</code> which are found in <code>⍵</code>.</p>
+<p>The set difference is then neatly expressed as <a href="../user-defined-functions/#the-three-function-styles">a fork</a> of the union without the intersection.</p>
+<pre class="highlight"><code class="language-APL">      'WASH' (∪~∩) 'SHOUT'
+WAOUT</code></pre>
+<h2 id="assigning-to-arrays">Assigning to arrays</h2>
+<h3 id="indexed-assignment">Indexed Assignment</h3>
+<p>Assign values at specified indices.</p>
+<pre class="highlight"><code class="language-APL">t←4 4⍴'some sample text'
+t[⍸t∊'aeiou']←'!'</code></pre>
+<h3 id="selective-assignment">Selective Assignment</h3>
+<p>Most ways of <a href="../selecting-from-arrays/">selecting from arrays</a> can be used to change values in an array. Here is an example using <strong>compress</strong>:</p>
+<p><pre class="highlight"><code class="language-APL">      a ← 2 3⍴⎕A
+      (1 0⌿a)←'⌺'
+      a</code></pre>
+<pre class="highlight"><code>⌺⌺⌺
+DEF</code></pre></p>
+<h3 id="modified-assignment">Modified Assignment</h3>
+<p>Experiment with the following expressions, paying particular attention to the <code>name f← array</code> construct.</p>
+<pre class="highlight"><code class="language-APL">salaries←18250 42500 56000 57250 48640
+codes←'ACDDC'
+salaries×←1.1
+salaries[⍸codes='C']×←1.1
+
+a←⎕A
+(3↑a),←'abc'
+(¯4↑a),←'xyz'  ⍝ this one will error — think about why!</code></pre>
+<h3 id="the-at-operator">The At operator</h3>
+<p>Monadic functions take a single right argument array as input. Dyadic functions take two argument arrays.</p>
+<p>Monadic operators take a single left operand which can be a function or an array (as in <code>+/</code> where plus <code>+</code> is the function operand and reduce <code>/</code> is the operator). </p>
+<p>Dyadic operators take two operands which could be functions or arrays depending on the operator's definition. For example, the <a href="../cells-and-axes/#the-rank-operator">rank operator</a> <code>F⍤k</code> takes a function left operand <code>F</code> and array right operand vector <code>k</code> of up to 3 elements.</p>
+<p>Selective and indexed assignment methods will change the values of variables. The "at" operator <code>@</code> merges two arrays at specified indices and returns a new array.</p>
+<p>If a function right operand returns a boolean array when applied to <code>⍵</code> (e.g. <code>3=1 3 5</code>) then ones <code>1</code> in the boolean array determine where scalars of <code>⍺</code> are inserted.</p>
+<p><pre class="highlight"><code class="language-APL">      ('∆⍥'@{⍵∊'AEIOU'})2 3⍴'DYALOG'</code></pre>
+<pre class="highlight"><code>DY∆
+L⍥G</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      (' '@2 3 4)'DYALOG'</code></pre>
+<pre class="highlight"><code>D   OG</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      (' '@(1 2)(1 3)(2 1))2 3⍴'DYALOG'</code></pre>
+<pre class="highlight"><code>D  
+ OG</code></pre></p>
+<p>Generally, the left operand to <code>@</code> is a function applied to scalars in <code>⍵</code> which are specified by a right operand that is either an array of scalar (simple or enclosed vector) indices or a boolean array returned by a right operand function. An array left operand is shorthand for a <a href="https://aplwiki.com/wiki/Constant">constant function</a> that returns the array.</p>
+<pre class="highlight"><code class="language-APL">      Upper ← 1∘⎕C
+      {Upper@{¯1⌽' '=⍵}' ',⍵}'my excellent heading'
+ My Excellent Heading</code></pre>
+<h3 id="strand-assignment">Strand Assignment</h3>
+<p><a href="http://help.dyalog.com/latest/#Language/Introduction/Namespaces/Distributed Assignment.htm"><strong>Distributed assignment</strong></a> or <strong>strand assignment</strong> allows multiple names to be defined using a single assignment arrow <code>←</code>.</p>
+<pre class="highlight"><code class="language-APL">      (max min avg)←{(⌈⌿⍵)(⌊⌿⍵)((+⌿÷≢)⍵)}3 1 4 1 5</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Strand assignment does not require names to be parenthesised, but we strongly recommend it for clarity.</p>
+</div>
+<p>We can assign items in <code>nest</code> to the three variables <code>s←'A'</code> <code>v←1 2 3</code> and <code>m←3 3⍴⍳9</code> using a single assignment arrow.</p>
+<pre class="highlight"><code class="language-APL">      nest←('A'(1 2 3))(3 3⍴⍳9)
+      ((s v) m)←nest</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You might have some issues when using inline, modified or strand assignment in dfns. This is by design, but can be a source of confusion.
+<pre class="highlight"><code class="language-APL">      { a←3 ⋄ f←+ ⋄ a f←3 ⋄ a }⍬
+3
+      a←3 ⋄ f←+ ⋄ a f←3 ⋄ a
+6</code></pre></p>
+<p>You can get around these problems by writing <code>∘⊢</code> to the immediate right of any function involved:
+<pre class="highlight"><code class="language-APL">      { a←3 ⋄ f←+ ⋄ a f∘⊢←3 ⋄ a }⍬
+6</code></pre></p>
+<p>You might find it best to simply keep the modification explicit:
+<pre class="highlight"><code class="language-APL">      { a←3 ⋄ f←+ ⋄ a←a+3 ⋄ a }⍬
+6</code></pre></p>
+</div>
+<h2 id="problem-set-6">Problem set 6</h2>
+<ol>
+<li>
+<p>Write a function test if there are any vowels <code>'aeiou'</code> in text vector <code>⍵</code></p>
+<p><pre class="highlight"><code class="language-APL">      AnyVowels 'this text is made of characters'</code></pre>
+<pre class="highlight"><code>1</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      AnyVowels 'bgxkz'</code></pre>
+<pre class="highlight"><code>0</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<p>We can use membership to see which elements of our argument belong to the set <code>'aeiou'</code>. Then we can then ask if there are any <code>1</code>s in the Boolean vector:</p>
+<pre class="highlight"><code class="language-APL">AnyVowels ← {∨/⍵∊'aeiou'}</code></pre>
+<p>An easy eay to check for any ones in a high rank Boolean array is to use membership:</p>
+<pre class="highlight"><code class="language-APL">AnyVowels ← {1∊⍵∊'aeiou'}</code></pre>
+</details>
+</li>
+<li>
+<p>Write a function to count the number of vowels in its character vector argument <code>⍵</code></p>
+<p><pre class="highlight"><code class="language-APL">      CountVowels 'this text is made of characters'</code></pre>
+<pre class="highlight"><code>9</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      CountVowels 'we have twelve vowels in this sentence'</code></pre>
+<pre class="highlight"><code>12</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<p>Counting the <code>1</code>s in the Boolean result of membership <code>⍺∊⍵</code> counts the vowels.</p>
+<pre class="highlight"><code class="language-APL">CountVowels ← {+/⍵∊'aeiou'}</code></pre>
+</details>
+</li>
+<li>
+<p>Write a function <code>FoundIn</code> which accepts a nested scalar or vector of character vectors and returns a <code>1</code> where each vector contains letters in the simple character vector <code>⍺</code>.</p>
+<p><pre class="highlight"><code class="language-APL">      'ei' FoundIn 'Katie' 'Bob' 'Stephen' 'Jessica' 'Andy'</code></pre>
+<pre class="highlight"><code>1 0 1 1 0</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<p>One solution is to bind <code>⍺</code> to the membership function (<code>∊∘⍺</code>) to form a monadic function "contains alpha" which can be applied on each vector in our nested argument.</p>
+<pre class="highlight"><code class="language-APL">FoundIn ← {∨/¨∊∘⍺¨⍵}</code></pre>
+</details>
+</li>
+<li>
+<p>Write a function <code>Clean</code> that changes all non-digits into stars.</p>
+<p><pre class="highlight"><code class="language-APL">      Clean 'Easy as 1, 2 and 3'</code></pre>
+<pre class="highlight"><code>********1**2*****3</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      Clean '1000'</code></pre>
+<pre class="highlight"><code>1000</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      Clean 'APL works!'</code></pre>
+<pre class="highlight"><code>**********</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<p>We cannot assign to <code>⍵</code> in a dfn, so we must create an intermediate variable name:</p>
+<pre class="highlight"><code class="language-APL"> Clean ← {
+    r←⍵ ⋄ d←~⍵∊⎕D
+    (d/r)←'*'
+    r
+ }</code></pre>
+<p>We can provide a function right operand to the <strong>at</strong> operator which checks for non-digits:</p>
+<pre class="highlight"><code class="language-APL">Clean ← '*'@(~∊∘⎕D)</code></pre>
+</details>
+</li>
+<li>
+<p>The following expression contains an error:  </p>
+<p><pre class="highlight"><code class="language-APL">      ('∆⍥'@1)2 3⍴'DYALOG'</code></pre>
+<pre class="highlight"><code>LENGTH ERROR
+      ('∆⍥'@1)2 3⍴'DYALOG'
+      ∧</code></pre></p>
+<p>Change the parenthesised function containing <code>@</code> so that it gives the following results:  </p>
+<ol>
+<li>
+<pre class="highlight"><code>∆∆∆
+LOG</code></pre>
+</li>
+<li>
+<pre class="highlight"><code>∆∆∆
+⍥⍥⍥</code></pre>
+</li>
+</ol>
+<details class="example">
+<summary>Answers</summary>
+<p><ol type="a">
+<li></p>
+<p><pre class="highlight"><code class="language-APL">      ('∆'@1)2 3⍴'DYALOG'</code></pre>
+<pre class="highlight"><code>∆∆∆
+LOG</code></pre></p>
+<p></li>
+<li></p>
+<p><pre class="highlight"><code class="language-APL">      ((2 3⍴3/'∆⍥')@1 2)2 3⍴'DYALOG'</code></pre>
+<pre class="highlight"><code>∆∆∆
+⍥⍥⍥</code></pre></p>
+<p></li>
+</ol></p>
+</details>
+</li>
+<li>
+<p>Create a function <code>ReplaceHead</code> which returns its left argument vector <code>⍺</code>, but with the first <code>⍴⍵</code> elements replaced with the contents of <code>⍵</code>.</p>
+<p><pre class="highlight"><code class="language-APL">      'apple' ReplaceHead 'Eat'</code></pre>
+<pre class="highlight"><code>Eatle</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      'apple' ReplaceHead 'rang'</code></pre>
+<pre class="highlight"><code>range</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      'apple' ReplaceHead 'ENTERPRISE'</code></pre>
+<pre class="highlight"><code>ENTER</code></pre></p>
+<details class="example">
+<summary>Answers</summary>
+<p>This solution uses indexed assignment:</p>
+<pre class="highlight"><code class="language-APL">ReplaceHead ← {r←⍺ ⋄ s←(≢⍺)⌊≢⍵ ⋄ r[⍳s]←s↑⍵ ⋄ r}</code></pre>
+<p>This solution uses the <strong>over</strong> operator <code>F⍥G</code> to express the minimum length of <code>⍺</code> and <code>⍵</code>. It then uses the <strong>at</strong> operator to do the substitution.</p>
+<pre class="highlight"><code class="language-APL">ReplaceHead ← {s←⍺⌊⍥≢⍵ ⋄ (s↑⍵)@(⍳s)⊢⍺}</code></pre>
+</details>
+</li>
+<li>
+<p>Bus stops in a town are labelled <strong>A</strong> to <strong>E</strong>. Define a function RouteMatrix which returns a Boolean matrix where <code>1</code>s indicate that buses go from one bus stop to the next.</p>
+<p><pre class="highlight"><code class="language-APL">      RouteMatrix 'BE' 'C' 'AE' 'BCE' 'A'</code></pre>
+<pre class="highlight"><code>0 0 1 0 1
+1 0 0 1 0
+0 1 0 1 0
+0 0 0 0 0
+1 0 1 1 0</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      'ABCDE'⍪RouteMatrix 'C' 'CDE' 'ABDE' 'E' 'B'</code></pre>
+<pre class="highlight"><code>A B C D E
+0 0 1 0 0
+0 0 1 0 1
+1 1 0 0 0
+0 1 1 0 0
+0 1 1 1 0</code></pre></p>
+<details class="example">
+<summary>Answer</summary>
+<pre class="highlight"><code class="language-APL">RouteMatrix ← {'ABCDE'∘.∊⍵}</code></pre>
+</details>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://dyalog.com" target="_blank" rel="noopener" title="dyalog.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M16 32v119.2h64V96h107.2C300.6 96 368 176.2 368 255.9 368 332 309.4 416 187.2 416H16v64h171.2C347.9 480 432 367.3 432 255.9c0-58.7-22.1-113.4-62.3-154.3C324.9 56 261.7 32 187.2 32z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mastodon.social/@dyalog" target="_blank" rel="noopener" title="mastodon.social" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 15.5a.5.5 0 0 1-.5.5.5.5 0 0 1-.5-.5v-7c0-1.93-2.07-3.5-4-3.5H6a4 4 0 0 0-4 4v10h4v-4h5v4h4v-4.5a.5.5 0 0 1 .5-.5.5.5 0 0 1 .5.5V16a3 3 0 0 0 3 3 3 3 0 0 0 3-3v-2h-2.5z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/dyalogapl" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "content.tooltips"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="../javascripts/mathjax/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

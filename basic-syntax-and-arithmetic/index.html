@@ -1,0 +1,1371 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A guided introduction to Dyalog APL">
+      
+      
+      
+        <link rel="canonical" href="https://dyalog.com/basic-syntax-and-arithmetic/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../dfns-and-assignment/">
+      
+      
+      <link rel="icon" href="../img/favicon-32.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>Basic syntax - APL Course</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css.49ea35f2.css">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../style/main.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#basic-syntax" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="APL Course" class="md-header__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APL Course
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Basic syntax
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="APL Course" class="md-nav__button md-logo" aria-label="APL Course" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    APL Course
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Basic syntax
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic syntax
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#functions-and-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions and arguments
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#singleton-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      Singleton extension
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#order-of-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Order of execution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comments
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-reduction-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      The reduction operator
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-index-generator" class="md-nav__link">
+    <span class="md-ellipsis">
+      The index generator
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-do-these-errors-mean" class="md-nav__link">
+    <span class="md-ellipsis">
+      What do these errors mean?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-set-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem Set 1
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dfns-and-assignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dfns and Assignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../array-logic-data-driven-conditionals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Array Logic and Data-driven Conditionals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multidimensional-and-nested-arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multidimensional and Nested Arrays
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cells-and-axes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cells and Axes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../finding-and-replacing-values/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Finding and Replacing Values
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../selecting-from-arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Selecting from Arrays
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../broken-keyboard-problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Broken Keyboard Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loops-and-recursion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Loops and Recursion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Assignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Extra Assignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Workspaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Workspace Basics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Namespaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Namespaces and Other Objects
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Help
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-defined-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    User-defined Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quad%20names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quad Names
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../error-handling-and-debugging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Handling and Debugging
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data IO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code IO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    External Interfaces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quirks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Historical Quirks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interpreter-internals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interpreter Internals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Reading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Further Reading
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#functions-and-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions and arguments
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#singleton-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      Singleton extension
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#order-of-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Order of execution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comments
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-reduction-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      The reduction operator
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-index-generator" class="md-nav__link">
+    <span class="md-ellipsis">
+      The index generator
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-do-these-errors-mean" class="md-nav__link">
+    <span class="md-ellipsis">
+      What do these errors mean?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-set-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem Set 1
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="basic-syntax">Basic syntax</h1>
+<h2 id="functions-and-arguments">Functions and arguments</h2>
+<p>APL has two-argument, infix functions. These are called <dfn>dyadic</dfn> functions.</p>
+<p><pre class="highlight"><code class="language-APL">      3 × 5</code></pre>
+<pre class="highlight"><code>15</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      3 - 5</code></pre>
+<pre class="highlight"><code>¯2</code></pre></p>
+<p>Some functions map between elements of their left and right argument arrays. It is easy to add lists of numbers together:
+<pre class="highlight"><code class="language-APL">      1 2 3 + 4 5 6</code></pre>
+<pre class="highlight"><code>5 7 9</code></pre></p>
+<p>Negative numbers are written with a <dfn>high minus</dfn> <code>¯</code> to differentiate between negation (<code>-3</code>) and literal negative numbers (<code>¯3</code>).
+<pre class="highlight"><code class="language-APL">      1 2 3 - 1 0 ¯1</code></pre>
+<pre class="highlight"><code>0 2 4</code></pre></p>
+<p>There are also one-argument, prefix functions. These are called <dfn>monadic</dfn> functions.
+<pre class="highlight"><code class="language-APL">      - 5 ¯3 0 ¯4 2</code></pre>
+<pre class="highlight"><code>¯5 3 0 4 ¯2</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      ⌽ 1 2 3 4 5</code></pre>
+<pre class="highlight"><code>5 4 3 2 1</code></pre></p>
+<p>Some symbols represent both a monadic and a dyadic function, but these are often closely related. As we will see later, even user-defined functions can be monadic, dyadic or even both (<dfn>ambivalent</dfn>).</p>
+<p><strong><img alt="💡" class="twemoji" src="../assets/external/cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f4a1.svg" title=":bulb:"> Try this</strong>: Use these functions monadically and dyadically:</p>
+<div class="center language-APL">
+<div class="displayBox">
+<a class="glyph" href="#" title="Plus"><code>+</code></a>
+<a class="glyph" href="#" title="Minus/Negate"><code>-</code></a>
+<a class="glyph" href="#" title="Times/Sign"><code>×</code></a>
+<a class="glyph" href="#" title="Divide/Inverse"><code>÷</code></a>
+<a class="glyph" href="#" title="Residue/Magnitude"><code>|</code></a>
+<a class="glyph" href="#" title="Power"><code>*</code></a>
+<a class="glyph" href="#" title="Logarithm"><code>⍟</code></a>
+<a class="glyph" href="#" title="Max/Ceiling"><code>⌈</code></a>
+<a class="glyph" href="#" title="Min/Floor"><code>⌊</code></a>
+</div>
+</div>
+<h2 id="singleton-extension">Singleton extension</h2>
+<p>Dyadic functions can map between a single value and an array of values.
+<pre class="highlight"><code class="language-APL">      3 × 1 10 100</code></pre>
+<pre class="highlight"><code>3 30 300</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      3 = 1 2 3 4 5</code></pre>
+<pre class="highlight"><code>0 0 1 0 0</code></pre></p>
+<p><strong><img alt="💡" class="twemoji" src="../assets/external/cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f4a1.svg" title=":bulb:"> Try this</strong>: Replace the functions in the previous two expressions with:
+<a class="glyph" href="#" title="Max"><code>⌈</code></a>
+<a class="glyph" href="#" title="Min"><code>⌊</code></a>
+<a class="glyph" href="#" title="Less than"><code>&lt;</code></a></p>
+<p>While experimenting, you may cause a <code>LENGTH ERROR</code>:</p>
+<p><pre class="highlight"><code class="language-APL">      1 2+3 4 5</code></pre>
+<pre class="highlight"><code>LENGTH ERROR: Mismatched left and right argument shapes
+      1 2+3 4 5
+         ∧</code></pre></p>
+<p>Functions such as <code>+ × ⌈</code> apply between elements of two arrays of the same shape, or between one element and many if one of the arguments is a single value. However, if the arrays are of two different shapes, it is not clear how the function should be applied. Of course, you may want to <a href="../array-logic-data-driven-conditionals/#the-outer-product">apply a function between all combinations of elements of the left and right argument</a>, but that will be addressed soon enough.</p>
+<h2 id="order-of-execution">Order of execution</h2>
+<p>Expressions are executed from right to left.</p>
+<p><pre class="highlight"><code class="language-APL">      10×⍳2+5</code></pre>
+<pre class="highlight"><code>10 20 30 40 50 60 70</code></pre></p>
+<details class="info">
+<summary>Show me step-by-step</summary>
+<p>To start, there is a literal number 5:
+<pre class="highlight"><code class="language-APL">            5
+5</code></pre></p>
+<p>Next, there is a plus <code>+</code> with a number 2 to its immediate left, so it is evaluated as two plus five:
+<pre class="highlight"><code class="language-APL">          2+5
+7</code></pre></p>
+<p>Then the symbol <dfn>iota</dfn> <code>⍳</code>. To its left is another function, times <code>×</code>, not a value. So the function is called <em>monadically</em>. The monadic form of <code>⍳</code> is the <dfn>index generator</dfn>, which generates an integer array of length defined by its right argument.
+<pre class="highlight"><code>         ⍳2+5
+1 2 3 4 5 6 7</code></pre></p>
+<p>Lastly, another dyadic function, we multiply our list by ten:
+<pre class="highlight"><code>      10×⍳2+5
+10 20 30 40 50 60 70</code></pre></p>
+</details>
+<p>The expression above is "ten <em>times</em> the indices from 1 to <em>two plus five</em>, or in short: "ten times iota two plus five". We can make it clearer using (superfluous) <strong>parentheses</strong> <code>()</code>.
+<pre class="highlight"><code class="language-APL">      10×(⍳(2+5))</code></pre>
+<pre class="highlight"><code>10 20 30 40 50 60 70</code></pre></p>
+<p>Of course, we can change the order of execution using different parentheses.</p>
+<p><pre class="highlight"><code class="language-APL">      (10×⍳2)+5</code></pre>
+<pre class="highlight"><code>15 25</code></pre></p>
+<details class="info">
+<summary>Show me step-by-step</summary>
+<p>Beginning from the right, there is a literal number 5:
+<pre class="highlight"><code class="language-APL">      (10×⍳2)+5
+              5</code></pre></p>
+<p>Then there is a plus symbol <code>+</code>. Before we can decide if it is being called monadically or dyadically, we must look to the left.</p>
+<pre class="highlight"><code class="language-APL">            )+5</code></pre>
+<p>A right parenthesis. We must evaluate the contents of the parentheses to see if it is a function or a value.</p>
+<pre class="highlight"><code class="language-APL">      (10×⍳2)</code></pre>
+<p>This expression evaluates to the list <code>10 20</code>. Since it is a value, it is used as the left argument to our plus function.</p>
+<pre class="highlight"><code class="language-APL">      (10×⍳2)+5
+      (10 20)+5
+15 25</code></pre>
+</details>
+<p>Infix (dyadic) functions have a <strong>short</strong> <em>left</em> scope and <strong>long</strong> <em>right</em> scope. This means that they take the result of everything to their right hand side as their right argument. </p>
+<p>If there is one, the left argument is the value to the <em>immediate</em> left.</p>
+<p>However, juxtaposed values form lists <em>before</em> any functions are applied. This is called <dfn>stranding</dfn> and lets us write very natural expressions, such as:</p>
+<pre class="highlight"><code class="language-APL">      1 2 3 + 4 5 6
+5 7 9</code></pre>
+<p>but this can lead to some surprises if we are not aware:</p>
+<p><pre class="highlight"><code class="language-APL">      2 + 2 2 + 2</code></pre>
+<pre class="highlight"><code>6 6</code></pre></p>
+<details class="info">
+<summary>Show me step-by-step</summary>
+<p>First, there is a literal number 2
+<pre class="highlight"><code class="language-APL">                2
+2</code></pre></p>
+<p>Then there is a symbol <code>+</code>. What, if any, is the value to its immediate left?
+<pre class="highlight"><code class="language-APL">          2 2 + 2</code></pre></p>
+<p>It is a 2-element vector <code>2 2</code>. The plus function maps between these elements and the single number on the right:
+<pre class="highlight"><code class="language-APL">          2 2 + 2
+4 4</code></pre></p>
+<p>Finally there is another addition. The overall evaluation looks like the following:
+<pre class="highlight"><code class="language-APL">      2 + 2 2 + 2
+      2 + 4 4
+      6 6</code></pre></p>
+</details>
+<h2 id="comments">Comments</h2>
+<p>Anything after a lamp symbol <code>⍝</code> is ignored.</p>
+<p><pre class="highlight"><code class="language-APL">      ⍝ nothing happens on this line
+      2 × 3 ⍝ 4 5</code></pre>
+<pre class="highlight"><code>6</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">      'A'   ⍝ lamp is not an "A"</code></pre>
+<pre class="highlight"><code>A</code></pre></p>
+<h2 id="the-reduction-operator">The reduction operator</h2>
+<p>Adding a list of numbers <em>could</em> become very tedious...
+<pre class="highlight"><code class="language-APL">      1+2+3+4+5+6+7+8+9+10+11+12+13+14+15</code></pre>
+<pre class="highlight"><code>120</code></pre></p>
+<p>The <strong>reduce</strong> <a href="../Operators/">operator</a> <code>F/</code> inserts the function <code>F</code> to its left between parts of the right argument array.
+<pre class="highlight"><code class="language-APL">      +/1 2 3 4 5 6 7 8 9 10 11 12 13 14 15</code></pre>
+<pre class="highlight"><code>120</code></pre></p>
+<p>It is called <em>reduce</em> because it reduces the number of dimensions of its argument. In the example above, we have a <strong>vector</strong> (1 dimensional, list) argument and return a <strong>scalar</strong> (0 dimensional, single value) result.</p>
+<h2 id="the-index-generator">The index generator</h2>
+<p>The index generator <code>⍳⍵</code> generates integers up to the integer right argument <code>⍵</code>
+<pre class="highlight"><code class="language-APL">      ⍳10</code></pre>
+<pre class="highlight"><code>1 2 3 4 5 6 7 8 9 10</code></pre></p>
+<p>So we can do an arithmetic sum as follows</p>
+<table>
+<thead>
+<tr>
+<th><strong>Traditional Mathematical Notation (<abbr title="Traditional Mathematical Notation">TMN</abbr>)</strong></th>
+<th><strong>APL</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\sum_{n=1}^N n\)</span></td>
+<td><code>+/⍳N</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-do-these-errors-mean">What do these errors mean?</h2>
+<p>While experimenting, you are very likely to come across these:</p>
+<p><pre class="highlight"><code class="language-APL">      ⍳¯4</code></pre>
+<pre class="highlight"><code>DOMAIN ERROR
+      ⍳¯4
+      ∧</code></pre></p>
+<p>The <code>DOMAIN ERROR</code> means that APL cannot compute what you are asking for. In this case, it cannot generate indices up to a negative number. Negative numbers are <em>outside the domain</em> of the index generator function. How might you <a href="../dfns-and-assignment/#problem-set-2">generate integers from 1 to negative four</a>?</p>
+<pre class="highlight"><code class="language-APL">      1+
+SYNTAX ERROR: Missing right argument
+      1+
+       ∧</code></pre>
+<p>A <code>SYNTAX ERROR</code> means that the expression which you tried to execute does not make sense. In the case above, it is because functions always either take a single argument to their right or two arguments, one to the right and one to the left. Functions never take a single argument to their left.</p>
+<pre class="highlight"><code class="language-APL">      a
+VALUE ERROR: Undefined name: a
+      a
+      ∧</code></pre>
+<p>A <code>VALUE ERROR</code> means that there is nothing associated with the name provided. We have not seen any named functions or variables yet; nothing has been assigned to the name <code>a</code>, so trying to use it in an expression is meaningless.</p>
+<h2 id="problem-set-1">Problem Set 1</h2>
+<ol>
+<li>
+<p>The average daily temperatures, in degrees Celcius, for 7 days are stored in a variable <code>t_allweek</code>.</p>
+<pre class="highlight"><code class="language-APL">t_allweek ← 11.7 8.6 9.7 14.2 6.7 11.8 9.2</code></pre>
+<p>Use APL to compute the follwing:</p>
+<ol>
+<li>The highest daily temperature</li>
+<li>The lowest daily temperature</li>
+<li>The range of (difference between the largest and the smallest) temperatures</li>
+<li>Each temperature rounded to the nearest whole number</li>
+</ol>
+<details class="example">
+<summary>Answers</summary>
+<p><ol type="a">
+<li>
+<pre class="highlight"><code class="language-APL">      ⌈/t_allweek
+14.2</code></pre>
+</li>
+<li>
+<pre class="highlight"><code class="language-APL">      ⌊/t_allweek
+6.7</code></pre>
+</li>
+<li>
+<pre class="highlight"><code class="language-APL">      (⌈/t_allweek)-⌊/t_allweek
+7.5</code></pre></p>
+<blockquote>
+<p>You may have found the correct answer using the following expression:
+<pre class="highlight"><code class="language-APL">      ⌈/t_allweek-⌊/t_allweek
+7.5</code></pre></p>
+<p>but this is less efficient because it does more subtractions than it needs to. Recall the right-to-left evaluation:
+<pre class="highlight"><code class="language-APL">      ⌈/      t_allweek                 - ⌊/ t_allweek
+      ⌈/      t_allweek                 - 6.7
+      ⌈/ 11.7 8.6 9.7 14.2 6.7 11.8 9.2 - 6.7
+      ⌈/ 5 1.9 3 7.5 0 5.1 2.5
+      7.5</code></pre></p>
+<p>if we use parentheses <code>()</code> to force APL to compute the maximum of the list before doing subtraction, we only do a single subtraction instead of 7:
+<pre class="highlight"><code class="language-APL">      ( ⌈/t_allweek ) - ⌊/ t_allweek
+      ( ⌈/t_allweek ) - 6.7
+      (     14.2    ) - 6.7
+      7.5</code></pre></p>
+</blockquote>
+<p></li>
+<li>
+To round to the nearest whole number, either add 0.5 and round down:
+<pre class="highlight"><code class="language-APL">      ⌊0.5+t_allweek
+12 9 10 14 7 12 9</code></pre></p>
+<p>or subtract 0.5 and round up:
+<pre class="highlight"><code class="language-APL">      ⌈t_allweek-0.5
+12 9 10 14 7 12 9</code></pre>
+</li>
+</ol></p>
+</details>
+</li>
+<li>
+<p>A Mathematical Notation</p>
+<p>Use APL to evaluate the following</p>
+<ol>
+<li>
+<p><span class="arithmatex">\(\prod_{n=1}^{12} n\)</span> (multiply together the first twelve integers)</p>
+</li>
+<li>
+<p><span class="arithmatex">\(\sum_{n=1}^{17}n^2\)</span> (add together the first seventeen squared integers)</p>
+</li>
+<li>
+<p><span class="arithmatex">\(\sum_{n=1}^{100}2n\)</span> (add together the first one hundred positive even integers)</p>
+</li>
+<li>
+<p><span class="arithmatex">\(\sum_{n=1}^{100}2n-1\)</span> (add together the first one hundred odd integers)</p>
+</li>
+<li>
+<p>In <abbr title="Traditional Mathematical Notation">TMN</abbr>, the following expression is equal to <code>0</code>, why does the following return <code>70</code> in APL?
+    <pre class="highlight"><code class="language-APL">      84 - 12 - 1 - 13 - 28 - 9 - 6 - 15  </code></pre>
+    <pre class="highlight"><code>70</code></pre></p>
+</li>
+</ol>
+<details class="example">
+<summary>Answers</summary>
+<p><ol type="a">
+<li>
+<pre class="highlight"><code class="language-APL">      ×/⍳12
+479001600</code></pre>
+</li>
+<li>
+<pre class="highlight"><code class="language-APL">      +/(⍳17)*2
+1785</code></pre>
+Without parentheses we get the sum of the first 289 integers, instead of the first 17 integers squared.</p>
+<table>
+<thead>
+<tr>
+<th><abbr title="Traditional Mathematical Notation">TMN</abbr></th>
+<th>APL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\sum_n^{17^2} n\)</span></td>
+<td><code>+/⍳17*2</code></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\sum_n^{17} n^2\)</span></td>
+<td><code>+/(⍳17)*2</code></td>
+</tr>
+</tbody>
+</table>
+<p></li>
+<li>
+<pre class="highlight"><code class="language-APL">      +/2×⍳100
+10100</code></pre>
+</li>
+<li>
+We can either subtract 1 from the even numbers:
+<pre class="highlight"><code class="language-APL">      +/(2×⍳100)-1
+10000</code></pre></p>
+<p>or we can add negative 1:
+<pre class="highlight"><code class="language-APL">      +/¯1+2×⍳100
+10000</code></pre>
+The high minus denotes a literal negative, whereas the hyphen indicates subtraction.
+</li>
+<li>
+Remember the right-to-left rule: functions take everything to their right, and the first thing to their left. We can add unnecessary parentheses to show how APL evaluates our expression.
+<pre class="highlight"><code class="language-APL">      (84 - (12 - (1 - (13 - (28 - (9 - (6 - 15)))))))
+70</code></pre>
+</li>
+</ol></p>
+</details>
+</li>
+<li>
+<p>Pyramid Schemes</p>
+<ol>
+<li>
+<p>Sugar cubes are stacked in an arrangement as shown by <strong>Figure 1</strong>.</p>
+<p><img src="../img/SquaredCubes.png" width="200px" alt="Stacked sugar cubes"/>
+    <figcaption><strong>Figure 1.</strong> Stacked sugar cubes</figcaption></p>
+<p>This stack has <code>4</code> <strong>layers</strong> and a total of <code>30</code> cubes. How many cubes are there in a similar stack with <code>467</code> <strong>layers</strong>?</p>
+</li>
+<li>
+<p>Now consider the stack in <strong>Figure 2</strong>.</p>
+<p><img src="../img/OddSquaredCubes.png" width="280px" alt="Differently stacked sugar cubes"/>
+    <figcaption><strong>Figure 2.</strong> Differently stacked sugar cubes</figcaption></p>
+<p>The arrangement in <strong>Figure 2</strong> has <code>4</code> <strong>layers</strong> and <code>84</code> cubes. How many cubes are there in a similar stack with <code>812</code> <strong>layers</strong>?</p>
+</li>
+<li>
+<p>Now look at <strong>Figure 3</strong>.</p>
+<p><img src="../img/CubedCubes.png" width="280px" alt="This is just a waste of sugar cubes by now..."/>
+    <figcaption><strong>Figure 3. </strong>This is just a waste of sugar cubes by now...</figcaption></p>
+<p>The stack in <strong>Figure 3</strong> has <code>3</code> <strong>"layers"</strong> and <code>36</code> cubes in total. How many cubes are there in a similar stack with <code>68</code> <strong>"layers"</strong>?</p>
+</li>
+</ol>
+<details class="example">
+<summary>Answers</summary>
+<p><ol type="a">
+<li>
+Each <span class="arithmatex">\(n\)</span>th layer has <span class="arithmatex">\(n^2\)</span> cubes. There are <span class="arithmatex">\(34,058,310\)</span> cubes in a stack with <span class="arithmatex">\(467\)</span> layers.
+<pre class="highlight"><code class="language-APL">    +/(⍳4)*2</code></pre>
+<pre class="highlight"><code>30</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">    +/(⍳467)*2</code></pre>
+<pre class="highlight"><code>34058310</code></pre>
+</li>
+<li>
+Each <span class="arithmatex">\(n\)</span>th layer has <span class="arithmatex">\((2n-1)^2\)</span> cubes. There are <span class="arithmatex">\(713,849,500\)</span> cubes in a stack with <span class="arithmatex">\(812\)</span> layers.
+<pre class="highlight"><code class="language-APL">    +/(¯1+2×⍳4)*2</code></pre>
+<pre class="highlight"><code>84</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">    +/(¯1+2×⍳812)*2</code></pre>
+<pre class="highlight"><code>713849500</code></pre>
+</li>
+<li>
+Each <span class="arithmatex">\(n\)</span>th layer has <span class="arithmatex">\(n^3\)</span> cubes. There are <span class="arithmatex">\(5,503,716\)</span> cubes in a stack with <span class="arithmatex">\(68\)</span> layers.
+<pre class="highlight"><code class="language-APL">    +/(⍳3)*3</code></pre>
+<pre class="highlight"><code>36</code></pre></p>
+<hr />
+<p><pre class="highlight"><code class="language-APL">    +/(⍳68)*3</code></pre>
+<pre class="highlight"><code>5503716</code></pre>
+</li>
+</ol></p>
+</details>
+</li>
+<li>
+<p>Rewrite the following expressions so that they do not use parentheses.</p>
+<ol>
+<li><code>(÷a)×b</code></li>
+<li><code>(÷a)÷b</code></li>
+<li><code>(a+b)-5</code></li>
+<li><code>(a+b)+5</code></li>
+</ol>
+<details class="example">
+<summary>Answers</summary>
+<p><ol type="a">
+<li>Multiplication is commutative, which means that the order of arguments does not matter, so we can write <code>b×÷a</code>. Even more simply, it is <code>b÷a</code> because multiplication by a reciprocal is the same as division.</li>
+<li><span class="arithmatex">\({{{1}\over{a}}\div{b}} = {{1}\over{a\times{b}}}\)</span> so we can write <code>÷a×b</code></li>
+<li>Use a literal negative five:<code>¯5+a+b</code></li>
+<li>No parentheses needed: <code>a+b+5</code></li>
+</ol></p>
+</details>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://dyalog.com" target="_blank" rel="noopener" title="dyalog.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M16 32v119.2h64V96h107.2C300.6 96 368 176.2 368 255.9 368 332 309.4 416 187.2 416H16v64h171.2C347.9 480 432 367.3 432 255.9c0-58.7-22.1-113.4-62.3-154.3C324.9 56 261.7 32 187.2 32z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mastodon.social/@dyalog" target="_blank" rel="noopener" title="mastodon.social" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 15.5a.5.5 0 0 1-.5.5.5.5 0 0 1-.5-.5v-7c0-1.93-2.07-3.5-4-3.5H6a4 4 0 0 0-4 4v10h4v-4h5v4h4v-4.5a.5.5 0 0 1 .5-.5.5.5 0 0 1 .5.5V16a3 3 0 0 0 3 3 3 3 0 0 0 3-3v-2h-2.5z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/dyalogapl" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "content.tooltips"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="../javascripts/mathjax/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
