@@ -2,3 +2,4 @@ site/
 .cache/
 node_modules/
 docs/javascripts/mathjax/
+docs/javascripts/@mathjax/

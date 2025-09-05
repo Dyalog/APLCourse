@@ -8,6 +8,9 @@ window.MathJax = {
   options: {
     ignoreHtmlClass: ".*|",
     processHtmlClass: "arithmatex"
+  },
+  output: {
+    fontPath: '/javascripts/@mathjax/%%FONT%%-font'
   }
 };
 document$.subscribe(() => {
