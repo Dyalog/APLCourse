@@ -521,6 +521,26 @@ The primitive rank operator `F⍤k` was introduced in Dyalog version 14.0. An AP
  }
 ```
 
+## An APL model of the rank operator
+The primitive rank operator `F⍤k` was introduced in Dyalog version 14.0. An APL model compatible with earlier versions is as follows:  
+```APL
+ _Rank_←{
+     ⍺←{⍵}
+     ⍺ ⍺⍺{⍺←{⍵} ⋄ ⍺ ⍺⍺ ⍵}{
+         0 1000::⎕SIGNAL ⎕EN
+         effrank←{0≤⍺:⍺⌊⍴⍴⍵ ⋄ 0⌈⍺+⍴⍴⍵}   ⍝ effective rank
+         cells←{⊂[(-⍺ effrank ⍵)↑⍳⍴⍴⍵]⍵}
+         (m l r)←⌽3⍴⌽⍵⍵
+         ⎕ML←0                           ⍝ needed by ↑⍵
+         0=⎕NC'⍺':↑⍺⍺¨(m cells ⍵)        ⍝ monadic case
+         x←l cells ⍺
+         y←r cells ⍵
+         ((⍴x)≡⍴y)⍱0=(⍴⍴x)⌊⍴⍴y:⎕SIGNAL 4+(⍴⍴x)≡⍴⍴y
+         ↑x ⍺⍺¨y                         ⍝ dyadic  case
+     }⍵⍵{⍵}⍵
+ }
+```
+
 ## Reduce on an empty vector?
 For your interest, here are some reductions of note. Try to ask yourself why they give the results they do. Could they have been given different definitions?
 
