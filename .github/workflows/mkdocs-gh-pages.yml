@@ -21,6 +21,17 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Remove vendor example files #https://github.com/Dyalog/APLCourse/issues/91#issuecomment-4718935748
+        run: rm -rf docs/javascripts/@mathjax/mathjax-newcm-font/examples
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r CI/requirements.txt
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
