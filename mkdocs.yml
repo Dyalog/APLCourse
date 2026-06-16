@@ -39,6 +39,7 @@ extra:
       link: https://twitter.com/dyalogapl
 plugins:
   - privacy
+  - search
 nav:
   - About: index.md
   - basic-syntax-and-arithmetic.md
