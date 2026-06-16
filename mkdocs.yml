@@ -22,6 +22,10 @@ theme:
     - navigation.instant
 extra_css:
   - style/main.css
+plugins:
+  - privacy
+  - search
+
 nav:
   - About: index.md
   - First Steps: First-steps.md
