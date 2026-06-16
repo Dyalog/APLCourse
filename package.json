@@ -1,13 +1,13 @@
 {
   "dependencies": {
-    "mathjax": "^4.0.0"
+    "mathjax": "4.0.0"
   },
   "scripts": {
     "postinstall": "run-script-os",
-    "postinstall:linux:macos": "mv node_modules/mathjax docs/javascripts/; mv node_modules/@mathjax docs/javascripts/",
-    "postinstall:windows": "move node_modules\\mathjax docs\\javascripts\\ & move node_modules\\@mathjax docs\\javascripts\\"
+    "postinstall:linux:macos": "mv node_modules/mathjax docs/javascripts/; mv node_modules/@mathjax docs/javascripts/; rm -rf docs/javascripts/@mathjax/mathjax-newcm-font/examples",
+    "postinstall:windows": "move node_modules\\mathjax docs\\javascripts\\ & move node_modules\\@mathjax docs\\javascripts\\ & rd /s /q docs\\javascripts\\@mathjax\\mathjax-newcm-font\\examples"
   },
   "devDependencies": {
-    "run-script-os": "^1.1.6"
+    "run-script-os": "1.1.6"
   }
 }
